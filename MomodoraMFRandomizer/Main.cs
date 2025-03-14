@@ -18,17 +18,13 @@ namespace MomodoraMFRandomizer
         SkillRandomizer skillRandomizer = new SkillRandomizer();
         public override void OnSceneWasLoaded(int buildIndex, string sceneName)
         {
-            if (SceneManager.GetActiveScene().name == "BrightnessSetup")
-            {
-                SceneManager.LoadScene("Well01");
-            }
+            //skillRandomizer.randomizeSkills();
             demonStringRemover.removeAllBlockers();
-            skillRandomizer.loadAcquiredSkills();
         }
         public override void OnUpdate()
         {
-            GameData.current.MomoEvent[20] = 1;
-           skillRandomizer.randomizeSkills();
+            //GameData.current.MomoEvent[10] = 1;
+            skillRandomizer.randomizeSkills();
         }
     }
 }

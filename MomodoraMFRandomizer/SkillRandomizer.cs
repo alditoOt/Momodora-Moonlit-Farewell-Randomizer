@@ -7,6 +7,7 @@ using MelonLoader;
 using UnityEngine;
 using HarmonyLib;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 namespace MomodoraMFRandomizer
 {
@@ -23,67 +24,101 @@ namespace MomodoraMFRandomizer
         {
             foreach (int skill in skills)
             {
-
-                if (GameData.current.MomoEvent[skill] == 1 && !assignedSkills.Contains(skill))
+                if (GameData.current.MomoEvent[skill] == 1)
                 {
-                    checkedSkills.Add(skill);
-                    SetSkillName(skillNameReplaced, skill);
-                    HandleAcquiredSkill(skill);
-                    PrintHashSet(checkedSkills);
-                    PrintHashSet(assignedSkills);
-                    break;
+                    LoadCheck();
+                    if (skill == 20 && SceneManager.GetActiveScene().name == "Well26")
+                    {
+                        checkedSkills.Add(skill);
+                        HandleAcquiredSkill(skill);
+                        PrintAcquiredSkills();
+                        PrintHashSet(checkedSkills);
+                        PrintHashSet(assignedSkills);
+                    }
+                    if (skill == 9 && SceneManager.GetActiveScene().name == "Well29")
+                    {
+                        checkedSkills.Add(skill);
+                        HandleAcquiredSkill(skill);
+                        PrintAcquiredSkills();
+                        PrintHashSet(checkedSkills);
+                        PrintHashSet(assignedSkills);
+                    }
+                    if (skill == 10 && SceneManager.GetActiveScene().name == "Bark42")
+                    {
+                        checkedSkills.Add(skill);
+                        HandleAcquiredSkill(skill);
+                        PrintAcquiredSkills();
+                        PrintHashSet(checkedSkills);
+                        PrintHashSet(assignedSkills);
+                    }
+                    if (skill == 194 && SceneManager.GetActiveScene().name == "Fairy10")
+                    {
+                        checkedSkills.Add(skill);
+                        HandleAcquiredSkill(skill);
+                        PrintAcquiredSkills();
+                        PrintHashSet(checkedSkills);
+                        PrintHashSet(assignedSkills);
+                    }
+                    if (skill == 131 && SceneManager.GetActiveScene().name == "Marsh08")
+                    {
+                        checkedSkills.Add(skill);
+                        HandleAcquiredSkill(skill);
+                        PrintAcquiredSkills();
+                        PrintHashSet(checkedSkills);
+                        PrintHashSet(assignedSkills);
+                    }
                 }
             }   
         }
         private void HandleAcquiredSkill(int acquiredSkill)
         {
-            GameData.current.MomoEvent[acquiredSkill] = 0;
+            if (!assignedSkills.Contains(acquiredSkill))
+            {
+                GameData.current.MomoEvent[acquiredSkill] = 0;
+            }
 
             List<int> availableSkills = skills.Except(assignedSkills).ToList();
             
             if (availableSkills.Count > 0)
             {
                 int randomSkill = availableSkills[UnityEngine.Random.Range(0, availableSkills.Count)];
-                SetSkillName(skillNameCurrent, randomSkill);
                 GameData.current.MomoEvent[randomSkill] = 1;
                 assignedSkills.Add(randomSkill);
-                MelonLogger.Msg("Skill " + skillNameReplaced + " has been replaced with skill " + skillNameCurrent);
+                MelonLogger.Msg("Skill " + acquiredSkill + " has been replaced with skill " + randomSkill);
             }
         }
 
-        public void loadAcquiredSkills()
+        public void PrintAcquiredSkills()
         {
             String acquiredSkills = "";
-            String skillName = "";
             foreach (int skill in assignedSkills)
             {
-                SetSkillName(skillName, skill);
-                acquiredSkills += skillName + ", ";
-                GameData.current.MomoEvent[skill] = 1;
+                acquiredSkills += skill + ", ";
             }
             MelonLogger.Msg("Acquired skills:" + acquiredSkills);
         }
 
-        private void SetSkillName(String skillName, int skill)
+        public void LoadCheck()
         {
-            switch (skill) {
-                case 9:
-                    skillName = "Sprint";
-                    break;
-                case 10:
-                    skillName = "Double Jump";
-                    break;
-                case 20:
-                    skillName = "Sacred Leaf";
-                    break;
-                case 194:
-                    skillName = "Wall Jump";
-                    break;
-                case 131:
-                    skillName = "Lunar Attunement";
-                    break;
-                default:
-                    break;
+            if (SceneManager.GetActiveScene().name == "Well26" && assignedSkills.Contains(20) && !checkedSkills.Contains(20))
+            {
+                GameData.current.MomoEvent[20] = 0;
+            }
+            if (SceneManager.GetActiveScene().name == "Well29" && assignedSkills.Contains(9) && !checkedSkills.Contains(9))
+            {
+                GameData.current.MomoEvent[9] = 0;
+            }
+            if (SceneManager.GetActiveScene().name == "Bark42" && assignedSkills.Contains(10) && !checkedSkills.Contains(10))
+            {
+                GameData.current.MomoEvent[10] = 0;
+            }
+            if (SceneManager.GetActiveScene().name == "Fairy10" && assignedSkills.Contains(194) && !checkedSkills.Contains(194))
+            {
+                GameData.current.MomoEvent[194] = 0;
+            }
+            if (SceneManager.GetActiveScene().name == "Marsh08" && assignedSkills.Contains(131) && !checkedSkills.Contains(131))
+            {
+                GameData.current.MomoEvent[131] = 0;
             }
         }
 
