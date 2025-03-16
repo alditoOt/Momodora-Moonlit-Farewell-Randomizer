@@ -15,30 +15,34 @@ namespace MomodoraMFRandomizer
     class SkillRandomizer
     {
         public List<int> skills = new List<int> { 9, 10, 20, 194, 131 };
-        private HashSet<int> previousSceneValues = new HashSet<int>();
-        private Dictionary<int, int> previousSkillState = new Dictionary<int, int>()
-        {
-            {9, 0 },
-            {10, 0},
-            {20, 0},
-            {194, 0},
-            {131, 0}
-        };
+        private Dictionary<int, int> previousSkillState = new Dictionary<int, int>();
+
+        private bool doubleJump = true;
+        private bool wallJump = false;
+
         public HashSet<int> assignedSkills = new HashSet<int>() { 205 };
         public HashSet<int> checkedSkills = new HashSet<int>();
 
-        public bool twentyStarted = false;
-
-
-        public void CheckMomoEventValue()
+        public void InitializeSkills()
         {
-            for (int i = 0; i < GameData.current.MomoEvent.Length; i ++)
+            previousSkillState.Add( 9, 0);
+            previousSkillState.Add(10, 0);
+            previousSkillState.Add(20, 0);
+            previousSkillState.Add(194, 0);
+            previousSkillState.Add(131, 0);
+            GameData.current.MomoEvent[205] = 1;
+        }
+
+        public void AllowSkills(Platformer3D p3d)
+        {
+            if (doubleJump)
             {
-                if (GameData.current.MomoEvent[i] == 1 && !previousSceneValues.Contains(i))
-                {
-                    previousSceneValues.Add(i);
-                    MelonLogger.Msg("Event value: " + i);
-                }
+                p3d.m_doubleJump = doubleJump;
+            }
+
+            if (wallJump)
+            {
+                p3d.m_allowWallJump = false;
             }
         }
 
@@ -48,16 +52,6 @@ namespace MomodoraMFRandomizer
             {
                 if (GameData.current.MomoEvent[skill] == 1 && previousSkillState[skill] == 0)
                 {
-                    if (assignedSkills.Contains(skill))
-                    {
-                        continue;
-                    }
-                    if (skill == 10)
-                    {
-                        GameData.current.MomoEvent[10] = 1;
-                        assignedSkills.Add(10);
-                        continue;
-                    }
                     HandleSkillRandomization(skill);
                     break;
                 }
@@ -70,12 +64,15 @@ namespace MomodoraMFRandomizer
             {
                 GameData.current.MomoEvent[checkedSkill] = 0;
             }
-            
+            else
+            {
+                previousSkillState[checkedSkill] = 1;
+            }
             if (checkedSkills.Contains(checkedSkill))
             {
                 return;
             }
-                checkedSkills.Add(checkedSkill);
+            checkedSkills.Add(checkedSkill);
 
             List<int> availableSkills = skills.Except(assignedSkills).ToList();
 
@@ -89,7 +86,9 @@ namespace MomodoraMFRandomizer
             }
         }
 
-        public void ReloadSceneCheck()
+
+        //Maybe reload the scene once the values have changed?
+        public void ReloadSceneCheck(String sceneName)
         {
             foreach (int skill in assignedSkills)
             {
@@ -97,25 +96,30 @@ namespace MomodoraMFRandomizer
                 {
                     continue;
                 }
-                if (skill == 20 && SceneManager.GetActiveScene().name == "Well26")
+                if (skill == 20 && GameData.current.MomoEvent[20] == 1 && sceneName == "Well26")
                 {
                     GameData.current.MomoEvent[20] = 0;
+                    previousSkillState[20] = 0;
                 }
-                if (skill == 9 && SceneManager.GetActiveScene().name == "Well29")
+                if (skill == 9 && GameData.current.MomoEvent[9] == 1 && sceneName == "Well29")
                 {
                     GameData.current.MomoEvent[9] = 0;
+                    previousSkillState[9] = 0;
                 }
-                if (skill == 10 && SceneManager.GetActiveScene().name == "Bark42")
+                if (skill == 10 && GameData.current.MomoEvent[10] == 1 && sceneName == "Bark42")
                 {
                     GameData.current.MomoEvent[10] = 0;
+                    previousSkillState[10] = 0;
                 }
-                if (skill == 194 && SceneManager.GetActiveScene().name == "Fairy10")
+                if (skill == 194 && GameData.current.MomoEvent[194] == 1 && sceneName == "Fairy10")
                 {
                     GameData.current.MomoEvent[194] = 0;
+                    previousSkillState[194] = 0;
                 }
-                if (skill == 131 && SceneManager.GetActiveScene().name == "Marsh08")
+                if (skill == 131 && GameData.current.MomoEvent[131] == 1 && sceneName == "Marsh08")
                 {
                     GameData.current.MomoEvent[131] = 0;
+                    previousSkillState[131] = 0;
                 }
             }
         }
@@ -124,18 +128,9 @@ namespace MomodoraMFRandomizer
         {
             foreach (int skill in assignedSkills)
             {
+                MelonLogger.Msg("Persisting skill " + skill);
                 GameData.current.MomoEvent[skill] = 1;
             }
-        }
-
-        public void PrintAcquiredSkills()
-        {
-            String acquiredSkills = "";
-            foreach (int skill in assignedSkills)
-            {
-                acquiredSkills += skill + ", ";
-            }
-            MelonLogger.Msg("Acquired skills:" + acquiredSkills);
         }
     }
 }
