@@ -8,10 +8,17 @@ Download MomodoraMFRandomizer.dll from the releases tab (still very much a WIP a
 - Skills are randomized between each other
 
 # Not Working 
-- [FIXED] If a skill is acquired somewhere else, it's location check its locked (since the logic to check the location and the logic to update the proper skills are in the same method, they override each other - easy fix)
+- **[FIXED]** If a skill is acquired somewhere else, it's location check its locked (since the logic to check the location and the logic to update the proper skills are in the same method, they override each other - easy fix)
 - No logic implemented - possible softlocking if the acquired skills aren't useful to go to other areas
 
 # TO-DO
-- Implement logic
 - Modify code to allow a YAML file for mod configuration (Open World? Starting skills?)
+- Implement logic (for skills first)
+- Add Sigils to the randomization pool (maybe ignoring Cereza's shop and Oracle at first - implement logic later)
 - Remove Healing Bell and add it to the randomizer pool
+
+- EVENTUALLY ADD THIS TO THE ARCHIPELAGO MULTIWORLD WOOOOO
+
+# POSSIBLE LOCATIONS
+- Cereza friendship checks
+- Lumen Fairies?
