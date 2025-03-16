@@ -1,4 +1,4 @@
-#NOTES WIP
+# NOTES WIP
 
 Install MelonLoader 5.7 (or whichever is the latest 5 version) in the game
 
