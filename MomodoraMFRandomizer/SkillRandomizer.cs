@@ -33,19 +33,6 @@ namespace MomodoraMFRandomizer
             GameData.current.MomoEvent[205] = 1;
         }
 
-        public void AllowSkills(Platformer3D p3d)
-        {
-            if (doubleJump)
-            {
-                p3d.m_doubleJump = doubleJump;
-            }
-
-            if (wallJump)
-            {
-                p3d.m_allowWallJump = false;
-            }
-        }
-
         public void randomizeSkills()
         {
             foreach (int skill in skills)

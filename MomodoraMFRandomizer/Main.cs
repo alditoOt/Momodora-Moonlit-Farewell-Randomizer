@@ -16,7 +16,7 @@ namespace MomodoraMFRandomizer
 
         BlockRemover demonStringRemover = new BlockRemover();
         SkillRandomizer skillRandomizer = new SkillRandomizer();
-        Platformer3D p3d = GameObject.FindObjectOfType<Platformer3D>();
+        Platformer3D p3d = GameObject.FindObjectOfType<Platformer3D>(); //Could be useful?
 
         private HashSet<int> previousSceneValues = new HashSet<int>();
         private bool mainMenu = false;
@@ -49,11 +49,6 @@ namespace MomodoraMFRandomizer
         {
             skillRandomizer.randomizeSkills();
         }
-
-        //public void ConsistentSkillCheck()
-        //{
-        //    skillRandomizer.AllowSkills(p3d);
-        //}
 
         public void CheckMomoEventValue()
         {
