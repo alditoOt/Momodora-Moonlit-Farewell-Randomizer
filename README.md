@@ -1,5 +1,5 @@
 # NOTES WIP
 
-Install MelonLoader 5.7 (or whichever is the latest 5 version) in the game
+Download the [MelonLoader Installer](https://github.com/LavaGang/MelonLoader.Installer/releases/latest/download/MelonLoader.Installer.exe) and install version 5.7 (or whichever is the latest 5 version) in the game's folder
 
-Currently only in the develop branch, move MomodoraMFRandomizer.dll (\MomodoraMFRandomizer\MomodoraMFRandomizer\obj\Debug) file into the Mods folder in the game files
+Download MomodoraMFRandomizer.dll from the releases tab (still very much a WIP and some things might not even work properly) and move it into the Mods folder in the game files
