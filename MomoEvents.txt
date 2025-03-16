@@ -1,0 +1,40 @@
+Deathcount: 101
+
+Item definitions (to check in game menu)
+
+BellFlower: 101
+Windmill key: 356
+Walljump: 343
+Sprint: 345
+Awakened leaf: 342
+Silver Moonlit Dust: 181 (event)
+Fairy Springs Grimoire: 191
+Golden Moonlit Dust: 180
+
+
+MomoEvent values:
+
+Cloudy Blood: 32
+The Fool: 187
+The Sharpshooter: 140
+The Hunter: 104
+Resonance of Ifriya: 37
+The Blessed: 138
+Glazed Aegis: 139
+Pawn: 36
+Resolve: 186
+Mending Resonance: 86
+Phantasm Blade: 185
+
+
+
+Harpy: 17 or 366 (one is boss, second is Dora text?)
+That beast thingy: 16
+Black cat: 278
+Viper: 150
+Trials boss: 171
+Creatura: 105
+Tainted Serpent: 255
+
+Cereza friendship: 102 
+	Fairy Springs: 107

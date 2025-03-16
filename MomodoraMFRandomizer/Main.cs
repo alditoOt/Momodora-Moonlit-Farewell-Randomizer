@@ -16,10 +16,14 @@ namespace MomodoraMFRandomizer
 
         BlockRemover demonStringRemover = new BlockRemover();
         SkillRandomizer skillRandomizer = new SkillRandomizer();
+        
         public override void OnSceneWasLoaded(int buildIndex, string sceneName)
         {
             //skillRandomizer.randomizeSkills();
             demonStringRemover.removeAllBlockers();
+            skillRandomizer.ReloadSceneCheck();
+            skillRandomizer.PersistAcquiredSkills();
+            skillRandomizer.CheckMomoEventValue();
         }
         public override void OnUpdate()
         {
