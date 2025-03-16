@@ -4,6 +4,8 @@ Download the [MelonLoader Installer](https://github.com/LavaGang/MelonLoader.Ins
 
 Download MomodoraMFRandomizer.dll from the releases tab (still very much a WIP and some things might not even work properly) and move it into the Mods folder in the game files
 
+SINCE THIS IS A WIP THE MOD IS PRONE TO BREAK OR SOMETHING, I'M WORKING ON IT I PROMISE
+
 # Currently Working
 - Skills are randomized between each other
 
@@ -17,7 +19,7 @@ Download MomodoraMFRandomizer.dll from the releases tab (still very much a WIP a
 - Add Sigils to the randomization pool (maybe ignoring Cereza's shop and Oracle at first - implement logic later)
 - Remove Healing Bell and add it to the randomizer pool
 
-- EVENTUALLY ADD THIS TO THE ARCHIPELAGO MULTIWORLD WOOOOO
+- **EVENTUALLY ADD THIS TO THE ARCHIPELAGO MULTIWORLD WOOOOO**
 
 # POSSIBLE LOCATIONS
 - Cereza friendship checks
