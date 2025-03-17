@@ -1,3 +1,5 @@
+# DEPRECATED NOTES
+
 # Currently Working
 - Skills are randomized between each other
 
