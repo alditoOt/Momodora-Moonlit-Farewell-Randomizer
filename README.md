@@ -1,13 +1,10 @@
-# DEPRECATED NOTES
+# MANUAL RANDOMIZER FOR ARCHIPELAGO MULTIWORLD
 
-# Currently Working
-- Skills are randomized between each other
+You can use this for now since it's currently the best (and pretty much working) implementation of Momodora: Moonlit Farewell for the Archipelago Multiworld
 
-# Not Working 
-- [FIXED] If a skill is acquired somewhere else, it's location check its locked (since the logic to check the location and the logic to update the proper skills are in the same method, they override each other - easy fix)
-- No logic implemented - possible softlocking if the acquired skills aren't useful to go to other areas
+# INSTALL INSTRUCTIONS
+(WIP)
 
-# TO-DO
-- Implement logic
-- Modify code to allow a YAML file for mod configuration (Open World? Starting skills?)
-- Remove Healing Bell and add it to the randomizer pool
+# USEFUL NOTES
+Unity Explorer mod can help with this. I'll update this section to explain how I installed it, used it and some useful notes for using it.
+(WIP)
