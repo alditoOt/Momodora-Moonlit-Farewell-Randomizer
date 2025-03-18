@@ -16,7 +16,7 @@ namespace MomodoraMoonlitFarewellAP.Patches
     [HarmonyPatch(typeof(MomoEventData))]
     class APLocationHandler
     {
-        static List<int> skillEvents = new List<int> { 9, 10, 20, 194, 1313 };
+        static List<int> skillEvents = new List<int> { 9, 10, 20, 194, 131 };
         static List<int> bossEvents = new List<int>(); // { 17, 16, 278, 150, 171, 105, 255};
         static List<int> sigilEvents = new List<int>();
         static HashSet<int> receivedSkill = new HashSet<int>();
@@ -29,6 +29,15 @@ namespace MomodoraMoonlitFarewellAP.Patches
             {10, "Bark42" },
             {194, "Fairy10" },
             {131, "Marsh08" }
+        };
+
+        static Dictionary<string, int> nameAndSkill = new Dictionary<string, int>()
+        {
+            {"Awakened Sacred Leaf", 20 },
+            {"Sacred Anemone", 9 },
+            {"Spiral Shell", 194 },
+            {"Crescent Moonflower", 10 },
+            {"Lunar Attunement", 131 }
         };
 
         private static int index = 0;
@@ -57,7 +66,6 @@ namespace MomodoraMoonlitFarewellAP.Patches
             {
                 ReportSigilLocation(index, value);
             }
-            APRandomizer.session.Locations.CompleteLocationChecks(index);
 
         }
 
@@ -75,6 +83,7 @@ namespace MomodoraMoonlitFarewellAP.Patches
                 {
                     GiveSkill(index);
                 }
+                APRandomizer.session.Locations.CompleteLocationChecks(index);
             }
         }
 
@@ -85,6 +94,7 @@ namespace MomodoraMoonlitFarewellAP.Patches
 
         private static void GiveSkill(int skillId)
         {
+            MelonLogger.Msg($"{skillId}");
             previousEventValue[skillId] = 1;
             receivedSkill.Add(skillId);
             GameData.current.MomoEvent[skillId] = 1;
@@ -92,34 +102,24 @@ namespace MomodoraMoonlitFarewellAP.Patches
 
         public static void ReceiveItem(ReceivedItemsHelper itemHandler)
         {
-            var receivedItem = itemHandler.DequeueItem();
-            MelonLogger.Msg($"index: {itemHandler.Index}");
-            if (itemHandler.Index <= index)
-            {
-                return;
-            }
-            index++;
-            GiveSkill(itemHandler.Index);
+            var receivedItem = itemHandler.PeekItem().ItemName;
+            GiveSkill(nameAndSkill[receivedItem]);
+            itemHandler.DequeueItem();
         }
 
         public void UpdateItemsForTheSession(ArchipelagoSession session)
         {
-            long itemId = -1;
             foreach (ItemInfo item in session.Items.AllItemsReceived)
             {
-                itemId = item.ItemId;
+                long itemId = item.ItemId;
+                session.Items.ItemReceived += (receivedItemsHelper) =>
+                {
+                    MelonLogger.Msg($"Item with name {receivedItemsHelper.PeekItem().ItemName} and ID {itemId} received");
+                    var itemReceivedName = receivedItemsHelper.PeekItem().ItemName ?? $"Item: {itemId}";
+                    GiveSkill((int)itemId);
+                    receivedItemsHelper.DequeueItem();
+                };
             }
-            if (itemId < 0)
-            {
-                return;
-            }
-            session.Items.ItemReceived += (receivedItemsHelper) =>
-            {
-                MelonLogger.Msg($"Item with ID {itemId} received");
-                var itemReceivedName = receivedItemsHelper.PeekItem().ItemName ?? $"Item: {itemId}";
-                GiveSkill((int)itemId);
-                receivedItemsHelper.DequeueItem();
-            };
             
         }
 

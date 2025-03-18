@@ -61,13 +61,12 @@ namespace MomodoraMFRandomizer
         {
             //Attempt connection to the server
 
-            MelonLogger.Msg("Attempting connection");
-            APConnector.Connect(session, server, username, password);
-            locationHandler.UpdateItemsForTheSession(session);
             session.Items.ItemReceived += APLocationHandler.ReceiveItem;
-            session.Socket.ErrorReceived += Socket_ErrorReceived;
-            session.Socket.SocketOpened += Socket_SocketOpened;
-            session.Socket.SocketClosed += Socket_SocketClosed;
+            locationHandler.UpdateItemsForTheSession(session);
+            APConnector.Connect(session, server, username, password);
+            //session.Socket.ErrorReceived += Socket_ErrorReceived;
+            //session.Socket.SocketOpened += Socket_SocketOpened;
+            //session.Socket.SocketClosed += Socket_SocketClosed;
 
             if (tags.Contains("deathlink"))
             {
