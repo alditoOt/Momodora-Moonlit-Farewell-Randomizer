@@ -11,25 +11,32 @@ using System.Collections;
 using Archipelago.MultiClient.Net;
 using Archipelago.MultiClient.Net.Enums;
 using Archipelago.MultiClient.Net.BounceFeatures.DeathLink;
+using MomodoraMFRandomizer.Patches;
 
 namespace MomodoraMFRandomizer
 {
     public class APRandomizer : MelonMod
     {
+        #region AP variables
         //All these should be loaded from a config.json file eventually
-        private static string server = "localhost:38281"; 
+        private static string localhost = "localhost:38281";
+        private static string server = "archipelago.gg:59186";
         private string username = "alditto";
         private string password = "";
         
         //This should be loaded from the YAML file eventually
         private string[] tags = new string[] { "deathlink" };
+        DeathLinkService deathLinkService;
+        DeathLinkHandler deathLinkHandler = new DeathLinkHandler();
 
+        private static ArchipelagoSession session = ArchipelagoSessionFactory.CreateSession(server);
+        #endregion
+        
         BlockRemover demonStringRemover = new BlockRemover();
         private HashSet<int> previousSceneValues = new HashSet<int>();
         private bool mainMenu = false;
-        private static ArchipelagoSession session = ArchipelagoSessionFactory.CreateSession(new Uri("ws://" + server));
-        DeathLinkService deathlinkService;
 
+        #region Socket Logging
         static void Socket_ErrorReceived(Exception e, string message)
         {
             MelonLogger.Msg($"Socket Error: {message}");
@@ -46,6 +53,7 @@ namespace MomodoraMFRandomizer
         static void Socket_SocketClosed(string reason) =>
             MelonLogger.Msg($"Socket closed: {reason}");
 
+        #endregion
         //When starting the game
         public override void OnLateInitializeMelon()
         {
@@ -58,8 +66,8 @@ namespace MomodoraMFRandomizer
 
             if (tags.Contains("deathlink"))
             {
-                deathlinkService = session.CreateDeathLinkService();
-                deathlinkService.EnableDeathLink();
+                deathLinkService = session.CreateDeathLinkService();
+                deathLinkService.EnableDeathLink();
             }
         }
 
@@ -83,7 +91,7 @@ namespace MomodoraMFRandomizer
         {
             if (tags.Contains("deathlink"))
             {
-                APConnector.CheckDeathLink(deathlinkService, username);
+                deathLinkHandler.CheckDeathLink(deathLinkService, username);
             }
         }
 

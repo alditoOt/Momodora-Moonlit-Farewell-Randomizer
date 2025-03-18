@@ -44,6 +44,11 @@ namespace MomodoraMFRandomizer
             CheckMomoEventValue();
         }
 
+        public override void OnFixedUpdate()
+        {
+            base.OnFixedUpdate();
+        }
+
         public void CheckMomoEventValue()
         {
             for (int i = 0; i < GameData.current.MomoEvent.Length; i++)
