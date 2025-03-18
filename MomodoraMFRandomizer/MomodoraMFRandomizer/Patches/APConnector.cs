@@ -14,12 +14,12 @@ namespace MomodoraMFRandomizer
 {
     class APConnector
     {
-        private MomoEventHandler momoEventHandler = new MomoEventHandler();
+        //private MomoEventHandler momoEventHandler = new MomoEventHandler();
         private static string game = "Momodora Moonlit Farewell";
 
-        private static LoginResult TryToLogin(ArchipelagoSession session, string user)
+        private static LoginResult TryToLogin(ArchipelagoSession session, string user, string password)
         {
-            var result = session.TryConnectAndLogin(game, user, ItemsHandlingFlags.AllItems, new System.Version(0,5,1));
+            var result = session.TryConnectAndLogin(game, user, ItemsHandlingFlags.AllItems, password: password);
             return result;
         }
 
@@ -28,7 +28,7 @@ namespace MomodoraMFRandomizer
             LoginResult result;
             try
             {
-                result = TryToLogin(session, user);
+                result = TryToLogin(session, user, pass);
             }
             catch (Exception e)
             {
@@ -56,34 +56,6 @@ namespace MomodoraMFRandomizer
             var loginSuccess = (LoginSuccessful)result;
             MelonLogger.Msg("soy fans");
         }
-
-        public void ReportLocation(ArchipelagoSession session, int location)
-        {
-            session.Locations.CompleteLocationChecks(location);
-        }
-
-        public void UpdateItems(ArchipelagoSession session, int itemId)
-        {
-            session.Items.ItemReceived += (receivedItemsHelper) =>
-            {
-                var itemReceivedName = receivedItemsHelper.PeekItem().ItemName ?? $"Item: {itemId}";
-                momoEventHandler.GiveSkill(itemId);
-                receivedItemsHelper.DequeueItem();
-            };
-        }
-
-        public static void CheckDeathLink(DeathLinkService deathLinkService, String username)
-        {
-            deathLinkService.OnDeathLinkReceived += (deathLinkObject) =>
-            {
-                Platformer3D.player_hp = 0f;
-            };
-
-            if (Platformer3D.player_hp == 0f)
-            {
-                deathLinkService.SendDeathLink(new DeathLink(username));
-            }
-        } 
 
         public static void SendCompletion(ArchipelagoSession session)
         {

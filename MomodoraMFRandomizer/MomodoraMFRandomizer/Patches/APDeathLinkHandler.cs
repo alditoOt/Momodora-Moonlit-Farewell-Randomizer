@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace MomodoraMFRandomizer.Patches
 {
-    class DeathLinkHandler
+    class APDeathLinkHandler
     {
 
         private Boolean isDead = false;

@@ -12,6 +12,7 @@ using Archipelago.MultiClient.Net;
 using Archipelago.MultiClient.Net.Enums;
 using Archipelago.MultiClient.Net.BounceFeatures.DeathLink;
 using MomodoraMFRandomizer.Patches;
+using MomodoraMoonlitFarewellAP.Patches;
 
 namespace MomodoraMFRandomizer
 {
@@ -20,21 +21,22 @@ namespace MomodoraMFRandomizer
         #region AP variables
         //All these should be loaded from a config.json file eventually
         private static string localhost = "localhost:38281";
-        private static string server = "archipelago.gg:59186";
+        private static string server = "archipelago.gg:56527";
         private string username = "alditto";
         private string password = "";
         
         //This should be loaded from the YAML file eventually
         private string[] tags = new string[] { "deathlink" };
         DeathLinkService deathLinkService;
-        DeathLinkHandler deathLinkHandler = new DeathLinkHandler();
+        APDeathLinkHandler deathLinkHandler = new APDeathLinkHandler();
+        APLocationHandler locationHandler = new APLocationHandler();
 
         private static ArchipelagoSession session = ArchipelagoSessionFactory.CreateSession(server);
         #endregion
         
         BlockRemover demonStringRemover = new BlockRemover();
         private HashSet<int> previousSceneValues = new HashSet<int>();
-        private bool mainMenu = false;
+        private bool mainMenu = true;
 
         #region Socket Logging
         static void Socket_ErrorReceived(Exception e, string message)
@@ -59,16 +61,19 @@ namespace MomodoraMFRandomizer
         {
             //Attempt connection to the server
 
+            MelonLogger.Msg("Attempting connection");
             APConnector.Connect(session, server, username, password);
-            session.Socket.ErrorReceived += Socket_ErrorReceived;
-            session.Socket.SocketOpened += Socket_SocketOpened;
-            session.Socket.SocketClosed += Socket_SocketClosed;
+            //session.Socket.ErrorReceived += Socket_ErrorReceived;
+            //session.Socket.SocketOpened += Socket_SocketOpened;
+            //session.Socket.SocketClosed += Socket_SocketClosed;
 
             if (tags.Contains("deathlink"))
             {
                 deathLinkService = session.CreateDeathLinkService();
                 deathLinkService.EnableDeathLink();
             }
+
+            locationHandler.InitializeDictionary();
         }
 
 
@@ -83,7 +88,12 @@ namespace MomodoraMFRandomizer
 
         public override void OnSceneWasLoaded(int buildIndex, string sceneName)
         {
+            if (SceneManager.sceneCount >= 3)
+            {
+                mainMenu = false;
+            }
             demonStringRemover.removeAllBlockers(); // This should happen if the YAML file has enabled opening up the first area
+            locationHandler.ResetLocationSceneForSkill(sceneName);
             CheckMomoEventValue(); //This is for getting specific values, should probably move it somewhere else 
         }
 
@@ -93,6 +103,8 @@ namespace MomodoraMFRandomizer
             {
                 deathLinkHandler.CheckDeathLink(deathLinkService, username);
             }
+            locationHandler.ReportLocation(session);
+            locationHandler.UpdateItems(session);
         }
 
         public void CheckMomoEventValue()
