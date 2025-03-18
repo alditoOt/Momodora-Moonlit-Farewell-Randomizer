@@ -1,4 +1,5 @@
-﻿using Archipelago.MultiClient.Net;
+﻿using HarmonyLib;
+using Archipelago.MultiClient.Net;
 using Archipelago.MultiClient.Net.Helpers;
 using Archipelago.MultiClient.Net.Models;
 using MomodoraMFRandomizer;
@@ -8,16 +9,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine.SceneManagement;
+using MelonLoader;
 
 namespace MomodoraMoonlitFarewellAP.Patches
 {
+    [HarmonyPatch(typeof(MomoEventData))]
     class APLocationHandler
     {
-        List<int> skillEvents = new List<int> { 9, 10, 20, 194, 1313 };
-        HashSet<int> receivedSkill = new HashSet<int>();
-        HashSet<int> checkedLocation = new HashSet<int>();
-        Dictionary<int, int> previousEventValue = new Dictionary<int, int>();
-        Dictionary<int, string> skillAndScene = new Dictionary<int, string>()
+        static List<int> skillEvents = new List<int> { 9, 10, 20, 194, 1313 };
+        static List<int> bossEvents = new List<int>(); // { 17, 16, 278, 150, 171, 105, 255};
+        static List<int> sigilEvents = new List<int>();
+        static HashSet<int> receivedSkill = new HashSet<int>();
+        static HashSet<int> checkedLocation = new HashSet<int>();
+        static Dictionary<int, int> previousEventValue = new Dictionary<int, int>();
+        static Dictionary<int, string> skillAndScene = new Dictionary<int, string>()
         {
             { 20, "Well26" },
             {9, "Well29" },
@@ -25,6 +30,8 @@ namespace MomodoraMoonlitFarewellAP.Patches
             {194, "Fairy10" },
             {131, "Marsh08" }
         };
+
+        private static int index = 0;
 
         public void InitializeDictionary()
         {
@@ -34,52 +41,85 @@ namespace MomodoraMoonlitFarewellAP.Patches
             }
         }
 
-        public void ReportLocation(ArchipelagoSession session)
+        [HarmonyPatch("set_Item")]
+        [HarmonyPostfix]
+        private static void ReportLocation(int index, int value)
         {
-            if (session == null) {
+            if (value == 0 || (!bossEvents.Contains(index) && !skillEvents.Contains(index) && !sigilEvents.Contains(index))) {
                 return;
             }
-            foreach(int locationId in skillEvents)
+
+            if (skillEvents.Contains(index))
             {
-                if (!checkedLocation.Contains(locationId) && previousEventValue[locationId] == 0 && GameData.current.MomoEvent[locationId] == 1)
+                ReportSkillLocation(index, value);
+            } 
+            else if (sigilEvents.Contains(index))
+            {
+                ReportSigilLocation(index, value);
+            }
+            APRandomizer.session.Locations.CompleteLocationChecks(index);
+
+        }
+
+        private static void ReportSkillLocation(int index, int value)
+        {
+            if (!checkedLocation.Contains(index) && previousEventValue[index] == 0 && value == 1)
+            {
+                checkedLocation.Add(index);
+                if (!receivedSkill.Contains(index))
                 {
-                    if (!receivedSkill.Contains(locationId))
-                    {
-                        GameData.current.MomoEvent[locationId] = 0;
-                    }
-                    else
-                    {
-                        GiveSkill(locationId);
-                    }
-                    checkedLocation.Add(locationId);
-                    session.Locations.CompleteLocationChecks(locationId);
-                    break;
+                    MelonLogger.Msg("Skill not received yet");
+                    GameData.current.MomoEvent[index] = 0;
+                }
+                else
+                {
+                    GiveSkill(index);
                 }
             }
         }
 
-        private void GiveSkill(int skillId)
+        private static void ReportSigilLocation(int index, int value)
         {
-            previousEventValue[skillId] = 1;
-            GameData.current.MomoEvent[skillId] = 1;
-            receivedSkill.Add(skillId);
+            //TO-DO
         }
 
-        public void UpdateItems(ArchipelagoSession session)
+        private static void GiveSkill(int skillId)
         {
-            if (session == null)
+            previousEventValue[skillId] = 1;
+            receivedSkill.Add(skillId);
+            GameData.current.MomoEvent[skillId] = 1;
+        }
+
+        public static void ReceiveItem(ReceivedItemsHelper itemHandler)
+        {
+            var receivedItem = itemHandler.DequeueItem();
+            MelonLogger.Msg($"index: {itemHandler.Index}");
+            if (itemHandler.Index <= index)
             {
                 return;
             }
+            index++;
+            GiveSkill(itemHandler.Index);
+        }
+
+        public void UpdateItemsForTheSession(ArchipelagoSession session)
+        {
+            long itemId = -1;
             foreach (ItemInfo item in session.Items.AllItemsReceived)
             {
-                session.Items.ItemReceived += (receivedItemsHelper) =>
-                {
-                    var itemReceivedName = receivedItemsHelper.PeekItem().ItemName ?? $"Item: {item.ItemId}";
-                    GiveSkill((int)item.ItemId);
-                    receivedItemsHelper.DequeueItem();
-                };
+                itemId = item.ItemId;
             }
+            if (itemId < 0)
+            {
+                return;
+            }
+            session.Items.ItemReceived += (receivedItemsHelper) =>
+            {
+                MelonLogger.Msg($"Item with ID {itemId} received");
+                var itemReceivedName = receivedItemsHelper.PeekItem().ItemName ?? $"Item: {itemId}";
+                GiveSkill((int)itemId);
+                receivedItemsHelper.DequeueItem();
+            };
             
         }
 

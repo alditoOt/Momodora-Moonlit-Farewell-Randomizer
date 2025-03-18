@@ -24,14 +24,14 @@ namespace MomodoraMFRandomizer
         private static string server = "archipelago.gg:56527";
         private string username = "alditto";
         private string password = "";
-        
+
         //This should be loaded from the YAML file eventually
         private string[] tags = new string[] { "deathlink" };
         DeathLinkService deathLinkService;
         APDeathLinkHandler deathLinkHandler = new APDeathLinkHandler();
         APLocationHandler locationHandler = new APLocationHandler();
 
-        private static ArchipelagoSession session = ArchipelagoSessionFactory.CreateSession(server);
+        public static ArchipelagoSession session = ArchipelagoSessionFactory.CreateSession(localhost);
         #endregion
         
         BlockRemover demonStringRemover = new BlockRemover();
@@ -63,16 +63,17 @@ namespace MomodoraMFRandomizer
 
             MelonLogger.Msg("Attempting connection");
             APConnector.Connect(session, server, username, password);
-            //session.Socket.ErrorReceived += Socket_ErrorReceived;
-            //session.Socket.SocketOpened += Socket_SocketOpened;
-            //session.Socket.SocketClosed += Socket_SocketClosed;
+            locationHandler.UpdateItemsForTheSession(session);
+            session.Items.ItemReceived += APLocationHandler.ReceiveItem;
+            session.Socket.ErrorReceived += Socket_ErrorReceived;
+            session.Socket.SocketOpened += Socket_SocketOpened;
+            session.Socket.SocketClosed += Socket_SocketClosed;
 
             if (tags.Contains("deathlink"))
             {
                 deathLinkService = session.CreateDeathLinkService();
                 deathLinkService.EnableDeathLink();
             }
-
             locationHandler.InitializeDictionary();
         }
 
@@ -94,7 +95,6 @@ namespace MomodoraMFRandomizer
             }
             demonStringRemover.removeAllBlockers(); // This should happen if the YAML file has enabled opening up the first area
             locationHandler.ResetLocationSceneForSkill(sceneName);
-            CheckMomoEventValue(); //This is for getting specific values, should probably move it somewhere else 
         }
 
         public override void OnUpdate()
@@ -103,8 +103,6 @@ namespace MomodoraMFRandomizer
             {
                 deathLinkHandler.CheckDeathLink(deathLinkService, username);
             }
-            locationHandler.ReportLocation(session);
-            locationHandler.UpdateItems(session);
         }
 
         public void CheckMomoEventValue()

@@ -72,7 +72,7 @@
     <Compile Include="Main.cs" />
     <Compile Include="Patches\APDeathLinkHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Patches\MomoEventHandler.cs" />
+    <Compile Include="Patches\MomoEventReader.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
