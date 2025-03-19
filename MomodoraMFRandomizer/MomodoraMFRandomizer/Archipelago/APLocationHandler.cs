@@ -35,7 +35,8 @@ namespace MomodoraMoonlitFarewellAP.Patches
             {"Sacred Anemone", 9 },
             {"Spiral Shell", 194 },
             {"Crescent Moonflower", 10 },
-            {"Lunar Attunement", 131 }
+            {"Lunar Attunement", 131 },
+            {"Mitchi Fast Travel", 205 }
         };
 
         public void InitializeDictionary()
@@ -97,14 +98,16 @@ namespace MomodoraMoonlitFarewellAP.Patches
 
         private static void ReportSkillLocation(int index, int value)
         {
+            MelonLogger.Msg($"Attempting to report skill {index}");
             if (!checkedLocation.Contains(index) && previousEventValue[index] == 0)
             {
+                MelonLogger.Msg($"Actually reporting skill {index}");
                 checkedLocation.Add(index);
                 if (!receivedSkill.Contains(index))
                 {
                     GameData.current.MomoEvent[index] = 0;
                 }
-                MomodoraMFRandomizer.APMomoMFRandomizer.session.Locations.CompleteLocationChecks(index);
+                APMomoMFRandomizer.session.Locations.CompleteLocationChecks(index);
             }
         }
 
@@ -127,30 +130,58 @@ namespace MomodoraMoonlitFarewellAP.Patches
         public static void ReceiveItem(ReceivedItemsHelper itemHandler)
         {
             var receivedItem = itemHandler.PeekItem().ItemName;
-            GiveSkill(nameAndSkill[receivedItem]);
+            if (nameAndSkill.ContainsKey(receivedItem))
+            {
+                MelonLogger.Msg($"Receiving {receivedItem}");
+                GiveSkill(nameAndSkill[receivedItem]);
+            }
             itemHandler.DequeueItem();
         }
 
-        public void UpdateItemsForTheSession(ArchipelagoSession session)
+        public static void UpdateItemsForTheSession(ReceivedItemsHelper itemHandler)
         {
             List<int> receivedItems = new List<int>();
-            foreach (ItemInfo item in session.Items.AllItemsReceived)
+            foreach (ItemInfo item in APMomoMFRandomizer.session.Items.AllItemsReceived)
             {
                 long itemId = item.ItemId;
-                session.Items.ItemReceived += (receivedItemsHelper) =>
+                MelonLogger.Msg($"Item with name {itemHandler.PeekItem().ItemName} and ID {itemId} received");
+                var itemReceivedName = item.ItemName ?? $"Item: {item.ItemId}";
+                if (nameAndSkill.ContainsKey(itemReceivedName)) 
                 {
-                    MelonLogger.Msg($"Item with name {receivedItemsHelper.PeekItem().ItemName} and ID {itemId} received");
-                    var itemReceivedName = receivedItemsHelper.PeekItem().ItemName ?? $"Item: {itemId}";
                     receivedItems.Add(nameAndSkill[itemReceivedName]);
-                    receivedItemsHelper.DequeueItem();
-                };
+                }
+                MelonLogger.Msg(itemReceivedName);
             }
             foreach (int itemReceived in receivedItems)
             {
-                if (!receivedSkill.Contains(itemReceived))
+                //if (!receivedSkill.Contains(itemReceived))
+                //{
+                //    GameData.current.MomoEvent[itemReceived] = 0;
+                //}
+                GiveSkill(itemReceived);
+            }
+        }
+
+        public void UpdateItemsForTheSaveFile()
+        {
+            List<int> receivedItems = new List<int>();
+            foreach (ItemInfo item in APMomoMFRandomizer.session.Items.AllItemsReceived)
+            {
+                long itemId = item.ItemId;
+                //MelonLogger.Msg($"Item with name {itemHandler.PeekItem().ItemName} and ID {itemId} received");
+                var itemReceivedName = item.ItemName ?? $"Item: {item.ItemId}";
+                if (nameAndSkill.ContainsKey(itemReceivedName))
                 {
-                    GameData.current.MomoEvent[itemReceived] = 0;
+                    receivedItems.Add(nameAndSkill[itemReceivedName]);
                 }
+                MelonLogger.Msg(itemReceivedName);
+            }
+            foreach (int itemReceived in receivedItems)
+            {
+                //if (!receivedSkill.Contains(itemReceived))
+                //{
+                //    GameData.current.MomoEvent[itemReceived] = 0;
+                //}
                 GiveSkill(itemReceived);
             }
         }

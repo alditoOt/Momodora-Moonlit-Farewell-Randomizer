@@ -14,10 +14,12 @@ def set_rules(world: "MomodoraWorld"):
     set_rule(multiworld.get_entrance("SPC_LTR", player), 
              lambda state: state.has("Sacred Anemone", player) or
              bool(world.options.open_springleaf_path.value))
-    set_rule(multiworld.get_entrance("SPC_FS", player), lambda state: state.has("Sacred Anemone", player))
-    set_rule(multiworld.get_entrance("LTR_FS", player), 
-             lambda state: state.has("Crescent Moonflower", player) or 
-             state.has("Spiral Shell", player))
+    set_rule(multiworld.get_entrance("SPC_FS", player), 
+             lambda state: (state.has("Crescent Moonflower", player) or
+                            state.has("Spiral Shell", player)) and
+             (bool(world.options.open_springleaf_path.value) or 
+             (state.has("Sacred Anemone", player))))
+    set_rule(multiworld.get_entrance("LTR_FS", player), lambda state: state.has("Crescent Moonflower", player))
     set_rule(multiworld.get_entrance("KV_OS", player), lambda state: state.has("Spiral Shell", player))
     set_rule(multiworld.get_entrance("LTR_DF", player), 
              lambda state: state.has("Spiral Shell", player) or

@@ -21,5 +21,14 @@ advancement_table = {
     "Viper Archdemon Sorrellia": AdvData(150, "Fairy Springs"),
     "Remnant of an Unknown Phantasm": AdvData(171, "Moonlight Repose"),
     "Accursed Autarch": AdvData(105, "Demon Frontier"),
-    "Tainted Serpent": AdvData(255, "Ashen Hinterlands")
+    "Tainted Serpent": AdvData(255, "Ashen Hinterlands Continued"),
+    "Very Big Spider": AdvData(114, "Fairy Springs"),
+    "Bloodthirsty Siblings": AdvData(188, "Demon Frontier"),
+    "Moon Goddess Lineth": AdvData(213, "Meikan Village"),
+    "Selin's Fear": AdvData(259, "Fount of Rebirth"),
+    "Selin's Envy": AdvData(261, "Fount of Rebirth"),
+    "Selin's Mendacity": AdvData(260, "Fount of Rebirth"),
+    "Selin's Sorrow": AdvData(262, "Fount of Rebirth"),
+    "Moon God Selin": AdvData(364, "Fount of Rebirth"),
+    "Mitchi Fast Travel": AdvData(205, "Demon Frontier")
 }

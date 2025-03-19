@@ -3,7 +3,7 @@ Deathcount event: 101
 Item definitions (to check in game menu)
 
 BellFlower: 101
-Windmill key: 356
+Windmill key: 356 (MomoEvent: 211)
 Walljump: 343 (event is 194)
 Sprint: 345 (event is 9)
 Awakened leaf: 342 (event is 20)
@@ -27,6 +27,8 @@ Pawn: 36
 Resolve: 186
 Mending Resonance: 86
 Phantasm Blade: 185
+Mudwalker: 223
+Living Blood: 328
 
 # BOSSES
 
@@ -35,20 +37,25 @@ Harpy Archdemon Plunia: 17
 Raging Demon: 16
 Black cat: 278
 Viper Archdemon Sorrellia: 150
-Very Big Spider:
+Very Big Spider: 114
 Remnant of an Unknown Phantasm: 171
 Accursed Autarch: 105
 Tainted Serpent: 255
-Bloodthirsty Siblings:
-Moon Goddess Lineth:
-Selin's Envy:
-Selin's Sorrow:
-Selin's Mendacity:
-Selin's Fear:
-Moon God Selin:
+Bloodthirsty Siblings: 188
+Moon Goddess Lineth: 213
+Selin's Fear: 259 or 294 (most likely 259, 294 must be the value for the door)
+Selin's Envy: 261
+Selin's Mendacity: 260
+Selin's Sorrow: 262
+Moon God Selin: 364, 99 (KohoHouseSelin)
+
+Dora?: 
 
 # OTHERS
 
+Cursed: 151
+Door to Selin: 327
+Credits start: 298
 Cereza friendship: 102
 	- Spring Tree Roots: 106 
 	- Fairy Springs: 107

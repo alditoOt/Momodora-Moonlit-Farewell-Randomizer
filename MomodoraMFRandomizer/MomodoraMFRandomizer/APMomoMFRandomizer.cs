@@ -64,7 +64,7 @@ namespace MomodoraMFRandomizer
         #endregion
         
         //When starting the game
-        public override void OnInitializeMelon()
+        public override void OnLateInitializeMelon()
         {
             ConfigLoader.LoadConfig();
             server = ConfigLoader.config.server;
@@ -72,11 +72,13 @@ namespace MomodoraMFRandomizer
             password = ConfigLoader.config.password;
             deathlink = ConfigLoader.config.deathlink;
             openSpringleafPath = ConfigLoader.config.openSpringleafPath;
+            locationHandler.InitializeDictionary();
             try
             {
                 session = ArchipelagoSessionFactory.CreateSession(server);
-                session.Items.ItemReceived += APLocationHandler.ReceiveItem;
                 APConnector.Connect(session, server, username, password);
+                //locationHandler.UpdateItemsForTheSession(session);
+                session.Items.ItemReceived += APLocationHandler.UpdateItemsForTheSession;
                 CollectSocketInfo();
                 if (deathlink)
                 {
@@ -96,11 +98,6 @@ namespace MomodoraMFRandomizer
             
         }
 
-        public override void OnLateInitializeMelon()
-        {
-            locationHandler.InitializeDictionary();
-        }
-
         public override void OnSceneWasUnloaded(int buildIndex, string sceneName)
         {
             if (SceneManager.sceneCount == 2)
@@ -113,7 +110,7 @@ namespace MomodoraMFRandomizer
         {
             if (mainMenu && SceneManager.sceneCount >= 2)
             {
-                locationHandler.UpdateItemsForTheSession(session);
+                locationHandler.UpdateItemsForTheSaveFile();
                 mainMenu = false;
             }
             if(openSpringleafPath)
