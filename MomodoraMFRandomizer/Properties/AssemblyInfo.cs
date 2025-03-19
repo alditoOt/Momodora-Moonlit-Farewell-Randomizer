@@ -1,15 +1,20 @@
 ﻿using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-
+using System.Runtime.InteropServices.ComTypes;
+using MelonLoader;
+using MomodoraMFRandomizer; // The namespace of your mod class
+// ...
+[assembly: MelonInfo(typeof(MomodoraMFRandomizer.Main), "Main", "0.0.1", "alditto")]
+[assembly: MelonGame("BOMBSERVICE", "MomodoraMoonlitFarewell")]
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("MomodoraAPRandomizer")]
+[assembly: AssemblyTitle("MomodoraMFRandomizer")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("MomodoraAPRandomizer")]
+[assembly: AssemblyProduct("MomodoraMFRandomizer")]
 [assembly: AssemblyCopyright("Copyright ©  2025")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +25,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("a4a90578-e7d4-4131-a74f-c7cfd5e006d4")]
+[assembly: Guid("2a6d7b25-713e-433a-b8ae-d2296827d6f4")]
 
 // Version information for an assembly consists of the following four values:
 //

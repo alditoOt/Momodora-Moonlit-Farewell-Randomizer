@@ -1,26 +1,25 @@
-﻿using HarmonyLib;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MelonLoader;
 using UnityEngine;
+using HarmonyLib;
 using UnityEngine.SceneManagement;
 
-namespace MomodoraAPRandomizer.Patches
+namespace MomodoraMFRandomizer
 {
-    [HarmonyPatch(typeof(SceneManager))]
-    class SceneManagerPatch
+    class BlockRemover
     {
-        //[HarmonyPatch("sceneLoaded")]
-        //[HarmonyPostfix]
-        static void RemoveSpringleafPathBlocks()
+
+        public void removeAllBlockers()
         {
-            RemoveWindZones();
             RemoveStrings();
+            RemoveWindZones();
         }
 
-        static void RemoveWindZones()
+        public void RemoveWindZones()
         {
             FlagDestroy[] extraWindZones = GameObject.FindObjectsOfType<FlagDestroy>();
 
@@ -45,7 +44,7 @@ namespace MomodoraAPRandomizer.Patches
             }
         }
 
-        static void RemoveStrings()
+        public void RemoveStrings()
         {
             List<AlrauneThorn> demonStrings = new List<AlrauneThorn>();
 
