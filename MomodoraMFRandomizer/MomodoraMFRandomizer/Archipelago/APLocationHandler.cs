@@ -10,19 +10,16 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine.SceneManagement;
 using MelonLoader;
+using MomodoraMoonlitFarewellAP.Utils;
 
 namespace MomodoraMoonlitFarewellAP.Patches
 {
     [HarmonyPatch(typeof(MomoEventData))]
     class APLocationHandler
     {
-        static List<int> skillEvents = new List<int> { 9, 10, 20, 194, 131 };
-        static List<int> bossEvents = new List<int>() { 17, 16, 278, 150, 171, 105, 255};
-        static List<int> sigilEvents = new List<int>();
         static HashSet<int> receivedSkill = new HashSet<int>();
         static HashSet<int> checkedLocation = new HashSet<int>();
         static Dictionary<int, int> previousEventValue = new Dictionary<int, int>();
-        public static Boolean fastTravel;
         static Dictionary<int, string> skillAndScene = new Dictionary<int, string>()
         {
             { 20, "Well26" },
@@ -43,7 +40,7 @@ namespace MomodoraMoonlitFarewellAP.Patches
 
         public void InitializeDictionary()
         {
-            foreach (int skill in skillEvents)
+            foreach (int skill in MomoEventUtils.SKILLEVENTS)
             {
                 previousEventValue[skill] = GameData.current.MomoEvent[skill];
             }
@@ -53,21 +50,24 @@ namespace MomodoraMoonlitFarewellAP.Patches
         [HarmonyPrefix]
         private static void ReportLocation(int index, int value)
         {
-            if (value != 1 || (!bossEvents.Contains(index) && !skillEvents.Contains(index) && !sigilEvents.Contains(index))) {
+            if (value != 1 || 
+                (!MomoEventUtils.BOSSEVENTS.Contains(index) && 
+                !MomoEventUtils.SKILLEVENTS.Contains(index) && 
+                !MomoEventUtils.SIGILEVENTS.Contains(index))) {
                 return;
             }
 
-            if (skillEvents.Contains(index))
+            if (MomoEventUtils.SKILLEVENTS.Contains(index))
             {
                 ReportSkillLocation(index, value);
             } 
-            else if (sigilEvents.Contains(index))
+            else if (MomoEventUtils.SIGILEVENTS.Contains(index))
             {
                 ReportSigilLocation(index, value);
             } 
             else
             {
-                APRandomizer.session.Locations.CompleteLocationChecks(index); //Boss check
+                MomodoraMFRandomizer.APMomoMFRandomizer.session.Locations.CompleteLocationChecks(index); //Boss check
             }
 
         }
@@ -76,7 +76,7 @@ namespace MomodoraMoonlitFarewellAP.Patches
         [HarmonyPostfix]
         private static void RemoveNonReceivedSkill(int index, int value)
         {
-            if (value != 1 || !skillEvents.Contains(index))
+            if (value != 1 || !MomoEventUtils.SKILLEVENTS.Contains(index))
             {
                 return;
             }
@@ -104,7 +104,7 @@ namespace MomodoraMoonlitFarewellAP.Patches
                 {
                     GameData.current.MomoEvent[index] = 0;
                 }
-                APRandomizer.session.Locations.CompleteLocationChecks(index);
+                MomodoraMFRandomizer.APMomoMFRandomizer.session.Locations.CompleteLocationChecks(index);
             }
         }
 
@@ -115,7 +115,7 @@ namespace MomodoraMoonlitFarewellAP.Patches
 
         private static void GiveSkill(int skillId)
         {
-            if (skillEvents.Contains(skillId))
+            if (MomoEventUtils.SKILLEVENTS.Contains(skillId))
             {
                 MelonLogger.Msg($"Assigning skill {skillId}");
                 previousEventValue[skillId] = 1;
@@ -153,15 +153,11 @@ namespace MomodoraMoonlitFarewellAP.Patches
                 }
                 GiveSkill(itemReceived);
             }
-            if (fastTravel)
-            {
-                GameData.current.MomoEvent[205] = 1;
-            }
         }
 
         public void ResetLocationSceneForSkill(string sceneName)
         {
-            foreach (int skillId in skillEvents)
+            foreach (int skillId in MomoEventUtils.SKILLEVENTS)
             {
                 if (!receivedSkill.Contains(skillId) || checkedLocation.Contains(skillId))
                 {

@@ -14,21 +14,19 @@ using Archipelago.MultiClient.Net.BounceFeatures.DeathLink;
 using MomodoraMFRandomizer.Patches;
 using MomodoraMoonlitFarewellAP.Patches;
 using MomodoraMoonlitFarewellAP.Utils;
+using System.Reflection;
 
 namespace MomodoraMFRandomizer
 {
-    public class APRandomizer : MelonMod
+    public class APMomoMFRandomizer : MelonMod
     {
         #region AP variables
-        //All these should be loaded from a config.json file eventually
-        //private string localhost = "localhost:38281";
         private static string server; 
         private string username; 
         private string password;
         private bool openSpringleafPath;
         private bool deathlink;
         
-        //This should be loaded from the YAML file eventually
         DeathLinkService deathLinkService;
         APDeathLinkHandler deathLinkHandler = new APDeathLinkHandler();
         APLocationHandler locationHandler = new APLocationHandler();
@@ -37,7 +35,6 @@ namespace MomodoraMFRandomizer
         #endregion
         
         BlockRemover demonStringRemover = new BlockRemover();
-        private HashSet<int> previousSceneValues = new HashSet<int>();
         private bool mainMenu = true;
 
         #region Socket Logging
@@ -65,6 +62,7 @@ namespace MomodoraMFRandomizer
         }
 
         #endregion
+        
         //When starting the game
         public override void OnInitializeMelon()
         {
@@ -74,8 +72,6 @@ namespace MomodoraMFRandomizer
             password = ConfigLoader.config.password;
             deathlink = ConfigLoader.config.deathlink;
             openSpringleafPath = ConfigLoader.config.openSpringleafPath;
-            APLocationHandler.fastTravel = ConfigLoader.config.fastTravel;
-            MelonLogger.Msg($"Open Springleaf Path: {openSpringleafPath}");
             try
             {
                 session = ArchipelagoSessionFactory.CreateSession(server);
@@ -107,45 +103,30 @@ namespace MomodoraMFRandomizer
 
         public override void OnSceneWasUnloaded(int buildIndex, string sceneName)
         {
-            MelonLogger.Msg($"Unloading scene. Scene count: {SceneManager.sceneCount}");
             if (SceneManager.sceneCount == 2)
             {
                 mainMenu = true;
             }
-            MelonLogger.Msg($"Scene {sceneName} unloaded. Main menu: {mainMenu}");
         }
 
         public override void OnSceneWasLoaded(int buildIndex, string sceneName)
         {
-            MelonLogger.Msg($"Scene count: {SceneManager.sceneCount}");
             if (mainMenu && SceneManager.sceneCount >= 2)
             {
                 locationHandler.UpdateItemsForTheSession(session);
                 mainMenu = false;
             }
-            locationHandler.ResetLocationSceneForSkill(sceneName);
-            MelonLogger.Msg($"Scene {sceneName} loaded. Main menu: {mainMenu}");
             if(openSpringleafPath)
             {
                 demonStringRemover.removeAllBlockers();
             }
+            locationHandler.ResetLocationSceneForSkill(sceneName);
+            MelonLogger.Msg($"Scene {sceneName} loaded.");
         }
 
         public override void OnFixedUpdate()
         {
             deathLinkHandler.CheckDeathLink(deathLinkService, username);
-        }
-
-        public void CheckMomoEventValue()
-        {
-            for (int i = 0; i < GameData.current.MomoEvent.Length; i++)
-            {
-                if (GameData.current.MomoEvent[i] == 1 && !previousSceneValues.Contains(i))
-                {
-                    previousSceneValues.Add(i);
-                    MelonLogger.Msg("Event value: " + i);
-                }
-            }
         }
     }
 }

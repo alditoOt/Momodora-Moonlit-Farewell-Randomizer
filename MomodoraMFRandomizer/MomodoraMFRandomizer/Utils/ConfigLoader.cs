@@ -16,13 +16,13 @@ namespace MomodoraMoonlitFarewellAP.Utils
         public string password { get; set; }
         public bool deathlink { get; set; }
         public bool openSpringleafPath { get; set; }
-        public bool fastTravel { get; set; }
+    
     }
 
     public static class ConfigLoader
     {
 
-        private static string configPath = Path.Combine(Directory.GetCurrentDirectory(), "Mods", "serverinfo.json");
+        private static string configPath = Path.Combine(Directory.GetCurrentDirectory(), "Mods", "config.json");
         public static ServerConfig config { get; private set; } 
 
         public static void LoadConfig()

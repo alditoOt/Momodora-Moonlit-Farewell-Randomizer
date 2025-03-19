@@ -12,13 +12,20 @@ using UnityEngine.SceneManagement;
 namespace MomodoraMFRandomizer
 {
     [HarmonyPatch(typeof(MomoEventData))]
-    class MomoEventReader
+    class MomoEventUtils
     {
+        public static List<int> SKILLEVENTS = new List<int> { 9, 10, 20, 194, 131, 205 };
+        public static List<int> BOSSEVENTS = new List<int>() { 15, 17, 16, 278, 150, 171, 105, 255 };
+        public static List<int> SIGILEVENTS = new List<int>();
+
         [HarmonyPatch("set_Item")]
         [HarmonyPostfix]
         private static void PrintOnEventChange(int index, int value)
         {
-            MelonLogger.Msg($"Event {index} was set to {value}.");
+            if (value == 1)
+            {
+                MelonLogger.Msg($"Event {index} was set to {value}.");
+            }
         }
     }
 }

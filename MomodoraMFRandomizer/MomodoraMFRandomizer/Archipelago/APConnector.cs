@@ -4,6 +4,7 @@ using Archipelago.MultiClient.Net.Enums;
 using Archipelago.MultiClient.Net.Helpers;
 using Archipelago.MultiClient.Net.Packets;
 using MelonLoader;
+using MomodoraMoonlitFarewellAP.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,12 +15,9 @@ namespace MomodoraMFRandomizer
 {
     class APConnector
     {
-        //private MomoEventHandler momoEventHandler = new MomoEventHandler();
-        private static string game = "Momodora Moonlit Farewell";
-
         private static LoginResult TryToLogin(ArchipelagoSession session, string user, string password)
         {
-            var result = session.TryConnectAndLogin(game, user, ItemsHandlingFlags.AllItems, password: password);
+            var result = session.TryConnectAndLogin(StringUtils.GAME, user, ItemsHandlingFlags.AllItems, password: password);
             return result;
         }
 

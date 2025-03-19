@@ -14,6 +14,7 @@ advancement_table = {
     "Crescent Moonflower": AdvData(10, "Lun Tree Roots"),
     "Spiral Shell": AdvData(194, "Fairy Village"),
     "Lunar Attunement": AdvData(131, "Ashen Hinterlands"),
+    "Gariser Demon": AdvData(15, "Springleaf Path"),
     "Harpy Archdemon": AdvData(17, "Springleaf Path"),
     "Raging Demon": AdvData(16, "Springleaf Path"),
     "Black Cat": AdvData(278, "Lun Tree Roots"),

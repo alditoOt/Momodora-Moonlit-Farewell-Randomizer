@@ -7,7 +7,8 @@ def link_momodora_areas(world: MultiWorld, player: int):
 # (Region name, list of exits)
 momodora_regions = [
     ("Menu", ["New Game"]),
-    ("Springleaf Path", ["SP_LTR", "SP_FS"]),
+    ("Springleaf Path", ["SP_SPC"]),
+    ("Springleaf Path Continued", ["SPC_LTR", "SPC_FS"]),
     ("Koho Village", ["KV_SP", "KV_OS"]),
     ("Old Sanctuary", []),
     ("Lun Tree Roots", ["LTR_DF", "LTR_FS", "LTR_MR"]),
@@ -15,7 +16,8 @@ momodora_regions = [
     ("Fairy Springs", ["FS_FV"]),
     ("Fairy Village", []),
     ("Moonlight Repose", []),
-    ("Ashen Hinterlands", []),
+    ("Ashen Hinterlands", ["AH_AHC"]),
+    ("Ashen Hinterlands Continued", []),
     ("Meikan Village", ["MV_FOR"]),
     ("Fount of Rebirth", ["FOR_DORA"]),
     ("Dora", [])
@@ -24,8 +26,9 @@ momodora_regions = [
 # (Entrance, region pointed to)
 mandatory_connections = [
     ("New Game", "Springleaf Path"),
-    ("SP_LTR", "Lun Tree Roots"),
-    ("SP_FS", "Fairy Springs"),
+    ("SP_SPC", "Springleaf Path Continued"),
+    ("SPC_LTR", "Lun Tree Roots"),
+    ("SPC_FS", "Fairy Springs"),
     ("KV_SP", "Springleaf Path"),
     ("KV_OS", "Old Sanctuary"),
     ("LTR_DF", "Demon Frontier"),
@@ -33,6 +36,7 @@ mandatory_connections = [
     ("LTR_MR", "Moonlight Repose"),
     ("FS_FV", "Fairy Village"),
     ("DF_AH", "Ashen Hinterlands"),
+    ("AH_AHC", "Ashen Hinterlands Continued"),
     ("DF_MV", "Meikan Village"),
     ("MV_FOR", "Fount of Rebirth"),
     ("FOR_DORA", "Dora")

@@ -16,7 +16,8 @@ item_table = {
    "Sacred Anemone": ItemData(9, ItemClassification.progression),
    "Crescent Moonflower": ItemData(10, ItemClassification.progression),
    "Spiral Shell": ItemData(194, ItemClassification.progression),
-   "Lunar Attunement": ItemData(131, ItemClassification.progression)
+   "Lunar Attunement": ItemData(131, ItemClassification.progression),
+   "Mitchi Fast Travel": ItemData(205, ItemClassification.useful)
    #Sigils (WIP)
 }
 
@@ -26,6 +27,10 @@ skill_items = {
     "Crescent Moonflower": 1,
     "Spiral Shell": 1,
     "Lunar Attunement": 1
+}
+
+extra_skill_items = {
+    "Mitchi Fast Travel": 1
 }
 
 sigil_items = {

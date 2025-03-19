@@ -9,6 +9,7 @@ namespace MomodoraMoonlitFarewellAP.Utils
 
     class StringUtils
     {
-    public static readonly string DEATHLINK = "deathlink";
+        public static readonly string DEATHLINK = "deathlink";
+        public static readonly string GAME = "Momodora Moonlit Farewell";
     }
 }
