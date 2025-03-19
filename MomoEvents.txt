@@ -9,7 +9,7 @@ Sprint: 345 (event is 9)
 Awakened leaf: 342 (event is 20)
 
 
-MomoEvent values:
+MomoEvent value for items:
 
 Silver Moonlit Dust: 181
 Golden Moonlit Dust: 180
@@ -30,8 +30,8 @@ Phantasm Blade: 185
 
 # BOSSES
 
-Gariser Demon: I haven't found it yet for some reason
-Harpy Archdemon Plunia: 17 or 366 (17 is the boss I think, the other is Dora text maybe?)
+Gariser Demon: 15
+Harpy Archdemon Plunia: 17
 Raging Demon: 16
 Black cat: 278
 Viper Archdemon Sorrellia: 150
