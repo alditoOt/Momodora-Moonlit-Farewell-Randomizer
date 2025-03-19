@@ -14,27 +14,22 @@ namespace MomodoraMFRandomizer.Patches
 
         private Boolean isDead = false;
         public void CheckDeathLink(DeathLinkService deathLinkService, String username)
-        {
-            if (!isDead)
+        {           
+            if (!isDead && Platformer3D.player_hp <= 0f)
             {
-                deathLinkService.OnDeathLinkReceived += (deathLinkObject) =>
-                {
-                    Platformer3D.player_hp = 0f;
-                    isDead = true;
-                };
-            
-                if (Platformer3D.player_hp == 0f)
-                {
-                    MelonLogger.Msg("deathlink sent");
-                    deathLinkService.SendDeathLink(new DeathLink(username));
-                    isDead = true;
-                }
+                MelonLogger.Msg("deathlink sent");
+                deathLinkService.SendDeathLink(new DeathLink(username));
+                isDead = true;
             }
             if (Platformer3D.player_hp >= 1)
             {
                 isDead = false;
             }
         }
-    }
 
+        public void SetIsDead(Boolean isDead)
+        {
+            this.isDead = isDead;
+        }
+    }
 }

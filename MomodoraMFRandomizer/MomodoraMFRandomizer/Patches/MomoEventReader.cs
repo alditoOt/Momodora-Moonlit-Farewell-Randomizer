@@ -18,7 +18,7 @@ namespace MomodoraMFRandomizer
         [HarmonyPostfix]
         private static void PrintOnEventChange(int index, int value)
         {
-            //MelonLogger.Msg($"Event {index} was set to {value}.");
+            MelonLogger.Msg($"Event {index} was set to {value}.");
         }
     }
 }

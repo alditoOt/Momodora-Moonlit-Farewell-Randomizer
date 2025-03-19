@@ -13,6 +13,7 @@ using Archipelago.MultiClient.Net.Enums;
 using Archipelago.MultiClient.Net.BounceFeatures.DeathLink;
 using MomodoraMFRandomizer.Patches;
 using MomodoraMoonlitFarewellAP.Patches;
+using MomodoraMoonlitFarewellAP.Utils;
 
 namespace MomodoraMFRandomizer
 {
@@ -20,18 +21,19 @@ namespace MomodoraMFRandomizer
     {
         #region AP variables
         //All these should be loaded from a config.json file eventually
-        private static string localhost = "localhost:38281";
-        private static string server = "archipelago.gg:56527";
-        private string username = "alditto";
-        private string password = "";
-
+        //private string localhost = "localhost:38281";
+        private static string server; 
+        private string username; 
+        private string password;
+        private bool openSpringleafPath;
+        private bool deathlink;
+        
         //This should be loaded from the YAML file eventually
-        private string[] tags = new string[] { "deathlink" };
         DeathLinkService deathLinkService;
         APDeathLinkHandler deathLinkHandler = new APDeathLinkHandler();
         APLocationHandler locationHandler = new APLocationHandler();
 
-        public static ArchipelagoSession session = ArchipelagoSessionFactory.CreateSession(localhost);
+        public static ArchipelagoSession session;
         #endregion
         
         BlockRemover demonStringRemover = new BlockRemover();
@@ -55,53 +57,83 @@ namespace MomodoraMFRandomizer
         static void Socket_SocketClosed(string reason) =>
             MelonLogger.Msg($"Socket closed: {reason}");
 
+        private void CollectSocketInfo()
+        {
+            session.Socket.ErrorReceived += Socket_ErrorReceived;
+            session.Socket.SocketOpened += Socket_SocketOpened;
+            session.Socket.SocketClosed += Socket_SocketClosed;
+        }
+
         #endregion
         //When starting the game
+        public override void OnInitializeMelon()
+        {
+            ConfigLoader.LoadConfig();
+            server = ConfigLoader.config.server;
+            username = ConfigLoader.config.username;
+            password = ConfigLoader.config.password;
+            deathlink = ConfigLoader.config.deathlink;
+            openSpringleafPath = ConfigLoader.config.openSpringleafPath;
+            APLocationHandler.fastTravel = ConfigLoader.config.fastTravel;
+            MelonLogger.Msg($"Open Springleaf Path: {openSpringleafPath}");
+            try
+            {
+                session = ArchipelagoSessionFactory.CreateSession(server);
+                session.Items.ItemReceived += APLocationHandler.ReceiveItem;
+                APConnector.Connect(session, server, username, password);
+                CollectSocketInfo();
+                if (deathlink)
+                {
+                    deathLinkService = session.CreateDeathLinkService();
+                    deathLinkService.EnableDeathLink();
+                    deathLinkService.OnDeathLinkReceived += (deathLinkObject) =>
+                    {
+                        Platformer3D.player_hp = 0f;
+                        deathLinkHandler.SetIsDead(true);
+                    };
+                }
+            }
+            catch (Exception e)
+            {
+                MelonLogger.Msg($"An error occured when trying to create the session: {e.Message}");
+            }
+            
+        }
+
         public override void OnLateInitializeMelon()
         {
-            //Attempt connection to the server
-
-            session.Items.ItemReceived += APLocationHandler.ReceiveItem;
-            locationHandler.UpdateItemsForTheSession(session);
-            APConnector.Connect(session, server, username, password);
-            //session.Socket.ErrorReceived += Socket_ErrorReceived;
-            //session.Socket.SocketOpened += Socket_SocketOpened;
-            //session.Socket.SocketClosed += Socket_SocketClosed;
-
-            if (tags.Contains("deathlink"))
-            {
-                deathLinkService = session.CreateDeathLinkService();
-                deathLinkService.EnableDeathLink();
-            }
             locationHandler.InitializeDictionary();
         }
 
-
-
         public override void OnSceneWasUnloaded(int buildIndex, string sceneName)
         {
-            if (SceneManager.sceneCount <= 2)
+            MelonLogger.Msg($"Unloading scene. Scene count: {SceneManager.sceneCount}");
+            if (SceneManager.sceneCount == 2)
             {
                 mainMenu = true;
             }
+            MelonLogger.Msg($"Scene {sceneName} unloaded. Main menu: {mainMenu}");
         }
 
         public override void OnSceneWasLoaded(int buildIndex, string sceneName)
         {
-            if (SceneManager.sceneCount >= 3)
+            MelonLogger.Msg($"Scene count: {SceneManager.sceneCount}");
+            if (mainMenu && SceneManager.sceneCount >= 2)
             {
+                locationHandler.UpdateItemsForTheSession(session);
                 mainMenu = false;
             }
-            demonStringRemover.removeAllBlockers(); // This should happen if the YAML file has enabled opening up the first area
             locationHandler.ResetLocationSceneForSkill(sceneName);
+            MelonLogger.Msg($"Scene {sceneName} loaded. Main menu: {mainMenu}");
+            if(openSpringleafPath)
+            {
+                demonStringRemover.removeAllBlockers();
+            }
         }
 
-        public override void OnUpdate()
+        public override void OnFixedUpdate()
         {
-            if (tags.Contains("deathlink"))
-            {
-                deathLinkHandler.CheckDeathLink(deathLinkService, username);
-            }
+            deathLinkHandler.CheckDeathLink(deathLinkService, username);
         }
 
         public void CheckMomoEventValue()
