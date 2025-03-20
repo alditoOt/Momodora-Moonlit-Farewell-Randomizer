@@ -28,16 +28,6 @@ namespace MomodoraMFRandomizer
             {131, "Marsh08" }
         };
 
-        static Dictionary<string, int> nameAndSkill = new Dictionary<string, int>()
-        {
-            {"Awakened Sacred Leaf", 20 },
-            {"Sacred Anemone", 9 },
-            {"Spiral Shell", 194 },
-            {"Crescent Moonflower", 10 },
-            {"Lunar Attunement", 131 },
-            {"Mitchi Fast Travel", 205 }
-        };
-
         public void InitializeDictionary()
         {
             foreach (int skill in MomoEventUtils.SKILLEVENTS)
@@ -85,7 +75,7 @@ namespace MomodoraMFRandomizer
             {
                 if (!receivedSkill.Contains(index))
                 {
-                    MelonLogger.Msg("Skill not received yet");
+                    //MelonLogger.Msg("Skill not received yet");
                     GameData.current.MomoEvent[index] = 0;
                 }
                 else
@@ -97,10 +87,10 @@ namespace MomodoraMFRandomizer
 
         private static void ReportSkillLocation(int index, int value)
         {
-            MelonLogger.Msg($"Attempting to report skill {index}");
+            //MelonLogger.Msg($"Attempting to report skill {index}");
             if (!APMomoMFRandomizer.session.Locations.AllLocationsChecked.Contains(index) && previousEventValue[index] == 0)
             {
-                MelonLogger.Msg($"Actually reporting skill {index}");
+                //MelonLogger.Msg($"Actually reporting skill {index}");
                 checkedLocation.Add(index);
                 if (!receivedSkill.Contains(index))
                 {
@@ -119,7 +109,7 @@ namespace MomodoraMFRandomizer
         {
             if (MomoEventUtils.SKILLEVENTS.Contains(skillId))
             {
-                MelonLogger.Msg($"Assigning skill {skillId}");
+                //MelonLogger.Msg($"Assigning skill {skillId}");
                 previousEventValue[skillId] = 1;
                 receivedSkill.Add(skillId);
                 GameData.current.MomoEvent[skillId] = 1;
@@ -128,43 +118,20 @@ namespace MomodoraMFRandomizer
 
         public static void UpdateItemsForTheSession(ReceivedItemsHelper itemHandler)
         {
-            //List<int> receivedItems = new List<int>();
             foreach (ItemInfo item in APMomoMFRandomizer.session.Items.AllItemsReceived)
             {
                 long itemId = item.ItemId;
-                MelonLogger.Msg($"Item with name {itemHandler.PeekItem().ItemName} and ID {(int)itemId} received");
-                //var itemReceivedName = item.ItemName ?? $"Item: {item.ItemId}";
                 GiveSkill((int)itemId);
-                //if (nameAndSkill.ContainsKey(itemReceivedName)) 
-                //{
-                //    receivedItems.Add(nameAndSkill[itemReceivedName]);
-                //}
-                //MelonLogger.Msg(itemReceivedName);
             }
-            //foreach (int itemReceived in receivedItems)
-            //{
-            //    GiveSkill(itemReceived);
-            //}
         }
 
         public void HandleItemsReceived()
         {
-            List<int> receivedItems = new List<int>();
             foreach (ItemInfo item in APMomoMFRandomizer.session.Items.AllItemsReceived)
             {
                 long itemId = item.ItemId;
-                //var itemReceivedName = item.ItemName ?? $"Item: {item.ItemId}";
                 GiveSkill((int)itemId);
-                //if (nameAndSkill.ContainsKey(itemReceivedName))
-                //{
-                //    receivedItems.Add(nameAndSkill[itemReceivedName]);
-                //}
-                //MelonLogger.Msg(itemReceivedName);
             }
-            //foreach (int itemReceived in receivedItems)
-            //{
-            //    GiveSkill(itemReceived);
-            //}
         }
 
         public void ResetLocationSceneForSkill(string sceneName, Boolean mainMenu)

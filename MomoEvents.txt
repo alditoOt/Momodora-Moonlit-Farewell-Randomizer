@@ -16,19 +16,21 @@ Golden Moonlit Dust: 180
 Fairy Springs Grimoire: 191
 
 # SIGILS
-Cloudy Blood: 32
-The Fool: 187
-The Sharpshooter: 140
-The Hunter: 104
-Resonance of Ifriya: 37
+Cloudy Blood: 32 (400)
+The Fool: 187 (item 419)
+The Sharpshooter: 140 (438)
+The Hunter: 104 (427)
+Resonance of Ifriya: 37 (425)
 The Blessed: 138
 Glazed Aegis: 139
 Pawn: 36
-Resolve: 186
+Resolve: 186 (444)
 Mending Resonance: 86
 Phantasm Blade: 185
 Mudwalker: 223
 Living Blood: 328
+Living Edge: 85 (412)
+Welkin Leaf: 256 (item 446)
 
 # BOSSES
 

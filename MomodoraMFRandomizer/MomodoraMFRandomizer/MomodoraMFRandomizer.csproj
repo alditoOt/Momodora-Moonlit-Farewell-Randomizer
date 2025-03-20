@@ -73,8 +73,10 @@
     <Compile Include="Main.cs" />
     <Compile Include="Archipelago\APDeathLinkHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\InventoryUtils.cs" />
     <Compile Include="Utils\MomoEventUtils.cs" />
     <Compile Include="Utils\ConfigLoader.cs" />
+    <Compile Include="Patches\SceneManagerPatcher.cs" />
     <Compile Include="Utils\StringUtils.cs" />
   </ItemGroup>
   <ItemGroup>

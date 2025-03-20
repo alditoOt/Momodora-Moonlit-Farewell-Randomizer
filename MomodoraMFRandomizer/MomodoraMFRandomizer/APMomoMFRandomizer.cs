@@ -34,6 +34,8 @@ namespace MomodoraMFRandomizer
         BlockRemover demonStringRemover = new BlockRemover();
         private bool mainMenu = true;
 
+        private List<int> itemId = new List<int> { 400, 419, 438, 427, 444, 412, 446};
+
         #region Socket Logging
         static void Socket_ErrorReceived(Exception e, string message)
         {
@@ -115,6 +117,8 @@ namespace MomodoraMFRandomizer
             }
             locationHandler.ResetLocationSceneForSkill(sceneName, mainMenu);
             MelonLogger.Msg($"Scene {sceneName} loaded.");
+
+            
         }
 
         public override void OnFixedUpdate()
