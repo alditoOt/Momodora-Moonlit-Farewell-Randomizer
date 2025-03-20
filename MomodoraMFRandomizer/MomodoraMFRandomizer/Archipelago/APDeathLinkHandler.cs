@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace MomodoraMFRandomizer.Patches
+namespace MomodoraMFRandomizer
 {
     class APDeathLinkHandler
     {

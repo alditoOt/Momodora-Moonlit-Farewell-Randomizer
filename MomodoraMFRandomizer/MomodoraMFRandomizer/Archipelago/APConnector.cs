@@ -4,7 +4,6 @@ using Archipelago.MultiClient.Net.Enums;
 using Archipelago.MultiClient.Net.Helpers;
 using Archipelago.MultiClient.Net.Packets;
 using MelonLoader;
-using MomodoraMoonlitFarewellAP.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -53,13 +52,6 @@ namespace MomodoraMFRandomizer
 
             var loginSuccess = (LoginSuccessful)result;
             MelonLogger.Msg("soy fans");
-        }
-
-        public static void SendCompletion(ArchipelagoSession session)
-        {
-            var statusUpdatePacket = new StatusUpdatePacket();
-            statusUpdatePacket.Status = ArchipelagoClientState.ClientGoal;
-            session.Socket.SendPacket(statusUpdatePacket);
         }
     }
 }

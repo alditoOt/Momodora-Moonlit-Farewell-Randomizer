@@ -68,6 +68,7 @@
     <Compile Include="Archipelago\APConnector.cs" />
     <Compile Include="Archipelago\APLocationHandler.cs" />
     <Compile Include="APMomoMFRandomizer.cs" />
+    <Compile Include="Archipelago\APSocketHandler.cs" />
     <Compile Include="Patches\BlockRemover.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Archipelago\APDeathLinkHandler.cs" />

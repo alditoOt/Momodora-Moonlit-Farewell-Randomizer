@@ -10,9 +10,8 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine.SceneManagement;
 using MelonLoader;
-using MomodoraMoonlitFarewellAP.Utils;
 
-namespace MomodoraMoonlitFarewellAP.Patches
+namespace MomodoraMFRandomizer
 {
     [HarmonyPatch(typeof(MomoEventData))]
     class APLocationHandler
@@ -48,7 +47,7 @@ namespace MomodoraMoonlitFarewellAP.Patches
         }
 
         [HarmonyPatch("set_Item")]
-        [HarmonyPrefix]
+        [HarmonyPostfix]
         private static void ReportLocation(int index, int value)
         {
             if (value != 1 || 
@@ -68,7 +67,7 @@ namespace MomodoraMoonlitFarewellAP.Patches
             } 
             else
             {
-                MomodoraMFRandomizer.APMomoMFRandomizer.session.Locations.CompleteLocationChecks(index); //Boss check
+                APMomoMFRandomizer.session.Locations.CompleteLocationChecks(index); //Boss check
             }
 
         }
@@ -99,7 +98,7 @@ namespace MomodoraMoonlitFarewellAP.Patches
         private static void ReportSkillLocation(int index, int value)
         {
             MelonLogger.Msg($"Attempting to report skill {index}");
-            if (!checkedLocation.Contains(index) && previousEventValue[index] == 0)
+            if (!APMomoMFRandomizer.session.Locations.AllLocationsChecked.Contains(index) && previousEventValue[index] == 0)
             {
                 MelonLogger.Msg($"Actually reporting skill {index}");
                 checkedLocation.Add(index);
@@ -127,78 +126,64 @@ namespace MomodoraMoonlitFarewellAP.Patches
             }
         }
 
-        public static void ReceiveItem(ReceivedItemsHelper itemHandler)
-        {
-            var receivedItem = itemHandler.PeekItem().ItemName;
-            if (nameAndSkill.ContainsKey(receivedItem))
-            {
-                MelonLogger.Msg($"Receiving {receivedItem}");
-                GiveSkill(nameAndSkill[receivedItem]);
-            }
-            itemHandler.DequeueItem();
-        }
-
         public static void UpdateItemsForTheSession(ReceivedItemsHelper itemHandler)
         {
-            List<int> receivedItems = new List<int>();
+            //List<int> receivedItems = new List<int>();
             foreach (ItemInfo item in APMomoMFRandomizer.session.Items.AllItemsReceived)
             {
                 long itemId = item.ItemId;
-                MelonLogger.Msg($"Item with name {itemHandler.PeekItem().ItemName} and ID {itemId} received");
-                var itemReceivedName = item.ItemName ?? $"Item: {item.ItemId}";
-                if (nameAndSkill.ContainsKey(itemReceivedName)) 
-                {
-                    receivedItems.Add(nameAndSkill[itemReceivedName]);
-                }
-                MelonLogger.Msg(itemReceivedName);
-            }
-            foreach (int itemReceived in receivedItems)
-            {
-                //if (!receivedSkill.Contains(itemReceived))
+                MelonLogger.Msg($"Item with name {itemHandler.PeekItem().ItemName} and ID {(int)itemId} received");
+                //var itemReceivedName = item.ItemName ?? $"Item: {item.ItemId}";
+                GiveSkill((int)itemId);
+                //if (nameAndSkill.ContainsKey(itemReceivedName)) 
                 //{
-                //    GameData.current.MomoEvent[itemReceived] = 0;
+                //    receivedItems.Add(nameAndSkill[itemReceivedName]);
                 //}
-                GiveSkill(itemReceived);
+                //MelonLogger.Msg(itemReceivedName);
             }
+            //foreach (int itemReceived in receivedItems)
+            //{
+            //    GiveSkill(itemReceived);
+            //}
         }
 
-        public void UpdateItemsForTheSaveFile()
+        public void HandleItemsReceived()
         {
             List<int> receivedItems = new List<int>();
             foreach (ItemInfo item in APMomoMFRandomizer.session.Items.AllItemsReceived)
             {
                 long itemId = item.ItemId;
-                //MelonLogger.Msg($"Item with name {itemHandler.PeekItem().ItemName} and ID {itemId} received");
-                var itemReceivedName = item.ItemName ?? $"Item: {item.ItemId}";
-                if (nameAndSkill.ContainsKey(itemReceivedName))
-                {
-                    receivedItems.Add(nameAndSkill[itemReceivedName]);
-                }
-                MelonLogger.Msg(itemReceivedName);
-            }
-            foreach (int itemReceived in receivedItems)
-            {
-                //if (!receivedSkill.Contains(itemReceived))
+                //var itemReceivedName = item.ItemName ?? $"Item: {item.ItemId}";
+                GiveSkill((int)itemId);
+                //if (nameAndSkill.ContainsKey(itemReceivedName))
                 //{
-                //    GameData.current.MomoEvent[itemReceived] = 0;
+                //    receivedItems.Add(nameAndSkill[itemReceivedName]);
                 //}
-                GiveSkill(itemReceived);
+                //MelonLogger.Msg(itemReceivedName);
             }
+            //foreach (int itemReceived in receivedItems)
+            //{
+            //    GiveSkill(itemReceived);
+            //}
         }
 
-        public void ResetLocationSceneForSkill(string sceneName)
+        public void ResetLocationSceneForSkill(string sceneName, Boolean mainMenu)
         {
+            if (mainMenu)
+            {
+                return;
+            }
             foreach (int skillId in MomoEventUtils.SKILLEVENTS)
             {
-                if (!receivedSkill.Contains(skillId) || checkedLocation.Contains(skillId))
+                if (!receivedSkill.Contains(skillId) || APMomoMFRandomizer.session.Locations.AllLocationsChecked.Contains(skillId))
                 {
-                    return;
+                    continue;
                 }
                 if (GameData.current.MomoEvent[skillId] == 1 && skillAndScene[skillId] == sceneName)
                 {
                     GameData.current.MomoEvent[skillId] = 0;
                     previousEventValue[skillId] = 0;
-                    SceneManager.LoadScene(sceneName);
+                    receivedSkill.Remove(skillId);
                     break;
                 }
             }

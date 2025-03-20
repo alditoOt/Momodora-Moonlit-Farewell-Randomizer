@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MomodoraMoonlitFarewellAP.Utils
+namespace MomodoraMFRandomizer
 {
     public class ServerConfig
     {

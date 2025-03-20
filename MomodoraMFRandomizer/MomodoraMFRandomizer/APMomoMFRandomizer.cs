@@ -11,9 +11,6 @@ using System.Collections;
 using Archipelago.MultiClient.Net;
 using Archipelago.MultiClient.Net.Enums;
 using Archipelago.MultiClient.Net.BounceFeatures.DeathLink;
-using MomodoraMFRandomizer.Patches;
-using MomodoraMoonlitFarewellAP.Patches;
-using MomodoraMoonlitFarewellAP.Utils;
 using System.Reflection;
 
 namespace MomodoraMFRandomizer
@@ -77,7 +74,6 @@ namespace MomodoraMFRandomizer
             {
                 session = ArchipelagoSessionFactory.CreateSession(server);
                 APConnector.Connect(session, server, username, password);
-                //locationHandler.UpdateItemsForTheSession(session);
                 session.Items.ItemReceived += APLocationHandler.UpdateItemsForTheSession;
                 CollectSocketInfo();
                 if (deathlink)
@@ -110,14 +106,14 @@ namespace MomodoraMFRandomizer
         {
             if (mainMenu && SceneManager.sceneCount >= 2)
             {
-                locationHandler.UpdateItemsForTheSaveFile();
+                locationHandler.HandleItemsReceived();
                 mainMenu = false;
             }
             if(openSpringleafPath)
             {
                 demonStringRemover.removeAllBlockers();
             }
-            locationHandler.ResetLocationSceneForSkill(sceneName);
+            locationHandler.ResetLocationSceneForSkill(sceneName, mainMenu);
             MelonLogger.Msg($"Scene {sceneName} loaded.");
         }
 
