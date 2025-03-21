@@ -27,7 +27,8 @@ class MomodoraWorld(World):
             "player_id": self.player,
             "client_version": self.required_client_version,
             "race": self.multiworld.is_race,
-            "open_springleaf_path": bool(self.options.open_springleaf_path.value)
+            "open_springleaf_path": bool(self.options.open_springleaf_path.value),
+            "deathlink": bool(self.options.deathlink.value)
         }
     
     def get_filler_item_name(self):

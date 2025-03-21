@@ -43,14 +43,15 @@ namespace MomodoraMFRandomizer
         {
             if (value != 1 || 
                 (!MomoEventUtils.BOSSEVENTS.Contains(index) && 
-                !MomoEventUtils.SKILLEVENTS.Contains(index))) {
+                !MomoEventUtils.SKILLEVENTS.Contains(index) &&
+                !MomoEventUtils.SIGILEVENTS.Contains(index))) {
                 return;
             }
 
             if (MomoEventUtils.SKILLEVENTS.Contains(index))
             {
                 ReportSkillLocation(index, value);
-            }  
+            }
             else
             {
                 APMomoMFRandomizer.session.Locations.CompleteLocationChecks(index); //Boss check
@@ -95,23 +96,19 @@ namespace MomodoraMFRandomizer
             }
         }
 
-        private static void ReportSigilLocation(int index, int value)
-        {
-            //TO-DO
-        }
-
         private static void GiveItem(int itemId)
         {
             if (MomoEventUtils.SKILLEVENTS.Contains(itemId))
             {
-                //MelonLogger.Msg($"Assigning skill {skillId}");
+                MelonLogger.Msg($"Assigning skill {itemId}");
                 previousEventValue[itemId] = 1;
                 receivedSkill.Add(itemId);
                 GameData.current.MomoEvent[itemId] = 1;
             }
             else if (InventoryUtils.SIGILID.Contains(itemId))
             {
-                GameData.inventory.Add(GameData.inventory.GetItem(itemId));
+                MelonLogger.Msg($"Giving item with id: {itemId}");
+                GameData.inventory.Add(GameData.itemDatabase.GetItem(itemId), is_new_item: false);
             }
         }
 

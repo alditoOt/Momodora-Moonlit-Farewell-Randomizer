@@ -69,8 +69,6 @@ namespace MomodoraMFRandomizer
             server = ConfigLoader.config.server;
             username = ConfigLoader.config.username;
             password = ConfigLoader.config.password;
-            deathlink = ConfigLoader.config.deathlink;
-            openSpringleafPath = ConfigLoader.config.openSpringleafPath;
             locationHandler.InitializeDictionary();
             try
             {
@@ -78,7 +76,8 @@ namespace MomodoraMFRandomizer
                 APConnector.Connect(session, server, username, password);
                 session.Items.ItemReceived += APLocationHandler.UpdateItemsForTheSession;
                 CollectSocketInfo();
-                if (deathlink)
+                YAMLUtils.GetSettingsFromYAML();
+                if (YAMLUtils.DEATHLINK)
                 {
                     deathLinkService = session.CreateDeathLinkService();
                     deathLinkService.EnableDeathLink();
@@ -93,7 +92,6 @@ namespace MomodoraMFRandomizer
             {
                 MelonLogger.Msg($"An error occured when trying to create the session: {e.Message}");
             }
-            
         }
 
         public override void OnSceneWasUnloaded(int buildIndex, string sceneName)
@@ -111,14 +109,11 @@ namespace MomodoraMFRandomizer
                 locationHandler.HandleItemsReceived();
                 mainMenu = false;
             }
-            if(openSpringleafPath)
+            if(YAMLUtils.OPENSPRINGLEAFPATH)
             {
                 demonStringRemover.removeAllBlockers();
             }
             locationHandler.ResetLocationSceneForSkill(sceneName, mainMenu);
-            MelonLogger.Msg($"Scene {sceneName} loaded.");
-
-            
         }
 
         public override void OnFixedUpdate()

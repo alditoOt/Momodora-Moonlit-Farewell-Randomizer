@@ -79,6 +79,7 @@
     <Compile Include="Utils\ConfigLoader.cs" />
     <Compile Include="Patches\SceneManagerPatcher.cs" />
     <Compile Include="Utils\StringUtils.cs" />
+    <Compile Include="Utils\YAMLUtils.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

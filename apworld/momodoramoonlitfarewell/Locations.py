@@ -60,5 +60,6 @@ advancement_table = {
     "The Hunter": AdvData(427, "Koho Village"),
     "The Sharpshooter": AdvData(438, "Old Sanctuary"),
     "Trinary": AdvData(449, "Meikan Village"),
-    "Welkin Leaf": AdvData(446, "Koho Village")
+    "Welkin Leaf": AdvData(446, "Koho Village"),
+    "The Fool": AdvData(419, "Springleaf Path")
 }

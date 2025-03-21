@@ -15,8 +15,6 @@ namespace MomoReader.Utils
         public static int index;
         private static string filePath = Path.Combine(Directory.GetCurrentDirectory(), "Mods", "Data", "LilyData.csv");
 
-        [HarmonyPatch("set_Item")]
-        [HarmonyPrefix]
         public static void GetEventIndex(int index, int value)
         {
             MomoEventUtils.index = index;
