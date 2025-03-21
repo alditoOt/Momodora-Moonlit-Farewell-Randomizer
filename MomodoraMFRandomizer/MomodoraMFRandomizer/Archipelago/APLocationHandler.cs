@@ -20,13 +20,13 @@ namespace MomodoraMFRandomizer
         static HashSet<int> receivedSkill = new HashSet<int>();
         static HashSet<int> checkedLocation = new HashSet<int>();
         static Dictionary<int, int> previousEventValue = new Dictionary<int, int>();
-        static Dictionary<int, string> skillAndScene = new Dictionary<int, string>()
+        static Dictionary<string, int> skillAndScene = new Dictionary<string, int>()
         {
-            { 20, "Well26" },
-            {9, "Well29" },
-            {10, "Bark42" },
-            {194, "Fairy10" },
-            {131, "Marsh08" }
+            { "Well26", 20 },
+            {"Well29" , 9 },
+            {"Bark42" , 10 },
+            {"Fairy10" , 194 },
+            {"Marsh08" , 131 }
         };
 
         public void InitializeDictionary()
@@ -85,7 +85,7 @@ namespace MomodoraMFRandomizer
             if (!APMomoMFRandomizer.session.Locations.AllLocationsChecked.Contains(index) && previousEventValue[index] == 0)
             {
                 checkedLocation.Add(index);
-                if (!receivedSkill.Contains(index))
+                if (!GameData.inventory.HasItem(GameData.itemDatabase.GetItemDef(InventoryUtils.SKILL_INVENTORY_ID[index])))
                 {
                     GameData.current.MomoEvent[index] = 0;
                 }
@@ -116,38 +116,25 @@ namespace MomodoraMFRandomizer
             }
         }
 
-        //public void HandleItemsReceived()
-        //{
-        //    foreach (ItemInfo item in APMomoMFRandomizer.session.Items.AllItemsReceived)
-        //    {
-        //        long itemId = item.ItemId;
-        //        GiveItem((int)itemId);
-        //    }
-        //}
-
-
-        //Still not working I'm gonna go crazy
         public void ResetLocationSceneForSkill(string sceneName, Boolean mainMenu)
         {
-            if (mainMenu)
+            if (mainMenu || !InventoryUtils.SKILL_INVENTORY_ID.ContainsKey(skillAndScene[sceneName]))
             {
                 return;
             }
-            foreach (int skillId in MomoEventUtils.SKILLEVENTS)
+            MelonLogger.Msg($"I'm in scene {sceneName}");
+            int itemId = InventoryUtils.SKILL_INVENTORY_ID[skillAndScene[sceneName]];
+
+            if (GameData.inventory.HasItem(GameData.itemDatabase.GetItemDef(itemId)))
             {
-                if (!receivedSkill.Contains(skillId) || APMomoMFRandomizer.session.Locations.AllLocationsChecked.Contains(skillId))
-                {
-                    continue;
-                }
-                if (GameData.current.MomoEvent[skillId] == 1 && skillAndScene[skillId] == sceneName)
-                {
-                    MelonLogger.Msg($"Resetting skill {skillId}.");
-                    GameData.current.MomoEvent[skillId] = 0;
-                    previousEventValue[skillId] = 0;
-                    receivedSkill.Remove(skillId);
-                    break;
-                }
+                MelonLogger.Msg(itemId + " is in the inventory.");
+                return;
             }
+
+            MelonLogger.Msg($"Resetting skill {skillAndScene[sceneName]}.");
+            GameData.current.MomoEvent[skillAndScene[sceneName]] = 0;
+            previousEventValue[skillAndScene[sceneName]] = 0;
+            receivedSkill.Remove(skillAndScene[sceneName]);
         }
     }
 }

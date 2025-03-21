@@ -117,6 +117,11 @@ namespace MomodoraMFRandomizer
         public override void OnFixedUpdate()
         {
             deathLinkHandler.CheckDeathLink(deathLinkService, username);
+            if (Input.GetKeyDown(KeyCode.F1))
+            {
+                GameData.inventory.Add(GameData.itemDatabase.GetItem(345));
+                GameData.inventory.Add(GameData.itemDatabase.GetItem(356));
+            }
         }
     }
 }
