@@ -75,6 +75,7 @@ namespace MomodoraMFRandomizer
                 session.Items.ItemReceived += APLocationHandler.UpdateItemsForTheSession;
                 CollectSocketInfo();
                 YAMLUtils.GetSettingsFromYAML();
+                //YAMLUtils.AddItemsToItemPool();
                 if (YAMLUtils.DEATHLINK)
                 {
                     deathLinkService = session.CreateDeathLinkService();

@@ -2,12 +2,35 @@ Deathcount event: 101
 
 Item definitions (to check in game menu)
 
-BellFlower: 101
-Windmill key: 356 (MomoEvent: 211)
-Walljump: 343 (event is 194)
-Sprint: 345 (event is 9)
-Awakened leaf: 342 (event is 20)
+BellFlower: 101 (?)
+Healing Bell: 320
+Windmill key: 356 
+Walljump: 343 
+Sprint: 345 (
+Awakened leaf: 342 
+Silver Moonlit Dust: 333
+Gold Moonlit Dust:332
+Lunar Attunement: 351
+Crescent Moonflower: 344
+Dusty Grimoire: 340
+Grimoire: 338
+Tattered Grimoire: 339
+Wooden Box: 347
 
+Companions:
+
+Grimalkin Spirit [Healer] 381
+Bakman [Explorer] 382
+Lawa [Explorer] 383
+Floating Skull [Brave] 384
+Ducky [Brave] 385
+Vampire Bat [Brave] 386
+Simple Cube [Explorer] 387
+Kaho [Healer] 388
+Nun [Healer] 389
+Lineth [Healer] 390
+Dora [Brave] 391
+Cactus [Brave] 392
 
 MomoEvent value for items:
 

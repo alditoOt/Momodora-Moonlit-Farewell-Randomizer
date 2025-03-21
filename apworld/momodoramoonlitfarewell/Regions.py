@@ -7,7 +7,7 @@ def link_momodora_areas(world: MultiWorld, player: int):
 # (Region name, list of exits)
 momodora_regions = [
     ("Menu", ["New Game"]),
-    ("Springleaf Path", ["SP_SPC"]),
+    ("Springleaf Path", ["SP_SPC", "Cereza"]),
     ("Springleaf Path Continued", ["SPC_LTR", "SPC_FS"]),
     ("Koho Village", ["KV_SP", "KV_OS"]),
     ("Old Sanctuary", []),
@@ -21,11 +21,13 @@ momodora_regions = [
     ("Ashen Hinterlands Continued", []),
     ("Meikan Village", ["MV_FOR"]),
     ("Fount of Rebirth", ["FOR_DORA"]),
-    ("Dora", [])
+    ("Dora", []),
+    ("Cereza", [])
 ]
 
 # (Entrance, region pointed to)
 mandatory_connections = [
+    ("Cereza", "Cereza"),
     ("New Game", "Springleaf Path"),
     ("SP_SPC", "Springleaf Path Continued"),
     ("SPC_LTR", "Lun Tree Roots"),

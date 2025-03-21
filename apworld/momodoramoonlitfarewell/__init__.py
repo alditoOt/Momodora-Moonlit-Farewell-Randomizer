@@ -1,4 +1,4 @@
-from .Items import MomodoraItem, item_table, skill_items, extra_skill_items, sigil_items
+from .Items import MomodoraItem, item_table, skill_items, extra_skill_items, sigil_items, optional_sigil_items
 from .Locations import MomodoraAdvancement, advancement_table
 from .Regions import momodora_regions, link_momodora_areas
 from worlds.generic.Rules import exclusion_rules
@@ -28,7 +28,9 @@ class MomodoraWorld(World):
             "client_version": self.required_client_version,
             "race": self.multiworld.is_race,
             "open_springleaf_path": bool(self.options.open_springleaf_path.value),
-            "deathlink": bool(self.options.deathlink.value)
+            "deathlink": bool(self.options.deathlink.value),
+            "oracle_sigil": bool(self.options.oracle_sigil.value)
+            # "fast_travel": self.options.fast_travel.current_key
         }
     
     def get_filler_item_name(self):
@@ -41,12 +43,17 @@ class MomodoraWorld(World):
         for name, num in skill_items.items():
             itempool += [name] * num
         #Add useful skill items
+        # if self.options.fast_travel.current_key == 2:
         for name, num in extra_skill_items.items():
             itempool += [name] * num
         #Add all sigil items
         for name, num in sigil_items.items():
             itempool += [name] * num
-        
+        #Add Oracle Sigil if enabled
+        # if self.options.oracle_sigil:
+        #     for name, num in optional_sigil_items.items():
+        #         itempool += [name] * num
+
         exclusion_pool = set()
         exclusion_checks = set()
         exclusion_rules(self.multiworld, self.player, exclusion_checks)
