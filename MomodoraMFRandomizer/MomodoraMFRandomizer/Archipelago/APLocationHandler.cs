@@ -71,7 +71,6 @@ namespace MomodoraMFRandomizer
             {
                 if (!receivedSkill.Contains(index))
                 {
-                    //MelonLogger.Msg("Skill not received yet");
                     GameData.current.MomoEvent[index] = 0;
                 }
                 else
@@ -83,10 +82,8 @@ namespace MomodoraMFRandomizer
 
         private static void ReportSkillLocation(int index, int value)
         {
-            //MelonLogger.Msg($"Attempting to report skill {index}");
             if (!APMomoMFRandomizer.session.Locations.AllLocationsChecked.Contains(index) && previousEventValue[index] == 0)
             {
-                //MelonLogger.Msg($"Actually reporting skill {index}");
                 checkedLocation.Add(index);
                 if (!receivedSkill.Contains(index))
                 {
@@ -100,14 +97,12 @@ namespace MomodoraMFRandomizer
         {
             if (MomoEventUtils.SKILLEVENTS.Contains(itemId))
             {
-                MelonLogger.Msg($"Assigning skill {itemId}");
                 previousEventValue[itemId] = 1;
                 receivedSkill.Add(itemId);
                 GameData.current.MomoEvent[itemId] = 1;
             }
             else if (InventoryUtils.SIGILID.Contains(itemId))
             {
-                MelonLogger.Msg($"Giving item with id: {itemId}");
                 GameData.inventory.Add(GameData.itemDatabase.GetItem(itemId), is_new_item: false);
             }
         }
@@ -121,15 +116,17 @@ namespace MomodoraMFRandomizer
             }
         }
 
-        public void HandleItemsReceived()
-        {
-            foreach (ItemInfo item in APMomoMFRandomizer.session.Items.AllItemsReceived)
-            {
-                long itemId = item.ItemId;
-                GiveItem((int)itemId);
-            }
-        }
+        //public void HandleItemsReceived()
+        //{
+        //    foreach (ItemInfo item in APMomoMFRandomizer.session.Items.AllItemsReceived)
+        //    {
+        //        long itemId = item.ItemId;
+        //        GiveItem((int)itemId);
+        //    }
+        //}
 
+
+        //Still not working I'm gonna go crazy
         public void ResetLocationSceneForSkill(string sceneName, Boolean mainMenu)
         {
             if (mainMenu)
@@ -144,6 +141,7 @@ namespace MomodoraMFRandomizer
                 }
                 if (GameData.current.MomoEvent[skillId] == 1 && skillAndScene[skillId] == sceneName)
                 {
+                    MelonLogger.Msg($"Resetting skill {skillId}.");
                     GameData.current.MomoEvent[skillId] = 0;
                     previousEventValue[skillId] = 0;
                     receivedSkill.Remove(skillId);

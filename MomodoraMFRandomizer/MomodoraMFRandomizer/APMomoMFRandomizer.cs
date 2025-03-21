@@ -104,7 +104,7 @@ namespace MomodoraMFRandomizer
         {
             if (mainMenu && SceneManager.sceneCount >= 2)
             {
-                locationHandler.HandleItemsReceived();
+                APLocationHandler.UpdateItemsForTheSession(null); //Testing but it should totally work
                 mainMenu = false;
             }
             if(YAMLUtils.OPENSPRINGLEAFPATH)
