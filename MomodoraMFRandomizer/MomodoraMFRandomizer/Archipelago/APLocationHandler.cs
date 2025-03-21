@@ -101,7 +101,7 @@ namespace MomodoraMFRandomizer
                 receivedSkill.Add(itemId);
                 GameData.current.MomoEvent[itemId] = 1;
             }
-            else if (InventoryUtils.SIGILID.Contains(itemId))
+            else if (InventoryUtils.SIGIL_ID.Contains(itemId))
             {
                 GameData.inventory.Add(GameData.itemDatabase.GetItem(itemId), is_new_item: false);
             }
