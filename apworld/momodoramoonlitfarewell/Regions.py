@@ -12,7 +12,8 @@ momodora_regions = [
     ("Koho Village", ["KV_SP", "KV_OS"]),
     ("Old Sanctuary", []),
     ("Lun Tree Roots", ["LTR_DF", "LTR_FS", "LTR_MR"]),
-    ("Demon Frontier", ["DF_AH", "DF_MV"]),
+    ("Demon Frontier", ["DF_AH", "DF_DFC"]),
+    ("Demon Frontier Continued", ["DFC_MV"]),
     ("Fairy Springs", ["FS_FV"]),
     ("Fairy Village", []),
     ("Moonlight Repose", []),
@@ -37,7 +38,8 @@ mandatory_connections = [
     ("FS_FV", "Fairy Village"),
     ("DF_AH", "Ashen Hinterlands"),
     ("AH_AHC", "Ashen Hinterlands Continued"),
-    ("DF_MV", "Meikan Village"),
+    ("DF_DFC", "Demon Frontier Continued"),
+    ("DFC_MV", "Meikan Village"),
     ("MV_FOR", "Fount of Rebirth"),
     ("FOR_DORA", "Dora")
 ]

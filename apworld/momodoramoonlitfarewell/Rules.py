@@ -26,6 +26,15 @@ def set_rules(world: "MomodoraWorld"):
              state.has("Crescent Moonflower", player))
     set_rule(multiworld.get_entrance("LTR_MR", player), lambda state: state.has("Spiral Shell", player))
     set_rule(multiworld.get_entrance("AH_AHC", player), lambda state: state.has("Spiral Shell", player))
+    set_rule(multiworld.get_entrance("DF_DFC", player), 
+             lambda state: state.has("Spiral Shell", player) and
+             state.has("Crescent Moonflower", player)),
+    set_rule(multiworld.get_entrance("DFC_MV", player), lambda state: state.has("Lunar Attunement", player)),
+    set_rule(multiworld.get_location("Mending Resonance", player), lambda state: state.has("Lunar Attunement", player)),
+    set_rule(multiworld.get_location("Resolve", player), lambda state: state.has("Lunar Attunement", player)),
+    set_rule(multiworld.get_location("Welkin Leaf", player), 
+             lambda state: state.has("Crescent Moonflower", player) and
+             state.has("Spiral Shell", player))
 
 def set_completion_rules(world: "MomodoraWorld"):
     player = world.player

@@ -1,4 +1,4 @@
-from .Items import MomodoraItem, item_table, skill_items, extra_skill_items
+from .Items import MomodoraItem, item_table, skill_items, extra_skill_items, sigil_items
 from .Locations import MomodoraAdvancement, advancement_table
 from .Regions import momodora_regions, link_momodora_areas
 from worlds.generic.Rules import exclusion_rules
@@ -41,6 +41,9 @@ class MomodoraWorld(World):
             itempool += [name] * num
         #Add useful skill items
         for name, num in extra_skill_items.items():
+            itempool += [name] * num
+        #Add all sigil items
+        for name, num in sigil_items.items():
             itempool += [name] * num
         
         exclusion_pool = set()

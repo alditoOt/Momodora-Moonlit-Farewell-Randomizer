@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine.SceneManagement;
 using MelonLoader;
+using APMomoMFRandomizer;
 
 namespace MomodoraMFRandomizer
 {
@@ -42,24 +43,18 @@ namespace MomodoraMFRandomizer
         {
             if (value != 1 || 
                 (!MomoEventUtils.BOSSEVENTS.Contains(index) && 
-                !MomoEventUtils.SKILLEVENTS.Contains(index) && 
-                !MomoEventUtils.SIGILEVENTS.Contains(index))) {
+                !MomoEventUtils.SKILLEVENTS.Contains(index))) {
                 return;
             }
 
             if (MomoEventUtils.SKILLEVENTS.Contains(index))
             {
                 ReportSkillLocation(index, value);
-            } 
-            else if (MomoEventUtils.SIGILEVENTS.Contains(index))
-            {
-                ReportSigilLocation(index, value);
-            } 
+            }  
             else
             {
                 APMomoMFRandomizer.session.Locations.CompleteLocationChecks(index); //Boss check
             }
-
         }
 
         [HarmonyPatch("set_Item")]
@@ -80,7 +75,7 @@ namespace MomodoraMFRandomizer
                 }
                 else
                 {
-                    GiveSkill(index);
+                    GiveItem(index);
                 }
             }
         }
@@ -105,14 +100,18 @@ namespace MomodoraMFRandomizer
             //TO-DO
         }
 
-        private static void GiveSkill(int skillId)
+        private static void GiveItem(int itemId)
         {
-            if (MomoEventUtils.SKILLEVENTS.Contains(skillId))
+            if (MomoEventUtils.SKILLEVENTS.Contains(itemId))
             {
                 //MelonLogger.Msg($"Assigning skill {skillId}");
-                previousEventValue[skillId] = 1;
-                receivedSkill.Add(skillId);
-                GameData.current.MomoEvent[skillId] = 1;
+                previousEventValue[itemId] = 1;
+                receivedSkill.Add(itemId);
+                GameData.current.MomoEvent[itemId] = 1;
+            }
+            else if (InventoryUtils.SIGILID.Contains(itemId))
+            {
+                GameData.inventory.Add(GameData.inventory.GetItem(itemId));
             }
         }
 
@@ -121,7 +120,7 @@ namespace MomodoraMFRandomizer
             foreach (ItemInfo item in APMomoMFRandomizer.session.Items.AllItemsReceived)
             {
                 long itemId = item.ItemId;
-                GiveSkill((int)itemId);
+                GiveItem((int)itemId);
             }
         }
 
@@ -130,7 +129,7 @@ namespace MomodoraMFRandomizer
             foreach (ItemInfo item in APMomoMFRandomizer.session.Items.AllItemsReceived)
             {
                 long itemId = item.ItemId;
-                GiveSkill((int)itemId);
+                GiveItem((int)itemId);
             }
         }
 
