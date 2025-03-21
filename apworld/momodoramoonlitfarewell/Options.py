@@ -20,7 +20,7 @@ class OracleSigil(Toggle):
 #     """Whether to start with Fast Travel, add it to the randomization pool, or keep it vanilla (Unlocking Fast Travel is still a location check)"""
 #     display_name = "Fast Travel Choice"
 #     option_vanilla = 0
-#     option_start_with_fast_travel = 1
+#     option_start_with = 1
 #     option_add_to_item_pool = 2
 #     default = 2
 

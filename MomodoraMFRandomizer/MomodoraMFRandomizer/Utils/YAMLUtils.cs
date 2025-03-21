@@ -40,14 +40,14 @@ namespace MomodoraMFRandomizer
                 InventoryUtils.SIGIL_ID.Add(InventoryUtils.ORACLE);
             }
             //WIP
-            //if (FAST_TRAVEL_CHOICE == StringUtils.VANILLA)
-            //{
-            //    MomoEventUtils.SKILLEVENTS.Remove(MomoEventUtils.FAST_TRAVEL_EVENT);
-            //}
-            //else if (FAST_TRAVEL_CHOICE == StringUtils.START_WITH)
-            //{
-            //    APLocationHandler.GiveItem(MomoEventUtils.FAST_TRAVEL_EVENT);
-            //}
+            if (FAST_TRAVEL_CHOICE == StringUtils.VANILLA)
+            {
+                MomoEventUtils.SKILLEVENTS.Remove(MomoEventUtils.FAST_TRAVEL_EVENT);
+            }
+            else if (FAST_TRAVEL_CHOICE == StringUtils.START_WITH)
+            {
+                APLocationHandler.GiveItem(MomoEventUtils.FAST_TRAVEL_EVENT);
+            }
         }
     }
 }
