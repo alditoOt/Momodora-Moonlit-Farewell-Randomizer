@@ -122,16 +122,11 @@ namespace MomodoraMFRandomizer
             {
                 return;
             }
-            MelonLogger.Msg($"I'm in scene {sceneName}");
             int itemId = InventoryUtils.SKILL_INVENTORY_ID[skillAndScene[sceneName]];
-
             if (GameData.inventory.HasItem(GameData.itemDatabase.GetItemDef(itemId)))
             {
-                MelonLogger.Msg(itemId + " is in the inventory.");
                 return;
             }
-
-            MelonLogger.Msg($"Resetting skill {skillAndScene[sceneName]}.");
             GameData.current.MomoEvent[skillAndScene[sceneName]] = 0;
             previousEventValue[skillAndScene[sceneName]] = 0;
             receivedSkill.Remove(skillAndScene[sceneName]);

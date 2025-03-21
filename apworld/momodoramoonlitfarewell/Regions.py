@@ -6,8 +6,8 @@ def link_momodora_areas(world: MultiWorld, player: int):
 
 # (Region name, list of exits)
 momodora_regions = [
-    ("Menu", ["New Game", "Cereza"]),
-    ("Springleaf Path", ["SP_SPC"]),
+    ("Menu", ["New Game"]),
+    ("Springleaf Path", ["SP_SPC", "Cereza"]),
     ("Springleaf Path Continued", ["SPC_LTR", "SPC_FS"]),
     ("Koho Village", ["KV_SP", "KV_OS"]),
     ("Old Sanctuary", []),
