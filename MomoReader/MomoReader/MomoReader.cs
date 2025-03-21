@@ -26,11 +26,16 @@ namespace MomoReader
             {
                 Time.timeScale = 1f;
             }
+            if (Input.GetKeyDown(KeyCode.F1))
+            {
+                GameData.inventory.Add(GameData.itemDatabase.GetItem(338));
+            }
         }
 
         public override void OnFixedUpdate()
         {
             phys_attack = Platformer3D.phys_attack;
+            
         }
     }
 }

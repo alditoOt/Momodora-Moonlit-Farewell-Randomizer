@@ -50,13 +50,14 @@ namespace MomoReader.Utils
         [HarmonyPrefix]
         private static void PrintSigilInfo(Item item)
         {
-            if (!item.itemDef.IsSigil)
-            {
-                return;
-            }
+            //if (!item.itemDef.IsSigil)
+            //{
+            //    return;
+            //}
             try
             {
-                UpdateItemData(item.Name, item.itemDef.Index, MomoEventUtils.index);
+                //UpdateItemData(item.Name, item.itemDef.Index, MomoEventUtils.index);
+                MelonLogger.Msg($"item added: {item.Name} {item.itemDef.Index}");
             }
             catch (Exception e)
             {
