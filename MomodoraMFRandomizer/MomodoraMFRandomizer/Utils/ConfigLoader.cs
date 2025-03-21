@@ -14,8 +14,6 @@ namespace MomodoraMFRandomizer
         public string server { get; set; }
         public string username { get; set; }
         public string password { get; set; }
-        public bool deathlink { get; set; }
-        public bool openSpringleafPath { get; set; }
     
     }
 

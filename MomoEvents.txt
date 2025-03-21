@@ -16,19 +16,21 @@ Golden Moonlit Dust: 180
 Fairy Springs Grimoire: 191
 
 # SIGILS
-Cloudy Blood: 32
-The Fool: 187
-The Sharpshooter: 140
-The Hunter: 104
-Resonance of Ifriya: 37
-The Blessed: 138
-Glazed Aegis: 139
-Pawn: 36
-Resolve: 186
+Cloudy Blood: 32 (400) (Springleaf Path)
+The Fool: 187 (item 419) (Springleaf Path)
+The Sharpshooter: 140 (438) (Old Sanctuary)
+The Hunter: 104 (427) (Koho Village)
+Resonance of Ifriya: 37 (425) (Fairy Springs)
+The Blessed: 138 (Fairy Springs)
+Glazed Aegis: 139 (Fairy Springs)
+Pawn: 36 (Springleaf Path Continued)
+Resolve: 186 (444) ()
 Mending Resonance: 86
-Phantasm Blade: 185
+Phantasm Blade: 185 (Moonlight Repose)
 Mudwalker: 223
 Living Blood: 328
+Living Edge: 85 (412)
+Welkin Leaf: 256 (item 446) (Koho Village Continued)
 
 # BOSSES
 
