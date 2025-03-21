@@ -21,8 +21,7 @@ namespace MomodoraMFRandomizer
                 APMomoMFRandomizer.session.DataStorage.GetSlotData().TryGetValue("open_springleaf_path", out object openSpringleafPath);
                 APMomoMFRandomizer.session.DataStorage.GetSlotData().TryGetValue("deathlink", out object deathlink);
                 APMomoMFRandomizer.session.DataStorage.GetSlotData().TryGetValue("oracle_sigil", out object oracleSigil);
-                APMomoMFRandomizer.session.DataStorage.GetSlotData().TryGetValue("fast_travel", out object fastTravel);
-                MelonLogger.Msg($"fast travel: {fastTravel}");
+                //APMomoMFRandomizer.session.DataStorage.GetSlotData().TryGetValue("fast_travel", out object fastTravel);
                 OPENSPRINGLEAFPATH = (Boolean)openSpringleafPath;
                 DEATHLINK = (Boolean)deathlink;
                 ADD_ORACLE_SIGIL = (Boolean)oracleSigil;
@@ -40,6 +39,15 @@ namespace MomodoraMFRandomizer
             {
                 InventoryUtils.SIGIL_ID.Add(InventoryUtils.ORACLE);
             }
+            //WIP
+            //if (FAST_TRAVEL_CHOICE == StringUtils.VANILLA)
+            //{
+            //    MomoEventUtils.SKILLEVENTS.Remove(MomoEventUtils.FAST_TRAVEL_EVENT);
+            //}
+            //else if (FAST_TRAVEL_CHOICE == StringUtils.START_WITH)
+            //{
+            //    APLocationHandler.GiveItem(MomoEventUtils.FAST_TRAVEL_EVENT);
+            //}
         }
     }
 }

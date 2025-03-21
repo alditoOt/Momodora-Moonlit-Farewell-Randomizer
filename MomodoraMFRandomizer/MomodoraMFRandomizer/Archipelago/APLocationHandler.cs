@@ -93,7 +93,7 @@ namespace MomodoraMFRandomizer
             }
         }
 
-        private static void GiveItem(int itemId)
+        public static void GiveItem(int itemId)
         {
             if (MomoEventUtils.SKILLEVENTS.Contains(itemId))
             {

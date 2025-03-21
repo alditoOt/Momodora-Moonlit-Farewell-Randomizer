@@ -11,5 +11,8 @@ namespace MomodoraMFRandomizer
     {
         public static readonly string DEATHLINK = "deathlink";
         public static readonly string GAME = "Momodora Moonlit Farewell";
+        public static readonly string ADD_TO_ITEM_POOL = "add_to_item_pool";
+        public static readonly string VANILLA = "vanilla";
+        public static readonly string START_WITH = "start_with";
     }
 }

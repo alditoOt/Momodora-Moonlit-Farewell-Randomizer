@@ -29,8 +29,8 @@ class MomodoraWorld(World):
             "race": self.multiworld.is_race,
             "open_springleaf_path": bool(self.options.open_springleaf_path.value),
             "deathlink": bool(self.options.deathlink.value),
-            "fast_travel": self.options.fast_travel.current_key
-            # "oracle_sigil": bool(self.options.oracle_sigil.value)
+            "oracle_sigil": bool(self.options.oracle_sigil.value)
+            # "fast_travel": self.options.fast_travel.current_key
         }
     
     def get_filler_item_name(self):
@@ -43,9 +43,9 @@ class MomodoraWorld(World):
         for name, num in skill_items.items():
             itempool += [name] * num
         #Add useful skill items
-        if self.options.fast_travel.current_key == 2:
-            for name, num in extra_skill_items.items():
-                itempool += [name] * num
+        # if self.options.fast_travel.current_key == 2:
+        for name, num in extra_skill_items.items():
+            itempool += [name] * num
         #Add all sigil items
         for name, num in sigil_items.items():
             itempool += [name] * num

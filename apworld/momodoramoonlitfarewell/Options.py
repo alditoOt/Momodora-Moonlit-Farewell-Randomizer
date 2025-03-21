@@ -12,21 +12,21 @@ class DeathLink(Toggle):
     default = 1
 
 class OracleSigil(Toggle):
-    """Add the Oracle Sigil to the item pool (currently not implemented)"""
+    """Add the Oracle Sigil to the item pool (setting currently not implemented)"""
     display_name = "Add Oracle Sigil"
     default = 0
 
-class FastTravel(Choice):
-    """Whether to start with Fast Travel, add it to the randomization pool, or keep it vanilla (Unlocking Fast Travel is still a location check)"""
-    display_name = "Fast Travel Choice"
-    option_vanilla = 0
-    option_start_with_fast_travel = 1
-    option_add_to_item_pool = 2
-    default = 2
+# class FastTravel(Choice):
+#     """Whether to start with Fast Travel, add it to the randomization pool, or keep it vanilla (Unlocking Fast Travel is still a location check)"""
+#     display_name = "Fast Travel Choice"
+#     option_vanilla = 0
+#     option_start_with_fast_travel = 1
+#     option_add_to_item_pool = 2
+#     default = 2
 
 @dataclass
 class MomodoraOptions(PerGameCommonOptions):
     open_springleaf_path: OpenSpringleafPath
     deathlink: DeathLink
     oracle_sigil: OracleSigil
-    fast_travel: FastTravel
+    # fast_travel: FastTravel
