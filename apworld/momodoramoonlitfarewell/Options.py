@@ -16,6 +16,10 @@ class OracleSigil(Toggle):
     display_name = "Add Oracle Sigil"
     default = 0
 
+class BellHover(Toggle):
+    """Consider Bell Hover as a possible strat for world generation. Bell Hover is used to access certain areas without having the correct skill (i.e. Demon Frontier without Wall Jump)"""
+    display_name = "Bell Hover Generation"
+    default: 0
 # class FastTravel(Choice):
 #     """Whether to start with Fast Travel, add it to the randomization pool, or keep it vanilla (Unlocking Fast Travel is still a location check)"""
 #     display_name = "Fast Travel Choice"
@@ -29,4 +33,5 @@ class MomodoraOptions(PerGameCommonOptions):
     open_springleaf_path: OpenSpringleafPath
     deathlink: DeathLink
     oracle_sigil: OracleSigil
+    bell_hover_generation: BellHover
     # fast_travel: FastTravel

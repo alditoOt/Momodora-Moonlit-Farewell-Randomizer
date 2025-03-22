@@ -29,6 +29,7 @@ namespace MomodoraMFRandomizer
                 {
                     if (extraWindZone.gameObject.name.Contains("Extra Wind Barrier"))
                     {
+                        MelonLogger.Msg("Removing extra windzone");
                         extraWindZone.gameObject.SetActive(false);
                     }
                 }
@@ -39,6 +40,7 @@ namespace MomodoraMFRandomizer
             {
                 foreach (WindMomo2020 windZone in windZones)
                 {
+                    MelonLogger.Msg("Removing windzone");
                     windZone.gameObject.SetActive(false);
                 }
             }

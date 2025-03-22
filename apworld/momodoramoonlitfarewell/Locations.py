@@ -62,10 +62,10 @@ advancement_table = {
     "Trinary": AdvData(449, "Meikan Village"),
     "Welkin Leaf": AdvData(446, "Koho Village"),
     "The Fool": AdvData(419, "Springleaf Path"),
-   "Last Wish": AdvData(123, "Cereza"),
-   "Strongfist": AdvData(408, "Cereza"),
-   "Fallen Hero": AdvData(422, "Cereza"),
-   "The Profiteer": AdvData(401, "Cereza"),
+   "Last Wish": AdvData(123, "Springleaf Path"),
+   "Strongfist": AdvData(408, "Springleaf Path"),
+   "Fallen Hero": AdvData(422, "Springleaf Path"),
+   "The Profiteer": AdvData(401, "Springleaf Path"),
 #    "Oracle": AdvData(441, "Fairy Village")
     #Grimoires
    "Grimoire": AdvData(338, "Fairy Springs"),

@@ -29,7 +29,8 @@ class MomodoraWorld(World):
             "race": self.multiworld.is_race,
             "open_springleaf_path": bool(self.options.open_springleaf_path.value),
             "deathlink": bool(self.options.deathlink.value),
-            "oracle_sigil": bool(self.options.oracle_sigil.value)
+            "oracle_sigil": bool(self.options.oracle_sigil.value),
+            "bell_hover_generation": bool(self.options.bell_hover_generation.value)
             # "fast_travel": self.options.fast_travel.current_key
         }
     
@@ -49,6 +50,12 @@ class MomodoraWorld(World):
         #Add all sigil items
         for name, num in sigil_items.items():
             itempool += [name] * num
+        #Add Grimoire items
+        for name, num in grimoire_items.items():
+            itempool += [name] * num
+        #Add filler items
+        # remaining_slots = len(self.multiworld.get_filled_locations(self.player)) - len(itempool)
+        # itempool += ["Blessing of Nothing"] * max(0, remaining_slots)
         #Add Oracle Sigil if enabled
         # if self.options.oracle_sigil:
         #     for name, num in optional_sigil_items.items():

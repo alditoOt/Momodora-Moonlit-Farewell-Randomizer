@@ -23,7 +23,8 @@ def set_rules(world: "MomodoraWorld"):
     set_rule(multiworld.get_entrance("KV_OS", player), lambda state: state.has("Spiral Shell", player))
     set_rule(multiworld.get_entrance("LTR_DF", player), 
              lambda state: state.has("Spiral Shell", player) or
-             state.has("Crescent Moonflower", player))
+             (state.has("Crescent Moonflower", player) and
+              world.options.bell_hover_generation.value))
     set_rule(multiworld.get_entrance("LTR_MR", player), lambda state: state.has("Spiral Shell", player))
     set_rule(multiworld.get_entrance("AH_AHC", player), lambda state: state.has("Spiral Shell", player))
     set_rule(multiworld.get_entrance("DF_DFC", player), 
