@@ -1,4 +1,5 @@
-﻿using Archipelago.MultiClient.Net.Models;
+﻿using APMomoMFRandomizer;
+using Archipelago.MultiClient.Net.Models;
 using HarmonyLib;
 using MelonLoader;
 using System;
@@ -20,10 +21,6 @@ namespace MomodoraMFRandomizer
         public static bool CheckSigilReceived(Item item, ref bool is_new_item)
         {
             itemReceived = false;
-            if (!item.Type.Equals(ItemType.Sigil))
-            {
-                return true;
-            }
             foreach (ItemInfo apItem in APMomoMFRandomizer.session.Items.AllItemsReceived)
             {
                 long itemId = apItem.ItemId;
@@ -37,7 +34,7 @@ namespace MomodoraMFRandomizer
             {
                 APMomoMFRandomizer.session.Locations.CompleteLocationChecks(item.itemDef.Index);
             }
-            return itemReceived || item.itemDef.Index == 419;
+            return itemReceived || InventoryUtils.EXCLUDED_ITEM_ID.Contains(item.itemDef.Index);
         }
     }
 }

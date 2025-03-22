@@ -82,10 +82,10 @@ namespace MomodoraMFRandomizer
 
         private static void ReportSkillLocation(int index, int value)
         {
-            if (!APMomoMFRandomizer.session.Locations.AllLocationsChecked.Contains(index) && previousEventValue[index] == 0)
+            if (!APMomoMFRandomizer.session.Locations.AllLocationsChecked.Contains(index) && (previousEventValue[index] == 0 || index == 205))
             {
                 checkedLocation.Add(index);
-                if (!GameData.inventory.HasItem(GameData.itemDatabase.GetItemDef(InventoryUtils.SKILL_INVENTORY_ID[index])))
+                if ((index == 205 && !receivedSkill.Contains(index)) || (index != 205 && !GameData.inventory.HasItem(GameData.itemDatabase.GetItemDef(InventoryUtils.SKILL_INVENTORY_ID[index]))))
                 {
                     GameData.current.MomoEvent[index] = 0;
                 }
@@ -101,7 +101,7 @@ namespace MomodoraMFRandomizer
                 receivedSkill.Add(itemId);
                 GameData.current.MomoEvent[itemId] = 1;
             }
-            else if (InventoryUtils.SIGIL_ID.Contains(itemId))
+            else if (InventoryUtils.ITEM_ID.Contains(itemId))
             {
                 GameData.inventory.Add(GameData.itemDatabase.GetItem(itemId), is_new_item: false);
             }
@@ -118,7 +118,7 @@ namespace MomodoraMFRandomizer
 
         public void ResetLocationSceneForSkill(string sceneName, Boolean mainMenu)
         {
-            if (mainMenu || !InventoryUtils.SKILL_INVENTORY_ID.ContainsKey(skillAndScene[sceneName]))
+            if (mainMenu || !skillAndScene.ContainsKey(sceneName) || !InventoryUtils.SKILL_INVENTORY_ID.ContainsKey(skillAndScene[sceneName]))
             {
                 return;
             }

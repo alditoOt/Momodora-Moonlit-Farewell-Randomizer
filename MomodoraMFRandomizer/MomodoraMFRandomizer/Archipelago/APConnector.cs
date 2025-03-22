@@ -52,6 +52,7 @@ namespace MomodoraMFRandomizer
 
             var loginSuccess = (LoginSuccessful)result;
             MelonLogger.Msg("soy fans");
+            MelonLogger.Msg("Connected to Archipelago session. Have fun!");
         }
     }
 }

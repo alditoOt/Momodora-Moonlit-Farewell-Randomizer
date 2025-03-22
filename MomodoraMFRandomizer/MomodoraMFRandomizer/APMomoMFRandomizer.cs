@@ -21,8 +21,6 @@ namespace MomodoraMFRandomizer
         private static string server; 
         private string username; 
         private string password;
-        private bool openSpringleafPath;
-        private bool deathlink;
         
         DeathLinkService deathLinkService;
         APDeathLinkHandler deathLinkHandler = new APDeathLinkHandler();
@@ -105,7 +103,7 @@ namespace MomodoraMFRandomizer
         {
             if (mainMenu && SceneManager.sceneCount >= 2)
             {
-                APLocationHandler.UpdateItemsForTheSession(null); //Testing but it should totally work
+                APLocationHandler.UpdateItemsForTheSession(null);
                 mainMenu = false;
             }
             if(YAMLUtils.OPENSPRINGLEAFPATH)

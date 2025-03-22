@@ -49,7 +49,10 @@ item_table = {
    "Strongfist": ItemData(408, ItemClassification.useful),
    "Fallen Hero": ItemData(422, ItemClassification.useful),
    "The Profiteer": ItemData(401, ItemClassification.useful),
-   "Oracle": ItemData(441, ItemClassification.useful)
+   "Oracle": ItemData(441, ItemClassification.useful),
+   "Grimoire": ItemData(338, ItemClassification.useful),
+   "Tattered Grimoire": ItemData(339, ItemClassification.useful),
+   "Dusty Grimoire": ItemData(340, ItemClassification.useful)
 }
 
 skill_items = {
@@ -90,7 +93,11 @@ sigil_items = {
    "The Hunter": 1,
    "The Sharpshooter": 1,
    "Trinary": 1,
-   "Welkin Leaf": 1,
+   "Welkin Leaf": 1
+}
+
+cereza_sigil_items = {
+
    "Last Wish": 1,
    "Strongfist": 1,
    "Fallen Hero": 1,
@@ -102,7 +109,9 @@ optional_sigil_items = {
 }
 
 grimoire_items = {
-
+    "Grimoire": 1,
+    "Tattered Grimoire": 1,
+    "Dusty Grimoire": 1
 }
 
 key_items = {

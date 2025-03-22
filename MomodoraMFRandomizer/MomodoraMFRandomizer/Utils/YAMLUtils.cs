@@ -37,7 +37,7 @@ namespace MomodoraMFRandomizer
         {
             if (ADD_ORACLE_SIGIL)
             {
-                InventoryUtils.SIGIL_ID.Add(InventoryUtils.ORACLE);
+                InventoryUtils.ITEM_ID.Add(InventoryUtils.ORACLE);
             }
             //WIP
             if (FAST_TRAVEL_CHOICE == StringUtils.VANILLA)

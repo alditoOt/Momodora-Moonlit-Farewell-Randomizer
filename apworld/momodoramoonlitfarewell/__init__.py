@@ -1,4 +1,4 @@
-from .Items import MomodoraItem, item_table, skill_items, extra_skill_items, sigil_items, optional_sigil_items
+from .Items import MomodoraItem, item_table, skill_items, extra_skill_items, sigil_items, optional_sigil_items, grimoire_items
 from .Locations import MomodoraAdvancement, advancement_table
 from .Regions import momodora_regions, link_momodora_areas
 from worlds.generic.Rules import exclusion_rules

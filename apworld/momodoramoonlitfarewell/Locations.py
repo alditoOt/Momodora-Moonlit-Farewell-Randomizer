@@ -65,7 +65,10 @@ advancement_table = {
    "Last Wish": AdvData(123, "Cereza"),
    "Strongfist": AdvData(408, "Cereza"),
    "Fallen Hero": AdvData(422, "Cereza"),
-   "The Profiteer": AdvData(401, "Cereza")
+   "The Profiteer": AdvData(401, "Cereza"),
 #    "Oracle": AdvData(441, "Fairy Village")
     #Grimoires
+   "Grimoire": AdvData(338, "Fairy Springs"),
+   "Tattered Grimoire": AdvData(339, "Meikan Village"),
+   "Dusty Grimoire": AdvData(340, "Fount of Rebirth")
 }
