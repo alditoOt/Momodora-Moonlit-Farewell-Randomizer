@@ -5,7 +5,7 @@ using System.Runtime.InteropServices.ComTypes;
 using MelonLoader;
 using MomodoraMFRandomizer; // The namespace of your mod class
 // ...
-[assembly: MelonInfo(typeof(MomodoraMFRandomizer.APMomoMFRandomizer), "APRandomizer", "1.0.0", "alditto (also on Twitch)")]
+[assembly: MelonInfo(typeof(MomodoraMFRandomizer.APMomoMFRandomizer), "APRandomizer", "1.0.0", "alditto (ttv/alditto)")]
 [assembly: MelonGame("BOMBSERVICE", "MomodoraMoonlitFarewell")]
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
