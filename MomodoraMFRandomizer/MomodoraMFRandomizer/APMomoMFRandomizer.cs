@@ -61,10 +61,13 @@ namespace MomodoraMFRandomizer
         //When starting the game
         public override void OnLateInitializeMelon()
         {
+            #region Server Info
+            //Load server info from config
             ConfigLoader.LoadConfig();
             server = ConfigLoader.config.server;
             username = ConfigLoader.config.username;
             password = ConfigLoader.config.password;
+            #endregion
             locationHandler.InitializeDictionary();
             try
             {
@@ -73,7 +76,7 @@ namespace MomodoraMFRandomizer
                 session.Items.ItemReceived += APLocationHandler.UpdateItemsForTheSession;
                 CollectSocketInfo();
                 YAMLUtils.GetSettingsFromYAML();
-                //YAMLUtils.AddItemsToItemPool();
+                YAMLUtils.AddItemsToItemPool();
                 if (YAMLUtils.DEATHLINK)
                 {
                     deathLinkService = session.CreateDeathLinkService();

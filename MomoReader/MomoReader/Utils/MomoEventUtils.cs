@@ -15,14 +15,12 @@ namespace MomoReader.Utils
         public static int index;
         private static string filePath = Path.Combine(Directory.GetCurrentDirectory(), "Mods", "Data", "LilyData.csv");
 
+
+        [HarmonyPatch("set_Item")]
+        [HarmonyPostfix]
         public static void GetEventIndex(int index, int value)
         {
-            MomoEventUtils.index = index;
-            if (MomoReader.phys_attack != Platformer3D.phys_attack)
-            {
-                UpdateItemData(index, MomoReader.sceneName);
-            }
-            MomoReader.phys_attack = Platformer3D.phys_attack;
+            MelonLogger.Msg($"Event {index} just changed to {value}");
         }
 
 

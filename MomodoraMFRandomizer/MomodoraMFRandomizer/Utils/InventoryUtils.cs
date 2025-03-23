@@ -12,8 +12,8 @@ namespace APMomoMFRandomizer
     class InventoryUtils
     {
         public static List<int> ITEM_ID = new List<int> { 442, 400, 436, 402, 403, 433, 448, 412, 404, 434, 447, 440, 405, 439, 443, 444, 425, 445, 430, 435, 432, 427, 438, 449, 446, 123, 408, 422, 401, 338, 339, 340 };
+        public static List<int> KEY_ITEM_ID = new List<int> { 356, 333, 332, 347 };
         public static int ORACLE = 441;
-        public static List<int> EXCLUDED_ITEM_ID = new List<int> { 419, 123, 408, 422, 401 };
         public static Dictionary<int, int> SKILL_INVENTORY_ID = new Dictionary<int, int>()
         {
             { 9, 345 },
@@ -22,6 +22,5 @@ namespace APMomoMFRandomizer
             { 131, 351 },
             { 10, 344 }
         };
-        public static List<int> KEY_ITEMS_ID = new List<int>();        
-    }
+        
 }
