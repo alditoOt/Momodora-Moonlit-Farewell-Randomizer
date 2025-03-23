@@ -75,7 +75,6 @@ sigil_items = {
    "Demilune Whisper": 1,
    "Glazed Aegis": 1,
    "Hare": 1,
-   "Living Blood": 1,
    "Living Edge": 1,
    "Magic Blade": 1,
    "Mending Resonance": 1,

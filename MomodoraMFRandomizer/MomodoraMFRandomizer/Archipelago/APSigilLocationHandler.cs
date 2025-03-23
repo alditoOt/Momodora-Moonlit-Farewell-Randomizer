@@ -21,6 +21,10 @@ namespace MomodoraMFRandomizer
         public static bool CheckSigilReceived(Item item, ref bool is_new_item)
         {
             itemReceived = false;
+            if (!InventoryUtils.ITEM_ID.Contains(item.itemDef.Index) && !InventoryUtils.KEY_ITEMS_ID.Contains(item.itemDef.Index))
+            {
+                return true;
+            }
             foreach (ItemInfo apItem in APMomoMFRandomizer.session.Items.AllItemsReceived)
             {
                 long itemId = apItem.ItemId;

@@ -19,7 +19,8 @@ momodora_regions = [
     ("Moonlight Repose", []),
     ("Ashen Hinterlands", ["AH_AHC"]),
     ("Ashen Hinterlands Continued", []),
-    ("Meikan Village", ["MV_FOR"]),
+    ("Meikan Village", ["MV_MVW"]),
+    ("Meikan Village Windmill", ["MVW_FOR"]),
     ("Fount of Rebirth", ["FOR_DORA"]),
     ("Dora", [])
 ]
@@ -40,6 +41,7 @@ mandatory_connections = [
     ("AH_AHC", "Ashen Hinterlands Continued"),
     ("DF_DFC", "Demon Frontier Continued"),
     ("DFC_MV", "Meikan Village"),
-    ("MV_FOR", "Fount of Rebirth"),
+    ("MV_MVW", "Meikan Village Windmill"),
+    ("MVW_FOR", "Fount of Rebirth"),
     ("FOR_DORA", "Dora")
 ]

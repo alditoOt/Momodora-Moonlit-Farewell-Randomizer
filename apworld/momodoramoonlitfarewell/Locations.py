@@ -59,7 +59,7 @@ advancement_table = {
     "The Fortunate": AdvData(432, "Lun Tree Roots"),
     "The Hunter": AdvData(427, "Koho Village"),
     "The Sharpshooter": AdvData(438, "Old Sanctuary"),
-    "Trinary": AdvData(449, "Meikan Village"),
+    "Trinary": AdvData(449, "Meikan Village Windmill"),
     "Welkin Leaf": AdvData(446, "Koho Village"),
     "The Fool": AdvData(419, "Springleaf Path"),
    "Last Wish": AdvData(123, "Springleaf Path"),
@@ -69,6 +69,6 @@ advancement_table = {
 #    "Oracle": AdvData(441, "Fairy Village")
     #Grimoires
    "Grimoire": AdvData(338, "Fairy Springs"),
-   "Tattered Grimoire": AdvData(339, "Meikan Village"),
+   "Tattered Grimoire": AdvData(339, "Meikan Village Windmill"),
    "Dusty Grimoire": AdvData(340, "Fount of Rebirth")
 }
