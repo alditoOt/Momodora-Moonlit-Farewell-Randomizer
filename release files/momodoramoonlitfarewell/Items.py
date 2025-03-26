@@ -57,7 +57,9 @@ item_table = {
    "Gold Moonlit Dust": ItemData(332, ItemClassification.progression),
    "Silver Moonlit Dust": ItemData(333, ItemClassification.progression),
    "Wooden Box": ItemData(347, ItemClassification.progression),
-   "Windmill Key": ItemData(356, ItemClassification.progression)
+   "Windmill Key": ItemData(356, ItemClassification.progression),
+   # Selin Door
+   "Final Boss Key": ItemData(991, ItemClassification.progression)
 }
 
 skill_items = {
@@ -123,4 +125,8 @@ key_items = {
     "Silver Moonlit Dust": 1,
     "Wooden Box": 1,
     "Windmill Key": 1
+}
+
+selin_door = {
+    "Final Boss Key": 4
 }

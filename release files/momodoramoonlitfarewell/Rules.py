@@ -47,6 +47,7 @@ def set_rules(world: "MomodoraWorld"):
     set_rule(multiworld.get_entrance("MVW_FOR", player), lambda state: 
              state.has("Crescent Moonflower", player) and 
               (state.has("Windmill Key", player) if world.options.randomize_key_items.value else True)),
+    set_rule(multiworld.get_entrance("FOR_SELIN", player), lambda state: state.has("Final Boss Key", player, 4) if world.options.final_boss_keys.value else True), 
     set_rule(multiworld.get_location("Mending Resonance", player), lambda state: state.has("Lunar Attunement", player)),
     set_rule(multiworld.get_location("Resolve", player), lambda state: state.has("Lunar Attunement", player)),
     set_rule(multiworld.get_location("Welkin Leaf", player), 

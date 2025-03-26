@@ -29,6 +29,8 @@ namespace MomodoraMFRandomizer
             {"Marsh08" , 131 }
         };
 
+        private static int finalBossDoorCount = 0;
+
         public void InitializeDictionary()
         {
             foreach (int skill in MomoEventUtils.SKILLEVENTS)
@@ -80,6 +82,16 @@ namespace MomodoraMFRandomizer
             }
         }
 
+        [HarmonyPatch("set_Item")]
+        [HarmonyPostfix]
+        private static void UpdateFinalBossDoor(int index, int value)
+        {
+            if (index == MomoEventUtils.FINAL_DOOR_EVENT && YAMLUtils.FINAL_BOSS_DOOR)
+            {
+                GameData.current.MomoEvent[index] = finalBossDoorCount;
+            }
+        }
+
         private static void ReportSkillLocation(int index, int value)
         {
             if (!APMomoMFRandomizer.session.Locations.AllLocationsChecked.Contains(index) && (previousEventValue[index] == 0 || index == 205))
@@ -114,21 +126,27 @@ namespace MomodoraMFRandomizer
 
         public static void UpdateItemsForTheSession(ReceivedItemsHelper itemHandler)
         {
-            Boolean firstMoney = true;
+            Boolean firstTimeSendingMoney = true;
+            finalBossDoorCount = 0;
             foreach (ItemInfo item in APMomoMFRandomizer.session.Items.AllItemsReceived)
             {
                 long itemId = item.ItemId;
-                if (itemId == 999)
+                if (itemId == 991) //Final Boss Door
+                {
+                    finalBossDoorCount++;
+                    continue;
+                }
+                if (itemId == 999) //Filler with Lunar Crystals
                 {
                     if (itemHandler == null)
                     {
                         continue;
                     }
-                    if (!firstMoney)
+                    if (!firstTimeSendingMoney)
                     {
                         continue;
                     }
-                    firstMoney = false;
+                    firstTimeSendingMoney = false;
                 }
                 GiveItem((int)itemId);
             }

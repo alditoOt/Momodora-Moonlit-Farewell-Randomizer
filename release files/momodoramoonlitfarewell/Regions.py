@@ -21,13 +21,14 @@ momodora_regions = [
     ("Ashen Hinterlands Continued", []),
     ("Meikan Village", ["MV_MVW"]),
     ("Meikan Village Windmill", ["MVW_FOR"]),
-    ("Fount of Rebirth", ["FOR_DORA"]),
+    ("Fount of Rebirth", ["FOR_SELIN"]),
+    ("Selin", ["SELIN_DORA"]),
     ("Dora", [])
 ]
 
 # (Entrance, region pointed to)
 mandatory_connections = [
-    ("New Game", "Springleaf Path"),
+    ("New Game", "Koho Village"),
     ("SP_SPC", "Springleaf Path Continued"),
     ("SPC_LTR", "Lun Tree Roots"),
     ("SPC_FS", "Fairy Springs"),
@@ -43,5 +44,7 @@ mandatory_connections = [
     ("DFC_MV", "Meikan Village"),
     ("MV_MVW", "Meikan Village Windmill"),
     ("MVW_FOR", "Fount of Rebirth"),
-    ("FOR_DORA", "Dora")
+    ("FOR_SELIN", "Selin"),
+    ("SELIN_DORA", "Dora")
+    # ("FOR_DORA", "Dora")
 ]

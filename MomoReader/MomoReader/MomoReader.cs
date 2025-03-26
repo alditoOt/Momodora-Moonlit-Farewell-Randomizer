@@ -25,7 +25,7 @@ namespace MomoReader
             if (Input.GetKeyUp(KeyCode.F5))
             {
                 Time.timeScale = 1f;
-            }  GameData.inventory.Add(GameData.itemDatabase.GetItem(338));
+            } 
         }
 
         public override void OnFixedUpdate()

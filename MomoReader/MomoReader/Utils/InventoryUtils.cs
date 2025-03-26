@@ -46,8 +46,8 @@ namespace MomoReader.Utils
             MelonLogger.Msg("Item added: " + itemData);
         }
 
-        [HarmonyPatch("Add")]
-        [HarmonyPrefix]
+        //[HarmonyPatch("Add")]
+        //[HarmonyPrefix]
         private static void PrintSigilInfo(Item item)
         {
             //if (!item.itemDef.IsSigil)

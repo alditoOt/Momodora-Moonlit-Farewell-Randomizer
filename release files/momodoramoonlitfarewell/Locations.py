@@ -31,7 +31,7 @@ advancement_table = {
     "Selin's Envy": AdvData(261, "Fount of Rebirth"),
     "Selin's Mendacity": AdvData(260, "Fount of Rebirth"),
     "Selin's Sorrow": AdvData(262, "Fount of Rebirth"),
-    "Moon God Selin": AdvData(364, "Fount of Rebirth"),
+    "Moon God Selin": AdvData(364, "Selin"),
     #Extra
     "Mitchi Fast Travel": AdvData(205, "Demon Frontier"),
     #Sigils

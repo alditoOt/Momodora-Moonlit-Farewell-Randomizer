@@ -1,4 +1,4 @@
-from .Items import MomodoraItem, item_table, skill_items, extra_skill_items, sigil_items, optional_sigil_items, grimoire_items, key_items
+from .Items import MomodoraItem, item_table, skill_items, extra_skill_items, sigil_items, optional_sigil_items, grimoire_items, key_items, selin_door
 from .Locations import MomodoraAdvancement, advancement_table, exclusion_table
 from .Regions import momodora_regions, link_momodora_areas
 from worlds.generic.Rules import exclusion_rules
@@ -62,7 +62,10 @@ class MomodoraWorld(World):
         if self.options.oracle_sigil:
             for name, num in optional_sigil_items.items():
                 itempool += [name] * num
-
+        ##Add Final Boss Door if enabled
+        if self.options.final_boss_keys:
+            for name, num in selin_door.items():
+                itempool += [name] * num
         #Choose locations to automatically exclude based on settings
         exclusion_pool = set()
         if not self.options.randomize_key_items:
