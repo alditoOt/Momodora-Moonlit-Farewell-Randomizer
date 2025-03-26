@@ -11,6 +11,7 @@ class MomodoraItem(Item):
 item_table = {
     #Junk
     "Blessing of Nothing": ItemData(1, ItemClassification.filler),
+    "50 Lunar Crystals": ItemData(999, ItemClassification.filler),
     #Skills
    "Awakened Sacred Leaf": ItemData(20, ItemClassification.progression),
    "Sacred Anemone": ItemData(9, ItemClassification.progression),

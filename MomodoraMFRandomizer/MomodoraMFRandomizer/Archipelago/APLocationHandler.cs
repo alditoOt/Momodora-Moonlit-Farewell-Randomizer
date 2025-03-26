@@ -95,6 +95,11 @@ namespace MomodoraMFRandomizer
 
         public static void GiveItem(int itemId)
         {
+            if (itemId == 999)
+            {
+                Platformer3D.player_money += 50;
+                return;
+            }
             if (MomoEventUtils.SKILLEVENTS.Contains(itemId))
             {
                 previousEventValue[itemId] = 1;
@@ -109,9 +114,22 @@ namespace MomodoraMFRandomizer
 
         public static void UpdateItemsForTheSession(ReceivedItemsHelper itemHandler)
         {
+            Boolean firstMoney = true;
             foreach (ItemInfo item in APMomoMFRandomizer.session.Items.AllItemsReceived)
             {
                 long itemId = item.ItemId;
+                if (itemId == 999)
+                {
+                    if (itemHandler == null)
+                    {
+                        continue;
+                    }
+                    if (!firstMoney)
+                    {
+                        continue;
+                    }
+                    firstMoney = false;
+                }
                 GiveItem((int)itemId);
             }
         }

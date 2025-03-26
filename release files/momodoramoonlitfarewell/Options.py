@@ -17,12 +17,12 @@ class BellHover(Toggle):
     default: 0
 
 class RandomizeKeyItems(Toggle):
-    """Add Key Items needed for progression to the randomization pool. These items are: Gold Moonlit Dust, Silver Moonlit Dust, Wooden Box and Windmill Key"""
+    """Add Key Items needed for progression to the randomization pool. These items are: Gold Moonlit Dust, Silver Moonlit Dust, Wooden Box and Windmill Key. These items are still considered as location checks, but if enabled, they might contain important items."""
     display_name = "Randomize Key items"
     default: 0
 
 class OracleSigil(Toggle):
-    """Add the Oracle Sigil to the item pool"""
+    """Add the Oracle Sigil to the item pool. This Sigil is still considered a location check, but if enabled, it may contain an important item."""
     display_name = "Add Oracle Sigil"
     default = 1
 

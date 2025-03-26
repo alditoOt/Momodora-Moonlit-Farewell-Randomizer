@@ -22,5 +22,5 @@ namespace APMomoMFRandomizer
             { 131, 351 },
             { 10, 344 }
         };
-        
+    }   
 }

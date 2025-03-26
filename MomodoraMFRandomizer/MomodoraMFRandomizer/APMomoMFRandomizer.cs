@@ -31,6 +31,7 @@ namespace MomodoraMFRandomizer
         
         BlockRemover demonStringRemover = new BlockRemover();
         private bool mainMenu = true;
+        private static Boolean manualItem = false;
 
         #region Socket Logging
         static void Socket_ErrorReceived(Exception e, string message)
