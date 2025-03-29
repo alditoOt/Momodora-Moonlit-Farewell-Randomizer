@@ -20,17 +20,22 @@ namespace MomodoraMFRandomizer
         {
             try
             {
+                //foreach (string key in APMomoMFRandomizer.session.DataStorage.GetSlotData().Keys) {
+                //    MelonLogger.Msg(key);
+                //}
                 APMomoMFRandomizer.session.DataStorage.GetSlotData().TryGetValue("open_springleaf_path", out object openSpringleafPath);
                 APMomoMFRandomizer.session.DataStorage.GetSlotData().TryGetValue("deathlink", out object deathlink);
                 APMomoMFRandomizer.session.DataStorage.GetSlotData().TryGetValue("randomize_key_items", out object keyItems);
                 APMomoMFRandomizer.session.DataStorage.GetSlotData().TryGetValue("oracle_sigil", out object oracleSigil);
-                APMomoMFRandomizer.session.DataStorage.GetSlotData().TryGetValue("randomize_final_boss_door", out object finalBossDoor);
+                APMomoMFRandomizer.session.DataStorage.GetSlotData().TryGetValue("final_boss_keys", out object finalBossKeys);
+                //APMomoMFRandomizer.session.DataStorage.GetSlotData().TryGetValue("oracle_sigil", out object finalBossKeys);
                 //APMomoMFRandomizer.session.DataStorage.GetSlotData().TryGetValue("fast_travel", out object fastTravel);
                 OPENSPRINGLEAFPATH = (Boolean)openSpringleafPath;
                 DEATHLINK = (Boolean)deathlink;
                 KEY_ITEMS = (Boolean)keyItems;
                 ADD_ORACLE_SIGIL = (Boolean)oracleSigil;
-                FINAL_BOSS_DOOR = (Boolean)finalBossDoor;
+                //FINAL_BOSS_DOOR = (Boolean)finalBossKeys;
+                FINAL_BOSS_DOOR = true;
                 //FAST_TRAVEL_CHOICE = (string)fastTravel;
             }
             catch (Exception e)

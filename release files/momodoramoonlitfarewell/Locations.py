@@ -51,7 +51,7 @@ advancement_table = {
     "Perfect Chime": AdvData(405, "Meikan Village"),
     "Phantasm Blade": AdvData(439, "Moonlight Repose"),
     "Quintessence": AdvData(443, "Meikan Village"),
-    "Resolve": AdvData(444, "Old Sanctuary"),
+    "Resolve": AdvData(444, "Old Sanctuary Continued"),
     "Resonance of Ifriya": AdvData(425, "Fairy Springs"),
     "Serval": AdvData(445, "Ashen Hinterlands"),
     "The Arsonist": AdvData(430, "Lun Tree Roots"),
@@ -72,10 +72,11 @@ advancement_table = {
    "Tattered Grimoire": AdvData(339, "Meikan Village Windmill"),
    "Dusty Grimoire": AdvData(340, "Fount of Rebirth"),
    #Key Items
-   "Gold Moonlit Dust": AdvData(332, "Old Sanctuary"),
+   "Gold Moonlit Dust": AdvData(332, "Old Sanctuary Continued"),
    "Silver Moonlit Dust": AdvData(333, "Moonlight Repose"),
    "Wooden Box": AdvData(347, "Meikan Village"),
    "Windmill Key": AdvData(356, "Meikan Village")
+  
 }
 
 exclusion_table = {

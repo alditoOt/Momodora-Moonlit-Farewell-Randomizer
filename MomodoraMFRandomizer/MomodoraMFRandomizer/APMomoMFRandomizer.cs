@@ -29,7 +29,7 @@ namespace MomodoraMFRandomizer
         public static ArchipelagoSession session;
         #endregion
         
-        BlockRemover demonStringRemover = new BlockRemover();
+        BlockRemover blockRemover = new BlockRemover();
         private bool mainMenu = true;
         private static Boolean manualItem = false;
 
@@ -112,8 +112,9 @@ namespace MomodoraMFRandomizer
             }
             if(YAMLUtils.OPENSPRINGLEAFPATH)
             {
-                demonStringRemover.removeAllBlockers();
+                blockRemover.removeAllBlockers(sceneName);
             }
+            blockRemover.RemoveGynBarrier(sceneName);
             locationHandler.ResetLocationSceneForSkill(sceneName, mainMenu);
         }
 

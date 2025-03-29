@@ -18,6 +18,7 @@ class MomodoraWorld(World):
 
     item_name_to_id = {name: data.code for name, data in item_table.items()}
     location_name_to_id = {name: data.id for name, data in advancement_table.items()}
+    
 
     def _get_momodora_data(self):
         return {
@@ -31,7 +32,8 @@ class MomodoraWorld(World):
             "deathlink": bool(self.options.deathlink.value),
             "oracle_sigil": bool(self.options.oracle_sigil.value),
             "bell_hover_generation": bool(self.options.bell_hover_generation.value),
-            "randomize_key_items": bool(self.options.randomize_key_items.value)
+            "randomize_key_items": bool(self.options.randomize_key_items.value),
+            "final_boss_keys": bool(self.options.final_boss_keys.value)
             # "fast_travel": self.options.fast_travel.current_key
         }
     
@@ -57,21 +59,22 @@ class MomodoraWorld(World):
         #Add Key Items
         if self.options.randomize_key_items:
             for name, num in key_items.items():
-                itempool += [name] * num
-        #Add Oracle Sigil if enabled
+                itempool += [name] * num    
+       #Add Oracle Sigil if enabled
         if self.options.oracle_sigil:
             for name, num in optional_sigil_items.items():
                 itempool += [name] * num
+      
         ##Add Final Boss Door if enabled
         if self.options.final_boss_keys:
             for name, num in selin_door.items():
                 itempool += [name] * num
         #Choose locations to automatically exclude based on settings
         exclusion_pool = set()
-        if not self.options.randomize_key_items:
-            exclusion_pool.update(exclusion_table["random_key_items"])
-        if not self.options.oracle_sigil:
-            exclusion_pool.update(exclusion_table["oracle_sigil"])
+        # if not self.options.randomize_key_items:
+        #     exclusion_pool.update(exclusion_table["random_key_items"])
+        # if not self.options.oracle_sigil:
+        #     exclusion_pool.update(exclusion_table["oracle_sigil"])
 
         exclusion_rules(self.multiworld, self.player, exclusion_pool)
 
@@ -92,8 +95,13 @@ class MomodoraWorld(World):
             ret = Region(region_name, self.player, self.multiworld)
             ret.locations += [MomodoraAdvancement(self.player, loc_name, loc_data.id, ret)
                               for loc_name, loc_data in advancement_table.items()
-                                if loc_data.region == region_name
+                                if loc_data.region == region_name and
+                                (self.options.randomize_key_items or 
+                                 loc_name not in exclusion_table["random_key_items"]) and
+                                 (self.options.oracle_sigil or
+                                  loc_name not in exclusion_table["oracle_sigil"])
                               ]
+
             for exit in exits:
                 ret.exits.append(Entrance(self.player, exit, ret))
             return ret

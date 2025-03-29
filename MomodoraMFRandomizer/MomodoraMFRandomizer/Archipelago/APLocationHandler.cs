@@ -86,7 +86,7 @@ namespace MomodoraMFRandomizer
         [HarmonyPostfix]
         private static void UpdateFinalBossDoor(int index, int value)
         {
-            if (index == MomoEventUtils.FINAL_DOOR_EVENT && YAMLUtils.FINAL_BOSS_DOOR)
+            if (value != 0 && index == MomoEventUtils.FINAL_DOOR_EVENT && YAMLUtils.FINAL_BOSS_DOOR)
             {
                 GameData.current.MomoEvent[index] = finalBossDoorCount;
             }
