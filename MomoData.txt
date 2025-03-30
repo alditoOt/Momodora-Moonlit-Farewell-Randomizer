@@ -2,20 +2,20 @@ Deathcount event: 101
 
 Item definitions (to check in game menu)
 
+*Windmill key: 356 
+*Silver Moonlit Dust: 333
+*Gold Moonlit Dust:332
+*Wooden Box: 347
 BellFlower: 101 (?)
 Healing Bell: 320
-Windmill key: 356 
 Walljump: 343 
-Sprint: 345 (
+Sprint: 345
 Awakened leaf: 342 
-Silver Moonlit Dust: 333
-Gold Moonlit Dust:332
 Lunar Attunement: 351
 Crescent Moonflower: 344
 Dusty Grimoire: 340
 Grimoire: 338
 Tattered Grimoire: 339
-Wooden Box: 347
 
 Companions:
 
@@ -36,24 +36,9 @@ MomoEvent value for items:
 
 Silver Moonlit Dust: 181
 Golden Moonlit Dust: 180
-Fairy Springs Grimoire: 191
-
-# SIGILS
-Cloudy Blood: 32 (400) (Springleaf Path)
-The Fool: 187 (item 419) (Springleaf Path)
-The Sharpshooter: 140 (438) (Old Sanctuary)
-The Hunter: 104 (427) (Koho Village)
-Resonance of Ifriya: 37 (425) (Fairy Springs)
-The Blessed: 138 (Fairy Springs)
-Glazed Aegis: 139 (Fairy Springs)
-Pawn: 36 (Springleaf Path Continued)
-Resolve: 186 (444) ()
-Mending Resonance: 86
-Phantasm Blade: 185 (Moonlight Repose)
-Mudwalker: 223
-Living Blood: 328
-Living Edge: 85 (412)
-Welkin Leaf: 256 (item 446) (Koho Village Continued)
+Grimoire: 191
+Dusty Grimoire:
+Tattered Grimoire:
 
 # BOSSES
 
@@ -78,7 +63,7 @@ Dora?:
 
 # OTHERS
 
-Cursed: 151
+Cursed Event: 151
 Door to Selin: 327
 Credits start: 298
 Cereza friendship: 102

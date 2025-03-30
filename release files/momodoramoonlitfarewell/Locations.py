@@ -17,8 +17,8 @@ advancement_table = {
     "Lunar Attunement": AdvData(131, "Ashen Hinterlands"),
     #Bosses
     "Gariser Demon": AdvData(15, "Springleaf Path"),
-    "Harpy Archdemon": AdvData(17, "Springleaf Path"),
-    "Raging Demon": AdvData(16, "Springleaf Path"),
+    "Harpy Archdemon": AdvData(17, "Springleaf Path Continued"),
+    "Raging Demon": AdvData(16, "Springleaf Path Continued"),
     "Black Cat": AdvData(278, "Lun Tree Roots"),
     "Viper Archdemon Sorrellia": AdvData(150, "Fairy Springs"),
     "Remnant of an Unknown Phantasm": AdvData(171, "Moonlight Repose"),
@@ -31,7 +31,7 @@ advancement_table = {
     "Selin's Envy": AdvData(261, "Fount of Rebirth"),
     "Selin's Mendacity": AdvData(260, "Fount of Rebirth"),
     "Selin's Sorrow": AdvData(262, "Fount of Rebirth"),
-    "Moon God Selin": AdvData(364, "Fount of Rebirth"),
+    "Moon God Selin": AdvData(364, "Selin"),
     #Extra
     "Mitchi Fast Travel": AdvData(205, "Demon Frontier"),
     #Sigils
@@ -51,7 +51,7 @@ advancement_table = {
     "Perfect Chime": AdvData(405, "Meikan Village"),
     "Phantasm Blade": AdvData(439, "Moonlight Repose"),
     "Quintessence": AdvData(443, "Meikan Village"),
-    "Resolve": AdvData(444, "Old Sanctuary"),
+    "Resolve": AdvData(444, "Old Sanctuary Continued"),
     "Resonance of Ifriya": AdvData(425, "Fairy Springs"),
     "Serval": AdvData(445, "Ashen Hinterlands"),
     "The Arsonist": AdvData(430, "Lun Tree Roots"),
@@ -66,9 +66,26 @@ advancement_table = {
    "Strongfist": AdvData(408, "Springleaf Path"),
    "Fallen Hero": AdvData(422, "Springleaf Path"),
    "The Profiteer": AdvData(401, "Springleaf Path"),
-#    "Oracle": AdvData(441, "Fairy Village")
+   "Oracle": AdvData(441, "Fairy Village"),
     #Grimoires
    "Grimoire": AdvData(338, "Fairy Springs"),
    "Tattered Grimoire": AdvData(339, "Meikan Village Windmill"),
-   "Dusty Grimoire": AdvData(340, "Fount of Rebirth")
+   "Dusty Grimoire": AdvData(340, "Fount of Rebirth"),
+   #Key Items
+   "Gold Moonlit Dust": AdvData(332, "Old Sanctuary Continued"),
+   "Silver Moonlit Dust": AdvData(333, "Moonlight Repose"),
+   "Wooden Box": AdvData(347, "Meikan Village"),
+   "Windmill Key": AdvData(356, "Meikan Village")
+  
+}
+
+exclusion_table = {
+    "random_key_items": {
+        "Gold Moonlit Dust",
+        "Silver Moonlit Dust",
+        "Windmill Key"
+    },
+    "oracle_sigil": {
+        "Oracle"
+    }
 }

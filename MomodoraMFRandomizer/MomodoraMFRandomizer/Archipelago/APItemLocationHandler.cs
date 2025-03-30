@@ -13,16 +13,27 @@ using System.Threading.Tasks;
 namespace MomodoraMFRandomizer
 {
     [HarmonyPatch(typeof(Inventory))]
-    class APSigilLocationHandler
+    class APItemLocationHandler
     {
         public static Boolean itemReceived;
+
         [HarmonyPatch("Add")]
         [HarmonyPrefix]
         public static bool CheckSigilReceived(Item item, ref bool is_new_item)
         {
             itemReceived = false;
-            if (!InventoryUtils.ITEM_ID.Contains(item.itemDef.Index) && !InventoryUtils.KEY_ITEMS_ID.Contains(item.itemDef.Index))
+            //if ((!YAMLUtils.KEY_ITEMS && InventoryUtils.KEY_ITEM_ID.Contains(item.itemDef.Index))
+            //    || (!YAMLUtils.ADD_ORACLE_SIGIL && InventoryUtils.ORACLE == item.itemDef.Index))
+            //{
+            //    APMomoMFRandomizer.session.Locations.CompleteLocationChecks(item.itemDef.Index);
+            //    return true;
+            //}
+            if (!InventoryUtils.ITEM_ID.Contains(item.itemDef.Index))
             {
+                if (APMomoMFRandomizer.session.Locations.AllLocations.Contains(item.itemDef.Index))
+                {
+                    APMomoMFRandomizer.session.Locations.CompleteLocationChecks(item.itemDef.Index);
+                }
                 return true;
             }
             foreach (ItemInfo apItem in APMomoMFRandomizer.session.Items.AllItemsReceived)
@@ -38,7 +49,7 @@ namespace MomodoraMFRandomizer
             {
                 APMomoMFRandomizer.session.Locations.CompleteLocationChecks(item.itemDef.Index);
             }
-            return itemReceived || InventoryUtils.EXCLUDED_ITEM_ID.Contains(item.itemDef.Index);
+            return itemReceived;
         }
     }
 }

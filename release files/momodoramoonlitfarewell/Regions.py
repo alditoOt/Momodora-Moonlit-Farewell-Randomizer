@@ -10,7 +10,8 @@ momodora_regions = [
     ("Springleaf Path", ["SP_SPC"]),
     ("Springleaf Path Continued", ["SPC_LTR", "SPC_FS"]),
     ("Koho Village", ["KV_SP", "KV_OS"]),
-    ("Old Sanctuary", []),
+    ("Old Sanctuary", ["OS_OSC"]),
+    ("Old Sanctuary Continued", []),
     ("Lun Tree Roots", ["LTR_DF", "LTR_FS", "LTR_MR"]),
     ("Demon Frontier", ["DF_AH", "DF_DFC"]),
     ("Demon Frontier Continued", ["DFC_MV"]),
@@ -21,18 +22,20 @@ momodora_regions = [
     ("Ashen Hinterlands Continued", []),
     ("Meikan Village", ["MV_MVW"]),
     ("Meikan Village Windmill", ["MVW_FOR"]),
-    ("Fount of Rebirth", ["FOR_DORA"]),
+    ("Fount of Rebirth", ["FOR_SELIN"]),
+    ("Selin", ["SELIN_DORA"]),
     ("Dora", [])
 ]
 
 # (Entrance, region pointed to)
 mandatory_connections = [
-    ("New Game", "Springleaf Path"),
+    ("New Game", "Koho Village"),
     ("SP_SPC", "Springleaf Path Continued"),
     ("SPC_LTR", "Lun Tree Roots"),
     ("SPC_FS", "Fairy Springs"),
     ("KV_SP", "Springleaf Path"),
     ("KV_OS", "Old Sanctuary"),
+    ("OS_OSC", "Old Sanctuary Continued"),
     ("LTR_DF", "Demon Frontier"),
     ("LTR_FS", "Fairy Springs"),
     ("LTR_MR", "Moonlight Repose"),
@@ -43,5 +46,7 @@ mandatory_connections = [
     ("DFC_MV", "Meikan Village"),
     ("MV_MVW", "Meikan Village Windmill"),
     ("MVW_FOR", "Fount of Rebirth"),
-    ("FOR_DORA", "Dora")
+    ("FOR_SELIN", "Selin"),
+    ("SELIN_DORA", "Dora")
+    # ("FOR_DORA", "Dora")
 ]

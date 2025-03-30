@@ -1,5 +1,5 @@
-from .Items import MomodoraItem, item_table, skill_items, extra_skill_items, sigil_items, optional_sigil_items, grimoire_items
-from .Locations import MomodoraAdvancement, advancement_table
+from .Items import MomodoraItem, item_table, skill_items, extra_skill_items, sigil_items, optional_sigil_items, grimoire_items, key_items, selin_door
+from .Locations import MomodoraAdvancement, advancement_table, exclusion_table
 from .Regions import momodora_regions, link_momodora_areas
 from worlds.generic.Rules import exclusion_rules
 from BaseClasses import Region, Entrance, Tutorial, Item
@@ -18,6 +18,7 @@ class MomodoraWorld(World):
 
     item_name_to_id = {name: data.code for name, data in item_table.items()}
     location_name_to_id = {name: data.id for name, data in advancement_table.items()}
+    
 
     def _get_momodora_data(self):
         return {
@@ -30,12 +31,14 @@ class MomodoraWorld(World):
             "open_springleaf_path": bool(self.options.open_springleaf_path.value),
             "deathlink": bool(self.options.deathlink.value),
             "oracle_sigil": bool(self.options.oracle_sigil.value),
-            "bell_hover_generation": bool(self.options.bell_hover_generation.value)
+            "bell_hover_generation": bool(self.options.bell_hover_generation.value),
+            "randomize_key_items": bool(self.options.randomize_key_items.value),
+            "final_boss_keys": bool(self.options.final_boss_keys.value)
             # "fast_travel": self.options.fast_travel.current_key
         }
     
     def get_filler_item_name(self):
-        return "Blessing of Nothing"
+        return "50 Lunar Crystals"
     
     def create_items(self):
         # Generate item pool
@@ -53,17 +56,27 @@ class MomodoraWorld(World):
         #Add Grimoire items
         for name, num in grimoire_items.items():
             itempool += [name] * num
-        #Add filler items
-        # remaining_slots = len(self.multiworld.get_filled_locations(self.player)) - len(itempool)
-        # itempool += ["Blessing of Nothing"] * max(0, remaining_slots)
-        #Add Oracle Sigil if enabled
-        # if self.options.oracle_sigil:
-        #     for name, num in optional_sigil_items.items():
-        #         itempool += [name] * num
-
+        #Add Key Items
+        if self.options.randomize_key_items:
+            for name, num in key_items.items():
+                itempool += [name] * num    
+       #Add Oracle Sigil if enabled
+        if self.options.oracle_sigil:
+            for name, num in optional_sigil_items.items():
+                itempool += [name] * num
+      
+        ##Add Final Boss Door if enabled
+        if self.options.final_boss_keys:
+            for name, num in selin_door.items():
+                itempool += [name] * num
+        #Choose locations to automatically exclude based on settings
         exclusion_pool = set()
-        exclusion_checks = set()
-        exclusion_rules(self.multiworld, self.player, exclusion_checks)
+        # if not self.options.randomize_key_items:
+        #     exclusion_pool.update(exclusion_table["random_key_items"])
+        # if not self.options.oracle_sigil:
+        #     exclusion_pool.update(exclusion_table["oracle_sigil"])
+
+        exclusion_rules(self.multiworld, self.player, exclusion_pool)
 
         # Convert itempool into real items
         itempool = [item for item in map(lambda name: self.create_item(name), itempool)]
@@ -82,8 +95,13 @@ class MomodoraWorld(World):
             ret = Region(region_name, self.player, self.multiworld)
             ret.locations += [MomodoraAdvancement(self.player, loc_name, loc_data.id, ret)
                               for loc_name, loc_data in advancement_table.items()
-                                if loc_data.region == region_name
+                                if loc_data.region == region_name and
+                                (self.options.randomize_key_items or 
+                                 loc_name not in exclusion_table["random_key_items"]) and
+                                 (self.options.oracle_sigil or
+                                  loc_name not in exclusion_table["oracle_sigil"])
                               ]
+
             for exit in exits:
                 ret.exits.append(Entrance(self.player, exit, ret))
             return ret

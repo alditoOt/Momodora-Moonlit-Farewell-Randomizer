@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using UnityEngine.SceneManagement;
 using MelonLoader;
 using APMomoMFRandomizer;
+using System.Reflection;
 
 namespace MomodoraMFRandomizer
 {
@@ -28,6 +29,8 @@ namespace MomodoraMFRandomizer
             {"Fairy10" , 194 },
             {"Marsh08" , 131 }
         };
+
+        private static int finalBossDoorCount = 0;
 
         public void InitializeDictionary()
         {
@@ -80,6 +83,24 @@ namespace MomodoraMFRandomizer
             }
         }
 
+        [HarmonyPatch("set_Item")]
+        [HarmonyPostfix]
+        private static void UpdateFinalBossDoor(int index, int value)
+        {
+            if (YAMLUtils.FINAL_BOSS_DOOR && index == MomoEventUtils.FINAL_DOOR_EVENT && value != finalBossDoorCount)
+            {
+                finalBossDoorCount = 0;
+                foreach (ItemInfo item in APMomoMFRandomizer.session.Items.AllItemsReceived)
+                {
+                    if (item.ItemId == 991)
+                    {
+                        finalBossDoorCount++;
+                    }
+                }
+                GameData.current.MomoEvent[index] = finalBossDoorCount;
+            }
+        }
+
         private static void ReportSkillLocation(int index, int value)
         {
             if (!APMomoMFRandomizer.session.Locations.AllLocationsChecked.Contains(index) && (previousEventValue[index] == 0 || index == 205))
@@ -95,6 +116,11 @@ namespace MomodoraMFRandomizer
 
         public static void GiveItem(int itemId)
         {
+            if (itemId == 999)
+            {
+                Platformer3D.player_money += 50;
+                return;
+            }
             if (MomoEventUtils.SKILLEVENTS.Contains(itemId))
             {
                 previousEventValue[itemId] = 1;
@@ -109,10 +135,34 @@ namespace MomodoraMFRandomizer
 
         public static void UpdateItemsForTheSession(ReceivedItemsHelper itemHandler)
         {
+            Boolean firstTimeSendingMoney = true;
+            finalBossDoorCount = 0;
             foreach (ItemInfo item in APMomoMFRandomizer.session.Items.AllItemsReceived)
             {
                 long itemId = item.ItemId;
+                if (itemId == 991) //Final Boss Door
+                {
+                    finalBossDoorCount++;
+                    continue;
+                }
+                if (itemId == 999) //Filler with Lunar Crystals
+                {
+                    if (itemHandler == null)
+                    {
+                        continue;
+                    }
+                    if (!firstTimeSendingMoney)
+                    {
+                        continue;
+                    }
+                    firstTimeSendingMoney = false;
+                }
                 GiveItem((int)itemId);
+            }
+            if (finalBossDoorCount > 0)
+            {
+                //MelonLogger.Msg($"Final boss door event {MomoEventUtils.FINAL_DOOR_EVENT} current value: {finalBossDoorCount}");
+                GameData.current.MomoEvent[MomoEventUtils.FINAL_DOOR_EVENT] = finalBossDoorCount;
             }
         }
 

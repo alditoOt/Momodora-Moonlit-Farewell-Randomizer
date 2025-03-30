@@ -29,8 +29,9 @@ namespace MomodoraMFRandomizer
         public static ArchipelagoSession session;
         #endregion
         
-        BlockRemover demonStringRemover = new BlockRemover();
+        BlockRemover blockRemover = new BlockRemover();
         private bool mainMenu = true;
+        private static Boolean manualItem = false;
 
         #region Socket Logging
         static void Socket_ErrorReceived(Exception e, string message)
@@ -61,10 +62,13 @@ namespace MomodoraMFRandomizer
         //When starting the game
         public override void OnLateInitializeMelon()
         {
+            #region Server Info
+            //Load server info from config
             ConfigLoader.LoadConfig();
             server = ConfigLoader.config.server;
             username = ConfigLoader.config.username;
             password = ConfigLoader.config.password;
+            #endregion
             locationHandler.InitializeDictionary();
             try
             {
@@ -73,7 +77,7 @@ namespace MomodoraMFRandomizer
                 session.Items.ItemReceived += APLocationHandler.UpdateItemsForTheSession;
                 CollectSocketInfo();
                 YAMLUtils.GetSettingsFromYAML();
-                //YAMLUtils.AddItemsToItemPool();
+                YAMLUtils.AddItemsToItemPool();
                 if (YAMLUtils.DEATHLINK)
                 {
                     deathLinkService = session.CreateDeathLinkService();
@@ -108,8 +112,9 @@ namespace MomodoraMFRandomizer
             }
             if(YAMLUtils.OPENSPRINGLEAFPATH)
             {
-                demonStringRemover.removeAllBlockers();
+                blockRemover.removeAllBlockers(sceneName);
             }
+            blockRemover.RemoveGynBarrier(sceneName);
             locationHandler.ResetLocationSceneForSkill(sceneName, mainMenu);
         }
 

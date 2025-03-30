@@ -13,14 +13,31 @@ namespace MomodoraMFRandomizer
     class BlockRemover
     {
 
-        public void removeAllBlockers()
+        public void removeAllBlockers(string sceneName)
         {
             RemoveStrings();
-            RemoveWindZones();
+            RemoveWindZones(sceneName);
+            //RemoveGynBarrier(sceneName);
         }
 
-        public void RemoveWindZones()
+        public void RemoveWindZones(string sceneName)
         {
+            if (sceneName == "Well29")
+            {
+                GameObject windZoneOne = GameObject.Find("Momo2020WindZone");
+                GameObject windZoneTwo = GameObject.Find("Momo2020WindZone (1)");
+
+                if (windZoneOne != null)
+                {
+                    windZoneTwo.SetActive(false);
+                }
+                if (windZoneTwo != null)
+                {
+                    windZoneOne.SetActive(false);
+                }
+                return;
+            }
+
             FlagDestroy[] extraWindZones = GameObject.FindObjectsOfType<FlagDestroy>();
 
             if (extraWindZones != null && extraWindZones.Length > 0)
@@ -29,7 +46,6 @@ namespace MomodoraMFRandomizer
                 {
                     if (extraWindZone.gameObject.name.Contains("Extra Wind Barrier"))
                     {
-                        MelonLogger.Msg("Removing extra windzone");
                         extraWindZone.gameObject.SetActive(false);
                     }
                 }
@@ -40,8 +56,19 @@ namespace MomodoraMFRandomizer
             {
                 foreach (WindMomo2020 windZone in windZones)
                 {
-                    MelonLogger.Msg("Removing windzone");
                     windZone.gameObject.SetActive(false);
+                }
+            }
+        }
+
+        public void RemoveGynBarrier(string sceneName)
+        {
+            if (sceneName == "Bark21")
+            {
+                GameObject gynBarrier = GameObject.Find("GynBarrier");
+                if (gynBarrier != null)
+                {
+                    gynBarrier.SetActive(false);
                 }
             }
         }

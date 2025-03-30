@@ -40,7 +40,7 @@ namespace MomodoraMFRandomizer
         public override void OnSceneWasLoaded(int buildIndex, string sceneName)
         {
             // This should happen if the settings file has this enabled
-            demonStringRemover.removeAllBlockers();
+            //demonStringRemover.removeAllBlockers();
             CheckMomoEventValue();
         }
 
