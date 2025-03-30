@@ -71,7 +71,7 @@ def set_rules(world: "MomodoraWorld"):
              state.has("Silver Moonlit Dust", player)))
     if world.options.oracle_sigil:
         set_rule(multiworld.get_location("Oracle", player), 
-                 lambda state: state.can_reach("Meikan Village Windmill", "Region", player))
+                 lambda state: state.can_reach("Fount of Rebirth", "Region", player))
 
 def set_completion_rules(world: "MomodoraWorld"):
     player = world.player
