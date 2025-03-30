@@ -20,9 +20,6 @@ namespace MomodoraMFRandomizer
         {
             try
             {
-                //foreach (string key in APMomoMFRandomizer.session.DataStorage.GetSlotData().Keys) {
-                //    MelonLogger.Msg(key);
-                //}
                 APMomoMFRandomizer.session.DataStorage.GetSlotData().TryGetValue("open_springleaf_path", out object openSpringleafPath);
                 APMomoMFRandomizer.session.DataStorage.GetSlotData().TryGetValue("deathlink", out object deathlink);
                 APMomoMFRandomizer.session.DataStorage.GetSlotData().TryGetValue("randomize_key_items", out object keyItems);
@@ -34,8 +31,8 @@ namespace MomodoraMFRandomizer
                 DEATHLINK = (Boolean)deathlink;
                 KEY_ITEMS = (Boolean)keyItems;
                 ADD_ORACLE_SIGIL = (Boolean)oracleSigil;
-                //FINAL_BOSS_DOOR = (Boolean)finalBossKeys;
-                FINAL_BOSS_DOOR = true;
+                FINAL_BOSS_DOOR = (Boolean)finalBossKeys;
+                //FINAL_BOSS_DOOR = (Boo;
                 //FAST_TRAVEL_CHOICE = (string)fastTravel;
             }
             catch (Exception e)

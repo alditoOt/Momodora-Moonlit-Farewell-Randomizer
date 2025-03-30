@@ -24,7 +24,6 @@ namespace MomodoraMFRandomizer
         {
             if (sceneName == "Well29")
             {
-                MelonLogger.Msg("We're in Well29");
                 GameObject windZoneOne = GameObject.Find("Momo2020WindZone");
                 GameObject windZoneTwo = GameObject.Find("Momo2020WindZone (1)");
 
@@ -47,7 +46,6 @@ namespace MomodoraMFRandomizer
                 {
                     if (extraWindZone.gameObject.name.Contains("Extra Wind Barrier"))
                     {
-                        MelonLogger.Msg("Removing extra windzone");
                         extraWindZone.gameObject.SetActive(false);
                     }
                 }
@@ -58,7 +56,6 @@ namespace MomodoraMFRandomizer
             {
                 foreach (WindMomo2020 windZone in windZones)
                 {
-                    MelonLogger.Msg("Removing windzone");
                     windZone.gameObject.SetActive(false);
                 }
             }

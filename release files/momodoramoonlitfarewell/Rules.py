@@ -48,13 +48,17 @@ def set_rules(world: "MomodoraWorld"):
     set_rule(multiworld.get_entrance("DFC_MV", player), lambda state: state.has("Lunar Attunement", player)),
     set_rule(multiworld.get_entrance("MV_MVW", player), 
              lambda state: (state.has("Windmill Key", player) if world.options.randomize_key_items.value else True) and 
-             state.has("Crescent Moonflower", player) or
+             (state.has("Crescent Moonflower", player) or
              (state.has("Spiral Shell", player) and
-              world.options.bell_hover_generation.value)),
+              world.options.bell_hover_generation.value))),
     set_rule(multiworld.get_entrance("MVW_FOR", player), lambda state: 
              state.has("Crescent Moonflower", player) and 
               (state.has("Windmill Key", player) if world.options.randomize_key_items.value else True)),
-    set_rule(multiworld.get_entrance("FOR_SELIN", player), lambda state: state.has("Final Boss Key", player, 4) if world.options.final_boss_keys.value else True),
+    set_rule(multiworld.get_entrance("FOR_SELIN", player), lambda state: state.has("Progressive Final Boss Key", player, 4) if world.options.final_boss_keys.value else True),
+    set_rule(multiworld.get_location("Perfect Chime", player), 
+             lambda state: state.has("Spiral Shell", player) and 
+             (world.options.bell_hover_generation.value or 
+              state.has("Crescent Moonflower", player)))
     set_rule(multiworld.get_location("Mending Resonance", player), lambda state: state.has("Lunar Attunement", player)),
     set_rule(multiworld.get_location("Resolve", player), lambda state: state.has("Lunar Attunement", player))
     set_rule(multiworld.get_location("Welkin Leaf", player), 

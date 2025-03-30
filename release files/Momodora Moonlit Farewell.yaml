@@ -71,23 +71,24 @@ Momodora Moonlit Farewell:
     'true': 50
 
   bell_hover_generation:
-    # Consider Bell Hover as a possible strat for world generation. Bell Hover is used to access certain areas without having the correct skill (i.e. Demon Frontier without Wall Jump)
+    # Consider Bell Hover as a possible strat for world generation. Bell Hover is used to access certain areas without having the correct skill (i.e. Demon Frontier without Wall Jump) 
+    # With this setting on, you might need to get creative to access certain areas (i.e. using damage boost to reach a platform, speaking from experience)
     'false': 50
     'true': 0
 
   randomize_key_items:
-    # Add Key Items needed for progression to the randomization pool. These items are: Gold Moonlit Dust, Silver Moonlit Dust, Wooden Box and Windmill Key. 
-    # These items are still considered as location checks, but if the setting is enabled, the locations where you get these items might contain important items.
+    # Add Key Items needed for progression to the randomization pool and as location checks. These items are: Gold Moonlit Dust, Silver Moonlit Dust and Windmill Key.
     'false': 50
     'true': 0
 
   oracle_sigil:
-    # Add the Oracle Sigil to the item pool. This Sigil is still considered a location check, but if the setting is enabled, the location where you get this Sigil may contain an important item.
+    # Add the Oracle Sigil to the item pool and as a location check. 
+    # Oracle requires to free all 30 Lumen Fairies, which can be a long task so it's recommended to have this setting off unless you really want to do this
     'false': 50
     'true': 0
 
   final_boss_keys:
-    # Add 4 keys to open the door to the Final Boss which are added to the randomization pool. 
+    # Add 4 keys required to open the door to the Final Boss to the randomization pool. 
     # With this enabled, defeating the 4 bosses before the final boss will no longer help to unlock the door
     'false': 50
     'true': 0

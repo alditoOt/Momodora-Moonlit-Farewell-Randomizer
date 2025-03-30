@@ -83,7 +83,6 @@ exclusion_table = {
     "random_key_items": {
         "Gold Moonlit Dust",
         "Silver Moonlit Dust",
-        "Wooden Box",
         "Windmill Key"
     },
     "oracle_sigil": {

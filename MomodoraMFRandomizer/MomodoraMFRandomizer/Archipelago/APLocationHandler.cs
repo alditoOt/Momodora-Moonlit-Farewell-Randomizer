@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using UnityEngine.SceneManagement;
 using MelonLoader;
 using APMomoMFRandomizer;
+using System.Reflection;
 
 namespace MomodoraMFRandomizer
 {
@@ -86,8 +87,16 @@ namespace MomodoraMFRandomizer
         [HarmonyPostfix]
         private static void UpdateFinalBossDoor(int index, int value)
         {
-            if (value != 0 && index == MomoEventUtils.FINAL_DOOR_EVENT && YAMLUtils.FINAL_BOSS_DOOR)
+            if (YAMLUtils.FINAL_BOSS_DOOR && index == MomoEventUtils.FINAL_DOOR_EVENT && value != finalBossDoorCount)
             {
+                finalBossDoorCount = 0;
+                foreach (ItemInfo item in APMomoMFRandomizer.session.Items.AllItemsReceived)
+                {
+                    if (item.ItemId == 991)
+                    {
+                        finalBossDoorCount++;
+                    }
+                }
                 GameData.current.MomoEvent[index] = finalBossDoorCount;
             }
         }
@@ -149,6 +158,11 @@ namespace MomodoraMFRandomizer
                     firstTimeSendingMoney = false;
                 }
                 GiveItem((int)itemId);
+            }
+            if (finalBossDoorCount > 0)
+            {
+                //MelonLogger.Msg($"Final boss door event {MomoEventUtils.FINAL_DOOR_EVENT} current value: {finalBossDoorCount}");
+                GameData.current.MomoEvent[MomoEventUtils.FINAL_DOOR_EVENT] = finalBossDoorCount;
             }
         }
 

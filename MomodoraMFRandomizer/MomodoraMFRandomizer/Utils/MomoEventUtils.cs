@@ -21,14 +21,14 @@ namespace MomodoraMFRandomizer
         public static int FINAL_DOOR_EVENT = 294;
         public static int FAST_TRAVEL_EVENT = 205;
 
-        [HarmonyPatch("set_Item")]
-        [HarmonyPostfix]
-        private static void PrintOnEventChange(int index, int value)
-        {
-            if (value == 1)
-            {
-                MelonLogger.Msg($"Event {index} was set to {value}.");
-            }
-        }
+        //[HarmonyPatch("set_Item")]
+        //[HarmonyPostfix]
+        //private static void PrintOnEventChange(int index, int value)
+        //{
+        //    if (value == 1)
+        //    {
+        //        MelonLogger.Msg($"Event {index} was set to {value}.");
+        //    }
+        //}
     }
 }

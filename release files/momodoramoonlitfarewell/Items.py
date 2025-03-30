@@ -56,10 +56,10 @@ item_table = {
    "Dusty Grimoire": ItemData(340, ItemClassification.useful),
    "Gold Moonlit Dust": ItemData(332, ItemClassification.progression),
    "Silver Moonlit Dust": ItemData(333, ItemClassification.progression),
-   "Wooden Box": ItemData(347, ItemClassification.progression),
+#    "Wooden Box": ItemData(347, ItemClassification.progression),
    "Windmill Key": ItemData(356, ItemClassification.progression),
    # Selin Door
-   "Final Boss Key": ItemData(991, ItemClassification.progression)
+   "Progressive Final Boss Key": ItemData(991, ItemClassification.progression)
 }
 
 skill_items = {
@@ -123,10 +123,10 @@ grimoire_items = {
 key_items = {
     "Gold Moonlit Dust": 1,
     "Silver Moonlit Dust": 1,
-    "Wooden Box": 1,
+    # "Wooden Box": 1
     "Windmill Key": 1
 }
 
 selin_door = {
-    "Final Boss Key": 4
+    "Progressive Final Boss Key": 4
 }

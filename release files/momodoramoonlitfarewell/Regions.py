@@ -11,7 +11,7 @@ momodora_regions = [
     ("Springleaf Path Continued", ["SPC_LTR", "SPC_FS"]),
     ("Koho Village", ["KV_SP", "KV_OS"]),
     ("Old Sanctuary", ["OS_OSC"]),
-    ("Old Sanctuary Continued", [])
+    ("Old Sanctuary Continued", []),
     ("Lun Tree Roots", ["LTR_DF", "LTR_FS", "LTR_MR"]),
     ("Demon Frontier", ["DF_AH", "DF_DFC"]),
     ("Demon Frontier Continued", ["DFC_MV"]),
