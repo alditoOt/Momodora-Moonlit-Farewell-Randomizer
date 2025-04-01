@@ -28,10 +28,5 @@ namespace MomoReader
             } 
         }
 
-        public override void OnFixedUpdate()
-        {
-            phys_attack = Platformer3D.phys_attack;
-            
-        }
     }
 }

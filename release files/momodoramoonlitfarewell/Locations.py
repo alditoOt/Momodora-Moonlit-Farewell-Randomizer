@@ -14,7 +14,7 @@ advancement_table = {
     "Sacred Anemone": AdvData(9, "Springleaf Path"),
     "Crescent Moonflower": AdvData(10, "Lun Tree Roots"),
     "Spiral Shell": AdvData(194, "Fairy Village"),
-    "Lunar Attunement": AdvData(131, "Ashen Hinterlands"),
+    "Lunar Attunement": AdvData(131, "Ashen Hinterlands Continued"),
     #Bosses
     "Gariser Demon": AdvData(15, "Springleaf Path"),
     "Harpy Archdemon": AdvData(17, "Springleaf Path Continued"),
@@ -46,7 +46,7 @@ advancement_table = {
     "Living Edge": AdvData(412, "Springleaf Path"),
     "Magic Blade": AdvData(404, "Demon Frontier Continued"),
     "Mending Resonance": AdvData(434, "Demon Frontier Continued"),
-    "Mudwalker": AdvData(447, "Ashen Hinterlands"),
+    "Mudwalker": AdvData(447, "Ashen Hinterlands Continued"),
     "Pawn": AdvData(440, "Springleaf Path Continued"),
     "Perfect Chime": AdvData(405, "Meikan Village"),
     "Phantasm Blade": AdvData(439, "Moonlight Repose"),

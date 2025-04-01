@@ -46,16 +46,22 @@ def set_rules(world: "MomodoraWorld"):
                             (state.has("Spiral Shell", player) or state.has("Lunar Attunement", player))) or
                             (state.has("Spiral Shell", player) and 
                              (state.has("Sacred Anemone", player) or state.has("Perfect Chime", player))))
-    set_rule(multiworld.get_entrance("DFC_MV", player), lambda state: state.has("Lunar Attunement", player)),
+    set_rule(multiworld.get_entrance("DFC_MV", player), 
+             lambda state: state.has("Lunar Attunement", player) and
+             (state.has("Crescent Moonflower", player) if world.options.bell_hover_generation.value else True or
+              state.has("Spiral Shell", player))),
     set_rule(multiworld.get_entrance("MV_MVW", player), 
              lambda state: (state.has("Windmill Key", player) if world.options.randomize_key_items.value else True) and 
+             state.has("Spiral Shell", player) and
              (state.has("Crescent Moonflower", player) or
-             (state.has("Spiral Shell", player) and
-              world.options.bell_hover_generation.value))),
+              world.options.bell_hover_generation.value)),
     set_rule(multiworld.get_entrance("MVW_FOR", player), lambda state: 
              state.has("Crescent Moonflower", player) and 
               (state.has("Windmill Key", player) if world.options.randomize_key_items.value else True)),
     set_rule(multiworld.get_entrance("FOR_SELIN", player), lambda state: state.has("Progressive Final Boss Key", player, 4) if world.options.final_boss_keys.value else True),
+    set_rule(multiworld.get_location("Serval", player),
+             lambda state: state.has("Crescent Moonflower", player) or
+             (state.has("Spiral Shell", player) if world.options.bell_hover_generation.value else True))
     set_rule(multiworld.get_location("Perfect Chime", player), 
              lambda state: state.has("Spiral Shell", player) and 
              (world.options.bell_hover_generation.value or 

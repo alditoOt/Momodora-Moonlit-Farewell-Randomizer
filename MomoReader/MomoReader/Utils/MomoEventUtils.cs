@@ -15,12 +15,11 @@ namespace MomoReader.Utils
         public static int index;
         private static string filePath = Path.Combine(Directory.GetCurrentDirectory(), "Mods", "Data", "LilyData.csv");
 
-
         [HarmonyPatch("set_Item")]
         [HarmonyPostfix]
         public static void GetEventIndex(int index, int value)
         {
-            MelonLogger.Msg($"Event {index} just changed to {value}");
+            MelonLogger.Msg($"Event {index} just changed to {value} in scene ${MomoReader.sceneName}");
         }
 
 
