@@ -22,17 +22,19 @@ def set_rules(world: "MomodoraWorld"):
     set_rule(multiworld.get_entrance("LTR_FS", player), lambda state: state.has("Crescent Moonflower", player))
     set_rule(multiworld.get_entrance("KV_OS", player), 
              lambda state: state.has("Spiral Shell", player) or 
-             (world.options.bell_hover_generation.value and
-              state.has("Crescent Moonflower", player)))
-    set_rule(multiworld.get_entrance("OS_OSC", player), lambda state: state.has("Spiral Shell", player))
+             (state.has("Crescent Moonflower", player) and
+             (world.options.bell_hover_generation.value or
+              state.has("Lunar Attunement", player))))
+    set_rule(multiworld.get_entrance("OS_OSC", player), 
+             lambda state: state.has("Spiral Shell", player) or
+                            (world.options.bell_hover_generation.value and state.has("Lunar Attunement", player) and state.has("Crescent Moonflower", player)))
     set_rule(multiworld.get_entrance("LTR_DF", player), 
              lambda state: state.has("Spiral Shell", player) or
-             (state.has("Crescent Moonflower", player) and
-              world.options.bell_hover_generation.value))
+             (state.has("Crescent Moonflower", player) and world.options.bell_hover_generation.value))
     set_rule(multiworld.get_entrance("DF_AH", player),
-             lambda state: (state.has("Spiral Shell", player) and
-                            state.has("Sacred Anemone", player) and
-                            world.options.bell_hover_generation.value) or
+             lambda state: (world.options.bell_hover_generation.value and state.has("Spiral Shell", player) and
+                            (state.has("Sacred Anemone", player) or
+                            state.has("Perfect Chime", player))) or
                             state.has("Crescent Moonflower", player)),
     set_rule(multiworld.get_entrance("LTR_MR", player), 
              lambda state: state.has("Spiral Shell", player) and
@@ -40,11 +42,10 @@ def set_rules(world: "MomodoraWorld"):
               world.options.open_springleaf_path.value))
     set_rule(multiworld.get_entrance("AH_AHC", player), lambda state: state.has("Spiral Shell", player))
     set_rule(multiworld.get_entrance("DF_DFC", player), 
-             lambda state: (state.has("Crescent Moonflower", player) 
-                            and state.has("Lunar Attunement", player)) or 
-             (state.has("Spiral Shell", player) and
-             (state.has("Crescent Moonflower", player) or
-              state.has("Perfect Chime", player)))),
+             lambda state: (state.has("Crescent Moonflower", player) and
+                            (state.has("Spiral Shell", player) or state.has("Lunar Attunement", player))) or
+                            (state.has("Spiral Shell", player) and 
+                             (state.has("Sacred Anemone", player) or state.has("Perfect Chime", player))))
     set_rule(multiworld.get_entrance("DFC_MV", player), lambda state: state.has("Lunar Attunement", player)),
     set_rule(multiworld.get_entrance("MV_MVW", player), 
              lambda state: (state.has("Windmill Key", player) if world.options.randomize_key_items.value else True) and 
@@ -66,9 +67,10 @@ def set_rules(world: "MomodoraWorld"):
              state.has("Spiral Shell", player))
     if world.options.randomize_key_items:
         set_rule(multiworld.get_location("Gold Moonlit Dust", player), 
-                 lambda state: state.has("Spiral Shell", player) and
-                 (state.has("Crescent Moonflower", player) or
-                  state.has("Perfect Chime", player)))
+                 lambda state: state.has("Crescent Moonflower", player) or 
+                 (state.has("Spiral Shell", player) and
+                  (state.has("Sacred Anemone", player) or
+                   state.has("Perfect Chime", player))))
     set_rule(multiworld.get_location("Lunar Attunement", player),
              lambda state:
              not world.options.randomize_key_items.value or
