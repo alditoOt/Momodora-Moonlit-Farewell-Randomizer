@@ -64,10 +64,11 @@ def set_rules(world: "MomodoraWorld"):
     set_rule(multiworld.get_location("Welkin Leaf", player), 
              lambda state: state.has("Crescent Moonflower", player) and
              state.has("Spiral Shell", player))
-    set_rule(multiworld.get_location("Gold Moonlit Dust", player), 
-             lambda state: state.has("Spiral Shell", player) and
-             (state.has("Crescent Moonflower", player) or
-              state.has("Perfect Chime", player)))
+    if world.options.randomize_key_items:
+        set_rule(multiworld.get_location("Gold Moonlit Dust", player), 
+                 lambda state: state.has("Spiral Shell", player) and
+                 (state.has("Crescent Moonflower", player) or
+                  state.has("Perfect Chime", player)))
     set_rule(multiworld.get_location("Lunar Attunement", player),
              lambda state:
              not world.options.randomize_key_items.value or
