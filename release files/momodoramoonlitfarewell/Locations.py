@@ -66,6 +66,10 @@ advancement_table = {
    "Strongfist": AdvData(408, "Springleaf Path"),
    "Fallen Hero": AdvData(422, "Springleaf Path"),
    "The Profiteer": AdvData(401, "Springleaf Path"),
+   "Chrysanth": AdvData(431, "Springleaf Path"),
+   "Queen of Dusk": AdvData(437, "Springleaf Path"),
+   "Queen of Light": AdvData(406, "Springleaf Path"),
+    "The Collector": AdvData(426, "Springleaf Path"),
    "Oracle": AdvData(441, "Fairy Village"),
     #Grimoires
    "Grimoire": AdvData(338, "Fairy Springs"),

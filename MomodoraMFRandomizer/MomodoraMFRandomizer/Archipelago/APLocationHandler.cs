@@ -18,6 +18,7 @@ namespace MomodoraMFRandomizer
     [HarmonyPatch(typeof(MomoEventData))]
     class APLocationHandler
     {
+        private static int MONEY = 100;
         static HashSet<int> receivedSkill = new HashSet<int>();
         static HashSet<int> checkedLocation = new HashSet<int>();
         static Dictionary<int, int> previousEventValue = new Dictionary<int, int>();
@@ -118,7 +119,7 @@ namespace MomodoraMFRandomizer
         {
             if (itemId == 999)
             {
-                Platformer3D.player_money += 50;
+                Platformer3D.player_money += MONEY;
                 return;
             }
             if (MomoEventUtils.SKILLEVENTS.Contains(itemId))

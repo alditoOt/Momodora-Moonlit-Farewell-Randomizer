@@ -66,6 +66,6 @@ Dora?:
 Cursed Event: 151
 Door to Selin: 327
 Credits start: 298
-Cereza friendship: 102
+Cereza friendship: 102 (4 is max)
 	- Spring Tree Roots: 106 
 	- Fairy Springs: 107

@@ -38,7 +38,7 @@ class MomodoraWorld(World):
         }
     
     def get_filler_item_name(self):
-        return "50 Lunar Crystals"
+        return "100 Lunar Crystals"
     
     def create_items(self):
         # Generate item pool
