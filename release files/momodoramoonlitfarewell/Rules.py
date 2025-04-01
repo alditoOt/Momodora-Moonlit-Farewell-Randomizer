@@ -42,10 +42,10 @@ def set_rules(world: "MomodoraWorld"):
               world.options.open_springleaf_path.value))
     set_rule(multiworld.get_entrance("AH_AHC", player), lambda state: state.has("Spiral Shell", player))
     set_rule(multiworld.get_entrance("DF_DFC", player), 
-             lambda state: state.has("Crescent Moonflower", player) and
-             (state.has("Lunar Attunement", player) or
-              (state.has("Spiral Shell", player) and
-               (state.has("Perfect Chime", player) or state.has("Sacred Anemone", player)))))
+             lambda state: (state.has("Crescent Moonflower", player) and
+                            (state.has("Spiral Shell", player) or state.has("Lunar Attunement", player))) or
+                            (state.has("Spiral Shell", player) and 
+                             (state.has("Sacred Anemone", player) or state.has("Perfect Chime", player))))
     set_rule(multiworld.get_entrance("DFC_MV", player), lambda state: state.has("Lunar Attunement", player)),
     set_rule(multiworld.get_entrance("MV_MVW", player), 
              lambda state: (state.has("Windmill Key", player) if world.options.randomize_key_items.value else True) and 
