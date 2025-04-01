@@ -59,7 +59,7 @@ Selin's Mendacity: 260
 Selin's Sorrow: 262
 Moon God Selin: 364, 99 (KohoHouseSelin)
 
-Dora?: 
+Dora: 370 
 
 # OTHERS
 
