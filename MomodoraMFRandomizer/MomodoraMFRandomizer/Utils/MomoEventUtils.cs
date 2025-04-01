@@ -20,11 +20,6 @@ namespace MomodoraMFRandomizer
         public static List<int> OPTIONALEVENTS = new List<int>();
         public static List<int> LILYEVENTS = new List<int>();
 
-        public static Dictionary<int, int> EVENT_MOD = new Dictionary<int, int>
-        {
-            { 333, 3338 }
-        };
-
         public static int FINAL_DOOR_EVENT = 294;
         public static int FAST_TRAVEL_EVENT = 205;
         public static int LILY_COUNTER_EVENT = 218;
