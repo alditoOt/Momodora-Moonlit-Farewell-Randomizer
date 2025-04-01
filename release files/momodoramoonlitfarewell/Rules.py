@@ -94,6 +94,16 @@ def set_rules(world: "MomodoraWorld"):
     if world.options.oracle_sigil:
         set_rule(multiworld.get_location(*item("Oracle")), 
                  lambda state: state.can_reach("Fount of Rebirth", "Region", player))
+        
+    if world.options.progressive_damage_upgrade:
+        set_rule(multiworld.get_location(*item("Heavenly Lily - Koho Village")), lambda state: state.has(*item("Crescent Moonflower")) and state.has(*item("Spiral Shell")))
+        set_rule(multiworld.get_location(*item("Heavenly Lily 2 - Fairy Springs")), 
+                 lambda state: state.has(*item("Crescent Moonflower")) and
+                 (state.has(*item("Spiral Shell")) or
+                  world.options.bell_hover_generation.value))
+        set_rule(multiworld.get_location(*item("Heavenly Lily 2 - Ashen Hinterlands")), lambda state: state.has(*item("Crescent Moonflower")) and state.has(*item("Spiral Shell")) and state.has(*item("Lunar Attunement")))
+        set_rule(multiworld.get_location(*item("Heavenly Lily 3 - Ashen Hinterlands")), lambda state: state.has(*item("Crescent Moonflower")) and state.has(*item("Spiral Shell")) and state.has(*item("Lunar Attunement")))
+        
 
 def set_completion_rules(world: "MomodoraWorld"):
     player = world.player

@@ -79,8 +79,33 @@ advancement_table = {
    "Gold Moonlit Dust": AdvData(332, "Old Sanctuary Continued"),
    "Silver Moonlit Dust": AdvData(333, "Moonlight Repose"),
    "Wooden Box": AdvData(347, "Meikan Village"),
-   "Windmill Key": AdvData(356, "Meikan Village")
-  
+   "Windmill Key": AdvData(356, "Meikan Village"),
+    #Heavenly Lilies
+   "Heavenly Lily - Koho Village": AdvData(26400, "Koho Village"),
+   "Heavenly Lily 1 - Old Sanctuary": AdvData(8100, "Old Sanctuary"),
+   "Heavenly Lily 2 - Old Sanctuary": AdvData(12900, "Old Sanctuary"),
+   "Heavenly Lily 1 - Springleaf Path": AdvData(2800, "Springleaf Path"),
+   "Heavenly Lily 2 - Springleaf Path": AdvData(8400, "Springleaf Path"),
+   "Heavenly Lily 1 - Lun Tree Roots": AdvData(11800, "Lun Tree Roots"),
+   "Heavenly Lily 2 - Lun Tree Roots": AdvData(9400, "Lun Tree Roots"),
+   "Heavenly Lily 1 - Moonlight Repose": AdvData(24400, "Moonlight Repose"),
+   "Heavenly Lily 2 - Moonlight Repose": AdvData(17200, "Moonlight Repose"),
+   "Heavenly Lily 1 - Fairy Springs": AdvData(3800, "Fairy Springs"),
+   "Heavenly Lily 2 - Fairy Springs": AdvData(34300, "Fairy Springs"),
+   "Heavenly Lily - Fairy Village": AdvData(2300, "Fairy Village"),
+   "Heavenly Lily 1 - Demon Frontier": AdvData(16900, "Demon Frontier"),
+   "Heavenly Lily 2 - Demon Frontier": AdvData(51300, "Demon Frontier Continued"),
+   "Heavenly Lily 3 - Demon Frontier": AdvData(16600, "Demon Frontier Continued"),
+   "Heavenly Lily 1 - Ashen Hinterlands": AdvData(13000, "Ashen Hinterlands"),
+   "Heavenly Lily 2 - Ashen Hinterlands": AdvData(30200, "Ashen Hinterlands Continued"),
+   "Heavenly Lily 3 - Ashen Hinterlands": AdvData(24700, "Ashen Hinterlands Continued"),
+   "Heavenly Lily 1 - Meikan Village": AdvData(33400, "Meikan Village"),
+   "Heavenly Lily 2 - Meikan Village": AdvData(33600, "Meikan Village"),
+   "Heavenly Lily 3 - Meikan Village": AdvData(33300, "Fount of Rebirth"), #Logic says it's in FOR, but in game the area is still MV
+   "Heavenly Lily 1 - Fount of Rebirth": AdvData(28600, "Fount of Rebirth"),
+   "Heavenly Lily 2 - Fount of Rebirth": AdvData(28500, "Fount of Rebirth"),
+   "Heavenly Lily 3 - Fount of Rebirth": AdvData(23200, "Fount of Rebirth"),
+   "Heavenly Lily 4 - Fount of Rebirth": AdvData(32200, "Fount of Rebirth")
 }
 
 exclusion_table = {
@@ -91,5 +116,41 @@ exclusion_table = {
     },
     "oracle_sigil": {
         "Oracle"
+    },
+    "progressive_damage": {
+        "Heavenly Lily - Koho Village",
+        "Heavenly Lily 1 - Old Sanctuary",
+        "Heavenly Lily 2 - Old Sanctuary",
+        "Heavenly Lily 1 - Springleaf Path",
+        "Heavenly Lily 2 - Springleaf Path",
+        "Heavenly Lily 1 - Lun Tree Roots",
+        "Heavenly Lily 2 - Lun Tree Roots",
+        "Heavenly Lily 1 - Moonlight Repose",
+        "Heavenly Lily 2 - Moonlight Repose",
+        "Heavenly Lily 1 - Fairy Springs",
+        "Heavenly Lily 2 - Fairy Springs",
+        "Heavenly Lily - Fairy Village",
+        "Heavenly Lily 1 - Demon Frontier",
+        "Heavenly Lily 2 - Demon Frontier",
+        "Heavenly Lily 3 - Demon Frontier",
+        "Heavenly Lily 1 - Ashen Hinterlands",
+        "Heavenly Lily 2 - Ashen Hinterlands",
+        "Heavenly Lily 3 - Ashen Hinterlands",
+        "Heavenly Lily 1 - Meikan Village",
+        "Heavenly Lily 2 - Meikan Village",
+        "Heavenly Lily 3 - Meikan Village",
+        "Heavenly Lily 1 - Fount of Rebirth",
+        "Heavenly Lily 2 - Fount of Rebirth",
+        "Heavenly Lily 3 - Fount of Rebirth",
+        "Heavenly Lily 4 - Fount of Rebirth"
+    },
+    "progressive_health": {
+
+    },
+    "progressive_magic": {
+
+    },
+    "progressive_stamina": {
+
     }
 }
