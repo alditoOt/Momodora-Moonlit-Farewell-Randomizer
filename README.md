@@ -66,8 +66,8 @@ Places affected by this:
 - Fairy Village, talking to the big fairy woman whose name I don't remember right now (yeah, you're gonna have to use the elevators for this one...)
 - Ashen Hinterlands, Serpent that gives you the Lunar Attunement
 
-## IMPORTANT
-**IF** leaving and entering the room again doesn't give you your skill back, you can go back to the main menu and open your save file. This should give you back your skill, and you will usually enter the rooms where you get these only once or twice. This is an unfortunate oversight on how the game handles these skills so this is the workaround for now.
+## IMPORTANT: I Lost a Skill I Already Had?
+**IF** leaving and entering the room again doesn't give you your skill back, you can go back to the main menu and open your save file. This should give you back your skill, and you will usually enter the rooms where you get these only once or twice. This is an unfortunate oversight on my part due to how the game handles these skills so this is the workaround for now, until I find a more comfortable solution (already in the works).
 
 ## Items You Can Receive
 - All skills (all 5 main skills and fast travel)
@@ -86,9 +86,17 @@ Places affected by this:
 # Victory Condition
 The game is considered finished when you defeat the final boss and finish watching the text after the black screen.
 
-# Small Notes (aka Small Bugs That I'll Fix Later ~~Hopefully~~)
-These are things that happen during the game, not detrimental for the randomizer experience but maybe a tad bit annoying... 
-- When hosting on the page, when you send a check, the game might freeze for a tiny bit. That's completely normal, I'll look into fixing that later if possible ~~let's hope that's a quick fix~~, ~~no, I'm not mining bitcoin~~
-  - The game might freeze for longer if you open it again in a previous session. That's because it's giving you all your unlocked items on the session, so don't worry, the game didn't crash, it's loading (there's probably an implementation that won't cause this, but I'm new to modding......)
-- When you load the game again, there's a possibility that if you received a skill without checking the location where you'd get it, the game will send the check as if you just did. While it might be a bit annoying, only 5 locations are affected by this, so at least you're not freely giving away that many items.  
-- Due to how the game handles skills, receiving the Fast Travel will always send the check. It doesn't happen the other way around
+# Possible Issues
+## Stuck in Harpy Room
+- For some reason, with the open_springleaf_path setting on, the windzones in the fight with the Harpy, and only in this room, are **not** removed (I'm looking into this). If you find yourself in this situation and can't leave the room, go back to the Title Screen and reload your save file. The red barrier that appears to the right of the room will be gone.
+  - If you have **wall jump** or **double jump** you can just use those to leave the room. **If you don't**, the only other way I can think of is using [Bell Hover](https://www.youtube.com/watch?v=wEe-bJFBG_Q) for that particular place. This is a handy guide showcasing Bell Hover, and you can use the healing bell it up to 3 times to gain enough height to leave the room.
+## Losing a Skill I Already Had
+- This can happen when you enter a room where you get this skill, you can return to the title screen and open your save file again, ideally having saved in a room different to where you get the skill. This is an oversight due to how the game handles skills and how I handle receiving them, so until I come up with a proper solution I'm afraid this is the workaround
+  - This isn't much of an issue in most skills/rooms, but the room where you get Lunar Attunement can be a bit bothersome since you may go through that room a couple times. Fortunately you don't need Lunar Attunement in the Ashen Hinterlands, at least for the current location checks.
+  - I'm considering an alternative to the checks for these locations when you already have the skill so that we don't have to deal with losing it
+## Sending a Check When Reloading the Game
+- If you open your file when you have a skill but haven't checked it's location yet, the game will send that location as if it was just checked. Also an oversight from my part, but on the bright side, only 5 locations are affected by it so at least you're not sending too much stuff... (hopefully)
+
+If any issues are found during playing or playtesting, please do let me know in the discord forum so I can look into them. Ultimately, this is still a work in progress so it's not free of bugs, but I'd argue it's very much completable most of the time.
+
+Also, feel free to ask for advice or share what you find! There might be some places that, even with their respective YAML setting, might need some creativity or use of some strats to reach, since considering every possibility of entrance is quite a task, so having information on how to reach certain places can be very useful!
