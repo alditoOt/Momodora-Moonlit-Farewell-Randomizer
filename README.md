@@ -42,10 +42,13 @@ With this setting on, it adds 4 Keys required to open the door to the final boss
 
 If you have this setting on as well as the Oracle Sigil setting, there's a possibility that one of the keys is in the Oracle Sigil check, making completing the game a very long task.
 
+## Progressive Damage Upgrade
+With this setting on, all Heavenly Lilies count as location checks, and praying on one will no longer give you the damage upgrade. The damage upgrade is instead now part of the itempool, as Progressive Damage Upgrade, and each upgrade grants 2 additional damage
+
 # Items and Locations
 ## Locations Checks
-- All skills* (all 5 main skills and fast travel)
-- All Sigils (Save for the last 4 Sigils you can buy from Cereza)
+- All skills (all 5 main skills and fast travel)
+- All Sigils
 - All Grimoires
 - All Bosses (most bosses send the check once their cutscene is over)
 
@@ -54,20 +57,13 @@ If you have this setting on as well as the Oracle Sigil setting, there's a possi
 - Silver Moonlit Dust
 - Windmill Key
 - Oracle Sigil
+- Heavenly Lilies
 
-*Due to how the game manages the skills, if you have a skill before checking the room where you'd get it, the location will be disabled. The current workaround for this is:
-- Enter the room where you'd get a skill you already received. Your skill will be temporarily disabled
-- Leave the room and enter again
-- When you check the location, it will be sent to the session, and your original skill will be restored
-Places affected by this:
-- Springleaf Path where you bathe the Sacred Leaf
-- Springleaf Path, fight with the Harpy
-- Lun Tree Roots, room after figthing Black Cat
-- Fairy Village, talking to the big fairy woman whose name I don't remember right now (yeah, you're gonna have to use the elevators for this one...)
-- Ashen Hinterlands, Serpent that gives you the Lunar Attunement
-
-## IMPORTANT: I Lost a Skill I Already Had?
-**IF** leaving and entering the room again doesn't give you your skill back, you can go back to the main menu and open your save file. This should give you back your skill, and you will usually enter the rooms where you get these only once or twice. This is an unfortunate oversight on my part due to how the game handles these skills so this is the workaround for now, until I find a more comfortable solution (already in the works).
+## Skill Location Checks
+To send a location check for the skills, you simply need to receive the skill as the vanilla game. This will work **only** if you haven't received the skill from the itempool yet.
+If you already have a skill received, but haven't checked its location yet, entering the room where you get the location will automatically send the location check, with a few exceptions:
+- Entering the Harpy fight room will remove your Dash until you defeat her and pick up the Sacred Anemone. If you don't get it back, go back to the Title Screen and reload your save.
+- For the Lunar Attunement location check, before being able to send this location check, you need to have Golden Moonlit Dust and Silver Moonlit Dust, and have defeated the Tainted Serpent
 
 ## Items You Can Receive
 - All skills (all 5 main skills and fast travel)
@@ -81,7 +77,7 @@ Places affected by this:
 - Windmill Key
 - Oracle Sigil
 - 4 Final Boss Keys
-
+- Progressive Damage Upgrades
 
 # Victory Condition
 The game is considered finished when you defeat the final boss and finish watching the text after the black screen.
@@ -90,10 +86,6 @@ The game is considered finished when you defeat the final boss and finish watchi
 ## Stuck in Harpy Room
 - For some reason, with the open_springleaf_path setting on, the windzones in the fight with the Harpy, and only in this room, are **not** removed (I'm looking into this). If you find yourself in this situation and can't leave the room, go back to the Title Screen and reload your save file. The red barrier that appears to the right of the room will be gone.
   - If you have **wall jump** or **double jump** you can just use those to leave the room. **If you don't**, the only other way I can think of is using [Bell Hover](https://www.youtube.com/watch?v=wEe-bJFBG_Q) for that particular place. This is a handy guide showcasing Bell Hover, and you can use the healing bell it up to 3 times to gain enough height to leave the room.
-## Losing a Skill I Already Had
-- This can happen when you enter a room where you get this skill, you can return to the title screen and open your save file again, ideally having saved in a room different to where you get the skill. This is an oversight due to how the game handles skills and how I handle receiving them, so until I come up with a proper solution I'm afraid this is the workaround
-  - This isn't much of an issue in most skills/rooms, but the room where you get Lunar Attunement can be a bit bothersome since you may go through that room a couple times. Fortunately you don't need Lunar Attunement in the Ashen Hinterlands, at least for the current location checks.
-  - I'm considering an alternative to the checks for these locations when you already have the skill so that we don't have to deal with losing it
 ## Sending a Check When Reloading the Game
 - If you open your file when you have a skill but haven't checked it's location yet, the game will send that location as if it was just checked. Also an oversight from my part, but on the bright side, only 5 locations are affected by it so at least you're not sending too much stuff... (hopefully)
 
