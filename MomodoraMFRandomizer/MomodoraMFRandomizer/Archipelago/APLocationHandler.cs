@@ -183,18 +183,23 @@ namespace MomodoraMFRandomizer
 
         public void ResetLocationSceneForSkill(string sceneName, Boolean mainMenu)
         {
-            if (mainMenu || !skillAndScene.ContainsKey(sceneName) || !InventoryUtils.SKILL_INVENTORY_ID.ContainsKey(skillAndScene[sceneName]))
+            if (mainMenu || !skillAndScene.ContainsKey(sceneName))
             {
                 return;
             }
-            int itemId = InventoryUtils.SKILL_INVENTORY_ID[skillAndScene[sceneName]];
-            if (GameData.inventory.HasItem(GameData.itemDatabase.GetItemDef(itemId)))
+            if (skillAndScene[sceneName] == 9)
             {
-                return;
+                GameData.current.MomoEvent[skillAndScene[sceneName]] = 0;
+                previousEventValue[skillAndScene[sceneName]] = 0;
+                receivedSkill.Remove(skillAndScene[sceneName]);
             }
-            GameData.current.MomoEvent[skillAndScene[sceneName]] = 0;
-            previousEventValue[skillAndScene[sceneName]] = 0;
-            receivedSkill.Remove(skillAndScene[sceneName]);
+        }
+
+        public static void ResetDashSkill()
+        {
+            GameData.current.MomoEvent[9] = 0;
+            previousEventValue[9] = 0;
+            receivedSkill.Remove(9);
         }
 
         private static void UpdatePlayerDamage(int lilyCount)
