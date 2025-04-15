@@ -9,7 +9,7 @@ When playing in a randomizer, it's recommended to start from a new save file. Ha
 
 # Mod Install Notes
 This randomizer uses a custom made mod to go along with the AP session. 
-1. Download [MelonLoader](https://melonwiki.xyz/#/?id=requirements), execute the file, and when installing for Momodora: Moonlit Farewell, ensure you're using version 0.5.7. 
+1. Download [MelonLoader](https://melonwiki.xyz/#/?id=requirements), execute the file, and when installing for Momodora: Moonlit Farewell, **ensure you're installing version 0.5.7**. 
 2. Download the **MomodoraMFRandomizer.zip** file and extract it into the **Mods** folder in the game folder.
 3. Before opening the game, open config.json file and edit all fields as necessary. 
 # Creating the Session
