@@ -54,7 +54,7 @@ namespace MomodoraMFRandomizer
             }
             if (DAMAGE_UPGRADE)
             {
-                MomoEventUtils.LILYEVENTS.AddRange(new int[] { 264, 81, 129, 28, 84, 118, 94, 244, 172, 38, 343, 23, 169, 513, 166, 130, 302, 247, 334, 336, 333, 286, 285, 232, 322 });
+                MomoEventUtils.LILYEVENTS.AddRange(new int[] { 264, 81, 129, 28, 84, 118, 94, 344, 172, 38, 343, 23, 169, 153, 166, 130, 302, 247, 334, 336, 333, 286, 285, 323, 322 });
             }
             //WIP
             //if (FAST_TRAVEL_CHOICE == StringUtils.VANILLA)
