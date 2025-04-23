@@ -46,8 +46,8 @@ namespace MomodoraMFRandomizer
         private static void ReportLocation(int index, int value)
         {
             if (value != 1 || 
-                (!MomoEventUtils.BOSSEVENTS.Contains(index) && 
-                !MomoEventUtils.SKILLEVENTS.Contains(index)) &&
+                !MomoEventUtils.BOSSEVENTS.Contains(index) && 
+                !MomoEventUtils.SKILLEVENTS.Contains(index) &&
                 !MomoEventUtils.LILYEVENTS.Contains(index)) {
                 return;
             }

@@ -88,13 +88,13 @@ advancement_table = {
    "Heavenly Lily 2 - Springleaf Path": AdvData(8400, "Springleaf Path"),
    "Heavenly Lily 1 - Lun Tree Roots": AdvData(11800, "Lun Tree Roots"),
    "Heavenly Lily 2 - Lun Tree Roots": AdvData(9400, "Lun Tree Roots"),
-   "Heavenly Lily 1 - Moonlight Repose": AdvData(24400, "Moonlight Repose"),
+   "Heavenly Lily 1 - Moonlight Repose": AdvData(34400, "Moonlight Repose"),
    "Heavenly Lily 2 - Moonlight Repose": AdvData(17200, "Moonlight Repose"),
    "Heavenly Lily 1 - Fairy Springs": AdvData(3800, "Fairy Springs"),
    "Heavenly Lily 2 - Fairy Springs": AdvData(34300, "Fairy Springs"),
    "Heavenly Lily - Fairy Village": AdvData(2300, "Fairy Village"),
    "Heavenly Lily 1 - Demon Frontier": AdvData(16900, "Demon Frontier"),
-   "Heavenly Lily 2 - Demon Frontier": AdvData(51300, "Demon Frontier Continued"),
+   "Heavenly Lily 2 - Demon Frontier": AdvData(15300, "Demon Frontier Continued"),
    "Heavenly Lily 3 - Demon Frontier": AdvData(16600, "Demon Frontier Continued"),
    "Heavenly Lily 1 - Ashen Hinterlands": AdvData(13000, "Ashen Hinterlands"),
    "Heavenly Lily 2 - Ashen Hinterlands": AdvData(30200, "Ashen Hinterlands Continued"),
@@ -104,7 +104,7 @@ advancement_table = {
    "Heavenly Lily 3 - Meikan Village": AdvData(33300, "Fount of Rebirth"), #Logic says it's in FOR, but in game the area is still MV
    "Heavenly Lily 1 - Fount of Rebirth": AdvData(28600, "Fount of Rebirth"),
    "Heavenly Lily 2 - Fount of Rebirth": AdvData(28500, "Fount of Rebirth"),
-   "Heavenly Lily 3 - Fount of Rebirth": AdvData(23200, "Fount of Rebirth"),
+   "Heavenly Lily 3 - Fount of Rebirth": AdvData(32300, "Fount of Rebirth"),
    "Heavenly Lily 4 - Fount of Rebirth": AdvData(32200, "Fount of Rebirth")
 }
 
