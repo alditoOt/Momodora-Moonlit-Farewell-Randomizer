@@ -10,8 +10,7 @@ class MomodoraItem(Item):
 
 item_table = {
     #Junk
-    "Blessing of Nothing": ItemData(1, ItemClassification.filler),
-    "50 Lunar Crystals": ItemData(999, ItemClassification.filler),
+    "100 Lunar Crystals": ItemData(999, ItemClassification.filler),
     #Skills
    "Awakened Sacred Leaf": ItemData(20, ItemClassification.progression),
    "Sacred Anemone": ItemData(9, ItemClassification.progression),
@@ -59,7 +58,17 @@ item_table = {
 #    "Wooden Box": ItemData(347, ItemClassification.progression),
    "Windmill Key": ItemData(356, ItemClassification.progression),
    # Selin Door
-   "Progressive Final Boss Key": ItemData(991, ItemClassification.progression)
+   "Progressive Final Boss Key": ItemData(991, ItemClassification.progression),
+   # Damage Upgrade
+   "Progressive Damage Upgrade": ItemData(992, ItemClassification.useful),
+   #Health Upgrade
+   "Progressive Health Upgrade": ItemData(993, ItemClassification.useful),
+   #Stamina Upgrade
+   "Progressive Stamina Upgrade": ItemData(994, ItemClassification.useful),
+   #Magic Upgrade
+   "Progressive Magic Upgrade": ItemData(995, ItemClassification.useful),
+   #Fairy count for Oracle
+   "Progressive Lumen Fairy": ItemData(996, ItemClassification.useful)
 }
 
 skill_items = {
@@ -129,4 +138,22 @@ key_items = {
 
 selin_door = {
     "Progressive Final Boss Key": 4
+}
+
+progressive_upgrade_table = {
+    "progressive_damage": {
+        "Progressive Damage Upgrade": 25
+    },
+    "progressive_health": {
+        "Progressive Health Upgrade": 24
+    },
+    "progressive_stamina": {
+        "Progressive Stamina Upgrade": 5
+    },
+    "progressive_magic": {
+        "Progressive Magic Upgrade": 7
+    },
+    "progressive_fairy": {
+        "Progressive Lumen Fairy": 30
+    }
 }

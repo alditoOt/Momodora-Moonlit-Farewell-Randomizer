@@ -1,4 +1,4 @@
-from .Items import MomodoraItem, item_table, skill_items, extra_skill_items, sigil_items, optional_sigil_items, grimoire_items, key_items, selin_door
+from .Items import MomodoraItem, item_table, skill_items, extra_skill_items, sigil_items, optional_sigil_items, grimoire_items, key_items, selin_door, progressive_upgrade_table
 from .Locations import MomodoraAdvancement, advancement_table, exclusion_table
 from .Regions import momodora_regions, link_momodora_areas
 from worlds.generic.Rules import exclusion_rules
@@ -33,12 +33,13 @@ class MomodoraWorld(World):
             "oracle_sigil": bool(self.options.oracle_sigil.value),
             "bell_hover_generation": bool(self.options.bell_hover_generation.value),
             "randomize_key_items": bool(self.options.randomize_key_items.value),
-            "final_boss_keys": bool(self.options.final_boss_keys.value)
+            "final_boss_keys": bool(self.options.final_boss_keys.value),
+            "progressive_damage_upgrade": bool(self.options.progressive_damage_upgrade.value)
             # "fast_travel": self.options.fast_travel.current_key
         }
     
     def get_filler_item_name(self):
-        return "50 Lunar Crystals"
+        return "100 Lunar Crystals"
     
     def create_items(self):
         # Generate item pool
@@ -68,6 +69,10 @@ class MomodoraWorld(World):
         ##Add Final Boss Door if enabled
         if self.options.final_boss_keys:
             for name, num in selin_door.items():
+                itempool += [name] * num
+
+        if self.options.progressive_damage_upgrade:
+            for name, num in progressive_upgrade_table["progressive_damage"].items():
                 itempool += [name] * num
         #Choose locations to automatically exclude based on settings
         exclusion_pool = set()
@@ -99,7 +104,9 @@ class MomodoraWorld(World):
                                 (self.options.randomize_key_items or 
                                  loc_name not in exclusion_table["random_key_items"]) and
                                  (self.options.oracle_sigil or
-                                  loc_name not in exclusion_table["oracle_sigil"])
+                                  loc_name not in exclusion_table["oracle_sigil"]) and
+                                  (self.options.progressive_damage_upgrade or
+                                   loc_name not in exclusion_table["progressive_damage"])
                               ]
 
             for exit in exits:

@@ -88,8 +88,13 @@ Momodora Moonlit Farewell:
     'true': 0
 
   final_boss_keys:
-    # Add 4 keys required to open the door to the Final Boss to the randomization pool. 
+    # Add 4 progressive keys required to open the door to the Final Boss to the randomization pool. 
     # With this enabled, defeating the 4 bosses before the final boss will no longer help to unlock the door
+    'false': 50
+    'true': 0
+
+  progressive_damage_upgrade:
+    # Add the Heavenly Lilies to the item location check, as well as adding progressive damage upgrade to the itempool (each upgrade grants 2 extra damage)
     'false': 50
     'true': 0
 

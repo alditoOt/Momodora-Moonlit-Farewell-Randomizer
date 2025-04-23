@@ -115,7 +115,7 @@ namespace MomodoraMFRandomizer
                 blockRemover.removeAllBlockers(sceneName);
             }
             blockRemover.RemoveGynBarrier(sceneName);
-            locationHandler.ResetLocationSceneForSkill(sceneName, mainMenu);
+            APSkillLocationHandler.HandleSkillLocationCheck(sceneName, mainMenu);
         }
 
         public override void OnFixedUpdate()

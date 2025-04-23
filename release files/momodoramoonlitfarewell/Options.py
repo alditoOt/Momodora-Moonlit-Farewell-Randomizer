@@ -30,6 +30,11 @@ class ProgressiveFinalBossKeys(Toggle):
     """Add 4 progressive keys required to open the door to the Final Boss to the randomization pool. \n# With this enabled, defeating the 4 bosses before the final boss will no longer help to unlock the door"""
     display_name = "Progressive Final Boss Keys"
     default = 0
+
+class ProgressiveDamageUpgrade(Toggle):
+    """Add the Heavenly Lilies to the item location check, as well as adding progressive damage upgrade to the itempool (each upgrade grants 2 extra damage)"""
+    display_name = "Progressive Damage Upgrade"
+    default = 0
 # class FastTravel(Choice):
 #     """Whether to start with Fast Travel, add it to the randomization pool, or keep it vanilla (Unlocking Fast Travel is still a location check)"""
 #     display_name = "Fast Travel Choice"
@@ -46,4 +51,5 @@ class MomodoraOptions(PerGameCommonOptions):
     randomize_key_items: RandomizeKeyItems
     oracle_sigil: OracleSigil
     final_boss_keys: ProgressiveFinalBossKeys
+    progressive_damage_upgrade: ProgressiveDamageUpgrade
     # fast_travel: FastTravel

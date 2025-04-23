@@ -18,6 +18,7 @@ namespace MomodoraMFRandomizer
     [HarmonyPatch(typeof(MomoEventData))]
     class APLocationHandler
     {
+        private static int MONEY = 100;
         static HashSet<int> receivedSkill = new HashSet<int>();
         static HashSet<int> checkedLocation = new HashSet<int>();
         static Dictionary<int, int> previousEventValue = new Dictionary<int, int>();
@@ -46,14 +47,19 @@ namespace MomodoraMFRandomizer
         {
             if (value != 1 || 
                 (!MomoEventUtils.BOSSEVENTS.Contains(index) && 
-                !MomoEventUtils.SKILLEVENTS.Contains(index) &&
-                !MomoEventUtils.SIGILEVENTS.Contains(index))) {
+                !MomoEventUtils.SKILLEVENTS.Contains(index)) &&
+                !MomoEventUtils.LILYEVENTS.Contains(index)) {
                 return;
             }
 
             if (MomoEventUtils.SKILLEVENTS.Contains(index))
             {
                 ReportSkillLocation(index, value);
+            } else if (MomoEventUtils.LILYEVENTS.Contains(index))
+            {
+                Platformer3D.phys_attack -= 2;
+                GameData.current.MomoEvent[MomoEventUtils.LILY_COUNTER_EVENT] --;
+                APMomoMFRandomizer.session.Locations.CompleteLocationChecks(index * 100);
             }
             else
             {
@@ -118,7 +124,7 @@ namespace MomodoraMFRandomizer
         {
             if (itemId == 999)
             {
-                Platformer3D.player_money += 50;
+                Platformer3D.player_money += MONEY;
                 return;
             }
             if (MomoEventUtils.SKILLEVENTS.Contains(itemId))
@@ -137,15 +143,21 @@ namespace MomodoraMFRandomizer
         {
             Boolean firstTimeSendingMoney = true;
             finalBossDoorCount = 0;
+            int lilyCount = 0;
             foreach (ItemInfo item in APMomoMFRandomizer.session.Items.AllItemsReceived)
             {
                 long itemId = item.ItemId;
-                if (itemId == 991) //Final Boss Door
+                if (itemId == InventoryUtils.DAMAGE_ID)
+                {
+                    lilyCount++;
+                    continue;
+                }
+                if (itemId == InventoryUtils.BOSS_KEY_ID)
                 {
                     finalBossDoorCount++;
                     continue;
                 }
-                if (itemId == 999) //Filler with Lunar Crystals
+                if (itemId == InventoryUtils.FILLER_ID) 
                 {
                     if (itemHandler == null)
                     {
@@ -159,27 +171,41 @@ namespace MomodoraMFRandomizer
                 }
                 GiveItem((int)itemId);
             }
+            if (lilyCount > 0)
+            {
+                UpdatePlayerDamage(lilyCount);
+            }
             if (finalBossDoorCount > 0)
             {
-                //MelonLogger.Msg($"Final boss door event {MomoEventUtils.FINAL_DOOR_EVENT} current value: {finalBossDoorCount}");
                 GameData.current.MomoEvent[MomoEventUtils.FINAL_DOOR_EVENT] = finalBossDoorCount;
             }
         }
 
         public void ResetLocationSceneForSkill(string sceneName, Boolean mainMenu)
         {
-            if (mainMenu || !skillAndScene.ContainsKey(sceneName) || !InventoryUtils.SKILL_INVENTORY_ID.ContainsKey(skillAndScene[sceneName]))
+            if (mainMenu || !skillAndScene.ContainsKey(sceneName))
             {
                 return;
             }
-            int itemId = InventoryUtils.SKILL_INVENTORY_ID[skillAndScene[sceneName]];
-            if (GameData.inventory.HasItem(GameData.itemDatabase.GetItemDef(itemId)))
+            if (skillAndScene[sceneName] == 9)
             {
-                return;
+                GameData.current.MomoEvent[skillAndScene[sceneName]] = 0;
+                previousEventValue[skillAndScene[sceneName]] = 0;
+                receivedSkill.Remove(skillAndScene[sceneName]);
             }
-            GameData.current.MomoEvent[skillAndScene[sceneName]] = 0;
-            previousEventValue[skillAndScene[sceneName]] = 0;
-            receivedSkill.Remove(skillAndScene[sceneName]);
+        }
+
+        public static void ResetDashSkill()
+        {
+            GameData.current.MomoEvent[9] = 0;
+            previousEventValue[9] = 0;
+            receivedSkill.Remove(9);
+        }
+
+        private static void UpdatePlayerDamage(int lilyCount)
+        {
+            Platformer3D.phys_attack = 5 + 2 * lilyCount;
+            GameData.current.MomoEvent[MomoEventUtils.LILY_COUNTER_EVENT] = lilyCount;
         }
     }
 }
