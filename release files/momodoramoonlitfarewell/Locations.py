@@ -101,7 +101,7 @@ advancement_table = {
    "Heavenly Lily 3 - Ashen Hinterlands": AdvData(24700, "Ashen Hinterlands Continued"),
    "Heavenly Lily 1 - Meikan Village": AdvData(33400, "Meikan Village"),
    "Heavenly Lily 2 - Meikan Village": AdvData(33600, "Meikan Village"),
-   "Heavenly Lily 3 - Meikan Village": AdvData(33300, "Fount of Rebirth"), #Logic says it's in FOR, but in game the area is still MV
+   "Heavenly Lily 3 - Meikan Village": AdvData(33300, "Meikan Village Windmill"),
    "Heavenly Lily 1 - Fount of Rebirth": AdvData(28600, "Fount of Rebirth"),
    "Heavenly Lily 2 - Fount of Rebirth": AdvData(28500, "Fount of Rebirth"),
    "Heavenly Lily 3 - Fount of Rebirth": AdvData(32300, "Fount of Rebirth"),
