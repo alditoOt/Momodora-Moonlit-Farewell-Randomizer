@@ -26,7 +26,7 @@ advancement_table = {
     "Tainted Serpent": AdvData(255, "Ashen Hinterlands Continued"),
     "Very Big Spider": AdvData(114, "Fairy Springs"),
     "Bloodthirsty Siblings": AdvData(188, "Demon Frontier Continued"),
-    "Moon Goddess Lineth": AdvData(213, "Meikan Village"),
+    "Moon Goddess Lineth": AdvData(213, "Meikan Village Windmill"),
     "Selin's Fear": AdvData(259, "Fount of Rebirth"),
     "Selin's Envy": AdvData(261, "Fount of Rebirth"),
     "Selin's Mendacity": AdvData(260, "Fount of Rebirth"),

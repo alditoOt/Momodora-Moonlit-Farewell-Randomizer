@@ -101,8 +101,8 @@ def set_rules(world: "MomodoraWorld"):
                  lambda state: state.has(*item("Crescent Moonflower")) and
                  (state.has(*item("Spiral Shell")) or
                   world.options.bell_hover_generation.value))
-        set_rule(multiworld.get_location(*item("Heavenly Lily 2 - Ashen Hinterlands")), lambda state: state.has(*item("Crescent Moonflower")))
-        set_rule(multiworld.get_location(*item("Heavenly Lily 3 - Ashen Hinterlands")), lambda state: state.has(*item("Crescent Moonflower")))
+        set_rule(multiworld.get_location(*item("Heavenly Lily 2 - Ashen Hinterlands")), lambda state: state.has(*item("Crescent Moonflower")) and state.has(*item("Spiral Shell")))
+        set_rule(multiworld.get_location(*item("Heavenly Lily 3 - Ashen Hinterlands")), lambda state: state.has(*item("Crescent Moonflower")) and state.has(*item("Spiral Shell")))
         
 
 def set_completion_rules(world: "MomodoraWorld"):
