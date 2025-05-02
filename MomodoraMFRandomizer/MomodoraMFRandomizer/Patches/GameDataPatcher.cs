@@ -1,4 +1,7 @@
-﻿using HarmonyLib;
+﻿using APMomoMFRandomizer;
+using Archipelago.MultiClient.Net.Enums;
+using Archipelago.MultiClient.Net.Models;
+using HarmonyLib;
 using MelonLoader;
 using System;
 using System.Collections.Generic;
@@ -11,6 +14,8 @@ namespace MomodoraMFRandomizer
     [HarmonyPatch(typeof(GameData))]
     class GameDataPatcher
     {
+        public static long[] SHOP_ITEM_ID = new long[] { 123, 408, 422, 401, 431, 437, 406, 426 };
+        
         [HarmonyPatch("GetShop")]
         [HarmonyPrefix]
         public static void GetShop(ref int shop_id)
@@ -37,6 +42,21 @@ namespace MomodoraMFRandomizer
             {
                 MelonLogger.Msg("An error occured when trying to max out the shop: " + e.Message);
             } 
+        }
+
+        private static void UpdateShopNames(Dictionary<long, ScoutedItemInfo> results)
+        {
+            int index = 0;
+            foreach (var pair in results)
+            {
+                InventoryUtils.AP_SHOP_ITEMS[index] = pair.Value.ItemDisplayName;
+                index++;
+            }
+        }
+
+        public static void UpdateShopNames()
+        {
+            APMomoMFRandomizer.session.Locations.ScoutLocationsAsync(UpdateShopNames, SHOP_ITEM_ID);
         }
     }
 }

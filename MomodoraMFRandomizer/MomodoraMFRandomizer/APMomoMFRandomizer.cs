@@ -75,6 +75,7 @@ namespace MomodoraMFRandomizer
                 session = ArchipelagoSessionFactory.CreateSession(server);
                 APConnector.Connect(session, server, username, password);
                 session.Items.ItemReceived += APLocationHandler.UpdateItemsForTheSession;
+                GameDataPatcher.UpdateShopNames();
                 CollectSocketInfo();
                 YAMLUtils.GetSettingsFromYAML();
                 YAMLUtils.AddItemsToItemPool();

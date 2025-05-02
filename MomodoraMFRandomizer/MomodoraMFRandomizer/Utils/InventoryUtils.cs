@@ -30,5 +30,7 @@ namespace APMomoMFRandomizer
             { 131, 351 },
             { 10, 344 }
         };
+
+        public static string[] AP_SHOP_ITEMS = new string[8];
     }   
 }
