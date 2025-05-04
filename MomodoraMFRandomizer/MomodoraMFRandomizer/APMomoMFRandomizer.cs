@@ -110,6 +110,7 @@ namespace MomodoraMFRandomizer
             {
                 APLocationHandler.UpdateItemsForTheSession(null);
                 mainMenu = false;
+                MomoEventUtils.DEFAULT_EVENTS_TO_1.ForEach(x => GameData.current.MomoEvent[x] = 1);
             }
             if(YAMLUtils.OPENSPRINGLEAFPATH)
             {
