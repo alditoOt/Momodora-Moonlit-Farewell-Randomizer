@@ -4,6 +4,7 @@ using MelonLoader;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -20,10 +21,19 @@ namespace MomodoraMFRandomizer
 
         public static List<int> OPTIONALEVENTS = new List<int>();
         public static List<int> LILYEVENTS = new List<int>();
+        public static List<int> HEALTHBERRYEVENTS = new List<int>();
+        public static List<int> STAMINABERRYEVENTS = new List<int>();
+        public static List<int> MAGICBERRYEVENTS = new List<int>();
+        public static List<int> FAIRYEVENTS = new List<int>();
 
         public static int FINAL_DOOR_EVENT = 294;
         public static int FAST_TRAVEL_EVENT = 205;
         public static int LILY_COUNTER_EVENT = 218;
+        public static int HEALTH_COUNTER_EVENT = 215;
+        public static int MAGIC_COUNTER_EVENT = 216;
+        public static int STAMINA_COUNTER_EVENT_ONE = 217;
+        public static int STAMINA_COUNTER_EVENT_TWO = 200;
+        public static int FAIRY_COUNTER_EVENT = 39;
 
         //[HarmonyPatch("set_Item")]
         //[HarmonyPostfix]

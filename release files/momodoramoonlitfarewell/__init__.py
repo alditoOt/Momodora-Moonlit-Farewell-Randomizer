@@ -34,7 +34,11 @@ class MomodoraWorld(World):
             "bell_hover_generation": bool(self.options.bell_hover_generation.value),
             "randomize_key_items": bool(self.options.randomize_key_items.value),
             "final_boss_keys": bool(self.options.final_boss_keys.value),
-            "progressive_damage_upgrade": bool(self.options.progressive_damage_upgrade.value)
+            "progressive_damage_upgrade": bool(self.options.progressive_damage_upgrade.value),
+            "progressive_health_upgrade": bool(self.options.progressive_health_upgrade.value),
+            "progressive_magic_upgrade": bool(self.options.progressive_magic_upgrade.value),
+            "progressive_stamina_upgrade": bool(self.options.progressive_stamina_upgrade.value),
+            "progressive_lumen_fairies": bool(self.options.progressive_lumen_fairies.value),
             # "fast_travel": self.options.fast_travel.current_key
         }
     
@@ -74,6 +78,23 @@ class MomodoraWorld(World):
         if self.options.progressive_damage_upgrade:
             for name, num in progressive_upgrade_table["progressive_damage"].items():
                 itempool += [name] * num
+
+        if self.options.progressive_health_upgrade:
+            for name, num in progressive_upgrade_table["progressive_health"].items():
+                itempool += [name] * num
+        
+        if self.options.progressive_magic_upgrade:
+            for name, num in progressive_upgrade_table["progressive_magic"].items():
+                itempool += [name] * num
+
+        if self.options.progressive_stamina_upgrade:
+            for name, num in progressive_upgrade_table["progressive_stamina"].items():
+                itempool += [name] * num
+
+        if self.options.progressive_lumen_fairies:
+            for name, num in progressive_upgrade_table["progressive_fairy"].items():
+                itempool += [name] * num
+        
         #Choose locations to automatically exclude based on settings
         exclusion_pool = set()
         # if not self.options.randomize_key_items:

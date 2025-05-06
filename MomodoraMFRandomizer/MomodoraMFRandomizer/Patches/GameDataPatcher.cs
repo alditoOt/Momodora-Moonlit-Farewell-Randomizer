@@ -14,7 +14,7 @@ namespace MomodoraMFRandomizer
     [HarmonyPatch(typeof(GameData))]
     class GameDataPatcher
     {
-        public static long[] SHOP_ITEM_ID = new long[] { 123, 408, 422, 401, 431, 437, 406, 426 };
+        public static long[] SHOP_ITEM_ID = new long[] { 123, 408, 422, 401, 431, 426, 437, 406 };
         
         [HarmonyPatch("GetShop")]
         [HarmonyPrefix]

@@ -48,9 +48,14 @@ namespace MomodoraMFRandomizer
             if (value != 1 || 
                 !MomoEventUtils.BOSSEVENTS.Contains(index) && 
                 !MomoEventUtils.SKILLEVENTS.Contains(index) &&
-                !MomoEventUtils.LILYEVENTS.Contains(index)) {
+                !MomoEventUtils.LILYEVENTS.Contains(index) &&
+                !MomoEventUtils.HEALTHBERRYEVENTS.Contains(index) &&
+                !MomoEventUtils.STAMINABERRYEVENTS.Contains(index) &&
+                !MomoEventUtils.MAGICBERRYEVENTS.Contains(index) &&
+                !MomoEventUtils.FAIRYEVENTS.Contains(index)) {
                 return;
             }
+            MelonLogger.Msg(MomoEventUtils.FAIRYEVENTS);
 
             if (MomoEventUtils.SKILLEVENTS.Contains(index))
             {
@@ -59,6 +64,31 @@ namespace MomodoraMFRandomizer
             {
                 Platformer3D.phys_attack -= 2;
                 GameData.current.MomoEvent[MomoEventUtils.LILY_COUNTER_EVENT] --;
+                APMomoMFRandomizer.session.Locations.CompleteLocationChecks(index * 100);
+            }
+            else if (MomoEventUtils.HEALTHBERRYEVENTS.Contains(index))
+            {
+                Platformer3D.player_maxhp -= 50;
+                Platformer3D.player_hp -= 50;
+                GameData.current.MomoEvent[MomoEventUtils.HEALTH_COUNTER_EVENT]--;
+                APMomoMFRandomizer.session.Locations.CompleteLocationChecks(index * 100);
+            }
+            else if (MomoEventUtils.MAGICBERRYEVENTS.Contains(index))
+            {
+                Platformer3D.player_maxsp -= 10;
+                Platformer3D.player_sp -= 10;
+                GameData.current.MomoEvent[MomoEventUtils.MAGIC_COUNTER_EVENT]--;
+                APMomoMFRandomizer.session.Locations.CompleteLocationChecks(index * 100);
+            }
+            else if (MomoEventUtils.STAMINABERRYEVENTS.Contains(index))
+            {
+                GameData.current.MomoEvent[MomoEventUtils.STAMINA_COUNTER_EVENT_ONE]--;
+                GameData.current.MomoEvent[MomoEventUtils.STAMINA_COUNTER_EVENT_TWO]--;
+                APMomoMFRandomizer.session.Locations.CompleteLocationChecks(index * 100);
+            }
+            else if (MomoEventUtils.FAIRYEVENTS.Contains(index))
+            {
+                GameData.current.MomoEvent[MomoEventUtils.FAIRY_COUNTER_EVENT]--;
                 APMomoMFRandomizer.session.Locations.CompleteLocationChecks(index * 100);
             }
             else
@@ -89,8 +119,8 @@ namespace MomodoraMFRandomizer
             }
         }
 
-        [HarmonyPatch("set_Item")]
-        [HarmonyPostfix]
+        //[HarmonyPatch("set_Item")]
+        //[HarmonyPostfix]
         private static void UpdateFinalBossDoor(int index, int value)
         {
             if (YAMLUtils.FINAL_BOSS_DOOR && index == MomoEventUtils.FINAL_DOOR_EVENT && value != finalBossDoorCount)
@@ -141,15 +171,40 @@ namespace MomodoraMFRandomizer
 
         public static void UpdateItemsForTheSession(ReceivedItemsHelper itemHandler)
         {
+            ItemInfo[] items = APMomoMFRandomizer.session.Items.AllItemsReceived.ToArray();
             Boolean firstTimeSendingMoney = true;
             finalBossDoorCount = 0;
             int lilyCount = 0;
-            foreach (ItemInfo item in APMomoMFRandomizer.session.Items.AllItemsReceived)
+            int healthCount = 0;
+            int staminaCount = 0;
+            int magicCount = 0;
+            int fairyCount = 0;
+            foreach (ItemInfo item in items)
             {
                 long itemId = item.ItemId;
                 if (itemId == InventoryUtils.DAMAGE_ID)
                 {
                     lilyCount++;
+                    continue;
+                }
+                if (itemId == InventoryUtils.HEALTH_ID)
+                {
+                    healthCount++;
+                    continue;
+                }
+                if (itemId == InventoryUtils.STAMINA_ID)
+                {
+                    staminaCount++;
+                    continue;
+                }
+                if (itemId == InventoryUtils.MAGIC_ID)
+                {
+                    magicCount++;
+                    continue;
+                }
+                if (itemId == InventoryUtils.FAIRY_ID)
+                {
+                    fairyCount++;
                     continue;
                 }
                 if (itemId == InventoryUtils.BOSS_KEY_ID)
@@ -174,6 +229,22 @@ namespace MomodoraMFRandomizer
             if (lilyCount > 0)
             {
                 UpdatePlayerDamage(lilyCount);
+            }
+            if (healthCount > 0)
+            {
+                UpdatePlayerHealth(healthCount);
+            }
+            if (staminaCount > 0)
+            {
+                UpdatePlayerStamina(staminaCount);
+            }
+            if (magicCount > 0)
+            {
+                UpdatePlayerMagic(magicCount);
+            } 
+            if(fairyCount > 0)
+            {
+                UpdateFairies(fairyCount);
             }
             if (finalBossDoorCount > 0)
             {
@@ -206,6 +277,31 @@ namespace MomodoraMFRandomizer
         {
             Platformer3D.phys_attack = 5 + 2 * lilyCount;
             GameData.current.MomoEvent[MomoEventUtils.LILY_COUNTER_EVENT] = lilyCount;
+        }
+
+        private static void UpdatePlayerHealth(int healthCount)
+        {
+            Platformer3D.player_maxhp = 300 + 50 * healthCount;
+            Platformer3D.player_hp += 50;
+            GameData.current.MomoEvent[MomoEventUtils.HEALTH_COUNTER_EVENT] = healthCount;
+        }
+
+        private static void UpdatePlayerMagic(int magicCount)
+        {
+            Platformer3D.player_maxsp = 30 + 10 * magicCount;
+            Platformer3D.player_sp += 10;
+            GameData.current.MomoEvent[MomoEventUtils.MAGIC_COUNTER_EVENT] = magicCount;
+        }
+
+        private static void UpdateFairies(int fairyCount)
+        {
+            GameData.current.MomoEvent[MomoEventUtils.FAIRY_COUNTER_EVENT] = fairyCount;
+        }
+
+        private static void UpdatePlayerStamina(int staminaCount)
+        {
+            GameData.current.MomoEvent[MomoEventUtils.STAMINA_COUNTER_EVENT_ONE] = staminaCount;
+            GameData.current.MomoEvent[MomoEventUtils.STAMINA_COUNTER_EVENT_TWO] = staminaCount;
         }
     }
 }
