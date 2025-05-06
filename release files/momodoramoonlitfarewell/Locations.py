@@ -31,7 +31,7 @@ advancement_table = {
     "Selin's Envy": AdvData(261, "Fount of Rebirth"),
     "Selin's Mendacity": AdvData(260, "Fount of Rebirth"),
     "Selin's Sorrow": AdvData(262, "Fount of Rebirth"),
-    "Moon God Selin": AdvData(364, "Selin"),
+    # "Moon God Selin": AdvData(364, "Selin"),
     #Extra
     "Mitchi Fast Travel": AdvData(205, "Demon Frontier"),
     #Sigils
@@ -255,5 +255,37 @@ exclusion_table = {
         "Stamina Berry - Ashen Hinterlands",
         "Stamina Berry - Meikan Village",
         "Stamina Berry - Moonlight Repose"
+    },
+    "progressive_fairy": {
+        "Lumen Fairy 1 - Springleaf Path",
+        "Lumen Fairy 2 - Springleaf Path",
+        "Lumen Fairy 3 - Springleaf Path",
+        "Lumen Fairy 1 - Lun Tree Roots",
+        "Lumen Fairy 2 - Lun Tree Roots",
+        "Lumen Fairy 3 - Lun Tree Roots",
+        "Lumen Fairy 1 - Demon Frontier",
+        "Lumen Fairy 2 - Demon Frontier",
+        "Lumen Fairy 3 - Demon Frontier",
+        "Lumen Fairy 4 - Lun Tree Roots",
+        "Lumen Fairy - Moonlight Repose",
+        "Lumen Fairy 1 - Fairy Springs",
+        "Lumen Fairy 2 - Fairy Springs",
+        "Lumen Fairy 3 - Fairy Springs",
+        "Lumen Fairy 4 - Fairy Springs",
+        "Lumen Fairy 5 - Fairy Springs",
+        "Lumen Fairy - Fairy Village",
+        "Lumen Fairy 4 - Demon Frontier",
+        "Lumen Fairy 1 - Ashen Hinterlands",
+        "Lumen Fairy 2 - Ashen Hinterlands",
+        "Lumen Fairy 3 - Ashen Hinterlands",
+        "Lumen Fairy 4 - Ashen Hinterlands",
+        "Lumen Fairy 5 - Ashen Hinterlands",
+        "Lumen Fairy 6 - Ashen Hinterlands",
+        "Lumen Fairy - Meikan Village",
+        "Lumen Fairy 1 - Fount of Rebirth",
+        "Lumen Fairy 2 - Fount of Rebirth",
+        "Lumen Fairy 4 - Springleaf Path",
+        "Lumen Fairy - Old Sanctuary",
+        "Lumen Fairy - Meikan Village Windmill"
     }
 }

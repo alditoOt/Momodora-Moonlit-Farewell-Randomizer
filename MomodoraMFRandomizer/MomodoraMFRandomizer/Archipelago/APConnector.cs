@@ -9,8 +9,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using APMomodoraMoonlitFarewell.Utils;
 
-namespace MomodoraMFRandomizer
+namespace APMomodoraMoonlitFarewell.Archipelago
 {
     class APConnector
     {

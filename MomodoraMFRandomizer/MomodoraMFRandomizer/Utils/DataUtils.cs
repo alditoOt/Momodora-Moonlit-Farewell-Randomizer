@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MomodoraMFRandomizer 
+namespace APMomodoraMoonlitFarewell.Utils
 {
     class DataUtils
     {
-        ItemInfo[] allItems = new ItemInfo[APMomoMFRandomizer.session.Items.AllItemsReceived.Count];
+        ItemInfo[] allItems = new ItemInfo[APMomodoraMoonlitFarewell.session.Items.AllItemsReceived.Count];
         
         public void InitializeItems()
         {

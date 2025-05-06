@@ -127,8 +127,15 @@ class MomodoraWorld(World):
                                  (self.options.oracle_sigil or
                                   loc_name not in exclusion_table["oracle_sigil"]) and
                                   (self.options.progressive_damage_upgrade or
-                                   loc_name not in exclusion_table["progressive_damage"])
-                              ]
+                                   loc_name not in exclusion_table["progressive_damage"]) and
+                                   (self.options.progressive_health_upgrade or
+                                    loc_name not in exclusion_table["progressive_health"]) and
+                                    (self.options.progressive_magic_upgrade or
+                                     loc_name not in exclusion_table["progressive_magic"]) and
+                                     (self.options.progressive_stamina_upgrade or
+                                      loc_name not in exclusion_table["progressive_stamina"]) and
+                                      (self.options.progressive_lumen_fairies or
+                                       loc_name not in exclusion_table["progressive_fairy"])]
 
             for exit in exits:
                 ret.exits.append(Entrance(self.player, exit, ret))

@@ -10,10 +10,10 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine.SceneManagement;
 using MelonLoader;
-using APMomoMFRandomizer;
+using APMomodoraMoonlitFarewell.Utils;
 using System.Reflection;
 
-namespace MomodoraMFRandomizer
+namespace APMomodoraMoonlitFarewell.Archipelago
 {
     [HarmonyPatch(typeof(MomoEventData))]
     class APLocationHandler
@@ -55,50 +55,50 @@ namespace MomodoraMFRandomizer
                 !MomoEventUtils.FAIRYEVENTS.Contains(index)) {
                 return;
             }
-            MelonLogger.Msg(MomoEventUtils.FAIRYEVENTS);
 
             if (MomoEventUtils.SKILLEVENTS.Contains(index))
             {
                 ReportSkillLocation(index, value);
-            } else if (MomoEventUtils.LILYEVENTS.Contains(index))
+            } 
+            else if (MomoEventUtils.LILYEVENTS.Contains(index))
             {
                 Platformer3D.phys_attack -= 2;
-                GameData.current.MomoEvent[MomoEventUtils.LILY_COUNTER_EVENT] --;
-                APMomoMFRandomizer.session.Locations.CompleteLocationChecks(index * 100);
+                GameData.current.MomoEvent[MomoEventUtils.LILY_COUNTER_EVENT]--;
+                APUtils.CompleteLocation(index * 100);
             }
             else if (MomoEventUtils.HEALTHBERRYEVENTS.Contains(index))
             {
                 Platformer3D.player_maxhp -= 50;
                 Platformer3D.player_hp -= 50;
                 GameData.current.MomoEvent[MomoEventUtils.HEALTH_COUNTER_EVENT]--;
-                APMomoMFRandomizer.session.Locations.CompleteLocationChecks(index * 100);
+               APUtils.CompleteLocation(index * 100);
             }
             else if (MomoEventUtils.MAGICBERRYEVENTS.Contains(index))
             {
                 Platformer3D.player_maxsp -= 10;
                 Platformer3D.player_sp -= 10;
                 GameData.current.MomoEvent[MomoEventUtils.MAGIC_COUNTER_EVENT]--;
-                APMomoMFRandomizer.session.Locations.CompleteLocationChecks(index * 100);
+                APUtils.CompleteLocation(index * 100);
             }
             else if (MomoEventUtils.STAMINABERRYEVENTS.Contains(index))
             {
                 GameData.current.MomoEvent[MomoEventUtils.STAMINA_COUNTER_EVENT_ONE]--;
                 GameData.current.MomoEvent[MomoEventUtils.STAMINA_COUNTER_EVENT_TWO]--;
-                APMomoMFRandomizer.session.Locations.CompleteLocationChecks(index * 100);
+                APUtils.CompleteLocation(index * 100);
             }
             else if (MomoEventUtils.FAIRYEVENTS.Contains(index))
             {
                 GameData.current.MomoEvent[MomoEventUtils.FAIRY_COUNTER_EVENT]--;
-                APMomoMFRandomizer.session.Locations.CompleteLocationChecks(index * 100);
+                APUtils.CompleteLocation(index * 100);
             }
             else
             {
-                APMomoMFRandomizer.session.Locations.CompleteLocationChecks(index); //Boss check
+                APUtils.CompleteLocation(index); //Boss check
             }
         }
 
-        [HarmonyPatch("set_Item")]
-        [HarmonyPostfix]
+        //[HarmonyPatch("set_Item")]
+        //[HarmonyPostfix]
         private static void RemoveNonReceivedSkill(int index, int value)
         {
             if (value != 1 || !MomoEventUtils.SKILLEVENTS.Contains(index))
@@ -126,7 +126,7 @@ namespace MomodoraMFRandomizer
             if (YAMLUtils.FINAL_BOSS_DOOR && index == MomoEventUtils.FINAL_DOOR_EVENT && value != finalBossDoorCount)
             {
                 finalBossDoorCount = 0;
-                foreach (ItemInfo item in APMomoMFRandomizer.session.Items.AllItemsReceived)
+                foreach (ItemInfo item in APMomodoraMoonlitFarewell.session.Items.AllItemsReceived)
                 {
                     if (item.ItemId == 991)
                     {
@@ -139,15 +139,48 @@ namespace MomodoraMFRandomizer
 
         private static void ReportSkillLocation(int index, int value)
         {
-            if (!APMomoMFRandomizer.session.Locations.AllLocationsChecked.Contains(index) && (previousEventValue[index] == 0 || index == 205))
+            //Boolean fastTravelReceived = false;
+            Boolean skillReceived = false;
+            foreach (ItemInfo item in APMomodoraMoonlitFarewell.session.Items.AllItemsReceived)
             {
-                checkedLocation.Add(index);
-                if ((index == 205 && !receivedSkill.Contains(index)) || (index != 205 && !GameData.inventory.HasItem(GameData.itemDatabase.GetItemDef(InventoryUtils.SKILL_INVENTORY_ID[index]))))
+                //if (item.ItemId == 205)
+                //{
+                //    fastTravelReceived = true;
+                //    break;
+                //}
+                if (item.ItemId == index)
                 {
-                    GameData.current.MomoEvent[index] = 0;
+                    skillReceived = true;
                 }
-                APMomoMFRandomizer.session.Locations.CompleteLocationChecks(index);
             }
+            if (!skillReceived)
+            {
+                // Reset the skill value if it hasn't been received yet
+                GameData.current.MomoEvent[index] = 0;
+                if (index == 205)
+                {
+                    if (SceneManager.GetActiveScene().name != "Cove03")
+                    {
+                        return;
+                    }
+                }
+                APUtils.CompleteLocation(index);
+            }
+            //if (index == 205)
+            //{
+            //    if (SceneManager.GetActiveScene().name != "Cove03")
+            //    {
+            //        return;
+            //    }
+            //    else
+            //    {
+            //        APUtils.CompleteLocation(index);
+            //    }
+            //}
+            //else if (GameData.inventory.HasItem(GameData.itemDatabase.GetItemDef(InventoryUtils.SKILL_INVENTORY_ID[index])))
+            //{
+            //    APUtils.CompleteLocation(index);
+            //}
         }
 
         public static void GiveItem(int itemId)
@@ -163,7 +196,7 @@ namespace MomodoraMFRandomizer
                 receivedSkill.Add(itemId);
                 GameData.current.MomoEvent[itemId] = 1;
             }
-            else if (InventoryUtils.ITEM_ID.Contains(itemId))
+            else if (InventoryUtils.AP_SIGIL_ITEM_ID.Contains(itemId))
             {
                 GameData.inventory.Add(GameData.itemDatabase.GetItem(itemId), is_new_item: false);
             }
@@ -171,7 +204,7 @@ namespace MomodoraMFRandomizer
 
         public static void UpdateItemsForTheSession(ReceivedItemsHelper itemHandler)
         {
-            ItemInfo[] items = APMomoMFRandomizer.session.Items.AllItemsReceived.ToArray();
+            List<ItemInfo> items = APMomodoraMoonlitFarewell.session.Items.AllItemsReceived.ToList<ItemInfo>();
             Boolean firstTimeSendingMoney = true;
             finalBossDoorCount = 0;
             int lilyCount = 0;
@@ -226,26 +259,12 @@ namespace MomodoraMFRandomizer
                 }
                 GiveItem((int)itemId);
             }
-            if (lilyCount > 0)
-            {
-                UpdatePlayerDamage(lilyCount);
-            }
-            if (healthCount > 0)
-            {
-                UpdatePlayerHealth(healthCount);
-            }
-            if (staminaCount > 0)
-            {
-                UpdatePlayerStamina(staminaCount);
-            }
-            if (magicCount > 0)
-            {
-                UpdatePlayerMagic(magicCount);
-            } 
-            if(fairyCount > 0)
-            {
-                UpdateFairies(fairyCount);
-            }
+            UpdatePlayerDamage(lilyCount);
+            UpdatePlayerHealth(healthCount);
+            UpdatePlayerStamina(staminaCount);
+            UpdatePlayerMagic(magicCount);
+            UpdateFairies(fairyCount);
+            
             if (finalBossDoorCount > 0)
             {
                 GameData.current.MomoEvent[MomoEventUtils.FINAL_DOOR_EVENT] = finalBossDoorCount;
@@ -281,15 +300,17 @@ namespace MomodoraMFRandomizer
 
         private static void UpdatePlayerHealth(int healthCount)
         {
+            float prevHP = Platformer3D.player_maxhp;
             Platformer3D.player_maxhp = 300 + 50 * healthCount;
-            Platformer3D.player_hp += 50;
+            Platformer3D.player_hp += Platformer3D.player_maxhp > prevHP ? 50 : 0;
             GameData.current.MomoEvent[MomoEventUtils.HEALTH_COUNTER_EVENT] = healthCount;
         }
 
         private static void UpdatePlayerMagic(int magicCount)
         {
+            float prevMagic = Platformer3D.player_maxsp;
             Platformer3D.player_maxsp = 30 + 10 * magicCount;
-            Platformer3D.player_sp += 10;
+            Platformer3D.player_sp += Platformer3D.player_maxsp > prevMagic ? 10 : 0;
             GameData.current.MomoEvent[MomoEventUtils.MAGIC_COUNTER_EVENT] = magicCount;
         }
 

@@ -1,4 +1,4 @@
-﻿using APMomoMFRandomizer;
+﻿using APMomodoraMoonlitFarewell;
 using MelonLoader;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MomodoraMFRandomizer
+namespace APMomodoraMoonlitFarewell.Utils
 {
     class YAMLUtils
     {
@@ -25,16 +25,16 @@ namespace MomodoraMFRandomizer
         {
             try
             {
-                APMomoMFRandomizer.session.DataStorage.GetSlotData().TryGetValue("open_springleaf_path", out object openSpringleafPath);
-                APMomoMFRandomizer.session.DataStorage.GetSlotData().TryGetValue("deathlink", out object deathlink);
-                APMomoMFRandomizer.session.DataStorage.GetSlotData().TryGetValue("randomize_key_items", out object keyItems);
-                APMomoMFRandomizer.session.DataStorage.GetSlotData().TryGetValue("oracle_sigil", out object oracleSigil);
-                APMomoMFRandomizer.session.DataStorage.GetSlotData().TryGetValue("final_boss_keys", out object finalBossKeys);
-                APMomoMFRandomizer.session.DataStorage.GetSlotData().TryGetValue("progressive_damage_upgrade", out object damageUpgrade);
-                APMomoMFRandomizer.session.DataStorage.GetSlotData().TryGetValue("progressive_health_upgrade", out object healthUpgrade);
-                APMomoMFRandomizer.session.DataStorage.GetSlotData().TryGetValue("progressive_stamina_upgrade", out object staminaUpgrade);
-                APMomoMFRandomizer.session.DataStorage.GetSlotData().TryGetValue("progressive_magic_upgrade", out object magicUpgrade);
-                APMomoMFRandomizer.session.DataStorage.GetSlotData().TryGetValue("progressive_lumen_fairies", out object fairies);
+                APMomodoraMoonlitFarewell.session.DataStorage.GetSlotData().TryGetValue("open_springleaf_path", out object openSpringleafPath);
+                APMomodoraMoonlitFarewell.session.DataStorage.GetSlotData().TryGetValue("deathlink", out object deathlink);
+                APMomodoraMoonlitFarewell.session.DataStorage.GetSlotData().TryGetValue("randomize_key_items", out object keyItems);
+                APMomodoraMoonlitFarewell.session.DataStorage.GetSlotData().TryGetValue("oracle_sigil", out object oracleSigil);
+                APMomodoraMoonlitFarewell.session.DataStorage.GetSlotData().TryGetValue("final_boss_keys", out object finalBossKeys);
+                APMomodoraMoonlitFarewell.session.DataStorage.GetSlotData().TryGetValue("progressive_damage_upgrade", out object damageUpgrade);
+                APMomodoraMoonlitFarewell.session.DataStorage.GetSlotData().TryGetValue("progressive_health_upgrade", out object healthUpgrade);
+                APMomodoraMoonlitFarewell.session.DataStorage.GetSlotData().TryGetValue("progressive_stamina_upgrade", out object staminaUpgrade);
+                APMomodoraMoonlitFarewell.session.DataStorage.GetSlotData().TryGetValue("progressive_magic_upgrade", out object magicUpgrade);
+                APMomodoraMoonlitFarewell.session.DataStorage.GetSlotData().TryGetValue("progressive_lumen_fairies", out object fairies);
                 //APMomoMFRandomizer.session.DataStorage.GetSlotData().TryGetValue("fast_travel", out object fastTravel);
                 OPENSPRINGLEAFPATH = (Boolean)openSpringleafPath;
                 DEATHLINK = (Boolean)deathlink;
@@ -58,11 +58,11 @@ namespace MomodoraMFRandomizer
         {
             if (KEY_ITEMS)
             {
-                InventoryUtils.ITEM_ID.AddRange(InventoryUtils.KEY_ITEM_ID);
+                InventoryUtils.AP_SIGIL_ITEM_ID.AddRange(InventoryUtils.KEY_ITEM_ID);
             }
             if (ADD_ORACLE_SIGIL)
             {
-                InventoryUtils.ITEM_ID.Add(InventoryUtils.ORACLE);
+                InventoryUtils.AP_SIGIL_ITEM_ID.Add(InventoryUtils.ORACLE);
             }
             if (DAMAGE_UPGRADE)
             {
@@ -82,7 +82,6 @@ namespace MomodoraMFRandomizer
             }
             if (FAIRIES)
             {
-                MelonLogger.Msg("Adding fairy events");
                 MomoEventUtils.FAIRYEVENTS.AddRange(new int[] { 41, 354, 44, 87, 51, 88, 352, 351, 162, 54, 346, 57, 47, 93, 137, 91, 342, 168, 355, 221, 224, 229, 238, 357, 300, 288, 287, 46, 353, 301});
             }
             //WIP

@@ -12,10 +12,13 @@ using Archipelago.MultiClient.Net;
 using Archipelago.MultiClient.Net.Enums;
 using Archipelago.MultiClient.Net.BounceFeatures.DeathLink;
 using System.Reflection;
+using APMomodoraMoonlitFarewell.Archipelago;
+using APMomodoraMoonlitFarewell.Patches;
+using APMomodoraMoonlitFarewell.Utils;
 
-namespace MomodoraMFRandomizer
+namespace APMomodoraMoonlitFarewell
 {
-    public class APMomoMFRandomizer : MelonMod
+    public class APMomodoraMoonlitFarewell : MelonMod
     {
         #region AP variables
         private static string server; 
@@ -117,7 +120,7 @@ namespace MomodoraMFRandomizer
                 blockRemover.removeAllBlockers(sceneName);
             }
             blockRemover.RemoveGynBarrier(sceneName);
-            APSkillLocationHandler.HandleSkillLocationCheck(sceneName, mainMenu);
+            APSkillHandler.HandleSkillOnSceneLoad(sceneName, mainMenu);
         }
 
         public override void OnFixedUpdate()

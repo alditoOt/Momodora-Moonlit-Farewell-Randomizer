@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MomodoraMFRandomizer
+namespace APMomodoraMoonlitFarewell.Archipelago
 {
     [HarmonyPatch(typeof(MomoEventData))]
     class APSocketHandler
@@ -22,7 +22,7 @@ namespace MomodoraMFRandomizer
             {
                 var statusUpdatePacket = new StatusUpdatePacket();
                 statusUpdatePacket.Status = ArchipelagoClientState.ClientGoal;
-                APMomoMFRandomizer.session.Socket.SendPacket(statusUpdatePacket);
+                APMomodoraMoonlitFarewell.session.Socket.SendPacket(statusUpdatePacket);
             }
         }
     }

@@ -1,4 +1,4 @@
-﻿using APMomoMFRandomizer;
+﻿using APMomodoraMoonlitFarewell;
 using Archipelago.MultiClient.Net.Enums;
 using Archipelago.MultiClient.Net.Models;
 using HarmonyLib;
@@ -8,8 +8,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using APMomodoraMoonlitFarewell.Utils;
 
-namespace MomodoraMFRandomizer
+namespace APMomodoraMoonlitFarewell.Patches
 {
     [HarmonyPatch(typeof(GameData))]
     class GameDataPatcher
@@ -58,7 +59,7 @@ namespace MomodoraMFRandomizer
 
         public static void UpdateShopNames()
         {
-            APMomoMFRandomizer.session.Locations.ScoutLocationsAsync(UpdateShopNames, SHOP_ITEM_ID);
+            APMomodoraMoonlitFarewell.session.Locations.ScoutLocationsAsync(UpdateShopNames, SHOP_ITEM_ID);
         }
     }
 }

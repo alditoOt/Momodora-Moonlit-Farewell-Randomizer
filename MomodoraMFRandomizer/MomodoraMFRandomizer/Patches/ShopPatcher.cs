@@ -1,4 +1,4 @@
-﻿using APMomoMFRandomizer;
+﻿using APMomodoraMoonlitFarewell;
 using HarmonyLib;
 using MelonLoader;
 using System;
@@ -6,8 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using APMomodoraMoonlitFarewell.Utils;
 
-namespace MomodoraMFRandomizer
+namespace APMomodoraMoonlitFarewell.Patches
 {
     [HarmonyPatch(typeof(DialogueBox))]
     class ShopPatcher
@@ -26,7 +27,6 @@ namespace MomodoraMFRandomizer
             for (int i = 0; i < apItems.Length; i ++)
             {
                 apItems[i] = InventoryUtils.AP_SHOP_ITEMS[i];
-                MelonLogger.Msg($"Index: {i}, name: {InventoryUtils.AP_SHOP_ITEMS[i]}");
             }
             options = apItems;
         }
@@ -57,7 +57,6 @@ namespace MomodoraMFRandomizer
             if (currentSelect < 8)
             {
                 int itemId = (int)InventoryUtils.AP_SHOP_ITEMS_ID[currentSelect];
-                MelonLogger.Msg(itemId);
                 if (!InventoryUtils.AP_SHOP_ITEM_IN_GAME[currentSelect])
                 {
                     text = "AP Item";

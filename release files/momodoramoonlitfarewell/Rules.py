@@ -39,7 +39,7 @@ def set_rules(world: "MomodoraWorld"):
                             (world.options.bell_hover_generation.value and state.has(*item("Lunar Attunement")) and state.has(*item("Crescent Moonflower"))))
     set_rule(multiworld.get_entrance(*region("LTR_DF")), 
              lambda state: state.has(*item("Spiral Shell")) or
-             (state.has(*item("Crescent Moonflower")) and world.options.bell_hover_generation.value))
+             (state.has(*item("Crescent Moonflower")) and world.options.bell_hover_generation.value and (state.has(*item("Progressive Magic Upgrade", 1) if world.options.progressive_magic_upgrade.value else True))))
     set_rule(multiworld.get_entrance(*region("DF_AH")),
              lambda state: (world.options.bell_hover_generation.value and state.has(*item("Spiral Shell")) and
                             (state.has(*item("Sacred Anemone")) or
@@ -120,7 +120,6 @@ def set_rules(world: "MomodoraWorld"):
     if world.options.progressive_stamina_upgrade:
         set_rule(multiworld.get_location(*item("Stamina Berry - Ashen Hinterlands")), lambda state: state.has(*item("Lunar Attunement")))
     if world.options.progressive_lumen_fairies:
-        set_rule(multiworld.get_location(*item("Lumen Fairy 1 - Springleaf Path")), lambda state: state.has(*item("Crescent Moonflower")) or state.has(*item("Spiral Shell")))
         set_rule(multiworld.get_location(*item("Lumen Fairy 2 - Springleaf Path")), lambda state: state.has(*item("Crescent Moonflower")) or state.has(*item("Spiral Shell")))
         set_rule(multiworld.get_location(*item("Lumen Fairy 4 - Lun Tree Roots")), lambda state: world.options.bell_hover_generation.value or state.has(*item("Crescent Moonflower")) or state.has(*item("Spiral Shell")))
         set_rule(multiworld.get_location(*item("Lumen Fairy - Moonlight Repose")), lambda state: state.has(*item("Crescent Moonflower")))
