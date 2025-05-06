@@ -50,6 +50,8 @@ namespace MomodoraMFRandomizer
             foreach (var pair in results)
             {
                 InventoryUtils.AP_SHOP_ITEMS[index] = pair.Value.ItemDisplayName;
+                InventoryUtils.AP_SHOP_ITEM_IN_GAME[index] = pair.Value.ItemGame == "Momodora Moonlit Farewell";
+                InventoryUtils.AP_SHOP_ITEMS_ID[index] = pair.Value.ItemId;
                 index++;
             }
         }

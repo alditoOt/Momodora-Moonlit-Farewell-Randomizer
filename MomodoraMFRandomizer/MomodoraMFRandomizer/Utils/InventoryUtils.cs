@@ -32,5 +32,7 @@ namespace APMomoMFRandomizer
         };
 
         public static string[] AP_SHOP_ITEMS = new string[8];
+        public static long[] AP_SHOP_ITEMS_ID = new long[8];
+        public static bool[] AP_SHOP_ITEM_IN_GAME = new bool[8];
     }   
 }
