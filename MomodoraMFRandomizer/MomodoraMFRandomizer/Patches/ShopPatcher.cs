@@ -63,29 +63,41 @@ namespace MomodoraMFRandomizer
                     text = "AP Item";
                 } else
                 {
-                    if (itemId == InventoryUtils.DAMAGE_ID)
+                    if (itemId == InventoryUtils.BOSS_KEY_ID)
+                    {
+                        text = StringUtils.BOSS_KEY_DESCRIPTION;
+                    }
+                    else if (itemId == InventoryUtils.DAMAGE_ID)
                     {
                         text = StringUtils.DAMAGE_DESCRIPTION;
-                    } else if (itemId == InventoryUtils.HEALTH_ID) {
+                    }
+                    else if (itemId == InventoryUtils.HEALTH_ID)
+                    {
                         text = StringUtils.HEALTH_DESCRPTION;
-                    } else if (itemId == InventoryUtils.MAGIC_ID)
+                    }
+                    else if (itemId == InventoryUtils.MAGIC_ID)
                     {
                         text = StringUtils.MAGIC_DESCRIPTION;
-                    } else if (itemId == InventoryUtils.STAMINA_ID)
+                    }
+                    else if (itemId == InventoryUtils.STAMINA_ID)
                     {
                         text = StringUtils.STAMINA_DESCRIPTION;
-                    } else if (itemId == InventoryUtils.FAIRY_ID)
+                    }
+                    else if (itemId == InventoryUtils.FAIRY_ID)
                     {
                         text = StringUtils.FAIRY_DESCRIPTION;
-                    } else if (MomoEventUtils.SKILLEVENTS.Contains(itemId))
+                    }
+                    else if (MomoEventUtils.SKILLEVENTS.Contains(itemId))
                     {
                         text = StringUtils.GENERAL_SKILL_DESCRIPTION;
-                    } else if (itemId == InventoryUtils.FILLER_ID)
+                    }
+                    else if (itemId == InventoryUtils.FILLER_ID)
                     {
                         text = StringUtils.GARBAGE_DESCRIPTION;
                     }
-                    else {
-                        text = GameData.itemDatabase.GetItem(itemId).Effect;
+                    else
+                    {
+                        text = string.Format("{0}\n{1}", GameData.itemDatabase.GetItem(itemId).Effect, GameData.itemDatabase.GetItem(itemId).Description);
                     }
                 }
 
