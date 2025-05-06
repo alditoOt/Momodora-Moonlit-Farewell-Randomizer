@@ -14,5 +14,13 @@ namespace MomodoraMFRandomizer
         public static readonly string ADD_TO_ITEM_POOL = "add_to_item_pool";
         public static readonly string VANILLA = "vanilla";
         public static readonly string START_WITH = "start_with";
+
+        public static readonly string DAMAGE_DESCRIPTION = "Increases attack power by 2!";
+        public static readonly string HEALTH_DESCRPTION = "Increases Maximum Health by 50!";
+        public static readonly string MAGIC_DESCRIPTION = "Increases Maximum Magic affinity by 10!";
+        public static readonly string STAMINA_DESCRIPTION = "Increases stamina regeneration speed";
+        public static readonly string FAIRY_DESCRIPTION = "Sets free a Lumen Fairy!";
+        public static readonly string GENERAL_SKILL_DESCRIPTION = "In game skill!";
+        public static readonly string GARBAGE_DESCRIPTION = "Money!";
     }
 }

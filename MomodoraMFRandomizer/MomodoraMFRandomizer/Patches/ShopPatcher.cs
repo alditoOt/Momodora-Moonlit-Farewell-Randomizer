@@ -65,24 +65,24 @@ namespace MomodoraMFRandomizer
                 {
                     if (itemId == InventoryUtils.DAMAGE_ID)
                     {
-                        text = "Increases attack power by 2!";
+                        text = StringUtils.DAMAGE_DESCRIPTION;
                     } else if (itemId == InventoryUtils.HEALTH_ID) {
-                        text = "Increases Maximum Health by 50!";
+                        text = StringUtils.HEALTH_DESCRPTION;
                     } else if (itemId == InventoryUtils.MAGIC_ID)
                     {
-                        text = "Increases Maximum Magic affinity by 10!";
+                        text = StringUtils.MAGIC_DESCRIPTION;
                     } else if (itemId == InventoryUtils.STAMINA_ID)
                     {
-                        text = "increases stamina regeneration speed!";
+                        text = StringUtils.STAMINA_DESCRIPTION;
                     } else if (itemId == InventoryUtils.FAIRY_ID)
                     {
-                        text = "Sets free a Lumen Fairy!";
+                        text = StringUtils.FAIRY_DESCRIPTION;
                     } else if (MomoEventUtils.SKILLEVENTS.Contains(itemId))
                     {
-                        text = "In game skill";
+                        text = StringUtils.GENERAL_SKILL_DESCRIPTION;
                     } else if (itemId == InventoryUtils.FILLER_ID)
                     {
-                        text = "Money!";
+                        text = StringUtils.GARBAGE_DESCRIPTION;
                     }
                     else {
                         text = GameData.itemDatabase.GetItem(itemId).Effect;
