@@ -34,6 +34,7 @@ namespace APMomodoraMoonlitFarewell.Utils
         public static int STAMINA_COUNTER_EVENT_ONE = 217;
         public static int STAMINA_COUNTER_EVENT_TWO = 200;
         public static int FAIRY_COUNTER_EVENT = 39;
+        public static int VICTORY_EVENT;
 
         //[HarmonyPatch("set_Item")]
         //[HarmonyPostfix]

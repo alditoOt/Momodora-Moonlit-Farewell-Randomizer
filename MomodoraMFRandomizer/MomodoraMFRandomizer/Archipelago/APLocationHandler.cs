@@ -19,9 +19,6 @@ namespace APMomodoraMoonlitFarewell.Archipelago
     class APLocationHandler
     {
         private static int MONEY = 100;
-        static HashSet<int> receivedSkill = new HashSet<int>();
-        static HashSet<int> checkedLocation = new HashSet<int>();
-        static Dictionary<int, int> previousEventValue = new Dictionary<int, int>();
         static Dictionary<string, int> skillAndScene = new Dictionary<string, int>()
         {
             { "Well26", 20 },
@@ -33,13 +30,6 @@ namespace APMomodoraMoonlitFarewell.Archipelago
 
         private static int finalBossDoorCount = 0;
 
-        public void InitializeDictionary()
-        {
-            foreach (int skill in MomoEventUtils.SKILLEVENTS)
-            {
-                previousEventValue[skill] = GameData.current.MomoEvent[skill];
-            }
-        }
 
         [HarmonyPatch("set_Item")]
         [HarmonyPostfix]
@@ -97,57 +87,12 @@ namespace APMomodoraMoonlitFarewell.Archipelago
             }
         }
 
-        //[HarmonyPatch("set_Item")]
-        //[HarmonyPostfix]
-        private static void RemoveNonReceivedSkill(int index, int value)
-        {
-            if (value != 1 || !MomoEventUtils.SKILLEVENTS.Contains(index))
-            {
-                return;
-            }
-
-            if (previousEventValue[index] == 0)
-            {
-                if (!receivedSkill.Contains(index))
-                {
-                    GameData.current.MomoEvent[index] = 0;
-                }
-                else
-                {
-                    GiveItem(index);
-                }
-            }
-        }
-
-        //[HarmonyPatch("set_Item")]
-        //[HarmonyPostfix]
-        private static void UpdateFinalBossDoor(int index, int value)
-        {
-            if (YAMLUtils.FINAL_BOSS_DOOR && index == MomoEventUtils.FINAL_DOOR_EVENT && value != finalBossDoorCount)
-            {
-                finalBossDoorCount = 0;
-                foreach (ItemInfo item in APMomodoraMoonlitFarewell.session.Items.AllItemsReceived)
-                {
-                    if (item.ItemId == 991)
-                    {
-                        finalBossDoorCount++;
-                    }
-                }
-                GameData.current.MomoEvent[index] = finalBossDoorCount;
-            }
-        }
-
         private static void ReportSkillLocation(int index, int value)
         {
             //Boolean fastTravelReceived = false;
             Boolean skillReceived = false;
             foreach (ItemInfo item in APMomodoraMoonlitFarewell.session.Items.AllItemsReceived)
             {
-                //if (item.ItemId == 205)
-                //{
-                //    fastTravelReceived = true;
-                //    break;
-                //}
                 if (item.ItemId == index)
                 {
                     skillReceived = true;
@@ -166,21 +111,6 @@ namespace APMomodoraMoonlitFarewell.Archipelago
                 }
                 APUtils.CompleteLocation(index);
             }
-            //if (index == 205)
-            //{
-            //    if (SceneManager.GetActiveScene().name != "Cove03")
-            //    {
-            //        return;
-            //    }
-            //    else
-            //    {
-            //        APUtils.CompleteLocation(index);
-            //    }
-            //}
-            //else if (GameData.inventory.HasItem(GameData.itemDatabase.GetItemDef(InventoryUtils.SKILL_INVENTORY_ID[index])))
-            //{
-            //    APUtils.CompleteLocation(index);
-            //}
         }
 
         public static void GiveItem(int itemId)
@@ -192,8 +122,6 @@ namespace APMomodoraMoonlitFarewell.Archipelago
             }
             if (MomoEventUtils.SKILLEVENTS.Contains(itemId))
             {
-                previousEventValue[itemId] = 1;
-                receivedSkill.Add(itemId);
                 GameData.current.MomoEvent[itemId] = 1;
             }
             else if (InventoryUtils.AP_SIGIL_ITEM_ID.Contains(itemId))
@@ -271,25 +199,9 @@ namespace APMomodoraMoonlitFarewell.Archipelago
             }
         }
 
-        public void ResetLocationSceneForSkill(string sceneName, Boolean mainMenu)
-        {
-            if (mainMenu || !skillAndScene.ContainsKey(sceneName))
-            {
-                return;
-            }
-            if (skillAndScene[sceneName] == 9)
-            {
-                GameData.current.MomoEvent[skillAndScene[sceneName]] = 0;
-                previousEventValue[skillAndScene[sceneName]] = 0;
-                receivedSkill.Remove(skillAndScene[sceneName]);
-            }
-        }
-
         public static void ResetDashSkill()
         {
             GameData.current.MomoEvent[9] = 0;
-            previousEventValue[9] = 0;
-            receivedSkill.Remove(9);
         }
 
         private static void UpdatePlayerDamage(int lilyCount)

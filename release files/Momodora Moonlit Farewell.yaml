@@ -98,6 +98,31 @@ Momodora Moonlit Farewell:
     'false': 50
     'true': 0
 
+  progressive_health_upgrade:
+    # Add the Dotted Health Berries to the item location check, as well as adding progressive health upgrade to the itempool (each upgrade grants 50 extra health)
+    'false': 50
+    'true': 0
+
+  progressive_magic_upgrade:
+    # Add the Blue Magic Berries to the item location check, as well as adding progressive magic upgrade to the itempool (each upgrade grants 10 extra magic)
+    'false': 50
+    'true': 0
+
+  progressive_stamina_upgrade:
+    # Add the Stamina Peaches/Berries to the item location check, as well as adding progressive stamina upgrade to the itempool
+    'false': 50
+    'true': 0
+
+  progressive_lumen_fairies:
+    # Add the Lumen Fairies to the item location check, as well as adding progressive Lumen Fairies to the itempool (you need a total of 30 Lumen Fairies to unlock the Oracle Sigil)
+    'false': 50
+    'true': 0
+
+  victory_condition:
+    # Choose which boss must be defeated to be considered as having completed the game.
+    moon_god_selin: 50
+    dora: 0
+
   # Item & Location Options
   local_items:
     # Forces these items to be in their native world.

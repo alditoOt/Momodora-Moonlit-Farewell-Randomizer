@@ -39,6 +39,7 @@ class MomodoraWorld(World):
             "progressive_magic_upgrade": bool(self.options.progressive_magic_upgrade.value),
             "progressive_stamina_upgrade": bool(self.options.progressive_stamina_upgrade.value),
             "progressive_lumen_fairies": bool(self.options.progressive_lumen_fairies.value),
+            "victory_condition": self.options.victory_condition.current_key,
             # "fast_travel": self.options.fast_travel.current_key
         }
     

@@ -55,6 +55,13 @@ class ProgressiveLumenFairies(Toggle):
     """Add the Lumen Fairies to the item location check, as well as adding progressive Lumen Fairies to the itempool (you need a total of 30 Lumen Fairies to unlock the Oracle Sigil)"""
     display_name = "Progressive Lumen Fairies"
     default = 0
+
+class VictoryCondition(Choice):
+    """Choose which boss must be defeated to be considered as having completed the game."""
+    display_name = "Victory Condition"
+    option_Moon_God_Selin = 0
+    option_Dora = 1
+    default = 0
 # class FastTravel(Choice):
 #     """Whether to start with Fast Travel, add it to the randomization pool, or keep it vanilla (Unlocking Fast Travel is still a location check)"""
 #     display_name = "Fast Travel Choice"
@@ -76,4 +83,5 @@ class MomodoraOptions(PerGameCommonOptions):
     progressive_magic_upgrade: ProgressiveMagicUpgrade
     progressive_stamina_upgrade: ProgressiveStaminaUpgrade
     progressive_lumen_fairies: ProgressiveLumenFairies
+    victory_condition: VictoryCondition
     # fast_travel: FastTravel

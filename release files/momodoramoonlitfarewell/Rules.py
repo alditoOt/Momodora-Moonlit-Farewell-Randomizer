@@ -39,7 +39,7 @@ def set_rules(world: "MomodoraWorld"):
                             (world.options.bell_hover_generation.value and state.has(*item("Lunar Attunement")) and state.has(*item("Crescent Moonflower"))))
     set_rule(multiworld.get_entrance(*region("LTR_DF")), 
              lambda state: state.has(*item("Spiral Shell")) or
-             (state.has(*item("Crescent Moonflower")) and world.options.bell_hover_generation.value and (state.has(*item("Progressive Magic Upgrade", 1) if world.options.progressive_magic_upgrade.value else True))))
+             (state.has(*item("Crescent Moonflower")) and world.options.bell_hover_generation.value and (state.has(*item("Progressive Magic Upgrade"), 1) if world.options.progressive_magic_upgrade.value else True)))
     set_rule(multiworld.get_entrance(*region("DF_AH")),
              lambda state: (world.options.bell_hover_generation.value and state.has(*item("Spiral Shell")) and
                             (state.has(*item("Sacred Anemone")) or
@@ -68,6 +68,7 @@ def set_rules(world: "MomodoraWorld"):
              state.has(*item("Crescent Moonflower")) and 
               (state.has(*item("Windmill Key")) if world.options.randomize_key_items.value else True)),
     set_rule(multiworld.get_entrance(*region("FOR_SELIN")), lambda state: state.has(*item("Progressive Final Boss Key"), 4) if world.options.final_boss_keys.value else True),
+    
     set_rule(multiworld.get_location(*item("Serval")),
              lambda state: state.has(*item("Crescent Moonflower")) or
              (state.has(*item("Spiral Shell")) if world.options.bell_hover_generation.value else True))
@@ -91,7 +92,8 @@ def set_rules(world: "MomodoraWorld"):
              not world.options.randomize_key_items.value or
              (state.has(*item("Gold Moonlit Dust")) and
              state.has(*item("Silver Moonlit Dust"))))
-    
+    set_rule(multiworld.get_location(*item("Magic Blade")), lambda state: state.has(*item("Awakened Sacred Leaf")) or world.options.open_springleaf_path.value)
+
     if world.options.oracle_sigil:
         set_rule(multiworld.get_location(*item("Oracle")), 
                  lambda state: state.has(*item("Progressive Lumen Fairy"), 30) if world.options.progressive_lumen_fairies.value else True 

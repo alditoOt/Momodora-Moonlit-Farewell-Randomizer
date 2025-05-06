@@ -72,7 +72,6 @@ namespace APMomodoraMoonlitFarewell
             username = ConfigLoader.config.username;
             password = ConfigLoader.config.password;
             #endregion
-            locationHandler.InitializeDictionary();
             try
             {
                 session = ArchipelagoSessionFactory.CreateSession(server);

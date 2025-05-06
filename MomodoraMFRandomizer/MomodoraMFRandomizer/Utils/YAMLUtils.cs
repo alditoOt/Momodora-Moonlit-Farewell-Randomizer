@@ -21,6 +21,7 @@ namespace APMomodoraMoonlitFarewell.Utils
         public static Boolean STAMINA_UPGRADE;
         public static Boolean MAGIC_UPGRADE;
         public static Boolean FAIRIES;
+        public static String VICTORY;
         public static void GetSettingsFromYAML()
         {
             try
@@ -35,6 +36,7 @@ namespace APMomodoraMoonlitFarewell.Utils
                 APMomodoraMoonlitFarewell.session.DataStorage.GetSlotData().TryGetValue("progressive_stamina_upgrade", out object staminaUpgrade);
                 APMomodoraMoonlitFarewell.session.DataStorage.GetSlotData().TryGetValue("progressive_magic_upgrade", out object magicUpgrade);
                 APMomodoraMoonlitFarewell.session.DataStorage.GetSlotData().TryGetValue("progressive_lumen_fairies", out object fairies);
+                APMomodoraMoonlitFarewell.session.DataStorage.GetSlotData().TryGetValue("victory_condition", out object victory);
                 //APMomoMFRandomizer.session.DataStorage.GetSlotData().TryGetValue("fast_travel", out object fastTravel);
                 OPENSPRINGLEAFPATH = (Boolean)openSpringleafPath;
                 DEATHLINK = (Boolean)deathlink;
@@ -46,6 +48,7 @@ namespace APMomodoraMoonlitFarewell.Utils
                 STAMINA_UPGRADE = (Boolean)staminaUpgrade;
                 MAGIC_UPGRADE = (Boolean)magicUpgrade;
                 FAIRIES = (Boolean)fairies;
+                VICTORY = (string)victory;
                 //FAST_TRAVEL_CHOICE = (string)fastTravel;
             }
             catch (Exception e)
@@ -84,6 +87,15 @@ namespace APMomodoraMoonlitFarewell.Utils
             {
                 MomoEventUtils.FAIRYEVENTS.AddRange(new int[] { 41, 354, 44, 87, 51, 88, 352, 351, 162, 54, 346, 57, 47, 93, 137, 91, 342, 168, 355, 221, 224, 229, 238, 357, 300, 288, 287, 46, 353, 301});
             }
+            if (VICTORY == "moon_god_selin")
+            {
+                MomoEventUtils.VICTORY_EVENT = 364;
+            } 
+            else if (VICTORY == "dora")
+            {
+                MomoEventUtils.VICTORY_EVENT = 370;
+            }
+            MelonLogger.Msg(MomoEventUtils.VICTORY_EVENT);
             //WIP
             //if (FAST_TRAVEL_CHOICE == StringUtils.VANILLA)
             //{
