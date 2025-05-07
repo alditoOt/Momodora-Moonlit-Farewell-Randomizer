@@ -27,8 +27,7 @@ namespace APMomodoraMoonlitFarewell
         
         DeathLinkService deathLinkService;
         APDeathLinkHandler deathLinkHandler = new APDeathLinkHandler();
-        APLocationHandler locationHandler = new APLocationHandler();
-
+        
         public static ArchipelagoSession session;
         #endregion
         

@@ -19,7 +19,7 @@ namespace APMomodoraMoonlitFarewell.Archipelago
         public static bool HandleSigilAP(Item item, ref bool is_new_item)
         {
             itemReceived = false;
-            if (InventoryUtils.NON_AP_SIGIL_ITEM_ID.Contains(item.itemDef.Index))
+            if (!InventoryUtils.AP_SIGIL_ITEM_ID.Contains(item.itemDef.Index))
             {
                 APUtils.CompleteLocation(item.itemDef.Index);
                 return true;
