@@ -95,7 +95,6 @@ namespace APMomodoraMoonlitFarewell.Utils
             {
                 MomoEventUtils.VICTORY_EVENT = 370;
             }
-            MelonLogger.Msg(MomoEventUtils.VICTORY_EVENT);
             //WIP
             //if (FAST_TRAVEL_CHOICE == StringUtils.VANILLA)
             //{

@@ -1,4 +1,5 @@
-﻿using HarmonyLib;
+﻿using Archipelago.MultiClient.Net.Enums;
+using HarmonyLib;
 using MelonLoader;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace APMomodoraMoonlitFarewell.Utils
 {
     class InventoryUtils
     {
-        public static int BOSS_KEY_ID = 991;
+        public static readonly int BOSS_KEY_ID = 991;
         public static int DAMAGE_ID = 992;
         public static int HEALTH_ID = 993;
         public static int STAMINA_ID = 994;
@@ -35,5 +36,7 @@ namespace APMomodoraMoonlitFarewell.Utils
         public static string[] AP_SHOP_ITEMS = new string[8];
         public static long[] AP_SHOP_ITEMS_ID = new long[8];
         public static bool[] AP_SHOP_ITEM_IN_GAME = new bool[8];
+        public static string[] AP_SHOP_PLAYER_NAME = new string[8];
+        public static ItemFlags[] AP_SHOP_ITEM_FLAGS = new ItemFlags[8];
     }   
 }

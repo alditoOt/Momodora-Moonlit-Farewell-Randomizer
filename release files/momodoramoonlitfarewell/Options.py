@@ -37,17 +37,17 @@ class ProgressiveDamageUpgrade(Toggle):
     default = 0
 
 class ProgressiveHealthUpgrade(Toggle):
-    """Add the Dotted Health Berries to the item location check, as well as adding progressive health upgrade to the itempool (each upgrade grants 50 extra health)"""
+    """Add the Dotted Berries to the item location check, as well as adding progressive health upgrade to the itempool (each upgrade grants 50 extra health)"""
     display_name = "Progressive Health Upgrade"
     default = 0
 
 class ProgressiveMagicUpgrade(Toggle):
-    """Add the Blue Magic Berries to the item location check, as well as adding progressive magic upgrade to the itempool (each upgrade grants 10 extra magic)"""
+    """Add the Lun Berries to the item location check, as well as adding progressive magic upgrade to the itempool (each upgrade grants 10 extra magic)"""
     display_name = "Progressive Magic Upgrade"
     default = 0
 
 class ProgressiveStaminaUpgrade(Toggle):
-    """Add the Stamina Peaches/Berries to the item location check, as well as adding progressive stamina upgrade to the itempool"""
+    """Add the Stamina Peaches to the item location check, as well as adding progressive stamina upgrade to the itempool"""
     display_name = "Progressive Stamina Upgrade"
     default = 0
 

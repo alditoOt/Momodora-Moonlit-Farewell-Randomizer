@@ -53,6 +53,8 @@ namespace APMomodoraMoonlitFarewell.Patches
                 InventoryUtils.AP_SHOP_ITEMS[index] = pair.Value.ItemDisplayName;
                 InventoryUtils.AP_SHOP_ITEM_IN_GAME[index] = pair.Value.ItemGame == "Momodora Moonlit Farewell";
                 InventoryUtils.AP_SHOP_ITEMS_ID[index] = pair.Value.ItemId;
+                InventoryUtils.AP_SHOP_PLAYER_NAME[index] = pair.Value.Player.Alias;
+                InventoryUtils.AP_SHOP_ITEM_FLAGS[index] = pair.Value.Flags;
                 index++;
             }
         }

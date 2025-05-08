@@ -109,18 +109,18 @@ def set_rules(world: "MomodoraWorld"):
         set_rule(multiworld.get_location(*item("Heavenly Lily 3 - Ashen Hinterlands")), lambda state: state.has(*item("Crescent Moonflower")) and state.has(*item("Spiral Shell")))
 
     if world.options.progressive_health_upgrade:
-        set_rule(multiworld.get_location(*item("Health Berry 1 - Lun Tree Roots")), lambda state: state.has(*item("Awakened Sacred Leaf")) or world.options.open_springleaf_path.value)
-        set_rule(multiworld.get_location(*item("Health Berry 1 - Demon Frontier")), lambda state: state.has(*item("Crescent Moonflower")))
-        set_rule(multiworld.get_location(*item("Health Berry 2 - Ashen Hinterlands")), lambda state: state.has(*item("Crescent Moonflower")) and (state.has(*item("Spiral Shell"))) or state.has(*item("Lunar Attunement")))
+        set_rule(multiworld.get_location(*item("Dotted Berry 1 - Lun Tree Roots")), lambda state: state.has(*item("Awakened Sacred Leaf")) or world.options.open_springleaf_path.value)
+        set_rule(multiworld.get_location(*item("Dotted Berry 1 - Demon Frontier")), lambda state: state.has(*item("Crescent Moonflower")))
+        set_rule(multiworld.get_location(*item("Dotted Berry 2 - Ashen Hinterlands")), lambda state: state.has(*item("Crescent Moonflower")) and (state.has(*item("Spiral Shell"))) or state.has(*item("Lunar Attunement")))
     if world.options.progressive_magic_upgrade:
-        set_rule(multiworld.get_location(*item("Magic Berry - Koho Village")), lambda state: state.has(*item("Crescent Moonflower")) and state.has(*item("Spiral Shell")))
-        set_rule(multiworld.get_location(*item("Magic Berry - Springleaf Path")), lambda state: world.options.open_springleaf_path.value or state.has(*item("Crescent Moonflower") or state.has(*item("Spiral Shell"))))
-        set_rule(multiworld.get_location(*item("Magic Berry - Lun Tree Roots")), lambda state: state.has(*item("Awakened Sacred Leaf")) or world.options.open_springleaf_path.value)
-        set_rule(multiworld.get_location(*item("Magic Berry - Ashen Hinterlands")), lambda state: state.has(*item("Crescent Moonflower")) and state.has(*item("Spiral Shell")))
-        set_rule(multiworld.get_location(*item("Magic Berry - Demon Frontier")), lambda state: state.has(*item("Crescent Moonflower")) and state.has(*item("Spiral Shell")))
-        set_rule(multiworld.get_location(*item("Magic Berry - Fount of Rebirth")), lambda state: state.can_reach("Selin", "Region", player))
+        set_rule(multiworld.get_location(*item("Lun Berry - Koho Village")), lambda state: state.has(*item("Crescent Moonflower")) and state.has(*item("Spiral Shell")))
+        set_rule(multiworld.get_location(*item("Lun Berry - Springleaf Path")), lambda state: world.options.open_springleaf_path.value or state.has(*item("Crescent Moonflower") or state.has(*item("Spiral Shell"))))
+        set_rule(multiworld.get_location(*item("Lun Berry - Lun Tree Roots")), lambda state: state.has(*item("Awakened Sacred Leaf")) or world.options.open_springleaf_path.value)
+        set_rule(multiworld.get_location(*item("Lun Berry - Ashen Hinterlands")), lambda state: state.has(*item("Crescent Moonflower")) and state.has(*item("Spiral Shell")))
+        set_rule(multiworld.get_location(*item("Lun Berry - Demon Frontier")), lambda state: state.has(*item("Crescent Moonflower")) and state.has(*item("Spiral Shell")))
+        set_rule(multiworld.get_location(*item("Lun Berry - Fount of Rebirth")), lambda state: state.can_reach("Selin", "Region", player))
     if world.options.progressive_stamina_upgrade:
-        set_rule(multiworld.get_location(*item("Stamina Berry - Ashen Hinterlands")), lambda state: state.has(*item("Lunar Attunement")))
+        set_rule(multiworld.get_location(*item("Peach - Ashen Hinterlands")), lambda state: state.has(*item("Lunar Attunement")))
     if world.options.progressive_lumen_fairies:
         set_rule(multiworld.get_location(*item("Lumen Fairy 2 - Springleaf Path")), lambda state: state.has(*item("Crescent Moonflower")) or state.has(*item("Spiral Shell")))
         set_rule(multiworld.get_location(*item("Lumen Fairy 4 - Lun Tree Roots")), lambda state: world.options.bell_hover_generation.value or state.has(*item("Crescent Moonflower")) or state.has(*item("Spiral Shell")))
