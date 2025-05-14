@@ -25,11 +25,11 @@ namespace APMomodoraMoonlitFarewell.Utils
         public static readonly string GARBAGE_DESCRIPTION = "Money!";
         public static readonly string KEY_ITEM_DESCRIPTION = "In-game item!";
 
-        public static readonly string LEAF_DESCRIPTION = "";
-        public static readonly string LUNAR_ATTUNEMENT_DESCRIPTION = "";
-        public static readonly string WALL_JUMP_DESCRIPTION = "";
-        public static readonly string DOUBLE_JUMP_DESCRIPTION = "";
-        public static readonly string DASH_DESCRIPTION = "";
+        public static readonly string LEAF_DESCRIPTION = "Allows your main attack to destroy Demon Strings!";
+        public static readonly string LUNAR_ATTUNEMENT_DESCRIPTION = "Increases combat ability and higher jumps, as well as allowing you to move through thick fog!";
+        public static readonly string WALL_JUMP_DESCRIPTION = "Allows you to do multiple jumps on walls!";
+        public static readonly string DOUBLE_JUMP_DESCRIPTION = "Allows you to jump midair!";
+        public static readonly string DASH_DESCRIPTION = "Allows you to sprint!";
         public static readonly string FAST_TRAVEL_DESCRIPTION = "Unlocks Mitchi Fast Travel. You can only fast travel to and from places you've already visited";
     }
 }
