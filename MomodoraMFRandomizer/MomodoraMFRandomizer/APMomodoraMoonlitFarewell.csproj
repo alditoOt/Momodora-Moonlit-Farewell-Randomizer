@@ -7,8 +7,8 @@
     <ProjectGuid>{2A6D7B25-713E-433A-B8AE-D2296827D6F4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>APMomoMFRandomizer</RootNamespace>
-    <AssemblyName>APMomoMFRandomizer</AssemblyName>
+    <RootNamespace>APMomodoraMoonlitFarewell</RootNamespace>
+    <AssemblyName>APMomodoraMoonlitFarewell</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -67,15 +67,18 @@
   <ItemGroup>
     <Compile Include="Archipelago\APConnector.cs" />
     <Compile Include="Archipelago\APLocationHandler.cs" />
-    <Compile Include="APMomoMFRandomizer.cs" />
-    <Compile Include="Archipelago\APItemLocationHandler.cs" />
-    <Compile Include="Archipelago\APSkillLocationHandler.cs" />
+    <Compile Include="APMomodoraMoonlitFarewell.cs" />
+    <Compile Include="Archipelago\APSigilHandler.cs" />
+    <Compile Include="Archipelago\APSkillHandler.cs" />
     <Compile Include="Archipelago\APSocketHandler.cs" />
     <Compile Include="Patches\BlockRemover.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Archipelago\APDeathLinkHandler.cs" />
     <Compile Include="Patches\GameDataPatcher.cs" />
+    <Compile Include="Patches\ShopPatcher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\APUtils.cs" />
+    <Compile Include="Utils\DataUtils.cs" />
     <Compile Include="Utils\InventoryUtils.cs" />
     <Compile Include="Utils\MomoEventUtils.cs" />
     <Compile Include="Utils\ConfigLoader.cs" />

@@ -8,7 +8,7 @@ using UnityEngine;
 using HarmonyLib;
 using UnityEngine.SceneManagement;
 
-namespace MomodoraMFRandomizer
+namespace APMomodoraMoonlitFarewell.Patches
 {
     class BlockRemover
     {

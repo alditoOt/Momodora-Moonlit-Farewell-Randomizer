@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine.SceneManagement;
 
-namespace APMomoMFRandomizer
+namespace APMomodoraMoonlitFarewell.Patches
 {
     [HarmonyPatch(typeof(SceneManager))]
     class SceneManagerPatcher

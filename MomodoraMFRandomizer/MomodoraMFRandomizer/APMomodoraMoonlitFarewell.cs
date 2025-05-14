@@ -12,10 +12,13 @@ using Archipelago.MultiClient.Net;
 using Archipelago.MultiClient.Net.Enums;
 using Archipelago.MultiClient.Net.BounceFeatures.DeathLink;
 using System.Reflection;
+using APMomodoraMoonlitFarewell.Archipelago;
+using APMomodoraMoonlitFarewell.Patches;
+using APMomodoraMoonlitFarewell.Utils;
 
-namespace MomodoraMFRandomizer
+namespace APMomodoraMoonlitFarewell
 {
-    public class APMomoMFRandomizer : MelonMod
+    public class APMomodoraMoonlitFarewell : MelonMod
     {
         #region AP variables
         private static string server; 
@@ -24,8 +27,7 @@ namespace MomodoraMFRandomizer
         
         DeathLinkService deathLinkService;
         APDeathLinkHandler deathLinkHandler = new APDeathLinkHandler();
-        APLocationHandler locationHandler = new APLocationHandler();
-
+        
         public static ArchipelagoSession session;
         #endregion
         
@@ -69,12 +71,12 @@ namespace MomodoraMFRandomizer
             username = ConfigLoader.config.username;
             password = ConfigLoader.config.password;
             #endregion
-            locationHandler.InitializeDictionary();
             try
             {
                 session = ArchipelagoSessionFactory.CreateSession(server);
                 APConnector.Connect(session, server, username, password);
                 session.Items.ItemReceived += APLocationHandler.UpdateItemsForTheSession;
+                GameDataPatcher.UpdateShopNames();
                 CollectSocketInfo();
                 YAMLUtils.GetSettingsFromYAML();
                 YAMLUtils.AddItemsToItemPool();
@@ -109,13 +111,14 @@ namespace MomodoraMFRandomizer
             {
                 APLocationHandler.UpdateItemsForTheSession(null);
                 mainMenu = false;
+                MomoEventUtils.DEFAULT_EVENTS_TO_1.ForEach(x => GameData.current.MomoEvent[x] = 1);
             }
             if(YAMLUtils.OPENSPRINGLEAFPATH)
             {
                 blockRemover.removeAllBlockers(sceneName);
             }
             blockRemover.RemoveGynBarrier(sceneName);
-            APSkillLocationHandler.HandleSkillLocationCheck(sceneName, mainMenu);
+            APSkillHandler.HandleSkillOnSceneLoad(sceneName, mainMenu);
         }
 
         public override void OnFixedUpdate()

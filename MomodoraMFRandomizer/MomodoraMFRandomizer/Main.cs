@@ -10,6 +10,7 @@ using UnityEngine.SceneManagement;
 using System.Collections;
 using Archipelago.MultiClient.Net;
 using Archipelago.MultiClient.Net.Enums;
+using APMomodoraMoonlitFarewell.Patches;
 
 namespace MomodoraMFRandomizer
 {

@@ -8,8 +8,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using APMomodoraMoonlitFarewell.Utils;
 
-namespace MomodoraMFRandomizer
+namespace APMomodoraMoonlitFarewell.Archipelago
 {
     [HarmonyPatch(typeof(MomoEventData))]
     class APSocketHandler
@@ -18,11 +19,11 @@ namespace MomodoraMFRandomizer
         [HarmonyPostfix]
         public static void SendCompletion()
         {
-            if (GameData.current.MomoEvent[364] == 1)
+            if (GameData.current.MomoEvent[MomoEventUtils.VICTORY_EVENT] == 1)
             {
                 var statusUpdatePacket = new StatusUpdatePacket();
                 statusUpdatePacket.Status = ArchipelagoClientState.ClientGoal;
-                APMomoMFRandomizer.session.Socket.SendPacket(statusUpdatePacket);
+                APMomodoraMoonlitFarewell.session.Socket.SendPacket(statusUpdatePacket);
             }
         }
     }
