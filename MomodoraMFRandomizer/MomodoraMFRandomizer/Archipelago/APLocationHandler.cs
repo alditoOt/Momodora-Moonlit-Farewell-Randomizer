@@ -109,8 +109,8 @@ namespace APMomodoraMoonlitFarewell.Archipelago
                         return;
                     }
                 }
-                APUtils.CompleteLocation(index);
             }
+            APUtils.CompleteLocation(index);
         }
 
         public static void GiveItem(int itemId)
