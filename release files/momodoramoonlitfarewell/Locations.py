@@ -123,7 +123,7 @@ advancement_table = {
    "Dotted Berry 3 - Fairy Springs": AdvData(8900, "Fairy Springs"),
    "Dotted Berry - Fairy Village": AdvData(14300, "Fairy Village"),
    "Dotted Berry 1 - Ashen Hinterlands": AdvData(21900, "Ashen Hinterlands"),
-   "Dotted Berry 2 - Ashen Hinterlands": AdvData(14900, "Ashen Hinterlands Continued"),
+   "Dotted Berry 2 - Ashen Hinterlands": AdvData(24900, "Ashen Hinterlands Continued"),
    "Dotted Berry 3 - Ashen Hinterlands": AdvData(35600, "Ashen Hinterlands Continued"),
    "Dotted Berry 4 - Ashen Hinterlands": AdvData(24600, "Ashen Hinterlands Continued"),
    "Dotted Berry 1 - Meikan Village": AdvData(35900, "Meikan Village"),

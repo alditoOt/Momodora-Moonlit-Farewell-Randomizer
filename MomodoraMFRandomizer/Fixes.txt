@@ -1,0 +1,4 @@
+Fixes
+
+- Dotted Berry 1 - Ashen Hinterlands not getting sent
+- Mouse NPC triggers Dotted Berry 2 - Ashen Hinterlands

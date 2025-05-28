@@ -17,6 +17,14 @@ Dusty Grimoire: 340
 Grimoire: 338
 Tattered Grimoire: 339
 
+Mouse rescue: 149
+279: 483: (AH Berry)
+240: 1550 (KV berry)
+280: 1922 (MR peach)
+
+60: alditto skip lever
+59: KV lever
+
 Companions:
 
 Grimalkin Spirit [Healer] 381

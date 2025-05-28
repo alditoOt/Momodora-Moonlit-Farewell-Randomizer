@@ -22,7 +22,6 @@ namespace MomoReader.Utils
             MelonLogger.Msg($"Event {index} just changed to {value} in scene ${MomoReader.sceneName}");
         }
 
-
         public static void UpdateItemData(int eventId, string location)
         {
             string itemData = $"{eventId},{location}";
