@@ -73,7 +73,7 @@ namespace APMomodoraMoonlitFarewell.Utils
             }
             if (HEALTH_UPGRADE)
             {
-                MomoEventUtils.HEALTHBERRYEVENTS.AddRange(new int[] { 30, 27, 29, 361, 26, 152, 24, 174, 116, 35, 31, 89, 143, 149, 356, 246, 165, 359, 332, 360, 348, 349, 218, 282});
+                MomoEventUtils.HEALTHBERRYEVENTS.AddRange(new int[] { 30, 27, 29, 361, 26, 152, 24, 174, 116, 35, 31, 89, 143, 249, 356, 246, 165, 359, 332, 360, 348, 349, 219, 282});
             }
             if (STAMINA_UPGRADE)
             {

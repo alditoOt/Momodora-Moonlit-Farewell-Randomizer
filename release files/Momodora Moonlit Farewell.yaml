@@ -67,8 +67,8 @@ Momodora Moonlit Farewell:
 
   deathlink:
     # Link all player deaths together. If you die, all other players in the session (with deathlink enabled) also die. The same works the other way around.
-    'false': 0
-    'true': 50
+    'false': 50
+    'true': 0
 
   bell_hover_generation:
     # Consider Bell Hover as a possible strat for world generation. Bell Hover is used to access certain areas without having the correct skill (i.e. Demon Frontier without Wall Jump) 
@@ -99,17 +99,17 @@ Momodora Moonlit Farewell:
     'true': 0
 
   progressive_health_upgrade:
-    # Add the Dotted Health Berries to the item location check, as well as adding progressive health upgrade to the itempool (each upgrade grants 50 extra health)
+    # Add the Dotted Berries to the item location check, as well as adding progressive health upgrade to the itempool (each upgrade grants 50 extra health)
     'false': 50
     'true': 0
 
   progressive_magic_upgrade:
-    # Add the Blue Magic Berries to the item location check, as well as adding progressive magic upgrade to the itempool (each upgrade grants 10 extra magic)
+    # Add the Lun Berries to the item location check, as well as adding progressive magic upgrade to the itempool (each upgrade grants 10 extra magic)
     'false': 50
     'true': 0
 
   progressive_stamina_upgrade:
-    # Add the Stamina Peaches/Berries to the item location check, as well as adding progressive stamina upgrade to the itempool
+    # Add the Stamina Peaches to the item location check, as well as adding progressive stamina upgrade to the itempool
     'false': 50
     'true': 0
 
