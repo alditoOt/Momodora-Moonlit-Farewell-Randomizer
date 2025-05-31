@@ -89,6 +89,10 @@ namespace APMomodoraMoonlitFarewell.Archipelago
 
         private static void ReportSkillLocation(int index, int value)
         {
+            if (index == 9)
+            {
+                APUtils.CompleteLocation(index);
+            }
             //Boolean fastTravelReceived = false;
             Boolean skillReceived = false;
             foreach (ItemInfo item in APMomodoraMoonlitFarewell.session.Items.AllItemsReceived)
@@ -109,8 +113,8 @@ namespace APMomodoraMoonlitFarewell.Archipelago
                         return;
                     }
                 }
+                APUtils.CompleteLocation(index);
             }
-            APUtils.CompleteLocation(index);
         }
 
         public static void GiveItem(int itemId)

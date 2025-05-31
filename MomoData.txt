@@ -1,5 +1,8 @@
 Deathcount event: 101
 
+For fast travel item: disable Mitchi NPC until you receive it or something
+How do I make it so that it actually unlocks when you do get it?
+
 Item definitions (to check in game menu)
 
 *Windmill key: 356 

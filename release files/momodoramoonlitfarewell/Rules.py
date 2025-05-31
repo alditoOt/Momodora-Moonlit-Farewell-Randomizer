@@ -117,8 +117,8 @@ def set_rules(world: "MomodoraWorld"):
         set_rule(multiworld.get_location(*item("Dotted Berry 3 - Meikan Village")), lambda state: state.can_reach("Fount of Rebirth", "Region", player))
     
     if world.options.progressive_magic_upgrade:
-        set_rule(multiworld.get_location(*item("Lun Berry - Koho Village")), lambda state: state.has(*item("Crescent Moonflower")) and state.has(*item("Spiral Shell")))
-        set_rule(multiworld.get_location(*item("Lun Berry - Springleaf Path")), lambda state: world.options.open_springleaf_path.value or state.has(*item("Crescent Moonflower") or state.has(*item("Spiral Shell"))))
+        set_rule(multiworld.get_location(*item("Lun Berry - Koho Village")), lambda state: state.has(*item("Crescent Moonflower")) or state.has(*item("Spiral Shell")))
+        set_rule(multiworld.get_location(*item("Lun Berry - Springleaf Path")), lambda state: world.options.open_springleaf_path.value or state.has(*item("Awakened Sacred Leaf")) or state.has(*item("Crescent Moonflower") or state.has(*item("Spiral Shell"))))
         set_rule(multiworld.get_location(*item("Lun Berry - Lun Tree Roots")), lambda state: state.has(*item("Awakened Sacred Leaf")) or world.options.open_springleaf_path.value)
         set_rule(multiworld.get_location(*item("Lun Berry - Ashen Hinterlands")), lambda state: state.has(*item("Crescent Moonflower")) and state.has(*item("Spiral Shell")))
         set_rule(multiworld.get_location(*item("Lun Berry - Demon Frontier")), lambda state: state.has(*item("Crescent Moonflower")) and state.has(*item("Spiral Shell")))
