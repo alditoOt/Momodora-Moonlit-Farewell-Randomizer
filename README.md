@@ -59,7 +59,7 @@ With this setting on, all Peaches count as location checks, and picking them up 
 With this setting on, all Lumen Fairies count as location checks, and breaking them up no longer frees a lumen fairie. The Lumen Fairy is now part of the itempool, as Progressive Lumen Fairy, with each upgrade setting free 1 Lumen Fairy of the 30 needed for the Oracle check. (You can use this with the Oracle Sigil setting on or off).
 
 ## Victory Condition
-You can choose which boss to defeat in order to consider the game as finished. If you pick Dora, the fight is available right after the cutscenes.
+You can choose which boss to defeat in order to consider the game as finished. If you pick Dora, the fight is available right after the end credits.
 
 # Items and Locations
 ## Locations Checks
