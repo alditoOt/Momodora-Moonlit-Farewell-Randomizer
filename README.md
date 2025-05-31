@@ -77,6 +77,7 @@ You can choose which boss to defeat in order to consider the game as finished. I
 - Dotted Berries
 - Lun Berries
 - Peaches
+- Lumen Fairies
 
 ## Skill Location Checks
 To send a location check for the skills, you simply need to receive the skill as the vanilla game. This will work **only** if you haven't received the skill from the itempool yet.
