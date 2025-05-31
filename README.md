@@ -5,7 +5,7 @@ You can find you save file here:
 
 You can copy the Save0.sav (or any corresponding slot) into a backup folder (Save0 is slot 1, save4 is slot 5).
 
-When playing in a randomizer, it's recommended to start from a new save file. Hardocre mode is possible, but not recommended.
+When playing in a randomizer, it's recommended to start from a new save file. Hardcore mode is in theory possible, but not recommended (especially with deathlink enabled).
 
 # Mod Install Notes
 This randomizer uses a custom made mod to go along with the AP session. 
@@ -46,12 +46,27 @@ If you have this setting on as well as the Oracle Sigil setting, there's a possi
 ## Progressive Damage Upgrade
 With this setting on, all Heavenly Lilies count as location checks, and praying on one will no longer give you the damage upgrade. The damage upgrade is instead now part of the itempool, as Progressive Damage Upgrade, and each upgrade grants 2 additional damage
 
+## Progressive Health Upgrade
+With this setting on, all Dotted Berries count as location checks, and picking them up no longer increases your max health. The health upgrade is now part of the itempool, as Progressive Health Upgrade, with each upgrade granting 50 additional max health.
+
+## Progressive Magic Upgrade
+With this setting on, all Lun Berries count as location checks, and picking them up no longer increases your max magic. The magic upgrade is now part of the itempool, as Progressive Magic Upgrade, with each upgrade granting 10 additional max magic.
+
+## Progressive Stamina Upgrade
+With this setting on, all Peaches count as location checks, and picking them up no longer increases your stamina regeneration. The stamina upgrade is now part of the itempool, as Progressive Stamina Upgrade.
+
+## Progressive Lumen Fairies
+With this setting on, all Lumen Fairies count as location checks, and breaking them up no longer frees a lumen fairie. The Lumen Fairy is now part of the itempool, as Progressive Lumen Fairy, with each upgrade setting free 1 Lumen Fairy of the 30 needed for the Oracle check. (You can use this with the Oracle Sigil setting on or off).
+
+## Victory Condition
+You can choose which boss to defeat in order to consider the game as finished. If you pick Dora, the fight is available right after the cutscenes.
+
 # Items and Locations
 ## Locations Checks
 - All skills (all 5 main skills and fast travel)
 - All Sigils
 - All Grimoires
-- All Bosses (most bosses send the check once their cutscene is over)
+- All Bosses but the final boss (most bosses send the check once their cutscene is over)
 
 ## Optional Checks (based on YAML settings)
 - Gold Moonlit Dust
@@ -59,6 +74,9 @@ With this setting on, all Heavenly Lilies count as location checks, and praying 
 - Windmill Key
 - Oracle Sigil
 - Heavenly Lilies
+- Dotted Berries
+- Lun Berries
+- Peaches
 
 ## Skill Location Checks
 To send a location check for the skills, you simply need to receive the skill as the vanilla game. This will work **only** if you haven't received the skill from the itempool yet.
@@ -70,7 +88,7 @@ If you already have a skill received, but haven't checked its location yet, ente
 - All skills (all 5 main skills and fast travel)
 - All Sigils (Save for The Fool, Living Blood and all Sigils you can buy from Cereza. Checking these locations will send a location check as well as giving you their respective Sigil)
 - All Grimoires
-- 50 Lunar Crystals
+- 100 Lunar Crystals
 
 ## Optional Items You Can Receive (based on YAML settings)
 - Gold Moonlit Dust 
@@ -79,17 +97,19 @@ If you already have a skill received, but haven't checked its location yet, ente
 - Oracle Sigil
 - 4 Final Boss Keys
 - Progressive Damage Upgrades
+- Progressive Health Upgrades
+- Progressive Magic Upgrades
+- Progressive Stamina Upgrades
+- Progressive Lumen Fairies
 
 # Victory Condition
-The game is considered finished when you defeat the final boss and finish watching the text after the black screen.
+The game is considered finished when you defeat the boss set in the victory condition setting.
 
 # Possible Issues
 ## Stuck in Harpy Room
 - For some reason, with the open_springleaf_path setting on, the windzones in the fight with the Harpy, and only in this room, are **not** removed (I'm looking into this). If you find yourself in this situation and can't leave the room, go back to the Title Screen and reload your save file. The red barrier that appears to the right of the room will be gone.
   - If you have **wall jump** or **double jump** you can just use those to leave the room. **If you don't**, the only other way I can think of is using [Bell Hover](https://www.youtube.com/watch?v=wEe-bJFBG_Q) for that particular place. This is a handy guide showcasing Bell Hover, and you can use the healing bell it up to 3 times to gain enough height to leave the room.
-## Sending a Check When Reloading the Game
-- If you open your file when you have a skill but haven't checked it's location yet, the game will send that location as if it was just checked. Also an oversight from my part, but on the bright side, only 5 locations are affected by it so at least you're not sending too much stuff... (hopefully)
 
-If any issues are found during playing or playtesting, please do let me know in the discord forum so I can look into them. Ultimately, this is still a work in progress so it's not free of bugs, but I'd argue it's very much completable most of the time.
+If any issues are found during playing or playtesting, please do let me know in the [Archipelago Discord](https://discord.com/invite/8Z65BR2) so I can look into them. Ultimately, this is still a work in progress so it's not free of bugs, but I'd argue it's very much completable most of the time.
 
 Also, feel free to ask for advice or share what you find! There might be some places that, even with their respective YAML setting, might need some creativity or use of some strats to reach, since considering every possibility of entrance is quite a task, so having information on how to reach certain places can be very useful!
