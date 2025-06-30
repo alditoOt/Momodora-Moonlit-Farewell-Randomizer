@@ -287,5 +287,14 @@ exclusion_table = {
         "Lumen Fairy 4 - Springleaf Path",
         "Lumen Fairy - Old Sanctuary",
         "Lumen Fairy - Meikan Village Windmill"
+    },
+    "progressive_magic": {
+        "Lun Berry - Koho Village",
+   "Lun Berry - Springleaf Path",
+   "Lun Berry - Lun Tree Roots",
+   "Lun Berry - Fairy Springs",
+   "Lun Berry - Ashen Hinterlands",
+   "Lun Berry - Demon Frontier",
+   "Lun Berry - Fount of Rebirth"
     }
 }
