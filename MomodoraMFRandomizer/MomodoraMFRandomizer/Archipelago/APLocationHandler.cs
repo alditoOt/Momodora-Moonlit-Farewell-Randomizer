@@ -89,10 +89,6 @@ namespace APMomodoraMoonlitFarewell.Archipelago
 
         private static void ReportSkillLocation(int index, int value)
         {
-            if (index == 9)
-            {
-                APUtils.CompleteLocation(index);
-            }
             //Boolean fastTravelReceived = false;
             Boolean skillReceived = false;
             foreach (ItemInfo item in APMomodoraMoonlitFarewell.session.Items.AllItemsReceived)
@@ -100,6 +96,7 @@ namespace APMomodoraMoonlitFarewell.Archipelago
                 if (item.ItemId == index)
                 {
                     skillReceived = true;
+                    continue;
                 }
             }
             if (!skillReceived)
@@ -114,6 +111,12 @@ namespace APMomodoraMoonlitFarewell.Archipelago
                     }
                 }
                 APUtils.CompleteLocation(index);
+            }
+            else if (skillReceived && index == 9)
+            {
+                if (GameData.inventory.HasItem(GameData.itemDatabase.GetItem(101).itemDef)) {
+                    APUtils.CompleteLocation(index);
+                } 
             }
         }
 
@@ -210,12 +213,20 @@ namespace APMomodoraMoonlitFarewell.Archipelago
 
         private static void UpdatePlayerDamage(int lilyCount)
         {
+            if (!YAMLUtils.DAMAGE_UPGRADE)
+            {
+                return;
+            }
             Platformer3D.phys_attack = 5 + 2 * lilyCount;
             GameData.current.MomoEvent[MomoEventUtils.LILY_COUNTER_EVENT] = lilyCount;
         }
 
         private static void UpdatePlayerHealth(int healthCount)
         {
+            if (!YAMLUtils.HEALTH_UPGRADE)
+            {
+                return;
+            }
             float prevHP = Platformer3D.player_maxhp;
             Platformer3D.player_maxhp = 300 + 50 * healthCount;
             Platformer3D.player_hp += Platformer3D.player_maxhp > prevHP ? 50 : 0;
@@ -224,6 +235,10 @@ namespace APMomodoraMoonlitFarewell.Archipelago
 
         private static void UpdatePlayerMagic(int magicCount)
         {
+            if (!YAMLUtils.MAGIC_UPGRADE)
+            {
+                return;
+            }
             float prevMagic = Platformer3D.player_maxsp;
             Platformer3D.player_maxsp = 30 + 10 * magicCount;
             Platformer3D.player_sp += Platformer3D.player_maxsp > prevMagic ? 10 : 0;
@@ -232,11 +247,19 @@ namespace APMomodoraMoonlitFarewell.Archipelago
 
         private static void UpdateFairies(int fairyCount)
         {
+            if (!YAMLUtils.FAIRIES)
+            {
+                return;
+            }
             GameData.current.MomoEvent[MomoEventUtils.FAIRY_COUNTER_EVENT] = fairyCount;
         }
 
         private static void UpdatePlayerStamina(int staminaCount)
         {
+            if (!YAMLUtils.STAMINA_UPGRADE)
+            {
+                return;
+            }
             GameData.current.MomoEvent[MomoEventUtils.STAMINA_COUNTER_EVENT_ONE] = staminaCount;
             GameData.current.MomoEvent[MomoEventUtils.STAMINA_COUNTER_EVENT_TWO] = staminaCount;
         }

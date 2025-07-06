@@ -18,7 +18,7 @@ def set_rules(world: "MomodoraWorld"):
         return region, player
     
     set_rule(multiworld.get_entrance(*region("SP_SPC")), 
-             lambda state: state.has(*item("Awakened Sacred Leaf")) or
+             lambda state: state.has(*item("Sacred Anemone")) or
              bool(world.options.open_springleaf_path.value))
     set_rule(multiworld.get_entrance(*region("SPC_LTR")), 
              lambda state: state.has(*item("Sacred Anemone")) or

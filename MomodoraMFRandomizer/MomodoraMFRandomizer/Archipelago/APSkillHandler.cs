@@ -40,7 +40,6 @@ namespace APMomodoraMoonlitFarewell.Archipelago
                 if (GameData.current.MomoEvent[17] == 0)
                 {
                     ResetDashSkill();
-                    // Check what happens if you get the dash skill back while in the scene
                 }
             }
             else if (index == 131) //Lunar Attunement
