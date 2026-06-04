@@ -8,6 +8,20 @@ from .Rules import set_rules, set_completion_rules
 from worlds.AutoWorld import World, WebWorld
 from multiprocessing import Process
 
+class MomodoraWeb(WebWorld):
+    theme = "grassFlowers"
+
+    setup_en = Tutorial(
+        "Multiworld Setup Guide",
+        "A guide to setting up the Archipelago randomizer for Momodora Moonlit Farewell.",
+        "English",
+        "setup_en.md",
+        "setup/en",
+        ["alditoOt"]
+    )
+
+    tutorials = [setup_en]
+
 class MomodoraWorld(World):
     """
     Momodora Moonlit Farewell is a game
@@ -19,6 +33,8 @@ class MomodoraWorld(World):
     item_name_to_id = {name: data.code for name, data in item_table.items()}
     location_name_to_id = {name: data.id for name, data in advancement_table.items()}
     
+    web = MomodoraWeb()
+
 
     def _get_momodora_data(self):
         return {
