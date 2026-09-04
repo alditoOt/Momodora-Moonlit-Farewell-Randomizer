@@ -52,7 +52,7 @@ namespace APMomodoraMoonlitFarewell.Archipelago
             }
 
             var loginSuccess = (LoginSuccessful)result;
-            MelonLogger.Msg("soy fans");
+            MelonLogger.Msg("I'm your fan(s)");
             MelonLogger.Msg("Connected to Archipelago session. Have fun!");
         }
     }

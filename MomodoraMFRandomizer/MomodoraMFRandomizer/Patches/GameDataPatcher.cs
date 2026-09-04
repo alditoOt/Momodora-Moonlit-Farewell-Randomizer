@@ -61,7 +61,8 @@ namespace APMomodoraMoonlitFarewell.Patches
 
         public static void UpdateShopNames()
         {
-            APMomodoraMoonlitFarewell.session.Locations.ScoutLocationsAsync(UpdateShopNames, SHOP_ITEM_ID);
+            Dictionary<long, ScoutedItemInfo> results = APMomodoraMoonlitFarewell.session.Locations.ScoutLocationsAsync(true, SHOP_ITEM_ID).Result;
+            UpdateShopNames(results);
         }
     }
 }

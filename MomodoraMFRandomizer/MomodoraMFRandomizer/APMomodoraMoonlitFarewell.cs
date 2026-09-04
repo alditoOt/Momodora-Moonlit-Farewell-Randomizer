@@ -93,7 +93,7 @@ namespace APMomodoraMoonlitFarewell
             }
             catch (Exception e)
             {
-                MelonLogger.Msg($"An error occured when trying to create the session: {e.Message}");
+                MelonLogger.Msg($"An error occured when trying to create the session: {e.ToString()}");
             }
         }
 
