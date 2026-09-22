@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -28,27 +27,19 @@ namespace APMomodoraMoonlitFarewell.Utils
 
         public static int FINAL_DOOR_EVENT = 294;
         public static int FAST_TRAVEL_EVENT = 205;
+        public static string FAST_TRAVEL_SCENE = "Cove03";
         public static int LILY_COUNTER_EVENT = 218;
         public static int HEALTH_COUNTER_EVENT = 215;
         public static int MAGIC_COUNTER_EVENT = 216;
         public static int STAMINA_COUNTER_EVENT_ONE = 217;
         public static int STAMINA_COUNTER_EVENT_TWO = 200;
         public static int FAIRY_COUNTER_EVENT = 39;
+        public static int TAINTED_SERPENT_DEFEATED_EVENT = 255;
         public static int VICTORY_EVENT;
-
-        //[HarmonyPatch("set_Item")]
-        //[HarmonyPostfix]
-        //private static void PrintOnEventChange(int index, int value)
-        //{
-        //    if (value == 1)
-        //    {
-        //        MelonLogger.Msg($"Event {index} was set to {value}.");
-        //    }
-        //}
 
         public static void GrowTimedBerries()
         {
-            if (YAMLUtils.HEALTH_UPGRADE)
+            if (SlotDataUtils.HEALTH_UPGRADE)
             {
                 if (GameData.current.MomoEvent[279] != 1)
                 {
@@ -59,7 +50,7 @@ namespace APMomodoraMoonlitFarewell.Utils
                     GameData.current.MomoEvent[240] = 1;
                 }
             }
-            if (YAMLUtils.STAMINA_UPGRADE && GameData.current.MomoEvent[280] != 1)
+            if (SlotDataUtils.STAMINA_UPGRADE && GameData.current.MomoEvent[280] != 1)
             {
                 GameData.current.MomoEvent[280] = 1;
             }

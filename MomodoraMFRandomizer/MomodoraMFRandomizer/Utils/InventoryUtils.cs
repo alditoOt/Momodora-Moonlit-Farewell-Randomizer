@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace APMomodoraMoonlitFarewell.Utils
@@ -23,6 +22,8 @@ namespace APMomodoraMoonlitFarewell.Utils
         public static List<int> AP_SIGIL_ITEM_ID = new List<int> { 442, 400, 436, 402, 403, 433, 448, 412, 404, 434, 447, 440, 405, 439, 443, 444, 425, 445, 430, 435, 432, 427, 438, 449, 446, 338, 339, 340 };
         public static List<int> NON_AP_SIGIL_ITEM_ID = new List<int> { 419, 431, 422, 123, 437, 406, 408, 426, 401 };
         public static List<int> KEY_ITEM_ID = new List<int> { 333, 332, 356 };
+        public static readonly int GOLD_MOONLIT_DUST_ID = 333;
+        public static readonly int SILVER_MOONLIT_DUST_ID = 332;
         public static int ORACLE = 441;
         public static Dictionary<int, int> SKILL_INVENTORY_ID = new Dictionary<int, int>()
         {

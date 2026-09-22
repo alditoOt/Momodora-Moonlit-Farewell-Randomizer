@@ -15,12 +15,10 @@ namespace APMomodoraMoonlitFarewell.Patches
     [HarmonyPatch(typeof(DialogueBox))]
     class ShopPatcher
     {
-
         [HarmonyPatch("SetOptions")]
         [HarmonyPrefix]
         public static void ChangeItemName(ref string[] options, ref string[] decors)
         {
-            MelonLogger.Msg("Updating shop");
             if (options.Length < 8)
             {
                 return;
@@ -31,13 +29,6 @@ namespace APMomodoraMoonlitFarewell.Patches
                 apItems[i] = InventoryUtils.AP_SHOP_ITEMS[i];
             }
             options = apItems;
-            //for (int i = 0; i < apItems.Length; i ++) 
-            //{
-                //if (decors[i] != MainScr.GetString("ui_sold"))
-            //    {
-            //        decors[i] = SetItemPrices()[i];
-            //    }
-            //}
         }
 
         private static string[] SetItemPrices()
@@ -45,28 +36,29 @@ namespace APMomodoraMoonlitFarewell.Patches
             string[] prices = new string[InventoryUtils.AP_SHOP_ITEMS.Length];
             for (int i = 0; i < InventoryUtils.AP_SHOP_ITEMS.Length; i++)
             {
-                ItemFlags flag = InventoryUtils.AP_SHOP_ITEM_FLAGS[i];
-                switch (flag)
-                {
-                    case var flagEnum when flagEnum == ItemFlags.None:
-                        prices[i] = "400";
-                        break;
-                    case var flagEnum when flagEnum == ItemFlags.Advancement:
-                        prices[i] = "250";
-                        break;
-                    case var flagEnum when flagEnum == ItemFlags.NeverExclude:
-                        prices[i] = "200";
-                        break;
-                    case var flagEnum when flagEnum == ItemFlags.Trap:
-                        prices[i] = "1";
-                        break;
-                    default:
-                        prices[i] = "100";
-                        break;
-                }
+                prices[i] = ItemFlagText.PriceFor(InventoryUtils.AP_SHOP_ITEM_FLAGS[i]);
             }
             return prices;
         }
+    }
+
+    static class ItemFlagText
+    {
+        private static readonly Dictionary<ItemFlags, (string price, string classification)> flagText = new Dictionary<ItemFlags, (string price, string classification)>()
+        {
+            { ItemFlags.None, ("400", "Doesn't seem special") },
+            { ItemFlags.Advancement, ("250", "Looks important") },
+            { ItemFlags.NeverExclude, ("200", "Looks useful") },
+            { ItemFlags.Trap, ("1", "Seems like a trap...") },
+        };
+
+        private static readonly (string price, string classification) defaultText = ("100", "");
+
+        public static string PriceFor(ItemFlags flag) =>
+            flagText.TryGetValue(flag, out var text) ? text.price : defaultText.price;
+
+        public static string ClassificationFor(ItemFlags flag) =>
+            flagText.TryGetValue(flag, out var text) ? text.classification : defaultText.classification;
     }
 
     [HarmonyPatch(typeof(DialogueCharText))]
@@ -164,25 +156,7 @@ namespace APMomodoraMoonlitFarewell.Patches
             string[] classText = new string[InventoryUtils.AP_SHOP_ITEMS.Length];
             for (int index = 0; index < InventoryUtils.AP_SHOP_ITEMS.Length; index++)
             {
-                ItemFlags flag = InventoryUtils.AP_SHOP_ITEM_FLAGS[index];
-                switch (flag)
-                {
-                    case var flagEnum when flagEnum == ItemFlags.None:
-                        classText[index] = "Doesn't seem special";
-                        break;
-                    case var flagEnum when flagEnum == ItemFlags.Advancement:
-                        classText[index] = "Looks important";
-                        break;
-                    case var flagEnum when flagEnum == ItemFlags.NeverExclude:
-                        classText[index] = "Looks useful";
-                        break;
-                    case var flagEnum when flagEnum == ItemFlags.Trap:
-                        classText[index] = "Seems like a trap...";
-                        break;
-                    default:
-                        classText[index] = "";
-                        break;
-                }
+                classText[index] = ItemFlagText.ClassificationFor(InventoryUtils.AP_SHOP_ITEM_FLAGS[index]);
             }
             return classText;
         }

@@ -17,7 +17,6 @@ namespace APMomodoraMoonlitFarewell.Patches
         {
             RemoveStrings();
             RemoveWindZones(sceneName);
-            //RemoveGynBarrier(sceneName);
         }
 
         public void RemoveWindZones(string sceneName)
@@ -29,11 +28,11 @@ namespace APMomodoraMoonlitFarewell.Patches
 
                 if (windZoneOne != null)
                 {
-                    windZoneTwo.SetActive(false);
+                    windZoneOne.SetActive(false);
                 }
                 if (windZoneTwo != null)
                 {
-                    windZoneOne.SetActive(false);
+                    windZoneTwo.SetActive(false);
                 }
                 return;
             }

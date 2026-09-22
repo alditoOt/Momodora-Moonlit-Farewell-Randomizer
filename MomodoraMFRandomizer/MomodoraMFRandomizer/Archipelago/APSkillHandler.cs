@@ -13,14 +13,24 @@ namespace APMomodoraMoonlitFarewell.Archipelago
     [HarmonyPatch(typeof(MomoEventData))]
     class APSkillHandler
     {
+        // Sprint, Leaf, Double Jump, Wall Jump, Lunar Attunement, Fast Travel event indices, as measured in-game.
+        private const int dashSkillEvent = 9;
+        private const int leafSkillEvent = 20;
+        private const int doubleJumpSkillEvent = 10;
+        private const int wallJumpSkillEvent = 194;
+        private const int lunarAttunementSkillEvent = 131;
+
+        // Boss event that must be cleared before the dash skill can be reset/re-granted in this scene.
+        private const int dashResetGateEvent = 17;
+
         static Dictionary<string, int> skillAndScene = new Dictionary<string, int>()
         {
-            { "Well26", 20 },
-            {"Well29" , 9 },
-            {"Bark42" , 10 },
-            {"Fairy10" , 194 },
-            {"Marsh08" , 131 },
-            {"Cove03", 205 }
+            { "Well26", leafSkillEvent },
+            { "Well29", dashSkillEvent },
+            { "Bark42", doubleJumpSkillEvent },
+            { "Fairy10", wallJumpSkillEvent },
+            { "Marsh08", lunarAttunementSkillEvent },
+            { MomoEventUtils.FAST_TRAVEL_SCENE, MomoEventUtils.FAST_TRAVEL_EVENT }
         };
 
         /*
@@ -35,19 +45,19 @@ namespace APMomodoraMoonlitFarewell.Archipelago
 
             int index = skillAndScene[sceneName];
 
-            if (index == 9)
+            if (index == dashSkillEvent)
             {
-                if (GameData.current.MomoEvent[17] == 0)
+                if (GameData.current.MomoEvent[dashResetGateEvent] == 0)
                 {
                     ResetDashSkill();
                     // Check what happens if you get the dash skill back while in the scene
                 }
             }
-            else if (index == 131) //Lunar Attunement
+            else if (index == lunarAttunementSkillEvent)
             {
-                if (GameData.inventory.HasItem(GameData.itemDatabase.GetItemDef(333))
-                    && GameData.inventory.HasItem(GameData.itemDatabase.GetItemDef(332)) // Gold and Silver Moonlit Dust
-                    && GameData.current.MomoEvent[255] == 1) //Tainted Serpent defeated
+                if (GameData.inventory.HasItem(GameData.itemDatabase.GetItemDef(InventoryUtils.GOLD_MOONLIT_DUST_ID))
+                    && GameData.inventory.HasItem(GameData.itemDatabase.GetItemDef(InventoryUtils.SILVER_MOONLIT_DUST_ID))
+                    && GameData.current.MomoEvent[MomoEventUtils.TAINTED_SERPENT_DEFEATED_EVENT] == 1) //Tainted Serpent defeated
                 {
                     APUtils.CompleteLocation(index);
                 }
@@ -60,7 +70,7 @@ namespace APMomodoraMoonlitFarewell.Archipelago
 
         private static void ResetDashSkill()
         {
-            GameData.current.MomoEvent[9] = 0;
+            GameData.current.MomoEvent[dashSkillEvent] = 0;
         }
     }
 }

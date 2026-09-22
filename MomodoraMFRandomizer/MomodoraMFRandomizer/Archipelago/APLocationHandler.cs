@@ -2,7 +2,6 @@
 using Archipelago.MultiClient.Net;
 using Archipelago.MultiClient.Net.Helpers;
 using Archipelago.MultiClient.Net.Models;
-using MomodoraMFRandomizer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,15 +17,17 @@ namespace APMomodoraMoonlitFarewell.Archipelago
     [HarmonyPatch(typeof(MomoEventData))]
     class APLocationHandler
     {
-        private static int MONEY = 100;
-        static Dictionary<string, int> skillAndScene = new Dictionary<string, int>()
-        {
-            { "Well26", 20 },
-            {"Well29" , 9 },
-            {"Bark42" , 10 },
-            {"Fairy10" , 194 },
-            {"Marsh08" , 131 }
-        };
+        // Archipelago "filler" item id used for the money/currency pickup, and the amount it grants.
+        private const int moneyFillerItemId = 999;
+        private const int moneyFillerAmount = 100;
+
+        // Base game stats + per-pickup increment, as measured in-game.
+        private const int baseAttack = 5;
+        private const int attackPerLily = 2;
+        private const int baseMaxHealth = 300;
+        private const int healthPerBerry = 50;
+        private const int baseMaxMagic = 30;
+        private const int magicPerUpgrade = 10;
 
         private static int finalBossDoorCount = 0;
 
@@ -52,21 +53,21 @@ namespace APMomodoraMoonlitFarewell.Archipelago
             } 
             else if (MomoEventUtils.LILYEVENTS.Contains(index))
             {
-                Platformer3D.phys_attack -= 2;
+                Platformer3D.phys_attack -= attackPerLily;
                 GameData.current.MomoEvent[MomoEventUtils.LILY_COUNTER_EVENT]--;
                 APUtils.CompleteLocation(index * 100);
             }
             else if (MomoEventUtils.HEALTHBERRYEVENTS.Contains(index))
             {
-                Platformer3D.player_maxhp -= 50;
-                Platformer3D.player_hp -= 50;
+                Platformer3D.player_maxhp -= healthPerBerry;
+                Platformer3D.player_hp -= healthPerBerry;
                 GameData.current.MomoEvent[MomoEventUtils.HEALTH_COUNTER_EVENT]--;
                APUtils.CompleteLocation(index * 100);
             }
             else if (MomoEventUtils.MAGICBERRYEVENTS.Contains(index))
             {
-                Platformer3D.player_maxsp -= 10;
-                Platformer3D.player_sp -= 10;
+                Platformer3D.player_maxsp -= magicPerUpgrade;
+                Platformer3D.player_sp -= magicPerUpgrade;
                 GameData.current.MomoEvent[MomoEventUtils.MAGIC_COUNTER_EVENT]--;
                 APUtils.CompleteLocation(index * 100);
             }
@@ -89,7 +90,6 @@ namespace APMomodoraMoonlitFarewell.Archipelago
 
         private static void ReportSkillLocation(int index, int value)
         {
-            //Boolean fastTravelReceived = false;
             Boolean skillReceived = false;
             foreach (ItemInfo item in APMomodoraMoonlitFarewell.session.Items.AllItemsReceived)
             {
@@ -102,9 +102,9 @@ namespace APMomodoraMoonlitFarewell.Archipelago
             {
                 // Reset the skill value if it hasn't been received yet
                 GameData.current.MomoEvent[index] = 0;
-                if (index == 205)
+                if (index == MomoEventUtils.FAST_TRAVEL_EVENT)
                 {
-                    if (SceneManager.GetActiveScene().name != "Cove03")
+                    if (SceneManager.GetActiveScene().name != MomoEventUtils.FAST_TRAVEL_SCENE)
                     {
                         return;
                     }
@@ -115,9 +115,9 @@ namespace APMomodoraMoonlitFarewell.Archipelago
 
         public static void GiveItem(int itemId)
         {
-            if (itemId == 999)
+            if (itemId == moneyFillerItemId)
             {
-                Platformer3D.player_money += MONEY;
+                Platformer3D.player_money += moneyFillerAmount;
                 return;
             }
             if (MomoEventUtils.SKILLEVENTS.Contains(itemId))
@@ -199,30 +199,25 @@ namespace APMomodoraMoonlitFarewell.Archipelago
             }
         }
 
-        public static void ResetDashSkill()
-        {
-            GameData.current.MomoEvent[9] = 0;
-        }
-
         private static void UpdatePlayerDamage(int lilyCount)
         {
-            Platformer3D.phys_attack = 5 + 2 * lilyCount;
+            Platformer3D.phys_attack = baseAttack + attackPerLily * lilyCount;
             GameData.current.MomoEvent[MomoEventUtils.LILY_COUNTER_EVENT] = lilyCount;
         }
 
         private static void UpdatePlayerHealth(int healthCount)
         {
             float prevHP = Platformer3D.player_maxhp;
-            Platformer3D.player_maxhp = 300 + 50 * healthCount;
-            Platformer3D.player_hp += Platformer3D.player_maxhp > prevHP ? 50 : 0;
+            Platformer3D.player_maxhp = baseMaxHealth + healthPerBerry * healthCount;
+            Platformer3D.player_hp += Platformer3D.player_maxhp > prevHP ? healthPerBerry : 0;
             GameData.current.MomoEvent[MomoEventUtils.HEALTH_COUNTER_EVENT] = healthCount;
         }
 
         private static void UpdatePlayerMagic(int magicCount)
         {
             float prevMagic = Platformer3D.player_maxsp;
-            Platformer3D.player_maxsp = 30 + 10 * magicCount;
-            Platformer3D.player_sp += Platformer3D.player_maxsp > prevMagic ? 10 : 0;
+            Platformer3D.player_maxsp = baseMaxMagic + magicPerUpgrade * magicCount;
+            Platformer3D.player_sp += Platformer3D.player_maxsp > prevMagic ? magicPerUpgrade : 0;
             GameData.current.MomoEvent[MomoEventUtils.MAGIC_COUNTER_EVENT] = magicCount;
         }
 
