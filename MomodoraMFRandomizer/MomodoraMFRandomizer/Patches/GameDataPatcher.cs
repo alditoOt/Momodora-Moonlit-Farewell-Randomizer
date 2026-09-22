@@ -7,7 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using APMomodoraMoonlitFarewell.Utils;
 
 namespace APMomodoraMoonlitFarewell.Patches
@@ -45,7 +44,11 @@ namespace APMomodoraMoonlitFarewell.Patches
         {
             try
             {
-                Dictionary<long, ScoutedItemInfo> results = APMomodoraMoonlitFarewell.session.Locations.ScoutLocationsAsync(true, SHOP_ITEM_ID).Result;
+                // Deliberately synchronous: this runs once during OnLateInitializeMelon, before any
+                // gameplay patches can fire, and this MelonLoader mod has no coroutine/async pump to
+                // await on instead. Blocking here is acceptable; the try/catch below bounds the risk
+                // of a network stall or fault taking down the rest of startup.
+                Dictionary<long, ScoutedItemInfo> results = APMomodoraMoonlitFarewell.session.Locations.ScoutLocationsAsync(false, SHOP_ITEM_ID).Result;
                 UpdateShopNames(results);
             }
             catch (Exception e)

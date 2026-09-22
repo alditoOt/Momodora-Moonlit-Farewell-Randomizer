@@ -10,6 +10,10 @@ namespace APMomodoraMoonlitFarewell.Utils
     {
         public static void CompleteLocation(int index)
         {
+            if (!APMomodoraMoonlitFarewell.IsSessionActive)
+            {
+                return;
+            }
             APMomodoraMoonlitFarewell.session.Locations.CompleteLocationChecks(index);
         }
     }

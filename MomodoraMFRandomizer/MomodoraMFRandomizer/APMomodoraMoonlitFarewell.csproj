@@ -66,7 +66,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Archipelago\APConnector.cs" />
+    <Compile Include="Archipelago\APItemGranter.cs" />
     <Compile Include="Archipelago\APLocationHandler.cs" />
+    <Compile Include="Archipelago\APPlayerStatUpdater.cs" />
     <Compile Include="APMomodoraMoonlitFarewell.cs" />
     <Compile Include="Archipelago\APSigilHandler.cs" />
     <Compile Include="Archipelago\APSkillHandler.cs" />

@@ -29,6 +29,10 @@ namespace APMomodoraMoonlitFarewell
         APDeathLinkHandler deathLinkHandler = new APDeathLinkHandler();
         
         public static ArchipelagoSession session;
+
+        // Harmony patches fire on gameplay events independent of whether startup finished connecting,
+        // so anything touching `session` should check this first.
+        public static bool IsSessionActive => session != null && session.Socket != null && session.Socket.Connected;
         #endregion
         
         BlockRemover blockRemover = new BlockRemover();
