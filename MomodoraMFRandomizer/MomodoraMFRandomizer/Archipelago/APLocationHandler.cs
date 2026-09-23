@@ -16,6 +16,12 @@ namespace APMomodoraMoonlitFarewell.Archipelago
     {
         private static int finalBossDoorCount = 0;
 
+        // Dash and Double Jump are excluded from the skill "Sent" notification below because they
+        // already get their own popup from Patches/APExchangeNotificationPatcher.cs;
+        // notifying here too would show the popup twice.
+        private const int dashSkillEvent = 9;
+        private const int doubleJumpSkillEvent = 10;
+
         [HarmonyPatch("set_Item")]
         [HarmonyPostfix]
         private static void ReportLocation(int index, int value)
@@ -70,10 +76,21 @@ namespace APMomodoraMoonlitFarewell.Archipelago
             {
                 GameData.current.MomoEvent[MomoEventUtils.FAIRY_COUNTER_EVENT]--;
                 APUtils.CompleteLocation(index * 100);
+                if (APLocationScoutCache.TryGetInfo(index * 100, out ScoutedItemInfo fairyInfo))
+                {
+                    APExchangeNotifier.NotifyExchange(fairyInfo);
+                    // MunnyRocks.Break already showed its own "fairy_freedom" TutorialMessage popup
+                    // above; replace it with a pointer instead of showing the same details twice.
+                    APExchangeNotifier.OverrideTutorialMessageWithPointerPopup(fairyInfo);
+                }
             }
             else
             {
                 APUtils.CompleteLocation(index); //Boss check
+                if (APLocationScoutCache.TryGetInfo(index, out ScoutedItemInfo bossInfo))
+                {
+                    APExchangeNotifier.NotifyExchange(bossInfo);
+                }
             }
         }
 
@@ -99,6 +116,14 @@ namespace APMomodoraMoonlitFarewell.Archipelago
                     }
                 }
                 APUtils.CompleteLocation(index);
+
+                // Leaf, Wall Jump, Lunar Attunement, and Fast Travel are granted through NPC
+                // dialogue/cutscenes we never touch; append our own popup once the grant completes.
+                if (index != dashSkillEvent && index != doubleJumpSkillEvent &&
+                    APLocationScoutCache.TryGetInfo(index, out ScoutedItemInfo skillInfo))
+                {
+                    APExchangeNotifier.NotifyExchange(skillInfo);
+                }
             }
         }
 

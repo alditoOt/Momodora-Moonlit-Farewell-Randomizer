@@ -10,6 +10,8 @@ using UnityEngine.SceneManagement;
 using System.Collections;
 using Archipelago.MultiClient.Net;
 using Archipelago.MultiClient.Net.Enums;
+using Archipelago.MultiClient.Net.Helpers;
+using Archipelago.MultiClient.Net.Models;
 using Archipelago.MultiClient.Net.BounceFeatures.DeathLink;
 using System.Reflection;
 using APMomodoraMoonlitFarewell.Archipelago;
@@ -84,10 +86,12 @@ namespace APMomodoraMoonlitFarewell
                 session = ArchipelagoSessionFactory.CreateSession(server);
                 APConnector.Connect(session, server, username, password);
                 session.Items.ItemReceived += APLocationHandler.UpdateItemsForTheSession;
+                session.Items.ItemReceived += NotifyNewlyReceivedItems;
                 GameDataPatcher.UpdateShopNames();
                 CollectSocketInfo();
                 SlotDataUtils.GetSettingsFromYAML();
                 SlotDataUtils.AddItemsToItemPool();
+                APLocationScoutCache.Initialize();
                 if (SlotDataUtils.DEATHLINK)
                 {
                     deathLinkService = session.CreateDeathLinkService();
@@ -102,6 +106,21 @@ namespace APMomodoraMoonlitFarewell
             catch (Exception e)
             {
                 MelonLogger.Error($"An error occured when trying to create the session: {e}");
+            }
+        }
+
+        // Independent of APLocationHandler.UpdateItemsForTheSession, which re-scans the entire
+        // received-items history on every resync (scene load, reconnect). Draining the helper's
+        // new-item queue here instead ensures a popup fires exactly once per genuinely new item.
+        private static void NotifyNewlyReceivedItems(ReceivedItemsHelper itemHandler)
+        {
+            while (itemHandler.Any())
+            {
+                ItemInfo item = itemHandler.DequeueItem();
+                if (item.Player.Slot != session.ConnectionInfo.Slot)
+                {
+                    APExchangeNotifier.NotifyReceived(item);
+                }
             }
         }
 
