@@ -30,12 +30,13 @@ namespace APMomodoraMoonlitFarewell.Utils
                 if (File.Exists(configPath))
                 {
                     string json = File.ReadAllText(configPath);
-                    config = JsonConvert.DeserializeObject<ServerConfig>(json);
+                    config = JsonConvert.DeserializeObject<ServerConfig>(json) ?? new ServerConfig();
                     MelonLogger.Msg("Config loaded successfully");
                 }
                 else
                 {
                     MelonLogger.Error("Config file not found!");
+                    config = new ServerConfig();
                 }
             }
             catch (Exception ex)

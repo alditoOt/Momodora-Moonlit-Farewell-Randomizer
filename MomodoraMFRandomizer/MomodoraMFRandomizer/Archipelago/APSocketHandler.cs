@@ -7,7 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using APMomodoraMoonlitFarewell.Utils;
 
 namespace APMomodoraMoonlitFarewell.Archipelago
@@ -19,6 +18,10 @@ namespace APMomodoraMoonlitFarewell.Archipelago
         [HarmonyPostfix]
         public static void SendCompletion()
         {
+            if (!APMomodoraMoonlitFarewell.IsSessionActive)
+            {
+                return;
+            }
             if (GameData.current.MomoEvent[MomoEventUtils.VICTORY_EVENT] == 1)
             {
                 var statusUpdatePacket = new StatusUpdatePacket();

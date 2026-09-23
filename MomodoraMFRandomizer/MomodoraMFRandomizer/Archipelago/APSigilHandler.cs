@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using HarmonyLib;
 
 namespace APMomodoraMoonlitFarewell.Archipelago
@@ -22,6 +21,11 @@ namespace APMomodoraMoonlitFarewell.Archipelago
             if (!InventoryUtils.AP_SIGIL_ITEM_ID.Contains(item.itemDef.Index))
             {
                 APUtils.CompleteLocation(item.itemDef.Index);
+                return true;
+            }
+            if (!APMomodoraMoonlitFarewell.IsSessionActive)
+            {
+                // Session isn't ready yet; let the vanilla pickup through rather than blocking the player.
                 return true;
             }
             foreach (ItemInfo apItem in APMomodoraMoonlitFarewell.session.Items.AllItemsReceived)

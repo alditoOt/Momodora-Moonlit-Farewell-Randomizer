@@ -1,42 +1,32 @@
-﻿using HarmonyLib;
-using Archipelago.MultiClient.Net;
+using HarmonyLib;
 using Archipelago.MultiClient.Net.Helpers;
 using Archipelago.MultiClient.Net.Models;
-using MomodoraMFRandomizer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine.SceneManagement;
-using MelonLoader;
 using APMomodoraMoonlitFarewell.Utils;
-using System.Reflection;
 
 namespace APMomodoraMoonlitFarewell.Archipelago
 {
+    // Detects in-game events that correspond to Archipelago location checks and reports them,
+    // and rebuilds player state from the full set of received items when the session's item list changes.
     [HarmonyPatch(typeof(MomoEventData))]
     class APLocationHandler
     {
-        private static int MONEY = 100;
-        static Dictionary<string, int> skillAndScene = new Dictionary<string, int>()
-        {
-            { "Well26", 20 },
-            {"Well29" , 9 },
-            {"Bark42" , 10 },
-            {"Fairy10" , 194 },
-            {"Marsh08" , 131 }
-        };
-
         private static int finalBossDoorCount = 0;
-
 
         [HarmonyPatch("set_Item")]
         [HarmonyPostfix]
         private static void ReportLocation(int index, int value)
         {
-            if (value != 1 || 
-                !MomoEventUtils.BOSSEVENTS.Contains(index) && 
+            if (!APMomodoraMoonlitFarewell.IsSessionActive)
+            {
+                return;
+            }
+
+            if (value != 1 ||
+                !MomoEventUtils.BOSSEVENTS.Contains(index) &&
                 !MomoEventUtils.SKILLEVENTS.Contains(index) &&
                 !MomoEventUtils.LILYEVENTS.Contains(index) &&
                 !MomoEventUtils.HEALTHBERRYEVENTS.Contains(index) &&
@@ -49,24 +39,24 @@ namespace APMomodoraMoonlitFarewell.Archipelago
             if (MomoEventUtils.SKILLEVENTS.Contains(index))
             {
                 ReportSkillLocation(index, value);
-            } 
+            }
             else if (MomoEventUtils.LILYEVENTS.Contains(index))
             {
-                Platformer3D.phys_attack -= 2;
+                Platformer3D.phys_attack -= APPlayerStatUpdater.attackPerLily;
                 GameData.current.MomoEvent[MomoEventUtils.LILY_COUNTER_EVENT]--;
                 APUtils.CompleteLocation(index * 100);
             }
             else if (MomoEventUtils.HEALTHBERRYEVENTS.Contains(index))
             {
-                Platformer3D.player_maxhp -= 50;
-                Platformer3D.player_hp -= 50;
+                Platformer3D.player_maxhp -= APPlayerStatUpdater.healthPerBerry;
+                Platformer3D.player_hp -= APPlayerStatUpdater.healthPerBerry;
                 GameData.current.MomoEvent[MomoEventUtils.HEALTH_COUNTER_EVENT]--;
                APUtils.CompleteLocation(index * 100);
             }
             else if (MomoEventUtils.MAGICBERRYEVENTS.Contains(index))
             {
-                Platformer3D.player_maxsp -= 10;
-                Platformer3D.player_sp -= 10;
+                Platformer3D.player_maxsp -= APPlayerStatUpdater.magicPerUpgrade;
+                Platformer3D.player_sp -= APPlayerStatUpdater.magicPerUpgrade;
                 GameData.current.MomoEvent[MomoEventUtils.MAGIC_COUNTER_EVENT]--;
                 APUtils.CompleteLocation(index * 100);
             }
@@ -89,7 +79,6 @@ namespace APMomodoraMoonlitFarewell.Archipelago
 
         private static void ReportSkillLocation(int index, int value)
         {
-            //Boolean fastTravelReceived = false;
             Boolean skillReceived = false;
             foreach (ItemInfo item in APMomodoraMoonlitFarewell.session.Items.AllItemsReceived)
             {
@@ -102,9 +91,9 @@ namespace APMomodoraMoonlitFarewell.Archipelago
             {
                 // Reset the skill value if it hasn't been received yet
                 GameData.current.MomoEvent[index] = 0;
-                if (index == 205)
+                if (index == MomoEventUtils.FAST_TRAVEL_EVENT)
                 {
-                    if (SceneManager.GetActiveScene().name != "Cove03")
+                    if (SceneManager.GetActiveScene().name != MomoEventUtils.FAST_TRAVEL_SCENE)
                     {
                         return;
                     }
@@ -113,25 +102,13 @@ namespace APMomodoraMoonlitFarewell.Archipelago
             }
         }
 
-        public static void GiveItem(int itemId)
-        {
-            if (itemId == 999)
-            {
-                Platformer3D.player_money += MONEY;
-                return;
-            }
-            if (MomoEventUtils.SKILLEVENTS.Contains(itemId))
-            {
-                GameData.current.MomoEvent[itemId] = 1;
-            }
-            else if (InventoryUtils.AP_SIGIL_ITEM_ID.Contains(itemId))
-            {
-                GameData.inventory.Add(GameData.itemDatabase.GetItem(itemId), is_new_item: false);
-            }
-        }
-
         public static void UpdateItemsForTheSession(ReceivedItemsHelper itemHandler)
         {
+            if (!APMomodoraMoonlitFarewell.IsSessionActive)
+            {
+                return;
+            }
+
             List<ItemInfo> items = APMomodoraMoonlitFarewell.session.Items.AllItemsReceived.ToList<ItemInfo>();
             Boolean firstTimeSendingMoney = true;
             finalBossDoorCount = 0;
@@ -173,7 +150,7 @@ namespace APMomodoraMoonlitFarewell.Archipelago
                     finalBossDoorCount++;
                     continue;
                 }
-                if (itemId == InventoryUtils.FILLER_ID) 
+                if (itemId == InventoryUtils.FILLER_ID)
                 {
                     if (itemHandler == null)
                     {
@@ -185,56 +162,18 @@ namespace APMomodoraMoonlitFarewell.Archipelago
                     }
                     firstTimeSendingMoney = false;
                 }
-                GiveItem((int)itemId);
+                APItemGranter.GiveItem((int)itemId);
             }
-            UpdatePlayerDamage(lilyCount);
-            UpdatePlayerHealth(healthCount);
-            UpdatePlayerStamina(staminaCount);
-            UpdatePlayerMagic(magicCount);
-            UpdateFairies(fairyCount);
-            
+            APPlayerStatUpdater.UpdatePlayerDamage(lilyCount);
+            APPlayerStatUpdater.UpdatePlayerHealth(healthCount);
+            APPlayerStatUpdater.UpdatePlayerStamina(staminaCount);
+            APPlayerStatUpdater.UpdatePlayerMagic(magicCount);
+            APPlayerStatUpdater.UpdateFairies(fairyCount);
+
             if (finalBossDoorCount > 0)
             {
                 GameData.current.MomoEvent[MomoEventUtils.FINAL_DOOR_EVENT] = finalBossDoorCount;
             }
-        }
-
-        public static void ResetDashSkill()
-        {
-            GameData.current.MomoEvent[9] = 0;
-        }
-
-        private static void UpdatePlayerDamage(int lilyCount)
-        {
-            Platformer3D.phys_attack = 5 + 2 * lilyCount;
-            GameData.current.MomoEvent[MomoEventUtils.LILY_COUNTER_EVENT] = lilyCount;
-        }
-
-        private static void UpdatePlayerHealth(int healthCount)
-        {
-            float prevHP = Platformer3D.player_maxhp;
-            Platformer3D.player_maxhp = 300 + 50 * healthCount;
-            Platformer3D.player_hp += Platformer3D.player_maxhp > prevHP ? 50 : 0;
-            GameData.current.MomoEvent[MomoEventUtils.HEALTH_COUNTER_EVENT] = healthCount;
-        }
-
-        private static void UpdatePlayerMagic(int magicCount)
-        {
-            float prevMagic = Platformer3D.player_maxsp;
-            Platformer3D.player_maxsp = 30 + 10 * magicCount;
-            Platformer3D.player_sp += Platformer3D.player_maxsp > prevMagic ? 10 : 0;
-            GameData.current.MomoEvent[MomoEventUtils.MAGIC_COUNTER_EVENT] = magicCount;
-        }
-
-        private static void UpdateFairies(int fairyCount)
-        {
-            GameData.current.MomoEvent[MomoEventUtils.FAIRY_COUNTER_EVENT] = fairyCount;
-        }
-
-        private static void UpdatePlayerStamina(int staminaCount)
-        {
-            GameData.current.MomoEvent[MomoEventUtils.STAMINA_COUNTER_EVENT_ONE] = staminaCount;
-            GameData.current.MomoEvent[MomoEventUtils.STAMINA_COUNTER_EVENT_TWO] = staminaCount;
         }
     }
 }

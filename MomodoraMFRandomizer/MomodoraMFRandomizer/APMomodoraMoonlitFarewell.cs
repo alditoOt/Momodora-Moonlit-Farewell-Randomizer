@@ -29,23 +29,26 @@ namespace APMomodoraMoonlitFarewell
         APDeathLinkHandler deathLinkHandler = new APDeathLinkHandler();
         
         public static ArchipelagoSession session;
+
+        // Harmony patches fire on gameplay events independent of whether startup finished connecting,
+        // so anything touching `session` should check this first.
+        public static bool IsSessionActive => session != null && session.Socket != null && session.Socket.Connected;
         #endregion
         
         BlockRemover blockRemover = new BlockRemover();
         private bool mainMenu = true;
-        private static Boolean manualItem = false;
 
         #region Socket Logging
         static void Socket_ErrorReceived(Exception e, string message)
         {
-            MelonLogger.Msg($"Socket Error: {message}");
-            MelonLogger.Msg($"Socket Exception: {e.Message}");
+            MelonLogger.Error($"Socket Error: {message}");
+            MelonLogger.Error($"Socket Exception: {e.Message}");
 
             if (e.StackTrace != null)
                 foreach (var line in e.StackTrace.Split('\n'))
-                    MelonLogger.Msg($"    {line}");
+                    MelonLogger.Error($"    {line}");
             else
-                MelonLogger.Msg($"    No stacktrace provided");
+                MelonLogger.Error($"    No stacktrace provided");
         }
         static void Socket_SocketOpened() =>
             MelonLogger.Msg($"Socket opened to: {session.Socket.Uri}");
@@ -67,6 +70,11 @@ namespace APMomodoraMoonlitFarewell
             #region Server Info
             //Load server info from config
             ConfigLoader.LoadConfig();
+            if (ConfigLoader.config == null || string.IsNullOrEmpty(ConfigLoader.config.server))
+            {
+                MelonLogger.Error("Server config is missing or has no server address; aborting Archipelago setup.");
+                return;
+            }
             server = ConfigLoader.config.server;
             username = ConfigLoader.config.username;
             password = ConfigLoader.config.password;
@@ -78,9 +86,9 @@ namespace APMomodoraMoonlitFarewell
                 session.Items.ItemReceived += APLocationHandler.UpdateItemsForTheSession;
                 GameDataPatcher.UpdateShopNames();
                 CollectSocketInfo();
-                YAMLUtils.GetSettingsFromYAML();
-                YAMLUtils.AddItemsToItemPool();
-                if (YAMLUtils.DEATHLINK)
+                SlotDataUtils.GetSettingsFromYAML();
+                SlotDataUtils.AddItemsToItemPool();
+                if (SlotDataUtils.DEATHLINK)
                 {
                     deathLinkService = session.CreateDeathLinkService();
                     deathLinkService.EnableDeathLink();
@@ -93,7 +101,7 @@ namespace APMomodoraMoonlitFarewell
             }
             catch (Exception e)
             {
-                MelonLogger.Msg($"An error occured when trying to create the session: {e.Message}");
+                MelonLogger.Error($"An error occured when trying to create the session: {e}");
             }
         }
 
@@ -114,7 +122,7 @@ namespace APMomodoraMoonlitFarewell
                 MomoEventUtils.DEFAULT_EVENTS_TO_1.ForEach(x => GameData.current.MomoEvent[x] = 1);
                 MomoEventUtils.GrowTimedBerries();
             }
-            if(YAMLUtils.OPENSPRINGLEAFPATH)
+            if(SlotDataUtils.OPENSPRINGLEAFPATH)
             {
                 blockRemover.removeAllBlockers(sceneName);
             }

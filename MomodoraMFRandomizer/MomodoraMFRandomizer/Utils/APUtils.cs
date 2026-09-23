@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace APMomodoraMoonlitFarewell.Utils
 {
@@ -11,6 +10,10 @@ namespace APMomodoraMoonlitFarewell.Utils
     {
         public static void CompleteLocation(int index)
         {
+            if (!APMomodoraMoonlitFarewell.IsSessionActive)
+            {
+                return;
+            }
             APMomodoraMoonlitFarewell.session.Locations.CompleteLocationChecks(index);
         }
     }

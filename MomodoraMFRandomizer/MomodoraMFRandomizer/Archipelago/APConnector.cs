@@ -8,7 +8,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using APMomodoraMoonlitFarewell.Utils;
 
 namespace APMomodoraMoonlitFarewell.Archipelago
@@ -31,12 +30,17 @@ namespace APMomodoraMoonlitFarewell.Archipelago
             catch (Exception e)
             {
                 result = new LoginFailure(e.GetBaseException().Message);
-                MelonLogger.Msg("Error connecting to Archipelago: " + e.Message);
+                MelonLogger.Error("Error connecting to Archipelago: " + e.Message);
             }
 
             if (!result.Successful)
             {
-                LoginFailure failure = (LoginFailure)result;
+                if (!(result is LoginFailure failure))
+                {
+                    MelonLogger.Error($"Failed to connect to {server} as {user}: unexpected login result type {result.GetType().Name}");
+                    return;
+                }
+
                 string errorMessage = $"Failed to Connect to {server} as {user}:";
                 foreach (string error in failure.Errors)
                 {
@@ -47,12 +51,12 @@ namespace APMomodoraMoonlitFarewell.Archipelago
                     errorMessage += $"\n    {error}";
                 }
 
-                MelonLogger.Msg(errorMessage);
+                MelonLogger.Error(errorMessage);
                 return; // Did not connect, show the user the contents of `errorMessage`
             }
 
             var loginSuccess = (LoginSuccessful)result;
-            MelonLogger.Msg("soy fans");
+            MelonLogger.Msg("I'm your fan(s)");
             MelonLogger.Msg("Connected to Archipelago session. Have fun!");
         }
     }
