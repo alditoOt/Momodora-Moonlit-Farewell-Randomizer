@@ -17,8 +17,8 @@ advancement_table = {
     "Lunar Attunement": AdvData(131, "Ashen Hinterlands Continued"),
     #Bosses
     "Gariser Demon": AdvData(15, "Springleaf Path"),
-    "Harpy Archdemon": AdvData(17, "Springleaf Path Continued"),
-    "Raging Demon": AdvData(16, "Springleaf Path Continued"),
+    "Harpy Archdemon": AdvData(17, "Springleaf Path"),
+    "Raging Demon": AdvData(16, "Lun Tree Roots"),
     "Black Cat": AdvData(278, "Lun Tree Roots"),
     "Viper Archdemon Sorrellia": AdvData(150, "Fairy Springs"),
     "Remnant of an Unknown Phantasm": AdvData(171, "Moonlight Repose"),
@@ -47,7 +47,7 @@ advancement_table = {
     "Magic Blade": AdvData(404, "Demon Frontier Continued"),
     "Mending Resonance": AdvData(434, "Demon Frontier Continued"),
     "Mudwalker": AdvData(447, "Ashen Hinterlands Continued"),
-    "Pawn": AdvData(440, "Springleaf Path Continued"),
+    "Pawn": AdvData(440, "Lun Tree Roots"),
     "Perfect Chime": AdvData(405, "Meikan Village"),
     "Phantasm Blade": AdvData(439, "Moonlight Repose"),
     "Quintessence": AdvData(443, "Meikan Village"),
@@ -83,7 +83,7 @@ advancement_table = {
     #Heavenly Lilies
    "Heavenly Lily - Koho Village": AdvData(26400, "Koho Village"),
    "Heavenly Lily 1 - Old Sanctuary": AdvData(8100, "Old Sanctuary"),
-   "Heavenly Lily 2 - Old Sanctuary": AdvData(12900, "Old Sanctuary"),
+   "Heavenly Lily 2 - Old Sanctuary": AdvData(12900, "Old Sanctuary Continued"),
    "Heavenly Lily 1 - Springleaf Path": AdvData(2800, "Springleaf Path"),
    "Heavenly Lily 2 - Springleaf Path": AdvData(8400, "Springleaf Path"),
    "Heavenly Lily 1 - Lun Tree Roots": AdvData(11800, "Lun Tree Roots"),
@@ -110,7 +110,7 @@ advancement_table = {
    "Dotted Berry 1 - Springleaf Path": AdvData(3000, "Springleaf Path"),
    "Dotted Berry 2 - Springleaf Path": AdvData(2900, "Springleaf Path"),
    "Dotted Berry 3 - Springleaf Path": AdvData(36100, "Springleaf Path"),
-   "Dotted Berry 4 - Springleaf Path": AdvData(3100, "Springleaf Path Continued"),
+   "Dotted Berry 4 - Springleaf Path": AdvData(3100, "Lun Tree Roots"),
    "Dotted Berry 1 - Koho Village": AdvData(2700, "Koho Village"),
    "Dotted Berry 2 - Koho Village": AdvData(28200, "Koho Village"),
    "Dotted Berry 1 - Lun Tree Roots": AdvData(2600, "Lun Tree Roots"),
@@ -140,15 +140,15 @@ advancement_table = {
    "Lun Berry - Demon Frontier": AdvData(29500, "Demon Frontier Continued"),
    "Lun Berry - Fount of Rebirth": AdvData(34100, "Fount of Rebirth"),
    #Stamina Berries
-   "Peach - Springleaf Path": AdvData(20100, "Springleaf Path"),
+   "Peach - Springleaf Path": AdvData(20100, "Springleaf Path Continued"),
    "Peach - Fairy Springs": AdvData(20300, "Fairy Springs"),
    "Peach - Ashen Hinterlands": AdvData(30300, "Ashen Hinterlands Continued"),
    "Peach - Meikan Village": AdvData(33100, "Meikan Village"),
    "Peach - Moonlight Repose": AdvData(20200, "Moonlight Repose"),
    #Lumen Fairies
-   "Lumen Fairy 1 - Springleaf Path": AdvData(4100, "Springleaf Path Continued"),
+   "Lumen Fairy 1 - Springleaf Path": AdvData(4100, "Lun Tree Roots"),
    "Lumen Fairy 2 - Springleaf Path": AdvData(35400, "Springleaf Path"),
-   "Lumen Fairy 3 - Springleaf Path": AdvData(4400, "Springleaf Path Continued"),
+   "Lumen Fairy 3 - Springleaf Path": AdvData(4400, "Lun Tree Roots"),
    "Lumen Fairy 1 - Lun Tree Roots": AdvData(8700, "Lun Tree Roots"),
    "Lumen Fairy 2 - Lun Tree Roots": AdvData(5100, "Lun Tree Roots"),
    "Lumen Fairy 3 - Lun Tree Roots": AdvData(8800, "Lun Tree Roots"),
@@ -287,5 +287,14 @@ exclusion_table = {
         "Lumen Fairy 4 - Springleaf Path",
         "Lumen Fairy - Old Sanctuary",
         "Lumen Fairy - Meikan Village Windmill"
+    },
+    "progressive_magic": {
+        "Lun Berry - Koho Village",
+   "Lun Berry - Springleaf Path",
+   "Lun Berry - Lun Tree Roots",
+   "Lun Berry - Fairy Springs",
+   "Lun Berry - Ashen Hinterlands",
+   "Lun Berry - Demon Frontier",
+   "Lun Berry - Fount of Rebirth"
     }
 }

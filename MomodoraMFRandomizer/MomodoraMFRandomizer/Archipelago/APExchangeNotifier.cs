@@ -1,6 +1,7 @@
 using Archipelago.MultiClient.Net.Models;
 using HarmonyLib;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -39,6 +40,13 @@ namespace APMomodoraMoonlitFarewell.Archipelago
         private static Segment[] trackedSegments;
         private static string trackedPlainText;
 
+        // ItemNotifications only has one visual slot, so a notification that arrives while another
+        // is still showing is queued here instead of overwriting it, and is displayed once the
+        // current one has fully finished (see `showing` and ReapplyColorForFrame below).
+        private const int maxQueuedNotifications = 5;
+        private static readonly Queue<Segment[]> pendingNotifications = new Queue<Segment[]>();
+        private static bool showing;
+
         private static readonly FieldInfo myTextField = AccessTools.Field(typeof(ItemNotifications), "my_text");
 
         private static bool IsForSelf(ScoutedItemInfo info) =>
@@ -46,6 +54,26 @@ namespace APMomodoraMoonlitFarewell.Archipelago
 
         private static void ShowColorized(params Segment[] segments)
         {
+            if (showing)
+            {
+                // Several exchanges can be reported synchronously in the same call stack (e.g. draining
+                // multiple received items in one loop) before Unity's next FixedUpdate ever runs, so
+                // `showing` -- set synchronously in Display below -- is what keeps a same-frame burst
+                // from collapsing together the way relying on ItemNotifications' own static state would.
+                if (pendingNotifications.Count >= maxQueuedNotifications)
+                {
+                    pendingNotifications.Dequeue();
+                }
+                pendingNotifications.Enqueue(segments);
+                return;
+            }
+
+            Display(segments);
+        }
+
+        private static void Display(Segment[] segments)
+        {
+            showing = true;
             trackedSegments = segments;
             trackedPlainText = string.Concat(segments.Select(s => s.Text));
             ItemNotifications.SetNotification(trackedPlainText, null);
@@ -54,26 +82,41 @@ namespace APMomodoraMoonlitFarewell.Archipelago
         // Postfix target for ItemNotifications.FixedUpdate (see Patches/APExchangeNotificationPatcher.cs):
         // re-renders the currently showing notification every frame with each colored span's alpha
         // matched to the popup's own fade animation, so colored text fades out along with everything else.
+        // Also drains the notification queue once the popup has fully finished (faded back out), so a
+        // queued notification only appears after the previous one has visually disappeared.
         public static void ReapplyColorForFrame(ItemNotifications instance)
         {
-            if (trackedSegments == null || ItemNotifications.text != trackedPlainText)
+            if (trackedSegments != null)
             {
-                trackedSegments = null;
-                return;
+                if (ItemNotifications.text != trackedPlainText)
+                {
+                    trackedSegments = null;
+                }
+                else
+                {
+                    byte alphaByte = (byte)Mathf.Clamp(instance.alpha.a * 255f, 0f, 255f);
+                    StringBuilder builder = new StringBuilder();
+                    foreach (Segment segment in trackedSegments)
+                    {
+                        builder.Append(segment.ColorHex == null
+                            ? segment.Text
+                            : $"<color={segment.ColorHex}{alphaByte:X2}>{segment.Text}</color>");
+                    }
+
+                    if (myTextField?.GetValue(instance) is Text textComponent)
+                    {
+                        textComponent.text = builder.ToString();
+                    }
+                }
             }
 
-            byte alphaByte = (byte)Mathf.Clamp(instance.alpha.a * 255f, 0f, 255f);
-            StringBuilder builder = new StringBuilder();
-            foreach (Segment segment in trackedSegments)
+            if (showing && !ItemNotifications.active && instance.alpha.a <= 0f)
             {
-                builder.Append(segment.ColorHex == null
-                    ? segment.Text
-                    : $"<color={segment.ColorHex}{alphaByte:X2}>{segment.Text}</color>");
-            }
-
-            if (myTextField?.GetValue(instance) is Text textComponent)
-            {
-                textComponent.text = builder.ToString();
+                showing = false;
+                if (pendingNotifications.Count > 0)
+                {
+                    Display(pendingNotifications.Dequeue());
+                }
             }
         }
 
@@ -122,7 +165,7 @@ namespace APMomodoraMoonlitFarewell.Archipelago
             string itemName = item.ItemDisplayName;
             string playerName = item.Player.Alias;
 
-            if (InventoryUtils.AP_SIGIL_ITEM_ID.Contains((int)item.ItemId))
+            if (InventoryUtils.TRUE_SIGIL_ITEM_ID.Contains((int)item.ItemId))
             {
                 ShowColorized(
                     new Segment("Received Sigil "),

@@ -25,6 +25,12 @@ namespace APMomodoraMoonlitFarewell.Utils
         public static readonly int GOLD_MOONLIT_DUST_ID = 333;
         public static readonly int SILVER_MOONLIT_DUST_ID = 332;
         public static int ORACLE = 441;
+
+        // AP_SIGIL_ITEM_ID plus the Oracle -- both real Sigils -- but never Key Items, even though
+        // SlotDataUtils.AddItemsToItemPool merges Key Items/Oracle into AP_SIGIL_ITEM_ID at runtime
+        // for inventory-granting purposes. Kept separately so text that should say "Sigil" (e.g.
+        // APExchangeNotifier) doesn't also label Key Items as one.
+        public static readonly List<int> TRUE_SIGIL_ITEM_ID = new List<int>(AP_SIGIL_ITEM_ID) { ORACLE };
         public static Dictionary<int, int> SKILL_INVENTORY_ID = new Dictionary<int, int>()
         {
             { 9, 345 },

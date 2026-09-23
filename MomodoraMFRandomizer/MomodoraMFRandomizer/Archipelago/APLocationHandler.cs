@@ -48,12 +48,20 @@ namespace APMomodoraMoonlitFarewell.Archipelago
             }
             else if (MomoEventUtils.LILYEVENTS.Contains(index))
             {
+                if (APUtils.IsLocationChecked(index * 100))
+                {
+                    return;
+                }
                 Platformer3D.phys_attack -= APPlayerStatUpdater.attackPerLily;
                 GameData.current.MomoEvent[MomoEventUtils.LILY_COUNTER_EVENT]--;
                 APUtils.CompleteLocation(index * 100);
             }
             else if (MomoEventUtils.HEALTHBERRYEVENTS.Contains(index))
             {
+                if (APUtils.IsLocationChecked(index * 100))
+                {
+                    return;
+                }
                 Platformer3D.player_maxhp -= APPlayerStatUpdater.healthPerBerry;
                 Platformer3D.player_hp -= APPlayerStatUpdater.healthPerBerry;
                 GameData.current.MomoEvent[MomoEventUtils.HEALTH_COUNTER_EVENT]--;
@@ -61,6 +69,10 @@ namespace APMomodoraMoonlitFarewell.Archipelago
             }
             else if (MomoEventUtils.MAGICBERRYEVENTS.Contains(index))
             {
+                if (APUtils.IsLocationChecked(index * 100))
+                {
+                    return;
+                }
                 Platformer3D.player_maxsp -= APPlayerStatUpdater.magicPerUpgrade;
                 Platformer3D.player_sp -= APPlayerStatUpdater.magicPerUpgrade;
                 GameData.current.MomoEvent[MomoEventUtils.MAGIC_COUNTER_EVENT]--;
@@ -68,12 +80,20 @@ namespace APMomodoraMoonlitFarewell.Archipelago
             }
             else if (MomoEventUtils.STAMINABERRYEVENTS.Contains(index))
             {
+                if (APUtils.IsLocationChecked(index * 100))
+                {
+                    return;
+                }
                 GameData.current.MomoEvent[MomoEventUtils.STAMINA_COUNTER_EVENT_ONE]--;
                 GameData.current.MomoEvent[MomoEventUtils.STAMINA_COUNTER_EVENT_TWO]--;
                 APUtils.CompleteLocation(index * 100);
             }
             else if (MomoEventUtils.FAIRYEVENTS.Contains(index))
             {
+                if (APUtils.IsLocationChecked(index * 100))
+                {
+                    return;
+                }
                 GameData.current.MomoEvent[MomoEventUtils.FAIRY_COUNTER_EVENT]--;
                 APUtils.CompleteLocation(index * 100);
                 if (APLocationScoutCache.TryGetInfo(index * 100, out ScoutedItemInfo fairyInfo))
@@ -86,6 +106,10 @@ namespace APMomodoraMoonlitFarewell.Archipelago
             }
             else
             {
+                if (APUtils.IsLocationChecked(index))
+                {
+                    return;
+                }
                 APUtils.CompleteLocation(index); //Boss check
                 if (APLocationScoutCache.TryGetInfo(index, out ScoutedItemInfo bossInfo))
                 {
