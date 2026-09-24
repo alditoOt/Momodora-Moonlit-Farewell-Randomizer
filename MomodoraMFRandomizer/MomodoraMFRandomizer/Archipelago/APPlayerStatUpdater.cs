@@ -2,10 +2,10 @@ using APMomodoraMoonlitFarewell.Utils;
 
 namespace APMomodoraMoonlitFarewell.Archipelago
 {
-    // Applies the player-stat side effects (attack/health/magic/stamina/fairy counts) of received Archipelago items.
+    // Applies the player-stat side effects (attack/health/magic/stamina/fairy not a stat but here either way) of received Archipelago items
     static class APPlayerStatUpdater
     {
-        // Base game stats + per-pickup increment, as measured in-game.
+        // Base game stats + per-pickup increment
         public const int baseAttack = 5;
         public const int attackPerLily = 2;
         public const int baseMaxHealth = 300;

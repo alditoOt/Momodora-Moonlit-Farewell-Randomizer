@@ -31,7 +31,7 @@ namespace APMomodoraMoonlitFarewell.Utils
                 {
                     string json = File.ReadAllText(configPath);
                     config = JsonConvert.DeserializeObject<ServerConfig>(json) ?? new ServerConfig();
-                    MelonLogger.Msg("Config loaded successfully");
+                    MelonLogger.Msg("Config loaded successfully.");
                 }
                 else
                 {

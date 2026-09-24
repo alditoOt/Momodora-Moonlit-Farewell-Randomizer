@@ -27,22 +27,29 @@ namespace APMomodoraMoonlitFarewell
         private string username; 
         private string password;
         
-        DeathLinkService deathLinkService;
-        APDeathLinkHandler deathLinkHandler = new APDeathLinkHandler();
-        
-        public static ArchipelagoSession session;
+        static DeathLinkService deathLinkService;
+        static APDeathLinkHandler deathLinkHandler = new APDeathLinkHandler();
 
-        // Harmony patches fire on gameplay events independent of whether startup finished connecting,
-        // so anything touching `session` should check this first.
-        public static bool IsSessionActive => session != null && session.Socket != null && session.Socket.Connected;
+        public static ArchipelagoSession session;
         #endregion
-        
+        private static bool loggedIn;
+
+        // True once a login has succeeded, and stays true through a disconnect: the session object
+        // keeps its received items / checked locations, so gameplay logic can keep using them
+        // while APConnectionManager reconnects
+        public static bool HasSession => loggedIn && session != null;
+
         BlockRemover blockRemover = new BlockRemover();
         private bool mainMenu = true;
 
         #region Socket Logging
         static void Socket_ErrorReceived(Exception e, string message)
         {
+            if (!APConnectionManager.IsConnected)
+            {
+                // Disconnected so don't write to the console every time
+                return;
+            }
             MelonLogger.Error($"Socket Error: {message}");
             MelonLogger.Error($"Socket Exception: {e.Message}");
 
@@ -52,16 +59,20 @@ namespace APMomodoraMoonlitFarewell
             else
                 MelonLogger.Error($"    No stacktrace provided");
         }
-        static void Socket_SocketOpened() =>
-            MelonLogger.Msg($"Socket opened to: {session.Socket.Uri}");
-        static void Socket_SocketClosed(string reason) =>
-            MelonLogger.Msg($"Socket closed: {reason}");
 
-        private void CollectSocketInfo()
+        private static void CollectSocketInfo(ArchipelagoSession target)
         {
-            session.Socket.ErrorReceived += Socket_ErrorReceived;
-            session.Socket.SocketOpened += Socket_SocketOpened;
-            session.Socket.SocketClosed += Socket_SocketClosed;
+            target.Socket.ErrorReceived += Socket_ErrorReceived;
+            target.Socket.SocketOpened += () => MelonLogger.Msg($"Socket opened to: {target.Socket.Uri}");
+            target.Socket.SocketClosed += reason =>
+            {
+                MelonLogger.Msg($"Socket closed: {reason}");
+                // A closed event from a session we've already replaced is stale
+                if (target == session)
+                {
+                    APConnectionManager.MarkDisconnected(reason);
+                }
+            };
         }
 
         #endregion
@@ -84,31 +95,18 @@ namespace APMomodoraMoonlitFarewell
             try
             {
                 session = ArchipelagoSessionFactory.CreateSession(server);
-                APConnector.Connect(session, server, username, password);
-                // Items delivered during Connect are already queued; discard them so they don't
-                // surface as notifications on the next real item.
-                while (session.Items.Any())
+                if (!APConnector.Connect(session, server, username, password))
                 {
-                    session.Items.DequeueItem();
+                    return;
                 }
-                initialSyncDrained = true;
-                session.Items.ItemReceived += APLocationHandler.UpdateItemsForTheSession;
-                session.Items.ItemReceived += NotifyNewlyReceivedItems;
+                loggedIn = true;
+                AttachSession(session);
                 GameDataPatcher.UpdateShopNames();
-                CollectSocketInfo();
                 SlotDataUtils.GetSettingsFromYAML();
                 SlotDataUtils.AddItemsToItemPool();
                 APLocationScoutCache.Initialize();
-                if (SlotDataUtils.DEATHLINK)
-                {
-                    deathLinkService = session.CreateDeathLinkService();
-                    deathLinkService.EnableDeathLink();
-                    deathLinkService.OnDeathLinkReceived += (deathLinkObject) =>
-                    {
-                        Platformer3D.player_hp = 0f;
-                        deathLinkHandler.SetIsDead(true);
-                    };
-                }
+                SetupDeathLink();
+                APConnectionManager.Start();
             }
             catch (Exception e)
             {
@@ -116,11 +114,70 @@ namespace APMomodoraMoonlitFarewell
             }
         }
 
-        // Independent of APLocationHandler.UpdateItemsForTheSession, which re-scans the entire
-        // received-items history on every resync (scene load, reconnect). Draining the helper's
-        // new-item queue here instead ensures a popup fires exactly once per genuinely new item.
-        // Connecting replays the entire received-item history into the helper's queue; those items
-        // aren't new, so the first drain after connect is discarded silently.
+        // Sets a newly logged-in session into the mod; used when starting up and reconnecting
+        private static void AttachSession(ArchipelagoSession target)
+        {
+            CollectSocketInfo(target);
+            // Items delivered during Connect are already queued; discard them so they don't
+            // surface as notifications on the next real item
+            while (target.Items.Any())
+            {
+                target.Items.DequeueItem();
+            }
+            initialSyncDrained = true;
+            // ItemReceived fires on the socket thread, but granting items and showing popups touch
+            // Unity objects, so both are handed to the main thread
+            target.Items.ItemReceived += itemHandler => APConnectionManager.RunOnMainThread(() =>
+            {
+                if (target != session)
+                {
+                    return;
+                }
+                APLocationHandler.UpdateItemsForTheSession(itemHandler);
+                NotifyNewlyReceivedItems(itemHandler);
+            });
+        }
+
+        private static void SetupDeathLink()
+        {
+            if (!SlotDataUtils.DEATHLINK)
+            {
+                return;
+            }
+            deathLinkService = session.CreateDeathLinkService();
+            deathLinkService.EnableDeathLink();
+            deathLinkService.OnDeathLinkReceived += deathLinkObject => APConnectionManager.RunOnMainThread(() =>
+            {
+                Platformer3D.player_hp = 0f;
+                deathLinkHandler.SetIsDead(true);
+            });
+        }
+
+        // Called from APConnectionManager's worker thread (never the game thread) after a connection drop
+        // Builds a brand-new session; the old one is left to die (Sadge) and is replaced only on success
+        internal static bool TryReconnectSession()
+        {
+            try
+            {
+                ArchipelagoSession newSession = ArchipelagoSessionFactory.CreateSession(server);
+                if (!APConnector.Connect(newSession, server, ConfigLoader.config.username, ConfigLoader.config.password))
+                {
+                    return false;
+                }
+                session = newSession;
+                AttachSession(newSession);
+                SetupDeathLink();
+                return true;
+            }
+            catch (Exception e)
+            {
+                MelonLogger.Warning($"Reconnect attempt failed: {e.GetBaseException().Message}");
+                return false;
+            }
+        }
+
+       // Check the history of already received items so that we don't fire a popup notification
+       // when updating items for the session after a reconnect
         private static bool initialSyncDrained;
 
         private static void NotifyNewlyReceivedItems(ReceivedItemsHelper itemHandler)
@@ -154,7 +211,7 @@ namespace APMomodoraMoonlitFarewell
                 MomoEventUtils.DEFAULT_EVENTS_TO_1.ForEach(x => GameData.current.MomoEvent[x] = 1);
                 MomoEventUtils.GrowTimedBerries();
             }
-            if(SlotDataUtils.OPENSPRINGLEAFPATH)
+            if(SlotDataUtils.OPEN_SPRINGLEAF_PATH)
             {
                 blockRemover.removeAllBlockers(sceneName);
             }
@@ -164,6 +221,7 @@ namespace APMomodoraMoonlitFarewell
 
         public override void OnFixedUpdate()
         {
+            APConnectionManager.DrainMainThreadActions();
             deathLinkHandler.CheckDeathLink(deathLinkService, username);
         }
     }

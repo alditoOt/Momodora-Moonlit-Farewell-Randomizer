@@ -7,16 +7,16 @@ using APMomodoraMoonlitFarewell.Utils;
 
 namespace APMomodoraMoonlitFarewell.Archipelago
 {
-    // Pre-scouts every AP-trackable (non-shop) location once at startup so ownership of a
-    // pickup (ours vs. another player's) is known synchronously, in time to intercept the
-    // same-frame vanilla popup rather than waiting on a live server round-trip.
+    // Check every AP item (except the shop) once during startup, so we can know which item
+    // belongs to which player and show the correct notification immediately, rather than
+    // waiting for a server round-trip to find out
     static class APLocationScoutCache
     {
         private static Dictionary<long, ScoutedItemInfo> locationInfo = new Dictionary<long, ScoutedItemInfo>();
 
         public static void Initialize()
         {
-            if (!APMomodoraMoonlitFarewell.IsSessionActive)
+            if (!APMomodoraMoonlitFarewell.HasSession)
             {
                 return;
             }

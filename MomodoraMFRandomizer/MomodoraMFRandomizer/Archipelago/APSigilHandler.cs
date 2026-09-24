@@ -24,9 +24,9 @@ namespace APMomodoraMoonlitFarewell.Archipelago
                 NotifyIfNew(item.itemDef.Index, is_new_item);
                 return true;
             }
-            if (!APMomodoraMoonlitFarewell.IsSessionActive)
+            if (!APMomodoraMoonlitFarewell.HasSession)
             {
-                // Session isn't ready yet; let the vanilla pickup through rather than blocking the player.
+                // Session isn't ready yet; let the vanilla pickup through rather than blocking the player
                 return true;
             }
             foreach (ItemInfo apItem in APMomodoraMoonlitFarewell.session.Items.AllItemsReceived)
@@ -46,8 +46,8 @@ namespace APMomodoraMoonlitFarewell.Archipelago
             return itemReceived;
         }
 
-        // Inventory.Add is the one place every sigil, grimoire, key item and Fool/Living Blood-style
-        // pickup passes through, so the send popup for all of them is raised here.
+        // Inventory.Add is the one place every sigil, grimoire, key item and The Fool/Living Blood
+        // pickup passes through, so the send popup for all of them is raised here
         private static void NotifyIfNew(int locationId, bool isNewItem)
         {
             if (isNewItem && APLocationScoutCache.TryGetInfo(locationId, out ScoutedItemInfo info))

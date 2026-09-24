@@ -18,15 +18,13 @@ namespace APMomodoraMoonlitFarewell.Archipelago
         [HarmonyPostfix]
         public static void SendCompletion()
         {
-            if (!APMomodoraMoonlitFarewell.IsSessionActive)
+            if (!APMomodoraMoonlitFarewell.HasSession)
             {
                 return;
             }
             if (GameData.current.MomoEvent[MomoEventUtils.VICTORY_EVENT] == 1)
             {
-                var statusUpdatePacket = new StatusUpdatePacket();
-                statusUpdatePacket.Status = ArchipelagoClientState.ClientGoal;
-                APMomodoraMoonlitFarewell.session.Socket.SendPacket(statusUpdatePacket);
+                APConnectionManager.QueueGoal();
             }
         }
     }

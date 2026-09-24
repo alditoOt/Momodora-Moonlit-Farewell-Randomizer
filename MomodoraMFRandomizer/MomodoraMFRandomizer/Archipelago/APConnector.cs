@@ -20,7 +20,7 @@ namespace APMomodoraMoonlitFarewell.Archipelago
             return result;
         }
 
-        public static void Connect(ArchipelagoSession session, string server, string user, string pass)
+        public static bool Connect(ArchipelagoSession session, string server, string user, string pass)
         {
             LoginResult result;
             try
@@ -38,7 +38,7 @@ namespace APMomodoraMoonlitFarewell.Archipelago
                 if (!(result is LoginFailure failure))
                 {
                     MelonLogger.Error($"Failed to connect to {server} as {user}: unexpected login result type {result.GetType().Name}");
-                    return;
+                    return false;
                 }
 
                 string errorMessage = $"Failed to Connect to {server} as {user}:";
@@ -52,12 +52,13 @@ namespace APMomodoraMoonlitFarewell.Archipelago
                 }
 
                 MelonLogger.Error(errorMessage);
-                return; // Did not connect, show the user the contents of `errorMessage`
+                return false; // Did not connect, log the errors from errorMessage
             }
 
             var loginSuccess = (LoginSuccessful)result;
-            MelonLogger.Msg("I'm your fan(s)");
+            MelonLogger.Msg("soy fans");
             MelonLogger.Msg("Connected to Archipelago session. Have fun!");
+            return true;
         }
     }
 }

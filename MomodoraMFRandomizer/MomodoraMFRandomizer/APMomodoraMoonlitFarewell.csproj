@@ -68,6 +68,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Archipelago\APConnectionManager.cs" />
     <Compile Include="Archipelago\APConnector.cs" />
     <Compile Include="Archipelago\APExchangeNotifier.cs" />
     <Compile Include="Archipelago\APItemGranter.cs" />

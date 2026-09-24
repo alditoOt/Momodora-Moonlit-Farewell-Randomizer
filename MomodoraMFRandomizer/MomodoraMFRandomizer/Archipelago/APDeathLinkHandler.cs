@@ -16,9 +16,12 @@ namespace APMomodoraMoonlitFarewell.Archipelago
         {           
             if (!isDead && Platformer3D.player_hp <= 0f)
             {
-                MelonLogger.Msg("deathlink sent");
-                deathLinkService.SendDeathLink(new DeathLink(username));
                 isDead = true;
+                if (deathLinkService != null && APConnectionManager.IsConnected)
+                {
+                    MelonLogger.Msg("DEATHLINK sent");
+                    APConnectionManager.RunInBackground(() => deathLinkService.SendDeathLink(new DeathLink(username)));
+                }
             }
             if (Platformer3D.player_hp >= 1)
             {
