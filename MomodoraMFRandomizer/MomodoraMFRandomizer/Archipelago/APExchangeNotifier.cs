@@ -12,20 +12,14 @@ using APMomodoraMoonlitFarewell.Utils;
 namespace APMomodoraMoonlitFarewell.Archipelago
 {
     // Builds and displays the "Sent X to Player Y!" / "Received X from Player Y!" popups for the
-    // multiworld item exchange. Always renders through the game's own corner ItemNotifications
-    // popup -- never TutorialMessage or the DialogueManager/DialogueText dialogue-box system used
-    // for NPC cutscenes -- so every vanilla popup for the underlying pickup is left untouched, and
-    // this one is shown as an additional notification alongside it.
+    // multiworld item exchange. Always renders through the game's own side ItemNotifications
+    // popup so every vanilla popup for the underlying pickup is left untouched, and
+    // this one is shown as an additional notification alongside it
     static class APExchangeNotifier
     {
         private const string itemColor = "#FFD27F";
         private const string playerColor = "#66CCFF";
 
-        // A run of plain text, or of text wrapped in a <color> tag whose alpha we re-embed every
-        // frame (see ReapplyColorForFrame) -- ItemNotifications renders through a legacy
-        // UnityEngine.UI.Text component, whose fade-out animation does not apply to colored spans
-        // on its own (a <color> tag pins that span to whatever alpha it names, ignoring the
-        // component's own fading color), so a static color tag would leave that span stuck on screen.
         private readonly struct Segment
         {
             public readonly string Text;
@@ -42,7 +36,7 @@ namespace APMomodoraMoonlitFarewell.Archipelago
 
         // ItemNotifications only has one visual slot, so a notification that arrives while another
         // is still showing is queued here instead of overwriting it, and is displayed once the
-        // current one has fully finished (see `showing` and ReapplyColorForFrame below).
+        // current one has fully finished 
         private const int maxQueuedNotifications = 5;
         private static readonly Queue<Segment[]> pendingNotifications = new Queue<Segment[]>();
         private static bool showing;
@@ -56,10 +50,7 @@ namespace APMomodoraMoonlitFarewell.Archipelago
         {
             if (showing)
             {
-                // Several exchanges can be reported synchronously in the same call stack (e.g. draining
-                // multiple received items in one loop) before Unity's next FixedUpdate ever runs, so
-                // `showing` -- set synchronously in Display below -- is what keeps a same-frame burst
-                // from collapsing together the way relying on ItemNotifications' own static state would.
+                // 'showing' flag prevents multiple displays from happening in the same FixedUpdate frame
                 if (pendingNotifications.Count >= maxQueuedNotifications)
                 {
                     pendingNotifications.Dequeue();
@@ -79,11 +70,6 @@ namespace APMomodoraMoonlitFarewell.Archipelago
             ItemNotifications.SetNotification(trackedPlainText, null);
         }
 
-        // Postfix target for ItemNotifications.FixedUpdate (see Patches/APExchangeNotificationPatcher.cs):
-        // re-renders the currently showing notification every frame with each colored span's alpha
-        // matched to the popup's own fade animation, so colored text fades out along with everything else.
-        // Also drains the notification queue once the popup has fully finished (faded back out), so a
-        // queued notification only appears after the previous one has visually disappeared.
         public static void ReapplyColorForFrame(ItemNotifications instance)
         {
             if (trackedSegments != null)
@@ -120,18 +106,18 @@ namespace APMomodoraMoonlitFarewell.Archipelago
             }
         }
 
-        // Corner popup for every send-side pickup (bosses, fairies, narrative skills, stat berries,
-        // Lily/Atk flower, sigils, Dash, Double Jump) once APLocationScoutCache confirms the
+        // Side popup for every send location or item, once APLocationScoutCache confirms the
         // location is part of the multiworld. Shows the normal "Sent" message when the item belongs
-        // to someone else, or a self-congratulatory "Received" message when it's our own check.
+        // to someone else, or a self-congratulatory "Received" message when it's the player's own check
         public static void NotifyExchange(ScoutedItemInfo info)
         {
             if (IsForSelf(info))
             {
                 ShowColorized(
-                    new Segment("Received "),
+                    new Segment("You found "),
                     new Segment(info.ItemDisplayName, itemColor),
-                    new Segment(" by yourself! Go you!"));
+                    new Segment("! Go "),
+                    new Segment("you!", playerColor));
             }
             else
             {
@@ -144,15 +130,8 @@ namespace APMomodoraMoonlitFarewell.Archipelago
             }
         }
 
-        // Sentinel localization id: MainScr.GetString is patched (see APExchangeNotificationPatcher)
-        // to resolve this to an empty string, so a TutorialMessage override can carry its entire
-        // message in extraText without needing a real localization-XML entry.
         public const string SentinelLocalizationKey = "ap_raw";
 
-        // Stat berries, sigils, the Lily/Atk flower, and Dash/Double Jump all show their own vanilla
-        // TutorialMessage popup as well as the corner NotifyExchange popup above -- rather than
-        // showing the full item/player details twice, replace the vanilla text with a short pointer
-        // so the player knows to look at the corner notification for the actual exchange details.
         public static void OverrideTutorialMessageWithPointerPopup(ScoutedItemInfo info)
         {
             string verb = IsForSelf(info) ? "received" : "sent";
@@ -160,7 +139,7 @@ namespace APMomodoraMoonlitFarewell.Archipelago
             TutorialMessage.extraText = $"An <color={itemColor}>AP Item</color> was {verb}! Check the notification!";
         }
 
-        // Connection status ("Disconnected...", "Reconnected!") through the same corner popup queue.
+        // Connection status ("Disconnected...", "Reconnected!") through the same corner popup queue
         public static void NotifyStatus(string message)
         {
             ShowColorized(new Segment(message));
@@ -171,7 +150,7 @@ namespace APMomodoraMoonlitFarewell.Archipelago
             string itemName = item.ItemDisplayName;
             string playerName = item.Player.Alias;
 
-            if (InventoryUtils.TRUE_SIGIL_ITEM_ID.Contains((int)item.ItemId))
+            if (InventoryUtils.ALL_SIGIL_ITEM_ID.Contains((int)item.ItemId))
             {
                 ShowColorized(
                     new Segment("Received Sigil "),
@@ -187,7 +166,8 @@ namespace APMomodoraMoonlitFarewell.Archipelago
                     new Segment(itemName, itemColor),
                     new Segment(" from "),
                     new Segment(playerName, playerColor),
-                    new Segment($"!\n{BuildStatText(item.ItemId)}"));
+                    new Segment("!"));
+                    // new Segment($"!\n{BuildStatText(item.ItemId)}"));
             }
             else if (item.ItemId == InventoryUtils.FAIRY_ID)
             {
@@ -211,7 +191,8 @@ namespace APMomodoraMoonlitFarewell.Archipelago
             itemId == InventoryUtils.DAMAGE_ID || itemId == InventoryUtils.STAMINA_ID;
 
         // Mirrors the vanilla ItemFruit.Notif() popup: a flavor line, plus a "(previous -> new)"
-        // delta for Health/Magic/Damage (Stamina shows no numeric delta in vanilla either).
+        // delta for Health/Magic/Damage (Stamina shows no numeric delta in vanilla either)
+        // Unused since it won't fit the notification message but leaving it here nonetheless
         private static string BuildStatText(long itemId)
         {
             if (itemId == InventoryUtils.HEALTH_ID)
@@ -230,8 +211,7 @@ namespace APMomodoraMoonlitFarewell.Archipelago
         }
 
         // Counts how many of this stat item we've received in total (including the one just
-        // dequeued) to compute the delta, rather than relying on live Platformer3D state --
-        // that value may already reflect a full resync of every received item by the time this runs.
+        // dequeued) to compute the delta, rather than relying on live Platformer3D state
         private static string BuildDeltaText(int baseValue, int perUnit, long itemId)
         {
             int countSoFar = APMomodoraMoonlitFarewell.session.Items.AllItemsReceived.Count(i => i.ItemId == itemId);

@@ -31,14 +31,13 @@ namespace APMomodoraMoonlitFarewell
         static APDeathLinkHandler deathLinkHandler = new APDeathLinkHandler();
 
         public static ArchipelagoSession session;
+        #endregion
         private static bool loggedIn;
 
         // True once a login has succeeded, and stays true through a disconnect: the session object
-        // keeps its cached received items / checked locations, so gameplay logic can keep using them
-        // while APConnectionManager reconnects. Whether the socket is actually up is
-        // APConnectionManager.IsConnected; anything that sends goes through that manager.
+        // keeps its received items / checked locations, so gameplay logic can keep using them
+        // while APConnectionManager reconnects
         public static bool HasSession => loggedIn && session != null;
-        #endregion
 
         BlockRemover blockRemover = new BlockRemover();
         private bool mainMenu = true;
@@ -48,7 +47,7 @@ namespace APMomodoraMoonlitFarewell
         {
             if (!APConnectionManager.IsConnected)
             {
-                // Already known to be down and reconnecting; don't flood the console.
+                // Disconnected so don't write to the console every time
                 return;
             }
             MelonLogger.Error($"Socket Error: {message}");
@@ -68,7 +67,7 @@ namespace APMomodoraMoonlitFarewell
             target.Socket.SocketClosed += reason =>
             {
                 MelonLogger.Msg($"Socket closed: {reason}");
-                // A closed event from a session we've already replaced is stale.
+                // A closed event from a session we've already replaced is stale
                 if (target == session)
                 {
                     APConnectionManager.MarkDisconnected(reason);
@@ -115,19 +114,19 @@ namespace APMomodoraMoonlitFarewell
             }
         }
 
-        // Wires a freshly logged-in session into the mod; shared by startup and reconnects.
+        // Sets a newly logged-in session into the mod; used when starting up and reconnecting
         private static void AttachSession(ArchipelagoSession target)
         {
             CollectSocketInfo(target);
             // Items delivered during Connect are already queued; discard them so they don't
-            // surface as notifications on the next real item.
+            // surface as notifications on the next real item
             while (target.Items.Any())
             {
                 target.Items.DequeueItem();
             }
             initialSyncDrained = true;
             // ItemReceived fires on the socket thread, but granting items and showing popups touch
-            // Unity objects, so both are handed to the main thread.
+            // Unity objects, so both are handed to the main thread
             target.Items.ItemReceived += itemHandler => APConnectionManager.RunOnMainThread(() =>
             {
                 if (target != session)
@@ -154,8 +153,8 @@ namespace APMomodoraMoonlitFarewell
             });
         }
 
-        // Called from APConnectionManager's worker thread (never the game thread) after a drop.
-        // Builds a brand-new session; the old one is left to die and is replaced only on success.
+        // Called from APConnectionManager's worker thread (never the game thread) after a connection drop
+        // Builds a brand-new session; the old one is left to die (Sadge) and is replaced only on success
         internal static bool TryReconnectSession()
         {
             try
@@ -177,11 +176,8 @@ namespace APMomodoraMoonlitFarewell
             }
         }
 
-        // Independent of APLocationHandler.UpdateItemsForTheSession, which re-scans the entire
-        // received-items history on every resync (scene load, reconnect). Draining the helper's
-        // new-item queue here instead ensures a popup fires exactly once per genuinely new item.
-        // Connecting replays the entire received-item history into the helper's queue; those items
-        // aren't new, so the first drain after connect is discarded silently.
+       // Check the history of already received items so that we don't fire a popup notification
+       // when updating items for the session after a reconnect
         private static bool initialSyncDrained;
 
         private static void NotifyNewlyReceivedItems(ReceivedItemsHelper itemHandler)
@@ -215,7 +211,7 @@ namespace APMomodoraMoonlitFarewell
                 MomoEventUtils.DEFAULT_EVENTS_TO_1.ForEach(x => GameData.current.MomoEvent[x] = 1);
                 MomoEventUtils.GrowTimedBerries();
             }
-            if(SlotDataUtils.OPENSPRINGLEAFPATH)
+            if(SlotDataUtils.OPEN_SPRINGLEAF_PATH)
             {
                 blockRemover.removeAllBlockers(sceneName);
             }

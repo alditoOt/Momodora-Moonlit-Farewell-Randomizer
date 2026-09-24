@@ -9,9 +9,9 @@ using System.Threading;
 
 namespace APMomodoraMoonlitFarewell.Archipelago
 {
-    // Owns every network write and the reconnect loop, so nothing on Unity's main thread ever waits
-    // on the socket. Gameplay code only enqueues (location checks, goal); a background worker sends
-    // them, and when the socket drops it reconnects with backoff and then flushes whatever piled up.
+    // Owns every network write and reconnect loop, so nothing on Unity's main thread ever waits on the socket. 
+    // Gameplay code enters a queue (location checks, goal); a background worker sends them, 
+    // and if the socket drops it reconnects with backoff and takes care of whatever piled up.
     static class APConnectionManager
     {
         private const int sendTimeoutMs = 10000;
@@ -32,7 +32,7 @@ namespace APMomodoraMoonlitFarewell.Archipelago
 
         public static bool IsConnected => connected;
 
-        // Call once after the first successful login.
+        // Call once after the first successful login
         public static void Start()
         {
             connected = true;
@@ -53,7 +53,7 @@ namespace APMomodoraMoonlitFarewell.Archipelago
             wake.Set();
         }
 
-        // A check made while offline hasn't reached the session's AllLocationsChecked yet.
+        // A check made while offline hasn't reached the session's AllLocationsChecked yet
         public static bool IsPending(long locationId)
         {
             lock (stateLock)
@@ -75,7 +75,8 @@ namespace APMomodoraMoonlitFarewell.Archipelago
             wake.Set();
         }
 
-        // Fire-and-forget network work (e.g. DeathLink) that must not run on the game thread.
+        // Fire-and-forget network work (i.e. DeathLink) that must not run on the game thread.
+        // aka try to shoot this method when available but don't block the game (which could freeze the game)
         public static void RunInBackground(Action action)
         {
             ThreadPool.QueueUserWorkItem(_ =>
@@ -94,7 +95,9 @@ namespace APMomodoraMoonlitFarewell.Archipelago
 
         public static void RunOnMainThread(Action action) => mainThreadActions.Enqueue(action);
 
-        // Called from OnFixedUpdate.
+        // Called from OnFixedUpdate
+        // Every frame try to run the established threads
+        // Main thread handles game stuff, background threads handle mostly networking stuff
         public static void DrainMainThreadActions()
         {
             while (mainThreadActions.TryDequeue(out Action action))
@@ -120,7 +123,7 @@ namespace APMomodoraMoonlitFarewell.Archipelago
                 }
                 connected = false;
             }
-            MelonLogger.Warning($"Disconnected from Archipelago ({reason}). Checks are kept and will be sent once the connection is back; trying to reconnect...");
+            MelonLogger.Warning($"Disconnected from Archipelago ({reason}). Checks are saved and will be sent once the connection is back; trying to reconnect...");
             RunOnMainThread(() => APExchangeNotifier.NotifyStatus("Disconnected from Archipelago. Reconnecting..."));
             wake.Set();
         }
@@ -138,7 +141,7 @@ namespace APMomodoraMoonlitFarewell.Archipelago
                 {
                     if (connected)
                     {
-                        // Catches a closed socket even if no event fired for it.
+                        // Catches a closed socket even if no event fired for it
                         if (APMomodoraMoonlitFarewell.session?.Socket == null || !APMomodoraMoonlitFarewell.session.Socket.Connected)
                         {
                             MarkDisconnected("socket closed");

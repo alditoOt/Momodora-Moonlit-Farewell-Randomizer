@@ -13,14 +13,14 @@ namespace APMomodoraMoonlitFarewell.Archipelago
     [HarmonyPatch(typeof(MomoEventData))]
     class APSkillHandler
     {
-        // Sprint, Leaf, Double Jump, Wall Jump, Lunar Attunement, Fast Travel event indices, as measured in-game.
+        // Sprint, Leaf, Double Jump, Wall Jump, Lunar Attunement, Fast Travel event ids
         private const int dashSkillEvent = 9;
         private const int leafSkillEvent = 20;
         private const int doubleJumpSkillEvent = 10;
         private const int wallJumpSkillEvent = 194;
         private const int lunarAttunementSkillEvent = 131;
 
-        // Boss event that must be cleared before the dash skill can be reset/re-granted in this scene.
+        // Boss event that must be cleared before the dash skill can be reset/re-granted in this scene
         private const int dashResetGateEvent = 17;
 
         static Dictionary<string, int> skillAndScene = new Dictionary<string, int>()
@@ -33,9 +33,8 @@ namespace APMomodoraMoonlitFarewell.Archipelago
             { MomoEventUtils.FAST_TRAVEL_SCENE, MomoEventUtils.FAST_TRAVEL_EVENT }
         };
 
-        /*
-         * Description: This method will handle completing the skill location check in case the player already has the skill when entering the scene where they would receive it in vanilla
-         */
+        // This method will handle completing the skill location check in case the player already has the skill when entering the scene where they would receive it in vanilla
+         
         public static void HandleSkillOnSceneLoad(string sceneName, Boolean mainMenu)
         {
             if (mainMenu || !skillAndScene.ContainsKey(sceneName) || GameData.current.MomoEvent[skillAndScene[sceneName]] == 0)
@@ -51,6 +50,7 @@ namespace APMomodoraMoonlitFarewell.Archipelago
                 {
                     ResetDashSkill();
                     // Check what happens if you get the dash skill back while in the scene
+                    // 1.8.0: you get the dash skill back, who would've thought but glad it works...
                 }
             }
             else if (index == lunarAttunementSkillEvent)
@@ -68,7 +68,7 @@ namespace APMomodoraMoonlitFarewell.Archipelago
             }
         }
 
-        // Only notifies the first time, so re-entering the scene doesn't repeat the popup.
+        // Only notifies the first time, so re-entering the scene doesn't repeat the popup
         private static void CompleteAndNotify(int index)
         {
             bool alreadyChecked = APUtils.IsLocationChecked(index);

@@ -10,7 +10,7 @@ using APMomodoraMoonlitFarewell.Utils;
 namespace APMomodoraMoonlitFarewell.Archipelago
 {
     // Detects in-game events that correspond to Archipelago location checks and reports them,
-    // and rebuilds player state from the full set of received items when the session's item list changes.
+    // and rebuilds player state from the full set of received items when the session's item list changes
     [HarmonyPatch(typeof(MomoEventData))]
     class APLocationHandler
     {
@@ -18,7 +18,7 @@ namespace APMomodoraMoonlitFarewell.Archipelago
 
         // Dash and Double Jump are excluded from the skill "Sent" notification below because they
         // already get their own popup from Patches/APExchangeNotificationPatcher.cs;
-        // notifying here too would show the popup twice.
+        // notifying here too would show the popup twice
         private const int dashSkillEvent = 9;
         private const int doubleJumpSkillEvent = 10;
 
@@ -100,7 +100,7 @@ namespace APMomodoraMoonlitFarewell.Archipelago
                 {
                     APExchangeNotifier.NotifyExchange(fairyInfo);
                     // MunnyRocks.Break already showed its own "fairy_freedom" TutorialMessage popup
-                    // above; replace it with a pointer instead of showing the same details twice.
+                    // above; replace it with a pointer message instead of showing the same details twice
                     APExchangeNotifier.OverrideTutorialMessageWithPointerPopup(fairyInfo);
                 }
             }
@@ -141,8 +141,6 @@ namespace APMomodoraMoonlitFarewell.Archipelago
                 }
                 APUtils.CompleteLocation(index);
 
-                // Leaf, Wall Jump, Lunar Attunement, and Fast Travel are granted through NPC
-                // dialogue/cutscenes we never touch; append our own popup once the grant completes.
                 if (index != dashSkillEvent && index != doubleJumpSkillEvent &&
                     APLocationScoutCache.TryGetInfo(index, out ScoutedItemInfo skillInfo))
                 {

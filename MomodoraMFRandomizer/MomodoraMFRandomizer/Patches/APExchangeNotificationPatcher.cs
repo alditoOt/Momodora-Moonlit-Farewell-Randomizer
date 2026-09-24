@@ -4,11 +4,10 @@ using APMomodoraMoonlitFarewell.Archipelago;
 
 namespace APMomodoraMoonlitFarewell.Patches
 {
-    // Lets every vanilla pickup (stat berries, sigils, Dash, Double Jump) run completely untouched
-    // -- inventory grants, flags, saves, sounds all happen exactly as before -- then adds a separate
-    // corner ItemNotifications popup whenever the location is part of the multiworld exchange (sent
-    // to another player, or received back by ourselves), and replaces the vanilla TutorialMessage
-    // popup's text with a short pointer to that corner popup instead of showing the same details twice.
+    // Lets every vanilla pickup (berries, sigils, skills sometimes) run completely untouched
+    // then adds a separate side ItemNotifications popup whenever the location is part of the AP 
+    // exchange (sent to another player, or received back by the player, go you!), and replaces the vanilla 
+    // TutorialMessage (top message) popup's text with a short pointer to that side popup 
 
     [HarmonyPatch(typeof(MainScr), "GetString")]
     class MainScrGetStringSentinelPatcher
@@ -25,9 +24,8 @@ namespace APMomodoraMoonlitFarewell.Patches
         }
     }
 
-    // ItemNotifications' own fade animation doesn't apply to rich-text <color> spans, so this
-    // re-renders whatever we last put in the corner popup every frame with the current fade alpha
-    // baked into its color tags (see APExchangeNotifier.ReapplyColorForFrame for the full reasoning).
+    // ItemNotifications' own fade animation doesn't apply to colored text, so this re-renders
+    // whatever we last put in the corner popup every frame with the current fade alpha baked into its color tags
     [HarmonyPatch(typeof(ItemNotifications), "FixedUpdate")]
     class ItemNotificationsColorFadePatcher
     {
@@ -80,7 +78,7 @@ namespace APMomodoraMoonlitFarewell.Patches
             }
             long locationId = GameData.itemDatabase.GetItem(__instance.TreasureID).itemDef.Index;
             // The corner popup itself is raised from APSigilHandler (Inventory.Add); only the
-            // vanilla TutorialMessage replacement happens here.
+            // vanilla TutorialMessage replacement happens here
             if (APLocationScoutCache.TryGetInfo(locationId, out ScoutedItemInfo info))
             {
                 APExchangeNotifier.OverrideTutorialMessageWithPointerPopup(info);

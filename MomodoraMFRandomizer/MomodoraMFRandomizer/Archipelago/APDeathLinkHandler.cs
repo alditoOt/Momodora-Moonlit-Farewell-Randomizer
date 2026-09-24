@@ -19,7 +19,7 @@ namespace APMomodoraMoonlitFarewell.Archipelago
                 isDead = true;
                 if (deathLinkService != null && APConnectionManager.IsConnected)
                 {
-                    MelonLogger.Msg("deathlink sent");
+                    MelonLogger.Msg("DEATHLINK sent");
                     APConnectionManager.RunInBackground(() => deathLinkService.SendDeathLink(new DeathLink(username)));
                 }
             }

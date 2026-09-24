@@ -52,11 +52,11 @@ namespace APMomodoraMoonlitFarewell.Archipelago
                 }
 
                 MelonLogger.Error(errorMessage);
-                return false; // Did not connect, show the user the contents of `errorMessage`
+                return false; // Did not connect, log the errors from errorMessage
             }
 
             var loginSuccess = (LoginSuccessful)result;
-            MelonLogger.Msg("I'm your fan(s)");
+            MelonLogger.Msg("soy fans");
             MelonLogger.Msg("Connected to Archipelago session. Have fun!");
             return true;
         }

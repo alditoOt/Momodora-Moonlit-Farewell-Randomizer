@@ -46,13 +46,13 @@ namespace APMomodoraMoonlitFarewell.Patches
     {
         private static readonly Dictionary<ItemFlags, (string price, string classification)> flagText = new Dictionary<ItemFlags, (string price, string classification)>()
         {
-            { ItemFlags.None, ("400", "Doesn't seem special") },
-            { ItemFlags.Advancement, ("250", "Looks important") },
-            { ItemFlags.NeverExclude, ("200", "Looks useful") },
-            { ItemFlags.Trap, ("1", "Seems like a trap...") },
+            { ItemFlags.None, ("100", "Doesn't seem special") },
+            { ItemFlags.Advancement, ("400", "Looks important") },
+            { ItemFlags.NeverExclude, ("250", "Looks useful") },
+            { ItemFlags.Trap, ("1", "Looks like...?") },
         };
 
-        private static readonly (string price, string classification) defaultText = ("100", "");
+        private static readonly (string price, string classification) defaultText = ("100", "No clue");
 
         public static string PriceFor(ItemFlags flag) =>
             flagText.TryGetValue(flag, out var text) ? text.price : defaultText.price;
@@ -89,7 +89,7 @@ namespace APMomodoraMoonlitFarewell.Patches
 
                 if (!InventoryUtils.AP_SHOP_ITEM_IN_GAME[currentSelect])
                 {
-                    text = $"AP Item for {InventoryUtils.AP_SHOP_PLAYER_NAME[currentSelect]} --- {ClassificationText()[currentSelect]}";
+                    text = $"AP Item for {InventoryUtils.AP_SHOP_PLAYER_NAME[currentSelect]} - {ClassificationText()[currentSelect]}";
                 }
                 else
                 {
@@ -147,7 +147,7 @@ namespace APMomodoraMoonlitFarewell.Patches
                     }
                 }
 
-                text += "\nOriginal Sigil: " + GameData.itemDatabase.GetItem((int)GameDataPatcher.SHOP_ITEM_ID[currentSelect]).Name;
+                text += "\nOriginal Sigil: " + GameData.itemDatabase.GetItem((int)GameDataPatcher.shopItemIDs[currentSelect]).Name;
             }
         }
 

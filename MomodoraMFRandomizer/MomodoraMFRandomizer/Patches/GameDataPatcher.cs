@@ -16,14 +16,14 @@ namespace APMomodoraMoonlitFarewell.Patches
     {
         public static long[] SHOP_ITEM_ID = new long[] { 123, 408, 422, 401, 431, 426, 437, 406 };
 
-        // The in-game shop id that contains every purchasable item.
-        private const int fullShopId = 3;
+        // In-game shop id to sets the shop to have all items available 
+        private const int FullShopId = 3;
 
         [HarmonyPatch("GetShop")]
         [HarmonyPrefix]
         public static void GetShop(ref int shop_id)
         {
-            shop_id = fullShopId; //Force the shopId to always get the full shop
+            shop_id = FullShopId; //Force the shopId to always get the full shop
         }
 
         private static void UpdateShopNames(Dictionary<long, ScoutedItemInfo> results)
@@ -44,10 +44,7 @@ namespace APMomodoraMoonlitFarewell.Patches
         {
             try
             {
-                // Deliberately synchronous: this runs once during OnLateInitializeMelon, before any
-                // gameplay patches can fire, and this MelonLoader mod has no coroutine/async pump to
-                // await on instead. Blocking here is acceptable; the try/catch below bounds the risk
-                // of a network stall or fault taking down the rest of startup.
+                // Runs once during OnLateInitializeMelon before any other game patches
                 Dictionary<long, ScoutedItemInfo> results = APMomodoraMoonlitFarewell.session.Locations.ScoutLocationsAsync(false, SHOP_ITEM_ID).Result;
                 UpdateShopNames(results);
             }
