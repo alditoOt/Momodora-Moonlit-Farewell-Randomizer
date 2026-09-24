@@ -79,9 +79,10 @@ namespace APMomodoraMoonlitFarewell.Patches
                 return;
             }
             long locationId = GameData.itemDatabase.GetItem(__instance.TreasureID).itemDef.Index;
+            // The corner popup itself is raised from APSigilHandler (Inventory.Add); only the
+            // vanilla TutorialMessage replacement happens here.
             if (APLocationScoutCache.TryGetInfo(locationId, out ScoutedItemInfo info))
             {
-                APExchangeNotifier.NotifyExchange(info);
                 APExchangeNotifier.OverrideTutorialMessageWithPointerPopup(info);
             }
         }

@@ -59,12 +59,23 @@ namespace APMomodoraMoonlitFarewell.Archipelago
                     && GameData.inventory.HasItem(GameData.itemDatabase.GetItemDef(InventoryUtils.SILVER_MOONLIT_DUST_ID))
                     && GameData.current.MomoEvent[MomoEventUtils.TAINTED_SERPENT_DEFEATED_EVENT] == 1) //Tainted Serpent defeated
                 {
-                    APUtils.CompleteLocation(index);
+                    CompleteAndNotify(index);
                 }
             }
             else
             {
-                APUtils.CompleteLocation(index);
+                CompleteAndNotify(index);
+            }
+        }
+
+        // Only notifies the first time, so re-entering the scene doesn't repeat the popup.
+        private static void CompleteAndNotify(int index)
+        {
+            bool alreadyChecked = APUtils.IsLocationChecked(index);
+            APUtils.CompleteLocation(index);
+            if (!alreadyChecked && APLocationScoutCache.TryGetInfo(index, out ScoutedItemInfo info))
+            {
+                APExchangeNotifier.NotifyExchange(info);
             }
         }
 

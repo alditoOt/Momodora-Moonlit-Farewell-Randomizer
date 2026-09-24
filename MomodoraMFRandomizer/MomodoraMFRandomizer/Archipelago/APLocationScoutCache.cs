@@ -43,6 +43,9 @@ namespace APMomodoraMoonlitFarewell.Archipelago
             ids.AddRange(MomoEventUtils.MAGICBERRYEVENTS.Select(i => (long)i * 100));
             ids.AddRange(MomoEventUtils.FAIRYEVENTS.Select(i => (long)i * 100));
             ids.AddRange(InventoryUtils.AP_SIGIL_ITEM_ID.Select(i => (long)i));
+            ids.AddRange(InventoryUtils.NON_AP_SIGIL_ITEM_ID.Select(i => (long)i));
+            ids.Add(InventoryUtils.livingBloodId);
+            ids.Add(InventoryUtils.woodenBoxId);
             return ids.Distinct().ToArray();
         }
 

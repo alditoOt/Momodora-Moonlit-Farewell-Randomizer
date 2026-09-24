@@ -26,6 +26,10 @@ namespace APMomodoraMoonlitFarewell.Utils
         public static readonly int SILVER_MOONLIT_DUST_ID = 332;
         public static int ORACLE = 441;
 
+        // Vanilla-only pickups that are still AP locations but appear in neither sigil list above.
+        public static readonly int livingBloodId = 420;
+        public static readonly int woodenBoxId = 347;
+
         // AP_SIGIL_ITEM_ID plus the Oracle -- both real Sigils -- but never Key Items, even though
         // SlotDataUtils.AddItemsToItemPool merges Key Items/Oracle into AP_SIGIL_ITEM_ID at runtime
         // for inventory-granting purposes. Kept separately so text that should say "Sigil" (e.g.

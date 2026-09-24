@@ -85,6 +85,13 @@ namespace APMomodoraMoonlitFarewell
             {
                 session = ArchipelagoSessionFactory.CreateSession(server);
                 APConnector.Connect(session, server, username, password);
+                // Items delivered during Connect are already queued; discard them so they don't
+                // surface as notifications on the next real item.
+                while (session.Items.Any())
+                {
+                    session.Items.DequeueItem();
+                }
+                initialSyncDrained = true;
                 session.Items.ItemReceived += APLocationHandler.UpdateItemsForTheSession;
                 session.Items.ItemReceived += NotifyNewlyReceivedItems;
                 GameDataPatcher.UpdateShopNames();
@@ -112,12 +119,18 @@ namespace APMomodoraMoonlitFarewell
         // Independent of APLocationHandler.UpdateItemsForTheSession, which re-scans the entire
         // received-items history on every resync (scene load, reconnect). Draining the helper's
         // new-item queue here instead ensures a popup fires exactly once per genuinely new item.
+        // Connecting replays the entire received-item history into the helper's queue; those items
+        // aren't new, so the first drain after connect is discarded silently.
+        private static bool initialSyncDrained;
+
         private static void NotifyNewlyReceivedItems(ReceivedItemsHelper itemHandler)
         {
+            bool isInitialSync = !initialSyncDrained;
+            initialSyncDrained = true;
             while (itemHandler.Any())
             {
                 ItemInfo item = itemHandler.DequeueItem();
-                if (item.Player.Slot != session.ConnectionInfo.Slot)
+                if (!isInitialSync && item.Player.Slot != session.ConnectionInfo.Slot)
                 {
                     APExchangeNotifier.NotifyReceived(item);
                 }
