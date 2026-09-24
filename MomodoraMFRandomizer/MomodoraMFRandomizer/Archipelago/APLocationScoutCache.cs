@@ -16,7 +16,7 @@ namespace APMomodoraMoonlitFarewell.Archipelago
 
         public static void Initialize()
         {
-            if (!APMomodoraMoonlitFarewell.IsSessionActive)
+            if (!APMomodoraMoonlitFarewell.HasSession)
             {
                 return;
             }

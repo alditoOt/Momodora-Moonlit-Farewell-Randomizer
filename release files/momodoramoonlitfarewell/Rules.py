@@ -41,10 +41,7 @@ def set_rules(world: "MomodoraWorld"):
              lambda state: state.has(*item("Spiral Shell")) or
              (state.has(*item("Crescent Moonflower")) and world.options.bell_hover_generation.value and (state.has(*item("Progressive Magic Upgrade"), 1) if world.options.progressive_magic_upgrade.value else True)))
     set_rule(multiworld.get_entrance(*region("DF_AH")),
-             lambda state: (world.options.bell_hover_generation.value and state.has(*item("Spiral Shell")) and
-                            (state.has(*item("Sacred Anemone")) or
-                            state.has(*item("Perfect Chime")))) or
-                            state.has(*item("Crescent Moonflower"))),
+             lambda state:  state.has(*item("Crescent Moonflower"))),
     set_rule(multiworld.get_entrance(*region("LTR_MR")), 
              lambda state: state.has(*item("Spiral Shell")) and
              (state.has("Awakened Sacred Leaf", player) or

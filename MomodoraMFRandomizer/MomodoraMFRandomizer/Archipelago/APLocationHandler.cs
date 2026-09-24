@@ -26,7 +26,7 @@ namespace APMomodoraMoonlitFarewell.Archipelago
         [HarmonyPostfix]
         private static void ReportLocation(int index, int value)
         {
-            if (!APMomodoraMoonlitFarewell.IsSessionActive)
+            if (!APMomodoraMoonlitFarewell.HasSession)
             {
                 return;
             }
@@ -153,7 +153,7 @@ namespace APMomodoraMoonlitFarewell.Archipelago
 
         public static void UpdateItemsForTheSession(ReceivedItemsHelper itemHandler)
         {
-            if (!APMomodoraMoonlitFarewell.IsSessionActive)
+            if (!APMomodoraMoonlitFarewell.HasSession)
             {
                 return;
             }

@@ -13,7 +13,7 @@ namespace APMomodoraMoonlitFarewell.Utils
         public static Boolean DEATHLINK;
         public static Boolean ADD_ORACLE_SIGIL;
         public static Boolean KEY_ITEMS;
-        public static string FAST_TRAVEL_CHOICE;
+        // public static string FAST_TRAVEL_CHOICE;
         public static Boolean FINAL_BOSS_DOOR;
         public static Boolean DAMAGE_UPGRADE;
         public static Boolean HEALTH_UPGRADE;

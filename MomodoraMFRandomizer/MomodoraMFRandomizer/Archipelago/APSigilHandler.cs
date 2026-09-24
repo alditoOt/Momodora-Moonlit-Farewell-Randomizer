@@ -24,7 +24,7 @@ namespace APMomodoraMoonlitFarewell.Archipelago
                 NotifyIfNew(item.itemDef.Index, is_new_item);
                 return true;
             }
-            if (!APMomodoraMoonlitFarewell.IsSessionActive)
+            if (!APMomodoraMoonlitFarewell.HasSession)
             {
                 // Session isn't ready yet; let the vanilla pickup through rather than blocking the player.
                 return true;

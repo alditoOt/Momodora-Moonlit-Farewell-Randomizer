@@ -160,6 +160,12 @@ namespace APMomodoraMoonlitFarewell.Archipelago
             TutorialMessage.extraText = $"An <color={itemColor}>AP Item</color> was {verb}! Check the notification!";
         }
 
+        // Connection status ("Disconnected...", "Reconnected!") through the same corner popup queue.
+        public static void NotifyStatus(string message)
+        {
+            ShowColorized(new Segment(message));
+        }
+
         public static void NotifyReceived(ItemInfo item)
         {
             string itemName = item.ItemDisplayName;
