@@ -91,7 +91,7 @@ namespace APMomodoraMoonlitFarewell.Patches
     {
         // Dash (9) and Double Jump (10) are the only two skills granted through this generic
         // pickup, and the only two whose vanilla popup is TutorialMessage-based (a genuine popup)
-        // rather than a dialogue sequence, so they're the only skills handled here.
+        // rather than a dialogue sequence, so they're the only skills handled here
         [HarmonyPostfix]
         static void Postfix(MetroidvaniaPickup __instance)
         {

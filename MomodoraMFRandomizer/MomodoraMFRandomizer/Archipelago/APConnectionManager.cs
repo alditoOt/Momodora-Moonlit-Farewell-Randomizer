@@ -11,7 +11,7 @@ namespace APMomodoraMoonlitFarewell.Archipelago
 {
     // Owns every network write and reconnect loop, so nothing on Unity's main thread ever waits on the socket. 
     // Gameplay code enters a queue (location checks, goal); a background worker sends them, 
-    // and if the socket drops it reconnects with backoff and takes care of whatever piled up.
+    // and if the socket drops it reconnects with backoff and takes care of whatever piled up
     static class APConnectionManager
     {
         private const int sendTimeoutMs = 10000;
