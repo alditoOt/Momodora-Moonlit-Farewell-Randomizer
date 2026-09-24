@@ -147,7 +147,7 @@ namespace APMomodoraMoonlitFarewell.Patches
                     }
                 }
 
-                text += "\nOriginal Sigil: " + GameData.itemDatabase.GetItem((int)GameDataPatcher.shopItemIDs[currentSelect]).Name;
+                text += "\nOriginal Sigil: " + GameData.itemDatabase.GetItem((int)GameDataPatcher.SHOP_ITEM_ID[currentSelect]).Name;
             }
         }
 
