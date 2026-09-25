@@ -12,7 +12,7 @@ namespace APMomodoraMoonlitFarewell.Patches
 		public static void ModifyGameOverMessage(Platformer3D __instance)
 		{
             if (APDeathLinkHandler.getDeathLinkSource() != null)
-            __instance.GameOverText.text = $"You were killed by {APDeathLinkHandler.getDeathLinkSource()}...";
+            __instance.GameOverText.text = $"Deathlink received from {APDeathLinkHandler.getDeathLinkSource()}...";
                 APDeathLinkHandler.setDeathLinkSource(null);
         }
 	}
