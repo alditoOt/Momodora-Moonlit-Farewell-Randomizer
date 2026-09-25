@@ -68,7 +68,8 @@ item_table = {
    #Magic Upgrade
    "Progressive Magic Upgrade": ItemData(995, ItemClassification.useful),
    #Fairy count for Oracle
-   "Progressive Lumen Fairy": ItemData(996, ItemClassification.useful)
+   "Progressive Lumen Fairy": ItemData(996, ItemClassification.useful),
+   "Progressive Berry Upgrade": ItemData(997, ItemClassification.useful)
 }
 
 skill_items = {
@@ -144,16 +145,22 @@ progressive_upgrade_table = {
     "progressive_damage": {
         "Progressive Damage Upgrade": 25
     },
-    "progressive_health": {
-        "Progressive Health Upgrade": 24
-    },
-    "progressive_stamina": {
-        "Progressive Stamina Upgrade": 5
-    },
-    "progressive_magic": {
-        "Progressive Magic Upgrade": 7
-    },
+    # "progressive_health": {
+    #     "Progressive Health Upgrade": 24
+    # },
+    # "progressive_stamina": {
+    #     "Progressive Stamina Upgrade": 5
+    # },
+    # "progressive_magic": {
+    #     "Progressive Magic Upgrade": 7
+    # },
     "progressive_fairy": {
         "Progressive Lumen Fairy": 30
+    },
+    "progressive_berry": {
+        "Progressive Health Upgrade": 24,
+        "Progressive Magic Upgrade": 7,
+        "Progressive Stamina Upgrade": 5
+        # "Progressive Berry Upgrade": 36
     }
 }

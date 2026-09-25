@@ -187,6 +187,48 @@ exclusion_table = {
     "oracle_sigil": {
         "Oracle"
     },
+    "progressive_berry": {
+    #Health Berries
+        "Dotted Berry 1 - Springleaf Path",
+        "Dotted Berry 2 - Springleafh Path",
+        "Dotted Berry 3 - Springleaf Path",
+        "Dotted Berry 4 - Springleaf Path",
+        "Dotted Berry 1 - Koho Village",
+        "Dotted Berry 2 - Koho Village",
+        "Dotted Berry 1 - Lun Tree Roots",
+        "Dotted Berry 2 - Lun Tree Roots",
+        "Dotted Berry 1 - Demon Frontier",
+        "Dotted Berry 2- Demon Frontier",
+        "Dotted Berry - Moonlight Repose",
+        "Dotted Berry 1 - Fairy Springs",
+        "Dotted Berry 2 - Fairy Springs",
+        "Dotted Berry 3 - Fairy Springs",
+        "Dotted Berry - Fairy Village",
+        "Dotted Berry 1 - Ashen Hinterlands",
+        "Dotted Berry 2 - Ashen Hinterlands",
+        "Dotted Berry 3 - Ashen Hinterlands",
+        "Dotted Berry 4 - Ashen Hinterlands",
+        "Dotted Berry 1 - Meikan Village",
+        "Dotted Berry 2 - Meikan Village",
+        "Dotted Berry 1 - Fount of Rebirth",
+        "Dotted Berry 2 - Fount of Rebirth",
+        "Dotted Berry 3 - Fount of Rebirth",
+        #Magic Berries
+        "Lun Berry - Koho Village",
+        "Lun Berry - Springleaf Path",
+        "Lun Berry - Lun Tree Roots",
+        "Lun Berry - Fairy Springs",
+        "Lun Berry - Ashen Hinterlands",
+        "Lun Berry - Demon Frontier",
+        "Lun Berry - Fount of Rebirth",
+        #Stamina Berries
+        "Peach - Springleaf Path",
+        "Peach - Fairy Springs",
+        "Peach - Ashen Hinterlands",
+        "Peach - Meikan Village",
+        "Peach - Moonlight Repose"
+        #Black Berries
+    },
     "progressive_damage": {
         "Heavenly Lily - Koho Village",
         "Heavenly Lily 1 - Old Sanctuary",
