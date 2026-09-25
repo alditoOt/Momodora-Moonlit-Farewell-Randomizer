@@ -5,7 +5,7 @@ using System.Runtime.InteropServices.ComTypes;
 using MelonLoader;
 using APMomodoraMoonlitFarewell;
 // ...
-[assembly: MelonInfo(typeof(APMomodoraMoonlitFarewell.APMomodoraMoonlitFarewell), "APMomodoraMoonlitFarewell", "1.7.0", "alditto (ttv/alditto)")]
+[assembly: MelonInfo(typeof(APMomodoraMoonlitFarewell.APMomodoraMoonlitFarewell), "APMomodoraMoonlitFarewell", "1.8.0", "alditto (ttv/alditto)")]
 [assembly: MelonGame("BOMBSERVICE", "MomodoraMoonlitFarewell")]
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
