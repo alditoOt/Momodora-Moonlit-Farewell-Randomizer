@@ -45,7 +45,7 @@ namespace APMomodoraMoonlitFarewell.Utils
             var slotData = APMomodoraMoonlitFarewell.session.DataStorage.GetSlotData();
 
             OPEN_SPRINGLEAF_PATH = GetBoolSetting(slotData, "open_springleaf_path");
-            DEATHLINK = GetBoolSetting(slotData, "DEATHLINK");
+            DEATHLINK = GetBoolSetting(slotData, "deathlink");
             KEY_ITEMS = GetBoolSetting(slotData, "randomize_key_items");
             ORACLE_SIGIL = GetBoolSetting(slotData, "oracle_sigil");
             FINAL_BOSS_DOOR = GetBoolSetting(slotData, "final_boss_keys");

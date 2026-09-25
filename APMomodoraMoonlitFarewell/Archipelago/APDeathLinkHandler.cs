@@ -11,6 +11,7 @@ namespace APMomodoraMoonlitFarewell.Archipelago
     class APDeathLinkHandler
     {
 
+        public static string deathLinkSource;
         private Boolean isDead = false;
         public void CheckDeathLink(DeathLinkService deathLinkService, String username)
         {           
@@ -19,7 +20,7 @@ namespace APMomodoraMoonlitFarewell.Archipelago
                 isDead = true;
                 if (deathLinkService != null && APConnectionManager.IsConnected)
                 {
-                    MelonLogger.Msg("DEATHLINK sent");
+                    // MelonLogger.Msg("deathlink sent");
                     APConnectionManager.RunInBackground(() => deathLinkService.SendDeathLink(new DeathLink(username)));
                 }
             }
@@ -32,6 +33,15 @@ namespace APMomodoraMoonlitFarewell.Archipelago
         public void SetIsDead(Boolean isDead)
         {
             this.isDead = isDead;
+        }
+
+        public static void setDeathLinkSource(string source)
+        {
+            deathLinkSource = source;
+        }
+        public static string getDeathLinkSource()
+        {
+            return deathLinkSource;
         }
     }
 }

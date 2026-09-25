@@ -149,7 +149,9 @@ namespace APMomodoraMoonlitFarewell
             deathLinkService.OnDeathLinkReceived += deathLinkObject => APConnectionManager.RunOnMainThread(() =>
             {
                 Platformer3D.player_hp = 0f;
+                MelonLogger.Msg($"Deathlink received from {deathLinkObject.Source}!");               
                 deathLinkHandler.SetIsDead(true);
+                APDeathLinkHandler.setDeathLinkSource(deathLinkObject.Source);
             });
         }
 

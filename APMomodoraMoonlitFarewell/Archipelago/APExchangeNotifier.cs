@@ -19,6 +19,7 @@ namespace APMomodoraMoonlitFarewell.Archipelago
     {
         private const string itemColor = "#FFD27F";
         private const string playerColor = "#66CCFF";
+        private const string deathlinkColor = "#fa3d3d";
 
         private readonly struct Segment
         {
@@ -117,7 +118,8 @@ namespace APMomodoraMoonlitFarewell.Archipelago
                     new Segment("You found "),
                     new Segment(info.ItemDisplayName, itemColor),
                     new Segment("! Go "),
-                    new Segment("you!", playerColor));
+                    new Segment("you", playerColor),
+                    new Segment("!"));
             }
             else
             {
@@ -145,15 +147,25 @@ namespace APMomodoraMoonlitFarewell.Archipelago
             ShowColorized(new Segment(message));
         }
 
+        public static void NotifyDeathlink(string player)
+        {
+            ShowColorized(
+                new Segment("Deathlink received by "),
+                new Segment(player, deathlinkColor),
+                new Segment("!"));
+        }
+
         public static void NotifyReceived(ItemInfo item)
         {
             string itemName = item.ItemDisplayName;
             string playerName = item.Player.Alias;
-
+            string sigilText = "Sigil ";
+            
             if (InventoryUtils.ALL_SIGIL_ITEM_ID.Contains((int)item.ItemId))
             {
                 ShowColorized(
-                    new Segment("Received Sigil "),
+                    new Segment("Received "),
+                    new Segment(InventoryUtils.AP_SIGIL_ITEM_ID.Contains((int)item.ItemId) ? sigilText : ""),
                     new Segment(itemName, itemColor),
                     new Segment(" from "),
                     new Segment(playerName, playerColor),

@@ -77,3 +77,7 @@ Credits start: 298
 Cereza friendship: 102 (4 is max)
 	- Spring Tree Roots: 106 
 	- Fairy Springs: 107
+
+
+in the "go you!" message, the ! is also colored
+grimoire message says "Sigil" prefixed
