@@ -82,12 +82,24 @@ namespace APMomodoraMoonlitFarewell.Archipelago
             }
             else if (MomoEventUtils.BLACKBERRYEVENTS.Contains(index))
             {
+                if (APUtils.IsLocationChecked(index * 100))
+                {
+                    return;
+                }
                 Platformer3D.luck -= 1f;
                 APUtils.CompleteLocation(index * 100);
             }
             else if (MomoEventUtils.COMPANIONEVENTS.Contains(index))
             {
+                if (APUtils.IsLocationChecked(index))
+                {
+                    return;
+                }
                 APUtils.CompleteLocation(index);
+                if (APLocationScoutCache.TryGetInfo(index, out ScoutedItemInfo companionInfo))
+                {
+                    APExchangeNotifier.NotifyExchange(companionInfo);
+                }
             }
             else if (MomoEventUtils.STAMINABERRYEVENTS.Contains(index))
             {

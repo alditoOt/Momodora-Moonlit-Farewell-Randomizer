@@ -7,6 +7,7 @@ using System.Text;
 
 namespace APMomodoraMoonlitFarewell.Utils
 {
+    // Handles location IDs
     class SlotDataUtils
     {
         public static Boolean OPEN_SPRINGLEAF_PATH;
@@ -16,9 +17,6 @@ namespace APMomodoraMoonlitFarewell.Utils
         // public static string FAST_TRAVEL_CHOICE;
         public static Boolean FINAL_BOSS_DOOR;
         public static Boolean DAMAGE_UPGRADE;
-        public static Boolean HEALTH_UPGRADE;
-        public static Boolean STAMINA_UPGRADE;
-        public static Boolean MAGIC_UPGRADE;
         public static Boolean LUMEN_FAIRIES;
         public static Boolean BERRYSANITY;
         public static Boolean COMPANIONSANITY;
@@ -43,7 +41,7 @@ namespace APMomodoraMoonlitFarewell.Utils
         private static readonly int[] blackBerryEvents = { 58, 164 };
 
         // Companion event ids
-        private static readonly int[] companionEvents = { 388, 381, 382, 383, 387, 386, 384, 385, 392, 389 };
+        private static readonly int[] companionEvents = { 311, 304, 305, 306, 310, 309, 307, 308, 330, 312 };
         // Lumen Fairy event ids
         private static readonly int[] lumenFairyEvents = { 41, 354, 44, 87, 51, 88, 352, 351, 162, 54, 346, 57, 47, 93, 137, 91, 342, 168, 355, 221, 224, 229, 238, 357, 300, 288, 287, 46, 353, 301 };
 
@@ -89,6 +87,12 @@ namespace APMomodoraMoonlitFarewell.Utils
             {
                 InventoryUtils.AP_SIGIL_ITEM_ID.AddRange(InventoryUtils.KEY_ITEM_ID);
             }
+            if (COMPANIONSANITY)
+            {
+                InventoryUtils.AP_SIGIL_ITEM_ID.AddRange(InventoryUtils.COMPANION_ITEM_ID);
+                MomoEventUtils.COMPANIONEVENTS.AddRange(companionEvents);
+
+            }
             if (ORACLE_SIGIL)
             {
                 InventoryUtils.AP_SIGIL_ITEM_ID.Add(InventoryUtils.ORACLE);
@@ -103,10 +107,6 @@ namespace APMomodoraMoonlitFarewell.Utils
                 MomoEventUtils.STAMINABERRYEVENTS.AddRange(staminaBerryEvents);
                 MomoEventUtils.MAGICBERRYEVENTS.AddRange(magicBerryEvents);
                 MomoEventUtils.BLACKBERRYEVENTS.AddRange(blackBerryEvents);
-            }
-            if (COMPANIONSANITY)
-            {
-                MomoEventUtils.COMPANIONEVENTS.AddRange(companionEvents);
             }
             if (LUMEN_FAIRIES)
             {

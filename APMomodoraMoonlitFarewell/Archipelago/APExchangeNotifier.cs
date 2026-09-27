@@ -185,6 +185,16 @@ namespace APMomodoraMoonlitFarewell.Archipelago
             }
             else if (IsStat(item.ItemId))
             {
+                if (item.ItemId == InventoryUtils.BLACK_BERRY_ID)
+            {
+                ShowColorized(
+                    new Segment("Despite "),
+                    new Segment(playerName, playerColor),
+                    new Segment("'s "),
+                    new Segment("Black Berry", itemColor),
+                    new Segment(", you don't feel any different..."));
+                    return;
+            }
                 ShowColorized(
                     new Segment("Received "),
                     new Segment(itemName, itemColor),
@@ -199,15 +209,7 @@ namespace APMomodoraMoonlitFarewell.Archipelago
                     new Segment(playerName, playerColor),
                     new Segment(" freed a Lumen Fairy!"));
             }
-            else if (item.ItemId == InventoryUtils.BLACK_BERRY_ID)
-            {
-                ShowColorized(
-                    new Segment("Despite "),
-                    new Segment(playerName, playerColor),
-                    new Segment("'s"),
-                    new Segment("Black Berry", itemColor),
-                    new Segment(", you don't feel any different..."));
-            }
+           
             else
             {
                 ShowColorized(

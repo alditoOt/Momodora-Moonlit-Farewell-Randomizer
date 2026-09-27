@@ -9,6 +9,7 @@ using UnityEngine;
 
 namespace APMomodoraMoonlitFarewell.Utils
 {
+    // Handles item IDs
     class InventoryUtils
     {
         public static readonly int BOSS_KEY_ID = 991;
@@ -22,9 +23,10 @@ namespace APMomodoraMoonlitFarewell.Utils
 
         public static List<int> AP_SIGIL_ITEM_ID = new List<int> { 442, 400, 436, 402, 403, 433, 448, 412, 404, 434, 447, 440, 405, 439, 443, 444, 425, 445, 430, 435, 432, 427, 438, 449, 446, 338, 339, 340 };
         public static List<int> NON_AP_SIGIL_ITEM_ID = new List<int> { 419, 431, 422, 123, 437, 406, 408, 426, 401 };
+        public static List<int> COMPANION_ITEM_ID = new List<int> { 381, 382, 383, 384, 385, 386, 387, 388, 389, 392 };
         public static List<int> KEY_ITEM_ID = new List<int> { 333, 332, 356 };
-        public static readonly int GOLD_MOONLIT_DUST_ID = 333;
-        public static readonly int SILVER_MOONLIT_DUST_ID = 332;
+        public static readonly int GOLD_MOONLIT_DUST_ID = 332;
+        public static readonly int SILVER_MOONLIT_DUST_ID = 333;
         public static int ORACLE = 441;
 
         // Vanilla items that are AP locations but not AP items

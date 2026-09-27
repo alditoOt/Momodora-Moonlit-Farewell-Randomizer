@@ -35,6 +35,7 @@ namespace APMomodoraMoonlitFarewell.Archipelago
         private static long[] BuildTrackedLocationIds()
         {
             List<long> ids = new List<long>();
+            // Location ID check
             ids.AddRange(MomoEventUtils.BOSSEVENTS.Select(i => (long)i));
             ids.AddRange(MomoEventUtils.SKILLEVENTS.Select(i => (long)i));
             ids.AddRange(MomoEventUtils.LILYEVENTS.Select(i => (long)i * 100));
@@ -42,11 +43,16 @@ namespace APMomodoraMoonlitFarewell.Archipelago
             ids.AddRange(MomoEventUtils.STAMINABERRYEVENTS.Select(i => (long)i * 100));
             ids.AddRange(MomoEventUtils.MAGICBERRYEVENTS.Select(i => (long)i * 100));
             ids.AddRange(MomoEventUtils.FAIRYEVENTS.Select(i => (long)i * 100));
+            ids.AddRange(MomoEventUtils.COMPANIONEVENTS.Select(i => (long)i));
+            ids.AddRange(MomoEventUtils.BLACKBERRYEVENTS.Select(i => (long)i * 100));
+            // Inventory ID check
             ids.AddRange(InventoryUtils.AP_SIGIL_ITEM_ID.Select(i => (long)i));
             ids.AddRange(InventoryUtils.NON_AP_SIGIL_ITEM_ID.Select(i => (long)i));
-            ids.AddRange(MomoEventUtils.BLACKBERRYEVENTS.Select(i => (long)i * 100));
+            ids.AddRange(InventoryUtils.KEY_ITEM_ID.Select(i => (long)i));
             ids.Add(InventoryUtils.livingBloodId);
             ids.Add(InventoryUtils.woodenBoxId);
+            ids.Add(InventoryUtils.GOLD_MOONLIT_DUST_ID);
+            ids.Add(InventoryUtils.SILVER_MOONLIT_DUST_ID);
             return ids.Distinct().ToArray();
         }
 
