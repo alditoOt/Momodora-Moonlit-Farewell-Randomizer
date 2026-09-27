@@ -145,15 +145,6 @@ progressive_upgrade_table = {
     "progressive_damage": {
         "Progressive Damage Upgrade": 25
     },
-    # "progressive_health": {
-    #     "Progressive Health Upgrade": 24
-    # },
-    # "progressive_stamina": {
-    #     "Progressive Stamina Upgrade": 5
-    # },
-    # "progressive_magic": {
-    #     "Progressive Magic Upgrade": 7
-    # },
     "progressive_fairy": {
         "Progressive Lumen Fairy": 30
     },
@@ -161,6 +152,5 @@ progressive_upgrade_table = {
         "Progressive Health Upgrade": 24,
         "Progressive Magic Upgrade": 7,
         "Progressive Stamina Upgrade": 5
-        # "Progressive Berry Upgrade": 36
     }
 }

@@ -35,9 +35,6 @@ class MomodoraWorld(World):
             "randomize_key_items": bool(self.options.randomize_key_items.value),
             "final_boss_keys": bool(self.options.final_boss_keys.value),
             "Lilysanity": bool(self.options.Lilysanity.value),
-            # "progressive_health_upgrade": bool(self.options.progressive_health_upgrade.value),
-            # "progressive_magic_upgrade": bool(self.options.progressive_magic_upgrade.value),
-            # "progressive_stamina_upgrade": bool(self.options.progressive_stamina_upgrade.value),
             "Fairysanity": bool(self.options.Fairysanity.value),
             "Berrysanity": bool(self.options.Berrysanity.value),
             "victory_condition": self.options.victory_condition.current_key,
@@ -85,18 +82,6 @@ class MomodoraWorld(World):
         if self.options.Berrysanity:
             for name, num in progressive_upgrade_table["progressive_berry"].items():
                 itempool += [name] * num
-
-        # # if self.options.progressive_health_upgrade:
-        #     for name, num in progressive_upgrade_table["progressive_health"].items():
-        #         itempool += [name] * num
-        
-        # # if self.options.progressive_magic_upgrade:
-        #     for name, num in progressive_upgrade_table["progressive_magic"].items():
-        #         itempool += [name] * num
-
-        # # if self.options.progressive_stamina_upgrade:
-        #     for name, num in progressive_upgrade_table["progressive_stamina"].items():
-        #         itempool += [name] * num
 
         if self.options.Fairysanity:
             for name, num in progressive_upgrade_table["progressive_fairy"].items():
