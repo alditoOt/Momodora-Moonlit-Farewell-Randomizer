@@ -20,7 +20,9 @@ namespace APMomodoraMoonlitFarewell.Utils
         public static Boolean STAMINA_UPGRADE;
         public static Boolean MAGIC_UPGRADE;
         public static Boolean LUMEN_FAIRIES;
+        public static Boolean BERRYSANITY;
         public static String VICTORY_CONDITION;
+        
 
         private const string MOON_GOD_SELIN = "moon_god_selin";
         private const string DORA = "dora";
@@ -36,6 +38,8 @@ namespace APMomodoraMoonlitFarewell.Utils
 
         // Magic Berry event ids
         private static readonly int[] magicBerryEvents = { 135, 33, 95, 115, 228, 341, 295 };
+        //  Black Berry event ids
+        private static readonly int[] blackBerryEvents = {};
 
         // Lumen Fairy event ids
         private static readonly int[] lumenFairyEvents = { 41, 354, 44, 87, 51, 88, 352, 351, 162, 54, 346, 57, 47, 93, 137, 91, 342, 168, 355, 221, 224, 229, 238, 357, 300, 288, 287, 46, 353, 301 };
@@ -49,12 +53,10 @@ namespace APMomodoraMoonlitFarewell.Utils
             KEY_ITEMS = GetBoolSetting(slotData, "randomize_key_items");
             ORACLE_SIGIL = GetBoolSetting(slotData, "oracle_sigil");
             FINAL_BOSS_DOOR = GetBoolSetting(slotData, "final_boss_keys");
-            DAMAGE_UPGRADE = GetBoolSetting(slotData, "progressive_damage_upgrade");
-            HEALTH_UPGRADE = GetBoolSetting(slotData, "progressive_health_upgrade");
-            STAMINA_UPGRADE = GetBoolSetting(slotData, "progressive_stamina_upgrade");
-            MAGIC_UPGRADE = GetBoolSetting(slotData, "progressive_magic_upgrade");
-            LUMEN_FAIRIES = GetBoolSetting(slotData, "progressive_lumen_fairies");
+            DAMAGE_UPGRADE = GetBoolSetting(slotData, "Lilysanity");
+            LUMEN_FAIRIES = GetBoolSetting(slotData, "Fairysanity");
             VICTORY_CONDITION = GetStringSetting(slotData, "victory_condition");
+            BERRYSANITY = GetBoolSetting(slotData, "Berrysanity");
         }
 
         private static bool GetBoolSetting(Dictionary<string, object> slotData, string key)
@@ -91,17 +93,12 @@ namespace APMomodoraMoonlitFarewell.Utils
             {
                 MomoEventUtils.LILYEVENTS.AddRange(damageLilyEvents);
             }
-            if (HEALTH_UPGRADE)
+            if (BERRYSANITY)
             {
                 MomoEventUtils.HEALTHBERRYEVENTS.AddRange(healthBerryEvents);
-            }
-            if (STAMINA_UPGRADE)
-            {
                 MomoEventUtils.STAMINABERRYEVENTS.AddRange(staminaBerryEvents);
-            }
-            if (MAGIC_UPGRADE)
-            {
                 MomoEventUtils.MAGICBERRYEVENTS.AddRange(magicBerryEvents);
+                MomoEventUtils.BLACKBERRYEVENTS.AddRange(blackBerryEvents);
             }
             if (LUMEN_FAIRIES)
             {

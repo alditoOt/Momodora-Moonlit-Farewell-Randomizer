@@ -23,6 +23,7 @@ namespace APMomodoraMoonlitFarewell.Utils
         public static List<int> HEALTHBERRYEVENTS = new List<int>();
         public static List<int> STAMINABERRYEVENTS = new List<int>();
         public static List<int> MAGICBERRYEVENTS = new List<int>();
+        public static List<int> BLACKBERRYEVENTS = new List<int>();
         public static List<int> FAIRYEVENTS = new List<int>();
 
         public static int FINAL_DOOR_EVENT = 294;
@@ -39,7 +40,7 @@ namespace APMomodoraMoonlitFarewell.Utils
 
         public static void GrowTimedBerries()
         {
-            if (SlotDataUtils.HEALTH_UPGRADE)
+            if (SlotDataUtils.BERRYSANITY)
             {
                 if (GameData.current.MomoEvent[279] != 1)
                 {
@@ -49,10 +50,10 @@ namespace APMomodoraMoonlitFarewell.Utils
                 {
                     GameData.current.MomoEvent[240] = 1;
                 }
-            }
-            if (SlotDataUtils.STAMINA_UPGRADE && GameData.current.MomoEvent[280] != 1)
-            {
-                GameData.current.MomoEvent[280] = 1;
+                if (GameData.current.MomoEvent[280] != 1)
+                {
+                    GameData.current.MomoEvent[280] = 1;
+                }
             }
         }
     }

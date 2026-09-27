@@ -13,9 +13,14 @@ namespace APMomodoraMoonlitFarewell.Patches
     class BlockRemover
     {
 
+        private static readonly string[] SPRINGLEAF_PATH_STRINGS = { "Well05", "Well12", "Well26", "Well20"};
+
         public void removeAllBlockers(string sceneName)
         {
-            RemoveStrings();
+            if (SPRINGLEAF_PATH_STRINGS.Contains(sceneName))
+            {
+                RemoveStrings();
+            }
             RemoveWindZones(sceneName);
         }
 

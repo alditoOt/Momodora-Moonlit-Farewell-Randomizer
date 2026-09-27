@@ -15,6 +15,7 @@ namespace MomoReader
         public override void OnSceneWasLoaded(int buildIndex, string sceneName)
         {
             MomoReader.sceneName = sceneName;
+            LoggerInstance.Msg($"Entered scene: {sceneName}");
         }
 
         public override void OnUpdate()
