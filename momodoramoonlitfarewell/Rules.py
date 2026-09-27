@@ -41,7 +41,7 @@ def set_rules(world: "MomodoraWorld"):
              lambda state: state.has(*item("Spiral Shell")) or
              (state.has(*item("Crescent Moonflower")) and world.options.bell_hover_generation.value and (state.has(*item("Progressive Magic Upgrade"), 1) if world.options.Berrysanity.value else True)))
     set_rule(multiworld.get_entrance(*region("DF_AH")),
-             lambda state:  state.has(*item("Crescent Moonflower"))),
+             lambda state:  state.has(*item("Crescent Moonflower")) and state.has(*item("Awakened Sacred Leaf"))),
     set_rule(multiworld.get_entrance(*region("LTR_MR")), 
              lambda state: state.has(*item("Spiral Shell")))
     set_rule(multiworld.get_entrance(*region("AH_AHC")), lambda state: state.has(*item("Spiral Shell")))
