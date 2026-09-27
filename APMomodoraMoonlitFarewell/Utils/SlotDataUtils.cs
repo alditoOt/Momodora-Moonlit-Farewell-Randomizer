@@ -21,6 +21,7 @@ namespace APMomodoraMoonlitFarewell.Utils
         public static Boolean MAGIC_UPGRADE;
         public static Boolean LUMEN_FAIRIES;
         public static Boolean BERRYSANITY;
+        public static Boolean COMPANIONSANITY;
         public static String VICTORY_CONDITION;
         
 
@@ -39,8 +40,10 @@ namespace APMomodoraMoonlitFarewell.Utils
         // Magic Berry event ids
         private static readonly int[] magicBerryEvents = { 135, 33, 95, 115, 228, 341, 295 };
         //  Black Berry event ids
-        private static readonly int[] blackBerryEvents = {};
+        private static readonly int[] blackBerryEvents = { 58, 164 };
 
+        // Companion event ids
+        private static readonly int[] companionEvents = { 388, 381, 382, 383, 387, 386, 384, 385, 392, 389 };
         // Lumen Fairy event ids
         private static readonly int[] lumenFairyEvents = { 41, 354, 44, 87, 51, 88, 352, 351, 162, 54, 346, 57, 47, 93, 137, 91, 342, 168, 355, 221, 224, 229, 238, 357, 300, 288, 287, 46, 353, 301 };
 
@@ -57,6 +60,7 @@ namespace APMomodoraMoonlitFarewell.Utils
             LUMEN_FAIRIES = GetBoolSetting(slotData, "Fairysanity");
             VICTORY_CONDITION = GetStringSetting(slotData, "victory_condition");
             BERRYSANITY = GetBoolSetting(slotData, "Berrysanity");
+            COMPANIONSANITY = GetBoolSetting(slotData, "Companionsanity");
         }
 
         private static bool GetBoolSetting(Dictionary<string, object> slotData, string key)
@@ -99,6 +103,10 @@ namespace APMomodoraMoonlitFarewell.Utils
                 MomoEventUtils.STAMINABERRYEVENTS.AddRange(staminaBerryEvents);
                 MomoEventUtils.MAGICBERRYEVENTS.AddRange(magicBerryEvents);
                 MomoEventUtils.BLACKBERRYEVENTS.AddRange(blackBerryEvents);
+            }
+            if (COMPANIONSANITY)
+            {
+                MomoEventUtils.COMPANIONEVENTS.AddRange(companionEvents);
             }
             if (LUMEN_FAIRIES)
             {

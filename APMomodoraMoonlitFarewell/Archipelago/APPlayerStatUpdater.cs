@@ -12,6 +12,7 @@ namespace APMomodoraMoonlitFarewell.Archipelago
         public const int healthPerBerry = 50;
         public const int baseMaxMagic = 30;
         public const int magicPerUpgrade = 10;
+        public const float luckPerBerry = 1f;
 
         public static void UpdatePlayerDamage(int lilyCount)
         {
@@ -35,6 +36,10 @@ namespace APMomodoraMoonlitFarewell.Archipelago
             GameData.current.MomoEvent[MomoEventUtils.MAGIC_COUNTER_EVENT] = magicCount;
         }
 
+        public static void UpdatePlayerLuck(int luckCount)
+        {
+            Platformer3D.luck = 1 + luckPerBerry * luckCount;
+        }
         public static void UpdateFairies(int fairyCount)
         {
             GameData.current.MomoEvent[MomoEventUtils.FAIRY_COUNTER_EVENT] = fairyCount;

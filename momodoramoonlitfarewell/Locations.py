@@ -17,7 +17,7 @@ advancement_table = {
     "Lunar Attunement": AdvData(131, "Ashen Hinterlands Continued"),
     #Bosses
     "Gariser Demon": AdvData(15, "Springleaf Path"),
-    "Harpy Archdemon": AdvData(17, "Springleaf Path"),
+    "Harpy Archdemon": AdvData(17, "Springleaf Path Continued"),
     "Raging Demon": AdvData(16, "Lun Tree Roots"),
     "Black Cat": AdvData(278, "Lun Tree Roots"),
     "Viper Archdemon Sorrellia": AdvData(150, "Fairy Springs"),
@@ -80,6 +80,17 @@ advancement_table = {
    "Silver Moonlit Dust": AdvData(333, "Moonlight Repose"),
    "Wooden Box": AdvData(347, "Meikan Village"),
    "Windmill Key": AdvData(356, "Meikan Village"),
+   #Companions
+   "Kaho": AdvData(388, "Old Sanctuary"),
+   "Grimalkin Spirit": AdvData(381, "Koho Village"),
+   "Bakman": AdvData(382, "Springleaf Path"),
+   "Lawa": AdvData(383, "Springleaf Path Continued"),
+   "Simple Cube": AdvData(387, "Lun Tree Roots"),
+   "Vampire Bat": AdvData(386, "Demon Frontier Continued"),
+   "Floating Skull": AdvData(384, "Lun Tree Roots"),
+   "Ducky": AdvData(385, "Meikan Village"),
+   "Cactus": AdvData(392, "Meikan Village Windmill"),
+   "Nun": AdvData(389, "Fount of Rebirth"),
     #Heavenly Lilies
    "Heavenly Lily - Koho Village": AdvData(26400, "Koho Village"),
    "Heavenly Lily 1 - Old Sanctuary": AdvData(8100, "Old Sanctuary"),
@@ -145,6 +156,9 @@ advancement_table = {
    "Peach - Ashen Hinterlands": AdvData(30300, "Ashen Hinterlands Continued"),
    "Peach - Meikan Village": AdvData(33100, "Meikan Village"),
    "Peach - Moonlight Repose": AdvData(20200, "Moonlight Repose"),
+   #Black Berries
+   "Black Berry - Lun Tree Roots": AdvData(5800, "Lun Tree Roots"),
+   "Black Berry - Demon Frontier": AdvData(16400, "Demon Frontier Continued"),
    #Lumen Fairies
    "Lumen Fairy 1 - Springleaf Path": AdvData(4100, "Lun Tree Roots"),
    "Lumen Fairy 2 - Springleaf Path": AdvData(35400, "Springleaf Path"),
@@ -226,8 +240,22 @@ exclusion_table = {
         "Peach - Fairy Springs",
         "Peach - Ashen Hinterlands",
         "Peach - Meikan Village",
-        "Peach - Moonlight Repose"
+        "Peach - Moonlight Repose",
         #Black Berries
+        "Black Berry - Lun Tree Roots",
+        "Black Berry - Demon Frontier"
+    },
+    "companions": {
+        "Kaho",
+        "Grimalkin Spirit",
+        "Bakman",
+        "Lawa",
+        "Simple Cube",
+        "Vampire Bat",
+        "Floating Skull",
+        "Ducky",
+        "Cactus",
+        "Nun"
     },
     "progressive_damage": {
         "Heavenly Lily - Koho Village",

@@ -17,6 +17,7 @@ namespace APMomodoraMoonlitFarewell.Utils
         public static int STAMINA_ID = 994;
         public static int MAGIC_ID = 995;
         public static int FAIRY_ID = 996;
+        public static int BLACK_BERRY_ID = 998;
         public static int FILLER_ID = 999;
 
         public static List<int> AP_SIGIL_ITEM_ID = new List<int> { 442, 400, 436, 402, 403, 433, 448, 412, 404, 434, 447, 440, 405, 439, 443, 444, 425, 445, 430, 435, 432, 427, 438, 449, 446, 338, 339, 340 };

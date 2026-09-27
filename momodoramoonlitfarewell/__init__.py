@@ -1,4 +1,4 @@
-from .Items import MomodoraItem, item_table, skill_items, extra_skill_items, sigil_items, optional_sigil_items, grimoire_items, key_items, selin_door, progressive_upgrade_table
+from .Items import MomodoraItem, item_table, skill_items, extra_skill_items, sigil_items, optional_sigil_items, grimoire_items, key_items, selin_door, progressive_upgrade_table, companion_table
 from .Locations import MomodoraAdvancement, advancement_table, exclusion_table
 from .Regions import momodora_regions, link_momodora_areas
 from worlds.generic.Rules import exclusion_rules
@@ -31,6 +31,7 @@ class MomodoraWorld(World):
             "open_springleaf_path": bool(self.options.open_springleaf_path.value),
             "deathlink": bool(self.options.deathlink.value),
             "oracle_sigil": bool(self.options.oracle_sigil.value),
+            "Companionsanity": bool(self.options.Companionsanity.value),
             "bell_hover_generation": bool(self.options.bell_hover_generation.value),
             "randomize_key_items": bool(self.options.randomize_key_items.value),
             "final_boss_keys": bool(self.options.final_boss_keys.value),
@@ -69,7 +70,10 @@ class MomodoraWorld(World):
             item_table["Progressive Lumen Fairy"] = item_table["Progressive Lumen Fairy"]._replace(classification=ItemClassification.progression)
             for name, num in optional_sigil_items.items():
                 itempool += [name] * num
-      
+        ##Add Companions
+        if self.options.Companionsanity:
+            for name, num in companion_table.items():
+                itempool += [name] * num
         ##Add Final Boss Door if enabled
         if self.options.final_boss_keys:
             for name, num in selin_door.items():
@@ -123,7 +127,9 @@ class MomodoraWorld(World):
                                    (self.options.Berrysanity or
                                     loc_name not in exclusion_table["progressive_berry"]) and
                                     (self.options.Fairysanity or
-                                     loc_name not in exclusion_table["progressive_fairy"])]
+                                     loc_name not in exclusion_table["progressive_fairy"]) and
+                                     (self.options.Companionsanity or
+                                      loc_name not in exclusion_table["companions"])]
 
             for exit in exits:
                 ret.exits.append(Entrance(self.player, exit, ret))
