@@ -40,6 +40,7 @@ namespace APMomodoraMoonlitFarewell.Archipelago
                 !MomoEventUtils.MAGICBERRYEVENTS.Contains(index) &&
                 !MomoEventUtils.BLACKBERRYEVENTS.Contains(index) &&
                 !MomoEventUtils.COMPANIONEVENTS.Contains(index) &&
+                !MomoEventUtils.LUNARBRANCHSHUFFLE.Contains(index) &&
                 !MomoEventUtils.FAIRYEVENTS.Contains(index)) {
                 return;
             }
@@ -99,6 +100,18 @@ namespace APMomodoraMoonlitFarewell.Archipelago
                 if (APLocationScoutCache.TryGetInfo(index, out ScoutedItemInfo companionInfo))
                 {
                     APExchangeNotifier.NotifyExchange(companionInfo);
+                }
+            }
+            else if (MomoEventUtils.LUNARBRANCHSHUFFLE.Contains(index))
+            {
+                if (APUtils.IsLocationChecked(index * 100))
+                {
+                    return;
+                }
+                APUtils.CompleteLocation(index * 100);
+                if (APLocationScoutCache.TryGetInfo(index * 100, out ScoutedItemInfo branchInfo))
+                {
+                    APExchangeNotifier.NotifyExchange(branchInfo);
                 }
             }
             else if (MomoEventUtils.STAMINABERRYEVENTS.Contains(index))

@@ -45,6 +45,7 @@ namespace APMomodoraMoonlitFarewell.Archipelago
             ids.AddRange(MomoEventUtils.FAIRYEVENTS.Select(i => (long)i * 100));
             ids.AddRange(MomoEventUtils.COMPANIONEVENTS.Select(i => (long)i));
             ids.AddRange(MomoEventUtils.BLACKBERRYEVENTS.Select(i => (long)i * 100));
+            ids.AddRange(MomoEventUtils.LUNARBRANCHSHUFFLE.Select(i => (long)i * 100));
             // Inventory ID check
             ids.AddRange(InventoryUtils.AP_SIGIL_ITEM_ID.Select(i => (long)i));
             ids.AddRange(InventoryUtils.NON_AP_SIGIL_ITEM_ID.Select(i => (long)i));

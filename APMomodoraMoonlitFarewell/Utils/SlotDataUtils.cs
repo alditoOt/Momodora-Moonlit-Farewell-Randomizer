@@ -21,6 +21,7 @@ namespace APMomodoraMoonlitFarewell.Utils
         public static Boolean BERRYSANITY;
         public static Boolean COMPANIONSANITY;
         public static String VICTORY_CONDITION;
+        public static Boolean LUNARBRANCHSHUFFLE;
         
 
         private const string MOON_GOD_SELIN = "moon_god_selin";
@@ -45,20 +46,24 @@ namespace APMomodoraMoonlitFarewell.Utils
         // Lumen Fairy event ids
         private static readonly int[] lumenFairyEvents = { 41, 354, 44, 87, 51, 88, 352, 351, 162, 54, 346, 57, 47, 93, 137, 91, 342, 168, 355, 221, 224, 229, 238, 357, 300, 288, 287, 46, 353, 301 };
 
+        // Lunar Crystal Branches event ids
+        private static readonly int[] lunarCrystalBranchEvents = { 82, 124, 125, 126, 127, 40, 50, 43, 42, 45, 83, 53, 52, 55, 96, 119, 56, 49, 48, 90, 133, 154, 161, 163, 178, 225, 226, 227, 222, 248 };
+        
         public static void GetSettingsFromYAML()
         {
             var slotData = APMomodoraMoonlitFarewell.session.DataStorage.GetSlotData();
 
-            OPEN_SPRINGLEAF_PATH = GetBoolSetting(slotData, "open_springleaf_path");
-            DEATHLINK = GetBoolSetting(slotData, "deathlink");
-            KEY_ITEMS = GetBoolSetting(slotData, "randomize_key_items");
-            ORACLE_SIGIL = GetBoolSetting(slotData, "oracle_sigil");
-            FINAL_BOSS_DOOR = GetBoolSetting(slotData, "final_boss_keys");
+            OPEN_SPRINGLEAF_PATH = GetBoolSetting(slotData, "OpenSpringleafPath");
+            DEATHLINK = GetBoolSetting(slotData, "Deathlink");
+            KEY_ITEMS = GetBoolSetting(slotData, "RandomizeKeyItems");
+            ORACLE_SIGIL = GetBoolSetting(slotData, "OracleSigil");
+            FINAL_BOSS_DOOR = GetBoolSetting(slotData, "SelinDoorKeysanity");
             DAMAGE_UPGRADE = GetBoolSetting(slotData, "Lilysanity");
             LUMEN_FAIRIES = GetBoolSetting(slotData, "Fairysanity");
-            VICTORY_CONDITION = GetStringSetting(slotData, "victory_condition");
+            VICTORY_CONDITION = GetStringSetting(slotData, "VictoryCondition");
             BERRYSANITY = GetBoolSetting(slotData, "Berrysanity");
             COMPANIONSANITY = GetBoolSetting(slotData, "Companionsanity");
+            LUNARBRANCHSHUFFLE = GetBoolSetting(slotData, "LunarCrystalBranchShuffle");
         }
 
         private static bool GetBoolSetting(Dictionary<string, object> slotData, string key)
@@ -119,6 +124,10 @@ namespace APMomodoraMoonlitFarewell.Utils
             else if (VICTORY_CONDITION == DORA)
             {
                 MomoEventUtils.VICTORY_EVENT = 370;
+            }
+            if (LUNARBRANCHSHUFFLE)
+            {
+                MomoEventUtils.LUNARBRANCHSHUFFLE.AddRange(lunarCrystalBranchEvents);
             }
         }
     }
