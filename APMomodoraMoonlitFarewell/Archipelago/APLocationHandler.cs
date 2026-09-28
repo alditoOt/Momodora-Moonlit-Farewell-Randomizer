@@ -38,6 +38,9 @@ namespace APMomodoraMoonlitFarewell.Archipelago
                 !MomoEventUtils.HEALTHBERRYEVENTS.Contains(index) &&
                 !MomoEventUtils.STAMINABERRYEVENTS.Contains(index) &&
                 !MomoEventUtils.MAGICBERRYEVENTS.Contains(index) &&
+                !MomoEventUtils.BLACKBERRYEVENTS.Contains(index) &&
+                !MomoEventUtils.COMPANIONEVENTS.Contains(index) &&
+                !MomoEventUtils.LUNARBRANCHSHUFFLE.Contains(index) &&
                 !MomoEventUtils.FAIRYEVENTS.Contains(index)) {
                 return;
             }
@@ -77,6 +80,39 @@ namespace APMomodoraMoonlitFarewell.Archipelago
                 Platformer3D.player_sp -= APPlayerStatUpdater.magicPerUpgrade;
                 GameData.current.MomoEvent[MomoEventUtils.MAGIC_COUNTER_EVENT]--;
                 APUtils.CompleteLocation(index * 100);
+            }
+            else if (MomoEventUtils.BLACKBERRYEVENTS.Contains(index))
+            {
+                if (APUtils.IsLocationChecked(index * 100))
+                {
+                    return;
+                }
+                Platformer3D.luck -= 1f;
+                APUtils.CompleteLocation(index * 100);
+            }
+            else if (MomoEventUtils.COMPANIONEVENTS.Contains(index))
+            {
+                if (APUtils.IsLocationChecked(index))
+                {
+                    return;
+                }
+                APUtils.CompleteLocation(index);
+                if (APLocationScoutCache.TryGetInfo(index, out ScoutedItemInfo companionInfo))
+                {
+                    APExchangeNotifier.NotifyExchange(companionInfo);
+                }
+            }
+            else if (MomoEventUtils.LUNARBRANCHSHUFFLE.Contains(index))
+            {
+                if (APUtils.IsLocationChecked(index * 100))
+                {
+                    return;
+                }
+                APUtils.CompleteLocation(index * 100);
+                if (APLocationScoutCache.TryGetInfo(index * 100, out ScoutedItemInfo branchInfo))
+                {
+                    APExchangeNotifier.NotifyExchange(branchInfo);
+                }
             }
             else if (MomoEventUtils.STAMINABERRYEVENTS.Contains(index))
             {
@@ -164,6 +200,7 @@ namespace APMomodoraMoonlitFarewell.Archipelago
             int staminaCount = 0;
             int magicCount = 0;
             int fairyCount = 0;
+            int blackBerryCount = 0;
             foreach (ItemInfo item in items)
             {
                 long itemId = item.ItemId;
@@ -185,6 +222,11 @@ namespace APMomodoraMoonlitFarewell.Archipelago
                 if (itemId == InventoryUtils.MAGIC_ID)
                 {
                     magicCount++;
+                    continue;
+                }
+                if (itemId == InventoryUtils.BLACK_BERRY_ID)
+                {
+                    blackBerryCount++;
                     continue;
                 }
                 if (itemId == InventoryUtils.FAIRY_ID)
@@ -216,6 +258,7 @@ namespace APMomodoraMoonlitFarewell.Archipelago
             APPlayerStatUpdater.UpdatePlayerStamina(staminaCount);
             APPlayerStatUpdater.UpdatePlayerMagic(magicCount);
             APPlayerStatUpdater.UpdateFairies(fairyCount);
+            APPlayerStatUpdater.UpdatePlayerLuck(blackBerryCount);
 
             if (finalBossDoorCount > 0)
             {

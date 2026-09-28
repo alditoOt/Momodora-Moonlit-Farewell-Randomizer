@@ -114,12 +114,24 @@ namespace APMomodoraMoonlitFarewell.Archipelago
         {
             if (IsForSelf(info))
             {
+                if (info.ItemId == InventoryUtils.BLACK_BERRY_ID)
+                {
+                    ShowColorized(
+                        new Segment("Despite the "),
+                        new Segment("Black Berry", itemColor),
+                        new Segment(", "),
+                        new Segment("you", playerColor),
+                        new Segment("don't feel any different..."));
+                }
+                else
+                {
                 ShowColorized(
                     new Segment("You found "),
                     new Segment(info.ItemDisplayName, itemColor),
                     new Segment("! Go "),
                     new Segment("you", playerColor),
                     new Segment("!"));
+                }
             }
             else
             {
@@ -173,6 +185,16 @@ namespace APMomodoraMoonlitFarewell.Archipelago
             }
             else if (IsStat(item.ItemId))
             {
+                if (item.ItemId == InventoryUtils.BLACK_BERRY_ID)
+            {
+                ShowColorized(
+                    new Segment("Despite "),
+                    new Segment(playerName, playerColor),
+                    new Segment("'s "),
+                    new Segment("Black Berry", itemColor),
+                    new Segment(", you don't feel any different..."));
+                    return;
+            }
                 ShowColorized(
                     new Segment("Received "),
                     new Segment(itemName, itemColor),
@@ -187,6 +209,7 @@ namespace APMomodoraMoonlitFarewell.Archipelago
                     new Segment(playerName, playerColor),
                     new Segment(" freed a Lumen Fairy!"));
             }
+           
             else
             {
                 ShowColorized(
@@ -200,7 +223,8 @@ namespace APMomodoraMoonlitFarewell.Archipelago
 
         private static bool IsStat(long itemId) =>
             itemId == InventoryUtils.HEALTH_ID || itemId == InventoryUtils.MAGIC_ID ||
-            itemId == InventoryUtils.DAMAGE_ID || itemId == InventoryUtils.STAMINA_ID;
+            itemId == InventoryUtils.DAMAGE_ID || itemId == InventoryUtils.STAMINA_ID ||
+            itemId == InventoryUtils.BLACK_BERRY_ID;
 
         // Mirrors the vanilla ItemFruit.Notif() popup: a flavor line, plus a "(previous -> new)"
         // delta for Health/Magic/Damage (Stamina shows no numeric delta in vanilla either)
@@ -218,6 +242,10 @@ namespace APMomodoraMoonlitFarewell.Archipelago
             if (itemId == InventoryUtils.DAMAGE_ID)
             {
                 return BuildDeltaText(APPlayerStatUpdater.baseAttack, APPlayerStatUpdater.attackPerLily, itemId);
+            }
+            if (itemId == InventoryUtils.BLACK_BERRY_ID)
+            {
+                return "You don't feel any different...";
             }
             return "";
         }

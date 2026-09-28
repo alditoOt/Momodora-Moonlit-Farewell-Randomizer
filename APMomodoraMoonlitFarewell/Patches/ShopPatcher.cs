@@ -110,7 +110,9 @@ namespace APMomodoraMoonlitFarewell.Patches
                         case var id when id == InventoryUtils.MAGIC_ID:
                             text = StringUtils.MAGIC_DESCRIPTION;
                             break;
-
+                        case var id when id == InventoryUtils.BLACK_BERRY_ID:
+                            text = StringUtils.BLACK_BERRY_DESCRIPTION;
+                            break;
                         case var id when id == InventoryUtils.STAMINA_ID:
                             text = StringUtils.STAMINA_DESCRIPTION;
                             break;

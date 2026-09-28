@@ -7,6 +7,7 @@ using System.Text;
 
 namespace APMomodoraMoonlitFarewell.Utils
 {
+    // Handles location IDs
     class SlotDataUtils
     {
         public static Boolean OPEN_SPRINGLEAF_PATH;
@@ -16,12 +17,11 @@ namespace APMomodoraMoonlitFarewell.Utils
         // public static string FAST_TRAVEL_CHOICE;
         public static Boolean FINAL_BOSS_DOOR;
         public static Boolean DAMAGE_UPGRADE;
-        public static Boolean HEALTH_UPGRADE;
-        public static Boolean STAMINA_UPGRADE;
-        public static Boolean MAGIC_UPGRADE;
         public static Boolean LUMEN_FAIRIES;
         public static Boolean BERRYSANITY;
+        public static Boolean COMPANIONSANITY;
         public static String VICTORY_CONDITION;
+        public static Boolean LUNARBRANCHSHUFFLE;
         
 
         private const string MOON_GOD_SELIN = "moon_god_selin";
@@ -39,24 +39,31 @@ namespace APMomodoraMoonlitFarewell.Utils
         // Magic Berry event ids
         private static readonly int[] magicBerryEvents = { 135, 33, 95, 115, 228, 341, 295 };
         //  Black Berry event ids
-        private static readonly int[] blackBerryEvents = {};
+        private static readonly int[] blackBerryEvents = { 58, 164 };
 
+        // Companion event ids
+        private static readonly int[] companionEvents = { 311, 304, 305, 306, 310, 309, 307, 308, 330, 312 };
         // Lumen Fairy event ids
         private static readonly int[] lumenFairyEvents = { 41, 354, 44, 87, 51, 88, 352, 351, 162, 54, 346, 57, 47, 93, 137, 91, 342, 168, 355, 221, 224, 229, 238, 357, 300, 288, 287, 46, 353, 301 };
 
+        // Lunar Crystal Branches event ids
+        private static readonly int[] lunarCrystalBranchEvents = { 82, 124, 125, 126, 127, 40, 50, 43, 42, 45, 83, 53, 52, 55, 96, 119, 56, 49, 48, 90, 133, 154, 161, 163, 178, 225, 226, 227, 222, 248 };
+        
         public static void GetSettingsFromYAML()
         {
             var slotData = APMomodoraMoonlitFarewell.session.DataStorage.GetSlotData();
 
-            OPEN_SPRINGLEAF_PATH = GetBoolSetting(slotData, "open_springleaf_path");
-            DEATHLINK = GetBoolSetting(slotData, "deathlink");
-            KEY_ITEMS = GetBoolSetting(slotData, "randomize_key_items");
-            ORACLE_SIGIL = GetBoolSetting(slotData, "oracle_sigil");
-            FINAL_BOSS_DOOR = GetBoolSetting(slotData, "final_boss_keys");
+            OPEN_SPRINGLEAF_PATH = GetBoolSetting(slotData, "OpenSpringleafPath");
+            DEATHLINK = GetBoolSetting(slotData, "Deathlink");
+            KEY_ITEMS = GetBoolSetting(slotData, "RandomizeKeyItems");
+            ORACLE_SIGIL = GetBoolSetting(slotData, "OracleSigil");
+            FINAL_BOSS_DOOR = GetBoolSetting(slotData, "SelinDoorKeysanity");
             DAMAGE_UPGRADE = GetBoolSetting(slotData, "Lilysanity");
             LUMEN_FAIRIES = GetBoolSetting(slotData, "Fairysanity");
-            VICTORY_CONDITION = GetStringSetting(slotData, "victory_condition");
+            VICTORY_CONDITION = GetStringSetting(slotData, "VictoryCondition");
             BERRYSANITY = GetBoolSetting(slotData, "Berrysanity");
+            COMPANIONSANITY = GetBoolSetting(slotData, "Companionsanity");
+            LUNARBRANCHSHUFFLE = GetBoolSetting(slotData, "LunarCrystalBranchShuffle");
         }
 
         private static bool GetBoolSetting(Dictionary<string, object> slotData, string key)
@@ -85,6 +92,12 @@ namespace APMomodoraMoonlitFarewell.Utils
             {
                 InventoryUtils.AP_SIGIL_ITEM_ID.AddRange(InventoryUtils.KEY_ITEM_ID);
             }
+            if (COMPANIONSANITY)
+            {
+                InventoryUtils.AP_SIGIL_ITEM_ID.AddRange(InventoryUtils.COMPANION_ITEM_ID);
+                MomoEventUtils.COMPANIONEVENTS.AddRange(companionEvents);
+
+            }
             if (ORACLE_SIGIL)
             {
                 InventoryUtils.AP_SIGIL_ITEM_ID.Add(InventoryUtils.ORACLE);
@@ -111,6 +124,10 @@ namespace APMomodoraMoonlitFarewell.Utils
             else if (VICTORY_CONDITION == DORA)
             {
                 MomoEventUtils.VICTORY_EVENT = 370;
+            }
+            if (LUNARBRANCHSHUFFLE)
+            {
+                MomoEventUtils.LUNARBRANCHSHUFFLE.AddRange(lunarCrystalBranchEvents);
             }
         }
     }

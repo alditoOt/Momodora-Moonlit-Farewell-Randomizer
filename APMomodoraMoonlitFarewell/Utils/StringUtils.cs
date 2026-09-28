@@ -23,6 +23,7 @@ namespace APMomodoraMoonlitFarewell.Utils
         public static readonly string GENERAL_SKILL_DESCRIPTION = "In-game skill!";
         public static readonly string GARBAGE_DESCRIPTION = "Money!";
         public static readonly string KEY_ITEM_DESCRIPTION = "In-game item!";
+        public static readonly string BLACK_BERRY_DESCRIPTION = "Doesn't make you feel any different...";
 
         public static readonly string LEAF_DESCRIPTION = "Allows your main attack to destroy Demon Strings!";
         public static readonly string LUNAR_ATTUNEMENT_DESCRIPTION = "Increases combat ability and higher jumps, as well as allowing you to move through thick fog!";

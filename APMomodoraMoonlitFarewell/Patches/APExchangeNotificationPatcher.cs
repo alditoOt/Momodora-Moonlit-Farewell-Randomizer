@@ -72,11 +72,13 @@ namespace APMomodoraMoonlitFarewell.Patches
         [HarmonyPostfix]
         static void Postfix(ItemSparkle __instance)
         {
-            if (__instance.visualProperty != ItemSparkle.Property.Sigil)
+            if (__instance.visualProperty != ItemSparkle.Property.Sigil || __instance.visualProperty != ItemSparkle.Property.Minion)
             {
                 return;
             }
-            long locationId = GameData.itemDatabase.GetItem(__instance.TreasureID).itemDef.Index;
+            long locationId = __instance.visualProperty == ItemSparkle.Property.Minion
+                ? GameData.itemDatabase.GetItem(__instance.DestroyFlag).itemDef.Index
+                : GameData.itemDatabase.GetItem(__instance.TreasureID).itemDef.Index;
             // The corner popup itself is raised from APSigilHandler (Inventory.Add); only the
             // vanilla TutorialMessage replacement happens here
             if (APLocationScoutCache.TryGetInfo(locationId, out ScoutedItemInfo info))

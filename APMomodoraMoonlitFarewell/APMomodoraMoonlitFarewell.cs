@@ -76,9 +76,8 @@ namespace APMomodoraMoonlitFarewell
         }
 
         #endregion
-        
-        //When starting the game
-        public override void OnLateInitializeMelon()
+
+        private void TryToConnect()
         {
             #region Server Info
             //Load server info from config
@@ -208,6 +207,7 @@ namespace APMomodoraMoonlitFarewell
         {
             if (mainMenu && SceneManager.sceneCount >= 2)
             {
+                TryToConnect();
                 APLocationHandler.UpdateItemsForTheSession(null);
                 mainMenu = false;
                 MomoEventUtils.DEFAULT_EVENTS_TO_1.ForEach(x => GameData.current.MomoEvent[x] = 1);

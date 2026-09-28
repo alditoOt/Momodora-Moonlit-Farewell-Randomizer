@@ -25,6 +25,8 @@ namespace APMomodoraMoonlitFarewell.Utils
         public static List<int> MAGICBERRYEVENTS = new List<int>();
         public static List<int> BLACKBERRYEVENTS = new List<int>();
         public static List<int> FAIRYEVENTS = new List<int>();
+        public static List<int> COMPANIONEVENTS = new List<int>();
+        public static List<int> LUNARBRANCHSHUFFLE = new List<int>();
 
         public static int FINAL_DOOR_EVENT = 294;
         public static int FAST_TRAVEL_EVENT = 205;
