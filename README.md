@@ -58,7 +58,7 @@ With this setting enabled, all Heavenly Lilies are added as item location checks
 With this setting enabled, all Lumen Fairies are arred as item location checks, and Progressive Lumen Fairies are added to the randomized item pool. You need all 30 Lumen Fairies for the Oracle Sigil item/location check.
 ## Companionsanity
 With this setting enabled, all Companions (except Dora and Lineth) are added as item location checks, and each companion (except Dora and Lineth) is added to the randomized item pool.
-## Selin Door Key Sanity
+## Selin Door Keysanity
 With this setting on, it adds 4 Keys required to open the door to the Selin boss fight. This is usually done by defeating the 4 Selin's Shades before this door, but with the setting enabled these bosses will only have their regular location checks but won't help to open the door.
 
 If you have this setting on as well as the Oracle Sigil setting, there's a possibility that one of the keys is in the Oracle Sigil check, making completing the game a very long task.
