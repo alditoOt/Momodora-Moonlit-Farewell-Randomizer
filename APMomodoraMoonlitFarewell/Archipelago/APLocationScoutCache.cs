@@ -52,8 +52,6 @@ namespace APMomodoraMoonlitFarewell.Archipelago
             ids.AddRange(InventoryUtils.KEY_ITEM_ID.Select(i => (long)i));
             ids.Add(InventoryUtils.livingBloodId);
             ids.Add(InventoryUtils.woodenBoxId);
-            ids.Add(InventoryUtils.GOLD_MOONLIT_DUST_ID);
-            ids.Add(InventoryUtils.SILVER_MOONLIT_DUST_ID);
             return ids.Distinct().ToArray();
         }
 
