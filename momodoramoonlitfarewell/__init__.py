@@ -28,17 +28,18 @@ class MomodoraWorld(World):
             "player_id": self.player,
             "client_version": self.required_client_version,
             "race": self.multiworld.is_race,
-            "open_springleaf_path": bool(self.options.open_springleaf_path.value),
-            "deathlink": bool(self.options.deathlink.value),
-            "oracle_sigil": bool(self.options.oracle_sigil.value),
+            "OpenSpringleafPath": bool(self.options.OpenSpringleafPath.value),
+            "Deathlink": bool(self.options.Deathlink.value),
+            "OracleSigil": bool(self.options.OracleSigil.value),
             "Companionsanity": bool(self.options.Companionsanity.value),
-            "bell_hover_generation": bool(self.options.bell_hover_generation.value),
-            "randomize_key_items": bool(self.options.randomize_key_items.value),
-            "final_boss_keys": bool(self.options.final_boss_keys.value),
+            "BellHoverGeneration": bool(self.options.BellHoverGeneration.value),
+            "RandomizeKeyItems": bool(self.options.RandomizeKeyItems.value),
+            "SelinDoorKeysanity": bool(self.options.SelinDoorKeysanity.value),
             "Lilysanity": bool(self.options.Lilysanity.value),
             "Fairysanity": bool(self.options.Fairysanity.value),
             "Berrysanity": bool(self.options.Berrysanity.value),
-            "victory_condition": self.options.victory_condition.current_key,
+            "LunarCrystalBranchShuffle": bool(self.options.LunarCrystalBranchShuffle.value),
+            "VictoryCondition": self.options.VictoryCondition.current_key,
             # "fast_travel": self.options.fast_travel.current_key
         }
     
@@ -53,7 +54,7 @@ class MomodoraWorld(World):
             itempool += [name] * num
         #Add useful skill items
         # if self.options.fast_travel.current_key == 2:
-        for name, num in extra_skill_items.items():
+        for name, num in extra_skill_items["fast_travel"].items():
             itempool += [name] * num
         #Add all sigil items
         for name, num in sigil_items.items():
@@ -62,11 +63,11 @@ class MomodoraWorld(World):
         for name, num in grimoire_items.items():
             itempool += [name] * num
         #Add Key Items
-        if self.options.randomize_key_items:
+        if self.options.RandomizeKeyItems:
             for name, num in key_items.items():
                 itempool += [name] * num    
        #Add Oracle Sigil if enabled
-        if self.options.oracle_sigil:
+        if self.options.OracleSigil:
             item_table["Progressive Lumen Fairy"] = item_table["Progressive Lumen Fairy"]._replace(classification=ItemClassification.progression)
             for name, num in optional_sigil_items.items():
                 itempool += [name] * num
@@ -75,7 +76,7 @@ class MomodoraWorld(World):
             for name, num in companion_table.items():
                 itempool += [name] * num
         ##Add Final Boss Door if enabled
-        if self.options.final_boss_keys:
+        if self.options.SelinDoorKeysanity:
             for name, num in selin_door.items():
                 itempool += [name] * num
 
@@ -90,13 +91,13 @@ class MomodoraWorld(World):
         if self.options.Fairysanity:
             for name, num in progressive_upgrade_table["progressive_fairy"].items():
                 itempool += [name] * num
-        
+
         #Choose locations to automatically exclude based on settings
         exclusion_pool = set()
-        # if not self.options.randomize_key_items:
+        # if not self.options.RandomizeKeyItems:
         #     exclusion_pool.update(exclusion_table["random_key_items"])
-        # if not self.options.oracle_sigil:
-        #     exclusion_pool.update(exclusion_table["oracle_sigil"])
+        # if not self.options.OracleSigil:
+        #     exclusion_pool.update(exclusion_table["OracleSigil"])
 
         exclusion_rules(self.multiworld, self.player, exclusion_pool)
 
@@ -118,10 +119,10 @@ class MomodoraWorld(World):
             ret.locations += [MomodoraAdvancement(self.player, loc_name, loc_data.id, ret)
                               for loc_name, loc_data in advancement_table.items()
                                 if loc_data.region == region_name and
-                                (self.options.randomize_key_items or 
+                                (self.options.RandomizeKeyItems or 
                                  loc_name not in exclusion_table["random_key_items"]) and
-                                 (self.options.oracle_sigil or
-                                  loc_name not in exclusion_table["oracle_sigil"]) and
+                                 (self.options.OracleSigil or
+                                  loc_name not in exclusion_table["OracleSigil"]) and
                                   (self.options.Lilysanity or
                                    loc_name not in exclusion_table["progressive_damage"]) and
                                    (self.options.Berrysanity or
@@ -129,7 +130,9 @@ class MomodoraWorld(World):
                                     (self.options.Fairysanity or
                                      loc_name not in exclusion_table["progressive_fairy"]) and
                                      (self.options.Companionsanity or
-                                      loc_name not in exclusion_table["companions"])]
+                                      loc_name not in exclusion_table["companions"]) and
+                                      (self.options.LunarCrystalBranchShuffle or
+                                       loc_name not in exclusion_table["lunar_crystal_branches"])]
 
             for exit in exits:
                 ret.exits.append(Entrance(self.player, exit, ret))

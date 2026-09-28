@@ -93,10 +93,6 @@ skill_items = {
     "Lunar Attunement": 1
 }
 
-extra_skill_items = {
-    "Mitchi Fast Travel": 1
-}
-
 sigil_items = {
     "Ascended Slash": 1,
    "Cloudy Blood": 1,
@@ -165,6 +161,18 @@ companion_table = {
     "Ducky": 1,
     "Cactus": 1,
     "Nun": 1
+}
+
+extra_skill_items = {
+    "bow": {
+        "Bow": 1
+    },
+    "dodge_roll": {
+        "Dodge Roll": 1
+    },
+    "fast_travel": {
+        "Mitchi Fast Travel": 1
+    }
 }
 
 progressive_upgrade_table = {

@@ -20,27 +20,27 @@ def set_rules(world: "MomodoraWorld"):
     # entrance rules
     set_rule(multiworld.get_entrance(*region("SP_SPC")), 
              lambda state: state.has(*item("Awakened Sacred Leaf")) or
-             bool(world.options.open_springleaf_path.value))
+             bool(world.options.OpenSpringleafPath.value))
     set_rule(multiworld.get_entrance(*region("SPC_LTR")), 
              lambda state: state.has(*item("Sacred Anemone")) or
-             bool(world.options.open_springleaf_path.value))
+             bool(world.options.OpenSpringleafPath.value))
     set_rule(multiworld.get_entrance(*region("SPC_FS")), 
              lambda state: (state.has(*item("Crescent Moonflower")) or
                             state.has(*item("Spiral Shell"))) and
-             (bool(world.options.open_springleaf_path.value) or 
+             (bool(world.options.OpenSpringleafPath.value) or 
              (state.has(*item("Sacred Anemone")))))
     set_rule(multiworld.get_entrance(*region("LTR_FS")), lambda state: state.has(*item("Crescent Moonflower")))
     set_rule(multiworld.get_entrance(*region("KV_OS")), 
              lambda state: state.has(*item("Spiral Shell")) or 
              (state.has(*item("Crescent Moonflower")) and
-             (world.options.bell_hover_generation.value or
+             (world.options.BellHoverGeneration.value or
               state.has(*item("Lunar Attunement")))))
     set_rule(multiworld.get_entrance(*region("OS_OSC")), 
              lambda state: state.has(*item("Spiral Shell")) or
-                            (world.options.bell_hover_generation.value and state.has(*item("Lunar Attunement")) and state.has(*item("Crescent Moonflower"))))
+                            (world.options.BellHoverGeneration.value and state.has(*item("Lunar Attunement")) and state.has(*item("Crescent Moonflower"))))
     set_rule(multiworld.get_entrance(*region("LTR_DF")), 
              lambda state: state.has(*item("Spiral Shell")) or
-             (state.has(*item("Crescent Moonflower")) and world.options.bell_hover_generation.value and (state.has(*item("Progressive Magic Upgrade"), 1) if world.options.Berrysanity.value else True)))
+             (state.has(*item("Crescent Moonflower")) and world.options.BellHoverGeneration.value and (state.has(*item("Progressive Magic Upgrade"), 1) if world.options.Berrysanity.value else True)))
     set_rule(multiworld.get_entrance(*region("DF_AH")),
              lambda state:  state.has(*item("Crescent Moonflower")) and state.has(*item("Awakened Sacred Leaf"))),
     set_rule(multiworld.get_entrance(*region("LTR_MR")), 
@@ -53,33 +53,33 @@ def set_rules(world: "MomodoraWorld"):
                              (state.has(*item("Sacred Anemone")) or state.has(*item("Perfect Chime")))))
     set_rule(multiworld.get_entrance(*region("DFC_MV")), 
              lambda state: state.has(*item("Lunar Attunement")) and
-             (state.has(*item("Crescent Moonflower")) if world.options.bell_hover_generation.value else True or
+             (state.has(*item("Crescent Moonflower")) if world.options.BellHoverGeneration.value else True or
               state.has(*item("Spiral Shell")))),
     set_rule(multiworld.get_entrance(*region("MV_MVW")), 
-             lambda state: (state.has("Windmill Key", player) if world.options.randomize_key_items.value else True) and 
+             lambda state: (state.has("Windmill Key", player) if world.options.RandomizeKeyItems.value else True) and 
              state.has(*item("Spiral Shell")) and
              (state.has(*item("Crescent Moonflower")) or
-              world.options.bell_hover_generation.value)),
+              world.options.BellHoverGeneration.value)),
     set_rule(multiworld.get_entrance(*region("MVW_FOR")), lambda state: 
              state.has(*item("Crescent Moonflower")) and 
-              (state.has(*item("Windmill Key")) if world.options.randomize_key_items.value else True)),
-    set_rule(multiworld.get_entrance(*region("FOR_SELIN")), lambda state: state.has(*item("Progressive Final Boss Key"), 4) if world.options.final_boss_keys.value else True),
+              (state.has(*item("Windmill Key")) if world.options.RandomizeKeyItems.value else True)),
+    set_rule(multiworld.get_entrance(*region("FOR_SELIN")), lambda state: state.has(*item("Progressive Final Boss Key"), 4) if world.options.SelinDoorKeysanity.value else True),
 
     # skill rules
-    set_rule(multiworld.get_location(*item("Sacred Anemone")), lambda state: world.options.open_springleaf_path.value or state.has(*item("Awakened Sacred Leaf")))
+    set_rule(multiworld.get_location(*item("Sacred Anemone")), lambda state: world.options.OpenSpringleafPath.value or state.has(*item("Awakened Sacred Leaf")))
     set_rule(multiworld.get_location(*item("Lunar Attunement")),
              lambda state:
-             not world.options.randomize_key_items.value or
+             not world.options.RandomizeKeyItems.value or
              (state.has(*item("Gold Moonlit Dust")) and
              state.has(*item("Silver Moonlit Dust"))))
     
     #sigil rules
     set_rule(multiworld.get_location(*item("Serval")),
              lambda state: state.has(*item("Crescent Moonflower")) or
-             (state.has(*item("Spiral Shell")) if world.options.bell_hover_generation.value else True))
+             (state.has(*item("Spiral Shell")) if world.options.BellHoverGeneration.value else True))
     set_rule(multiworld.get_location(*item("Perfect Chime")), 
              lambda state: state.has(*item("Spiral Shell")) and 
-             (world.options.bell_hover_generation.value or 
+             (world.options.BellHoverGeneration.value or 
               state.has(*item("Crescent Moonflower"))))
     set_rule(multiworld.get_location(*item("Mending Resonance")), lambda state: state.has(*item("Lunar Attunement"))),
     set_rule(multiworld.get_location(*item("Resolve")), lambda state: state.has(*item("Lunar Attunement")))
@@ -93,14 +93,14 @@ def set_rules(world: "MomodoraWorld"):
              lambda state: state.can_reach("Fount of Rebirth", "Region", player))
     # set_rule(multiworld.get_location(*item("Harpy Archdemon")),
     #          lambda state: state.has(*item("Awakened Sacred Leaf")) or
-    #           world.options.open_springleaf_path.value)
+    #           world.options.OpenSpringleafPath.value)
     set_rule(multiworld.get_location(*item("Remnant of an Unknown Phantasm")),
              lambda state: state.has(*item("Awakened Sacred Leaf")))
     set_rule(multiworld.get_location(*item("Accursed Autarch")),
              lambda state: state.has(*item("Awakened Sacred Leaf")))
     
     #key items
-    if world.options.randomize_key_items:
+    if world.options.RandomizeKeyItems:
         set_rule(multiworld.get_location(*item("Gold Moonlit Dust")), 
                  lambda state: state.has(*item("Crescent Moonflower")) or 
                  (state.has(*item("Spiral Shell")) and
@@ -109,7 +109,7 @@ def set_rules(world: "MomodoraWorld"):
         set_rule(multiworld.get_location(*item("Silver Moonlit Dust")), lambda state: state.has(*item("Awakened Sacred Leaf")))
     
     # Fairy rewards rules
-    if world.options.oracle_sigil:
+    if world.options.OracleSigil:
         set_rule(multiworld.get_location(*item("Oracle")), 
                  lambda state: state.has(*item("Progressive Lumen Fairy"), 30) if world.options.Fairysanity.value else True 
                  or state.can_reach("Fount of Rebirth", "Region", player))
@@ -118,7 +118,7 @@ def set_rules(world: "MomodoraWorld"):
     if world.options.Lilysanity:
         set_rule(multiworld.get_location(*item("Heavenly Lily - Koho Village")), lambda state: state.has(*item("Crescent Moonflower")) and state.has(*item("Spiral Shell")))
         set_rule(multiworld.get_location(*item("Heavenly Lily 1 - Fairy Village")), 
-                 lambda state: state.has(*item("Crescent Moonflower")) or (state.has(*item("Spiral Shell")) and world.options.bell_hover_generation.value))
+                 lambda state: state.has(*item("Crescent Moonflower")) or (state.has(*item("Spiral Shell")) and world.options.BellHoverGeneration.value))
         set_rule(multiworld.get_location(*item("Heavenly Lily 2 - Ashen Hinterlands")), lambda state: state.has(*item("Crescent Moonflower")) and state.has(*item("Spiral Shell")))
         set_rule(multiworld.get_location(*item("Heavenly Lily 3 - Ashen Hinterlands")), lambda state: state.has(*item("Crescent Moonflower")) and state.has(*item("Spiral Shell")) and state.has(*item("Lunar Attunement")))
         set_rule(multiworld.get_location(*item("Heavenly Lily 3 - Meikan Village")), lambda state: state.can_reach("Fount of Rebirth", "Region", player))
@@ -138,20 +138,20 @@ def set_rules(world: "MomodoraWorld"):
         set_rule(multiworld.get_location(*item("Lun Berry - Demon Frontier")), lambda state: state.has(*item("Crescent Moonflower")) and state.has(*item("Spiral Shell")))
         set_rule(multiworld.get_location(*item("Lun Berry - Fount of Rebirth")), lambda state: state.can_reach("Selin", "Region", player))    
         set_rule(multiworld.get_location(*item("Peach - Ashen Hinterlands")), lambda state: state.has(*item("Lunar Attunement")))
-        set_rule(multiworld.get_location(*item("Peach - Springleaf Path")), lambda state: (world.options.open_springleaf_path.value or state.has(*item("Awakened Sacred Leaf"))))
-        set_rule(multiworld.get_location(*item("Black Berry - Lun Tree Roots")), lambda state: world.options.bell_hover_generation or state.has(*item("Crescent Moonflower")) or state.has(*item("Spiral Shell")))
+        set_rule(multiworld.get_location(*item("Peach - Springleaf Path")), lambda state: (world.options.OpenSpringleafPath.value or state.has(*item("Awakened Sacred Leaf"))))
+        set_rule(multiworld.get_location(*item("Black Berry - Lun Tree Roots")), lambda state: world.options.BellHoverGeneration or state.has(*item("Crescent Moonflower")) or state.has(*item("Spiral Shell")))
     
     #Fairysanity rules
     if world.options.Fairysanity:
-        set_rule(multiworld.get_location(*item("Lumen Fairy 2 - Springleaf Path")), lambda state: (world.options.open_springleaf_path.value or state.has(*item("Awakened Sacred Leaf"))) and (state.has(*item("Crescent Moonflower")) or state.has(*item("Spiral Shell"))))
-        set_rule(multiworld.get_location(*item("Lumen Fairy 4 - Lun Tree Roots")), lambda state: world.options.bell_hover_generation.value or state.has(*item("Crescent Moonflower")) or state.has(*item("Spiral Shell")))
+        set_rule(multiworld.get_location(*item("Lumen Fairy 2 - Springleaf Path")), lambda state: (world.options.OpenSpringleafPath.value or state.has(*item("Awakened Sacred Leaf"))) and (state.has(*item("Crescent Moonflower")) or state.has(*item("Spiral Shell"))))
+        set_rule(multiworld.get_location(*item("Lumen Fairy 4 - Lun Tree Roots")), lambda state: world.options.BellHoverGeneration.value or state.has(*item("Crescent Moonflower")) or state.has(*item("Spiral Shell")))
         set_rule(multiworld.get_location(*item("Lumen Fairy - Moonlight Repose")), lambda state: state.has(*item("Crescent Moonflower")))
         set_rule(multiworld.get_location(*item("Lumen Fairy 5 - Lun Tree Roots")), lambda state: state.has(*item("Crescent Moonflower")) and state.has(*item("Spiral Shell")))
-        set_rule(multiworld.get_location(*item("Lumen Fairy 1 - Fairy Springs")), lambda state: state.has(*item("Crescent Moonflower")) or (world.options.bell_hover_generation.value and ((state.has(*item("Sacred Anemone")) or state.has(*item("Perfect Chime"))))))
+        set_rule(multiworld.get_location(*item("Lumen Fairy 1 - Fairy Springs")), lambda state: state.has(*item("Crescent Moonflower")) or (world.options.BellHoverGeneration.value and ((state.has(*item("Sacred Anemone")) or state.has(*item("Perfect Chime"))))))
         set_rule(multiworld.get_location(*item("Lumen Fairy 2 - Fairy Springs")), lambda state: state.has(*item("Crescent Moonflower")) or (state.has(*item("Spiral Shell"))))
-        set_rule(multiworld.get_location(*item("Lumen Fairy 3 - Fairy Springs")), lambda state: world.options.bell_hover_generation.value or state.has(*item("Spiral Shell")))
+        set_rule(multiworld.get_location(*item("Lumen Fairy 3 - Fairy Springs")), lambda state: world.options.BellHoverGeneration.value or state.has(*item("Spiral Shell")))
         set_rule(multiworld.get_location(*item("Lumen Fairy 4 - Fairy Springs")), lambda state: state.has(*item("Crescent Moonflower")))
-        set_rule(multiworld.get_location(*item("Lumen Fairy - Fairy Village")), lambda state: state.has(*item("Crescent Moonflower")) or (state.has(*item("Spiral Shell")) and world.options.bell_hover_generation.value))
+        set_rule(multiworld.get_location(*item("Lumen Fairy - Fairy Village")), lambda state: state.has(*item("Crescent Moonflower")) or (state.has(*item("Spiral Shell")) and world.options.BellHoverGeneration.value))
         set_rule(multiworld.get_location(*item("Lumen Fairy 4 - Demon Frontier")), lambda state: state.has(*item("Crescent Moonflower")))
         set_rule(multiworld.get_location(*item("Lumen Fairy 5 - Demon Frontier")), lambda state: state.can_reach("Ashen Hinterlands", "Region", player) and (state.has(*item("Crescent Moonflower")) or state.has(*item("The Blessed"))))
         set_rule(multiworld.get_location(*item("Lumen Fairy 5 - Ashen Hinterlands")), lambda state: state.has(*item("Spiral Shell")))
@@ -162,7 +162,12 @@ def set_rules(world: "MomodoraWorld"):
         set_rule(multiworld.get_location(*item("Bakman")), lambda state: state.has(*item("Crescent Moonflower")) or state.has(*item("Spiral Shell")))
         set_rule(multiworld.get_location(*item("Simple Cube")), lambda state: state.has(*item("Spiral Shell")))
         set_rule(multiworld.get_location(*item("Nun")), lambda state: state.has(*item("Chrysanth")) and state.has(*item("Fallen hero")) and state.has(*item("Magic Blade")))
-        
+
+    #LunarCrystalBranchShuffle rules
+    if world.options.LunarCrystalBranchShuffle:
+        set_rule(multiworld.get_location(*item("Lunar Crystal Branch 4 - Demon Frontier")), lambda state: state.has(*item("Crescent Moonflower")) or state.has(*item("Spiral Shell")))
+        set_rule(multiworld.get_location(*item("Lunar Crystal Branch 1 - Fairy Springs")), lambda state: state.has(*item("Crescent Moonflower")) or state.has(*item("Spiral Shell")))
+                
 def set_completion_rules(world: "MomodoraWorld"):
     player = world.player
     multiworld = world.multiworld
