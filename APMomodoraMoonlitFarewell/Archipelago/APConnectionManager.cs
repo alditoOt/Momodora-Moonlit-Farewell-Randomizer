@@ -124,7 +124,7 @@ namespace APMomodoraMoonlitFarewell.Archipelago
                 connected = false;
             }
             MelonLogger.Warning($"Disconnected from Archipelago ({reason}). Checks are saved and will be sent once the connection is back; trying to reconnect...");
-            RunOnMainThread(() => APExchangeNotifier.NotifyStatus("Disconnected from Archipelago. Reconnecting..."));
+            // RunOnMainThread(() => APExchangeNotifier.NotifyStatus("Disconnected from Archipelago. Reconnecting..."));
             wake.Set();
         }
 
@@ -169,9 +169,9 @@ namespace APMomodoraMoonlitFarewell.Archipelago
                         RunOnMainThread(() =>
                         {
                             APLocationHandler.UpdateItemsForTheSession(null);
-                            APExchangeNotifier.NotifyStatus(queued > 0
-                                ? $"Reconnected to Archipelago! Sending {queued} pending check(s)."
-                                : "Reconnected to Archipelago!");
+                            // APExchangeNotifier.NotifyStatus(queued > 0
+                            //     ? $"Reconnected to Archipelago! Sending {queued} pending check(s)."
+                            //     : "Reconnected to Archipelago!");
                         });
                     }
                     else

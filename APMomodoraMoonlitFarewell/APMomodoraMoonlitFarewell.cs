@@ -99,6 +99,7 @@ namespace APMomodoraMoonlitFarewell
                     return;
                 }
                 loggedIn = true;
+                APExchangeNotifier.NotifyArchipelagoStatus();
                 AttachSession(session);
                 GameDataPatcher.UpdateShopNames();
                 SlotDataUtils.GetSettingsFromYAML();

@@ -42,7 +42,7 @@ def set_rules(world: "MomodoraWorld"):
              lambda state: state.has(*item("Spiral Shell")) or
              (state.has(*item("Crescent Moonflower")) and world.options.BellHoverGeneration.value and (state.has(*item("Progressive Magic Upgrade"), 1) if world.options.Berrysanity.value else True)))
     set_rule(multiworld.get_entrance(*region("DF_AH")),
-             lambda state:  state.has(*item("Crescent Moonflower")) and state.has(*item("Awakened Sacred Leaf"))),
+             lambda state:  state.can_reach_location("Accursed Autarch", player) and state.has(*item("Crescent Moonflower"))),
     set_rule(multiworld.get_entrance(*region("LTR_MR")), 
              lambda state: state.has(*item("Spiral Shell")))
     set_rule(multiworld.get_entrance(*region("AH_AHC")), lambda state: state.has(*item("Spiral Shell")))
@@ -63,7 +63,7 @@ def set_rules(world: "MomodoraWorld"):
     set_rule(multiworld.get_entrance(*region("MVW_FOR")), lambda state: 
              state.has(*item("Crescent Moonflower")) and 
               (state.has(*item("Windmill Key")) if world.options.RandomizeKeyItems.value else True)),
-    set_rule(multiworld.get_entrance(*region("FOR_SELIN")), lambda state: state.has(*item("Progressive Final Boss Key"), 4) if world.options.SelinDoorKeysanity.value else True),
+    set_rule(multiworld.get_entrance(*region("FOR_SELIN")), lambda state: state.has(*item("Progressive Selin Door Key"), 4) if world.options.SelinDoorKeysanity.value else True),
 
     # skill rules
     set_rule(multiworld.get_location(*item("Sacred Anemone")), lambda state: world.options.OpenSpringleafPath.value or state.has(*item("Awakened Sacred Leaf")))
@@ -87,6 +87,7 @@ def set_rules(world: "MomodoraWorld"):
              lambda state: state.has(*item("Crescent Moonflower")) and
              state.has(*item("Spiral Shell")))
     set_rule(multiworld.get_location(*item("Magic Blade")), lambda state: state.has(*item("Awakened Sacred Leaf")))
+    set_rule(multiworld.get_location(*item("Phantasm Blade")), lambda state: state.has(*item("Awakened Sacred Leaf")))
     
     #boss rules
     set_rule(multiworld.get_location(*item("Moon Goddess Lineth")),
@@ -106,7 +107,7 @@ def set_rules(world: "MomodoraWorld"):
                  (state.has(*item("Spiral Shell")) and
                   (state.has(*item("Sacred Anemone")) or
                    state.has(*item("Perfect Chime")))))
-        set_rule(multiworld.get_location(*item("Silver Moonlit Dust")), lambda state: state.has(*item("Awakened Sacred Leaf")))
+        set_rule(multiworld.get_location(*item("Silver Moonlit Dust")), lambda state: state.can_reach_location("Remnant of an Unknown Phantasm", player))
     
     # Fairy rewards rules
     if world.options.OracleSigil:
@@ -122,7 +123,7 @@ def set_rules(world: "MomodoraWorld"):
         set_rule(multiworld.get_location(*item("Heavenly Lily 2 - Ashen Hinterlands")), lambda state: state.has(*item("Crescent Moonflower")) and state.has(*item("Spiral Shell")))
         set_rule(multiworld.get_location(*item("Heavenly Lily 3 - Ashen Hinterlands")), lambda state: state.has(*item("Crescent Moonflower")) and state.has(*item("Spiral Shell")) and state.has(*item("Lunar Attunement")))
         set_rule(multiworld.get_location(*item("Heavenly Lily 3 - Meikan Village")), lambda state: state.can_reach("Fount of Rebirth", "Region", player))
-        set_rule(multiworld.get_location(*item("Heavenly Lily 2 - Moonlight Repose")), lambda state: state.has(*item("Awakened Sacred Leaf")))
+        set_rule(multiworld.get_location(*item("Heavenly Lily 2 - Moonlight Repose")), lambda state: state.can_reach_location("Remnant of an Unknown Phantasm", player))
 
    #Berrysanity rules
     if world.options.Berrysanity:
@@ -130,7 +131,7 @@ def set_rules(world: "MomodoraWorld"):
         set_rule(multiworld.get_location(*item("Dotted Berry 1 - Demon Frontier")), lambda state: state.has(*item("Crescent Moonflower")))
         set_rule(multiworld.get_location(*item("Dotted Berry 2 - Ashen Hinterlands")), lambda state: state.has(*item("Crescent Moonflower")) and (state.has(*item("Spiral Shell"))) or state.has(*item("Lunar Attunement")))
         set_rule(multiworld.get_location(*item("Dotted Berry 3 - Meikan Village")), lambda state: state.can_reach("Fount of Rebirth", "Region", player))
-        set_rule(multiworld.get_location(*item("Dotted Berry - Moonlight Repose")), lambda state: state.has(*item("Awakened Sacred Leaf")))
+        set_rule(multiworld.get_location(*item("Dotted Berry - Moonlight Repose")), lambda state: state.can_reach_location("Remnant of an Unknown Phantasm", player))
         set_rule(multiworld.get_location(*item("Lun Berry - Koho Village")), lambda state: state.has(*item("Crescent Moonflower")) or state.has(*item("Spiral Shell")))
         set_rule(multiworld.get_location(*item("Lun Berry - Springleaf Path")), lambda state: state.has(*item("Awakened Sacred Leaf")) or state.has(*item("Spiral Shell")))
         set_rule(multiworld.get_location(*item("Lun Berry - Lun Tree Roots")), lambda state: state.has(*item("Awakened Sacred Leaf")))

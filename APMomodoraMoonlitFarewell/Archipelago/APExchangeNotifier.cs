@@ -159,6 +159,13 @@ namespace APMomodoraMoonlitFarewell.Archipelago
             ShowColorized(new Segment(message));
         }
 
+        public static void NotifyArchipelagoStatus()
+        {
+            ShowColorized(new Segment("Connected to "),
+            new Segment("Archipelago", itemColor),
+            new Segment(" session! Enjoy!"));
+        }
+
         public static void NotifyDeathlink(string player)
         {
             ShowColorized(

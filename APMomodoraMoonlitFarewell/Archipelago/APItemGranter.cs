@@ -6,7 +6,7 @@ namespace APMomodoraMoonlitFarewell.Archipelago
     static class APItemGranter
     {
         private const int moneyFillerItemId = 999;
-        private const int moneyFillerAmount = 100;
+        private const int moneyFillerAmount = 10;
 
         public static void GiveItem(int itemId)
         {

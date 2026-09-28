@@ -9,7 +9,7 @@ class MomodoraItem(Item):
     game: str = "MomodoraMoonlitFarewell"
 
 item_table = {
-    "100 Lunar Crystals": ItemData(999, ItemClassification.filler),
+    "10 Lunar Crystals": ItemData(999, ItemClassification.filler),
     #Skills
     "Awakened Sacred Leaf": ItemData(20, ItemClassification.progression),
     "Sacred Anemone": ItemData(9, ItemClassification.progression),
@@ -68,7 +68,7 @@ item_table = {
     "Cactus": ItemData(392, ItemClassification.useful),
     "Nun": ItemData(389, ItemClassification.useful),
     # Selin Door
-    "Progressive Final Boss Key": ItemData(991, ItemClassification.progression),
+    "Progressive Selin Door Key": ItemData(991, ItemClassification.progression),
     # Damage Upgrade
     "Progressive Damage Upgrade": ItemData(992, ItemClassification.useful),
     #Health Upgrade
@@ -147,7 +147,7 @@ key_items = {
 }
 
 selin_door = {
-    "Progressive Final Boss Key": 4
+    "Progressive Selin Door Key": 4
 }
 
 companion_table = {
