@@ -32,7 +32,7 @@ class OracleSigil(Toggle):
     default = 0
 
 class Companionsanity(Toggle):
-    """Add Companions to the item pool and as item location checks."""
+    """Add Companions to the item pool and as item location checks.\nNote: Dora and Lineth companions are not locations checks or part of the itempool (coding jank)."""
     display_name = "Companionsanity"
     default = 0
 
