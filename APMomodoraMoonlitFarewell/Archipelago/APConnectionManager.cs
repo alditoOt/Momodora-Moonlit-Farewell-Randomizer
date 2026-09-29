@@ -128,11 +128,25 @@ namespace APMomodoraMoonlitFarewell.Archipelago
             wake.Set();
         }
 
+        private static DateTime nextAttempt;
+
+        public static void RequestImmediateRetry()
+        {
+            lock (stateLock)
+            {
+                if (connected)
+                {
+                    return;
+                }
+                nextAttempt = DateTime.MinValue;
+            }
+            wake.Set();
+        }
+
         private static void WorkerLoop()
         {
             int retryDelayMs = firstRetryDelayMs;
-            DateTime nextAttempt = DateTime.MinValue;
-
+            
             while (true)
             {
                 wake.WaitOne(workerTickMs);

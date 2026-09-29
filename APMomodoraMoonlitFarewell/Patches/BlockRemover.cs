@@ -14,7 +14,7 @@ namespace APMomodoraMoonlitFarewell.Patches
     {
 
         private static readonly string[] SPRINGLEAF_PATH_STRINGS = { "Well05", "Well12", "Well26", "Well20"};
-
+        private static readonly string[] GYNBARRIER_SCENES = { "Bark09", "Bark08", "Bark16", "Bark21" };
         public void removeAllBlockers(string sceneName)
         {
             if (SPRINGLEAF_PATH_STRINGS.Contains(sceneName))
@@ -67,12 +67,22 @@ namespace APMomodoraMoonlitFarewell.Patches
 
         public void RemoveGynBarrier(string sceneName)
         {
-            if (sceneName == "Bark21")
+            if (GYNBARRIER_SCENES.Contains(sceneName))
             {
                 GameObject gynBarrier = GameObject.Find("GynBarrier");
+                GameObject gynBarrier1 = GameObject.Find("GynBarrier (1)");
+                GameObject gynBarrier2 = GameObject.Find("GynBarrier (2)");
                 if (gynBarrier != null)
                 {
                     gynBarrier.SetActive(false);
+                }
+                if (gynBarrier1 != null)
+                {
+                    gynBarrier1.SetActive(false);
+                }
+                if (gynBarrier2 != null)
+                {
+                    gynBarrier2.SetActive(false);
                 }
             }
         }

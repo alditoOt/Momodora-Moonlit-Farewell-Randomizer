@@ -79,6 +79,7 @@ namespace APMomodoraMoonlitFarewell
 
         private void TryToConnect()
         {
+
             #region Server Info
             //Load server info from config
             ConfigLoader.LoadConfig();
@@ -90,7 +91,20 @@ namespace APMomodoraMoonlitFarewell
             server = ConfigLoader.config.server;
             username = ConfigLoader.config.username;
             password = ConfigLoader.config.password;
+
+            if (string.IsNullOrEmpty(server))
+            {
+                return;
+            }
             #endregion
+            if (HasSession)
+            {
+                if (!APConnectionManager.IsConnected)
+                {
+                    APConnectionManager.RequestImmediateRetry();
+                }
+                return; 
+            }
             try
             {
                 session = ArchipelagoSessionFactory.CreateSession(server);

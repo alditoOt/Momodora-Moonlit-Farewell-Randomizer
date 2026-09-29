@@ -121,7 +121,7 @@ namespace APMomodoraMoonlitFarewell.Archipelago
                         new Segment("Black Berry", itemColor),
                         new Segment(", "),
                         new Segment("you", playerColor),
-                        new Segment("don't feel any different..."));
+                        new Segment(" don't feel any different..."));
                 }
                 else
                 {

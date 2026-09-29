@@ -155,7 +155,7 @@ advancement_table = {
     "Peach - Fairy Springs": AdvData(20300, "Fairy Springs"),
     "Peach - Ashen Hinterlands": AdvData(30300, "Ashen Hinterlands Continued"),
     "Peach - Meikan Village": AdvData(33100, "Meikan Village"),
-    "Peach - Moonlight Repose": AdvData(20200, "Moonlight Repose"),
+    "Peach - Moonlight Repose": AdvData(20200, "Lun Tree Roots"),
     #Black Berries
     "Black Berry - Lun Tree Roots": AdvData(5800, "Lun Tree Roots"),
     "Black Berry - Demon Frontier": AdvData(16400, "Demon Frontier Continued"),
@@ -206,7 +206,7 @@ advancement_table = {
     "Lunar Crystal Branch 3 - Lun Tree Roots": AdvData(5200, "Lun Tree Roots"),
     "Lunar Crystal Branch 4 - Lun Tree Roots": AdvData(5500, "Lun Tree Roots"),
     "Lunar Crystal Branch 5 - Lun Tree Roots": AdvData(9600, "Lun Tree Roots"),
-    "Lunar Crystal Branch 6 - Lun Tree Roots": AdvData(11900, "Lun Tree Roots"),
+    "Lunar Crystal Branch - Moonlight Repose": AdvData(11900, "Lun Tree Roots"),
     "Lunar Crystal Branch 1 - Fairy Springs": AdvData(5600, "Fairy Springs"),
     "Lunar Crystal Branch 2 - Fairy Springs": AdvData(4900, "Fairy Springs"),
     "Lunar Crystal Branch 3 - Fairy Springs": AdvData(4800, "Fairy Springs"),
@@ -216,10 +216,10 @@ advancement_table = {
     "Lunar Crystal Branch 2 - Demon Frontier": AdvData(16100, "Demon Frontier Continued"),
     "Lunar Crystal Branch 3 - Demon Frontier": AdvData(16300, "Demon Frontier Continued"),
     "Lunar Crystal Branch 4 - Demon Frontier": AdvData(17800, "Demon Frontier Continued"),
-    "Lunar Crystal Branch 1 - Ashen Hinterlands": AdvData(22500, "Ashen Hinterlands"),
+    "Lunar Crystal Branch 1 - Ashen Hinterlands": AdvData(22200, "Ashen Hinterlands"),
     "Lunar Crystal Branch 2 - Ashen Hinterlands": AdvData(22600, "Ashen Hinterlands Continued"),
-    "Lunar Crystal Branch 3 - Ashen Hinterlands": AdvData(22700, "Ashen Hinterlands Continued"),
-    "Lunar Crystal Branch 4 - Ashen Hinterlands": AdvData(22200, "Ashen Hinterlands Continued"),
+    "Lunar Crystal Branch 3 - Ashen Hinterlands": AdvData(22500, "Ashen Hinterlands Continued"),
+    "Lunar Crystal Branch 4 - Ashen Hinterlands": AdvData(22700, "Ashen Hinterlands Continued"),
     "Lunar Crystal Branch 5 - Ashen Hinterlands": AdvData(24800, "Ashen Hinterlands Continued"),
 }
 

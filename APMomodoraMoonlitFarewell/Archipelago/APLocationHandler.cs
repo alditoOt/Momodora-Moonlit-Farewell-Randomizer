@@ -157,7 +157,7 @@ namespace APMomodoraMoonlitFarewell.Archipelago
         private static void ReportSkillLocation(int index, int value)
         {
             Boolean skillReceived = false;
-            foreach (ItemInfo item in APMomodoraMoonlitFarewell.session.Items.AllItemsReceived)
+            foreach (ItemInfo item in APMomodoraMoonlitFarewell.session.Items.AllItemsReceived.ToList())
             {
                 if (item.ItemId == index)
                 {

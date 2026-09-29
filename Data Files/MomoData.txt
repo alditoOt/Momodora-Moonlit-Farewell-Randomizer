@@ -82,27 +82,19 @@ Enemies killed: 6
 Items or scenes that require bow:
 Well06 
 Lumen Fairy 3 - Lun Tree Roots
-freeing the rat
+freeing Mertil
 Lumen Fairy 5 - Demon Frontier (bow or mix of crescent moonflower and sacred anemone)
 
 New item requirements:
-Munny Holder 154, 161, 163, berry 164 same as Lumen Fairy 3 DF
-Munny Holder 178 crescent moonflower or sacred anemone
-Bakman crescent moonflower or sacred anemone
-Munny Holder 56 crescent moonflower or sacred anemone
-Munny Holder 222 same as Lumen Fairy 1 - Ashen Hinterlands
-
-Dora was not added to the csv
-Lineth also not added, requires beating Selin (could be item if Dora is victory condition but by that point just defeat Dora, though it may have Oracle)
 
 New items I need to add:
 Mertil's Pendant (after freeing Mertil with bow)
-Fishing Tools ' Heavenly Rod
+Fishing Tools - Heavenly Rod
 Glistening Hair Strands (after beating Raging Demon, requires 10 fairies)
 Lunar Crystals from fairy (after beating Raging Demon, requires 20 fairies, could be a check too)
-Oracle requires beating Raging Demon too
+Oracle requires Raging Demon reachable
 Bloodstained Pendant (big spider gives you this item)
-Fairy Icon (after Bloodstained Pendant, check if choice matters - apparently it does)
+Fairy Icon (after Bloodstained Pendant, choice doesn't matter, it lets you try again)
 Old Map (same as Wooden Key)
 Lunite (requires Old Map, and fast travel or access to Demon Frontier)
 Melodite (requires Lunite and access to Meikan Village, how does it handle having Lunite before and stuff?)
