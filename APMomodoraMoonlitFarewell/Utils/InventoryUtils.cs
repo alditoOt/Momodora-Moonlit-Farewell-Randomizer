@@ -1,0 +1,56 @@
+﻿using Archipelago.MultiClient.Net.Enums;
+using HarmonyLib;
+using MelonLoader;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using UnityEngine;
+
+namespace APMomodoraMoonlitFarewell.Utils
+{
+    // Handles item IDs
+    class InventoryUtils
+    {
+        public static readonly int BOSS_KEY_ID = 991;
+        public static int DAMAGE_ID = 992;
+        public static int HEALTH_ID = 993;
+        public static int STAMINA_ID = 994;
+        public static int MAGIC_ID = 995;
+        public static int FAIRY_ID = 996;
+        public static int BLACK_BERRY_ID = 998;
+        public static int FILLER_ID = 999;
+
+        public static List<int> AP_SIGIL_ITEM_ID = new List<int> { 442, 400, 436, 402, 403, 433, 448, 412, 404, 434, 447, 440, 405, 439, 443, 444, 425, 445, 430, 435, 432, 427, 438, 449, 446, 338, 339, 340 };
+        public static List<int> NON_AP_SIGIL_ITEM_ID = new List<int> { 419, 431, 422, 123, 437, 406, 408, 426, 401 };
+        public static List<int> COMPANION_ITEM_ID = new List<int> { 381, 382, 383, 384, 385, 386, 387, 388, 389, 392 };
+        public static List<int> KEY_ITEM_ID = new List<int> { 333, 332, 356 };
+        public static readonly int GOLD_MOONLIT_DUST_ID = 332;
+        public static readonly int SILVER_MOONLIT_DUST_ID = 333;
+        public static int ORACLE = 441;
+
+        // Vanilla items that are AP locations but not AP items
+        public static readonly int livingBloodId = 420;
+        public static readonly int woodenBoxId = 347;
+
+        // AP_SIGIL_ITEM_ID plus the Oracle but never Key Items, even though
+        // SlotDataUtils.AddItemsToItemPool merges Key Items/Oracle into AP_SIGIL_ITEM_ID at runtime
+        // for inventory-granting purposes (maybe I should change that sometime...). 
+        // Kept separately so text that should say "Sigil" (i.e. APExchangeNotifier) doesn't label Key Items as one
+        public static readonly List<int> ALL_SIGIL_ITEM_ID = new List<int>(AP_SIGIL_ITEM_ID) { ORACLE };
+        public static Dictionary<int, int> SKILL_INVENTORY_ID = new Dictionary<int, int>()
+        {
+            { 9, 345 },
+            { 20, 342 },
+            { 194, 343 },
+            { 131, 351 },
+            { 10, 344 }
+        };
+
+        public static string[] AP_SHOP_ITEMS = new string[8];
+        public static long[] AP_SHOP_ITEMS_ID = new long[8];
+        public static bool[] AP_SHOP_ITEM_IN_GAME = new bool[8];
+        public static string[] AP_SHOP_PLAYER_NAME = new string[8];
+        public static ItemFlags[] AP_SHOP_ITEM_FLAGS = new ItemFlags[8];
+    }   
+}

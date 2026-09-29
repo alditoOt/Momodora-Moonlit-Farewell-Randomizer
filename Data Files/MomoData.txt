@@ -1,0 +1,100 @@
+Deathcount event: 101
+
+Item definitions (to check in game menu)
+
+*Windmill key: 356 
+*Silver Moonlit Dust: 333
+*Gold Moonlit Dust:332
+*Wooden Box: 347
+BellFlower: 101 (?)
+Healing Bell: 320
+Walljump: 343 
+Sprint: 345
+Awakened leaf: 342 
+Lunar Attunement: 351
+Crescent Moonflower: 344
+Dusty Grimoire: 340
+Grimoire: 338
+Tattered Grimoire: 339
+
+Mouse rescue: 149
+279: 483: (AH Berry)
+240: 1550 (KV berry)
+280: 1922 (MR peach)
+
+60: alditto skip lever
+59: KV lever
+
+Companions:
+
+Grimalkin Spirit [Healer] 381
+Bakman [Explorer] 382
+Lawa [Explorer] 383
+Floating Skull [Brave] 384
+Ducky [Brave] 385
+Vampire Bat [Brave] 386
+Simple Cube [Explorer] 387
+Kaho [Healer] 388
+Nun [Healer] 389
+Lineth [Healer] 390
+Dora [Brave] 391
+Cactus [Brave] 392
+
+MomoEvent value for items:
+
+Silver Moonlit Dust: 181
+Golden Moonlit Dust: 180
+Grimoire: 191
+Dusty Grimoire:
+Tattered Grimoire:
+
+# BOSSES
+
+Gariser Demon: 15
+Harpy Archdemon Plunia: 17
+Raging Demon: 16
+Black cat: 278
+Viper Archdemon Sorrellia: 150
+Very Big Spider: 114
+Remnant of an Unknown Phantasm: 171
+Accursed Autarch: 105
+Tainted Serpent: 255
+Bloodthirsty Siblings: 188
+Moon Goddess Lineth: 213
+Selin's Fear: 259 or 294 (most likely 259, 294 must be the value for the door)
+Selin's Envy: 261
+Selin's Mendacity: 260
+Selin's Sorrow: 262
+Moon God Selin: 364, 99 (KohoHouseSelin)
+
+Dora: 370 
+
+# OTHERS
+
+Cursed Event: 151
+Door to Selin: 327
+Credits start: 298
+Cereza friendship: 102 (4 is max)
+	- Spring Tree Roots: 106 
+	- Fairy Springs: 107
+Enemies killed: 6
+
+Items or scenes that require bow:
+Well06 
+Lumen Fairy 3 - Lun Tree Roots
+freeing Mertil
+Lumen Fairy 5 - Demon Frontier (bow or mix of crescent moonflower and sacred anemone)
+
+New item requirements:
+
+New items I need to add:
+Mertil's Pendant (after freeing Mertil with bow)
+Fishing Tools - Heavenly Rod
+Glistening Hair Strands (after beating Raging Demon, requires 10 fairies)
+Lunar Crystals from fairy (after beating Raging Demon, requires 20 fairies, could be a check too)
+Oracle requires Raging Demon reachable
+Bloodstained Pendant (big spider gives you this item)
+Fairy Icon (after Bloodstained Pendant, choice doesn't matter, it lets you try again)
+Old Map (same as Wooden Key)
+Lunite (requires Old Map, and fast travel or access to Demon Frontier)
+Melodite (requires Lunite and access to Meikan Village, how does it handle having Lunite before and stuff?)

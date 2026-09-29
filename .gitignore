@@ -100,6 +100,8 @@ StyleCopReport.xml
 *.svclog
 *.scc
 
+*.csv#
+
 # Chutzpah Test files
 _Chutzpah*
 
@@ -398,3 +400,5 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+*.code.workspace
