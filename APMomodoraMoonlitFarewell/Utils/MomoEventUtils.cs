@@ -14,9 +14,9 @@ namespace APMomodoraMoonlitFarewell.Utils
     [HarmonyPatch(typeof(MomoEventData))]
     class MomoEventUtils
     {
-        public static List<int> SKILLEVENTS = new List<int> { 9, 10, 20, 194, 131, 205 }; //Sprint, Leaf, Double Jump, Wall Jump, Lunar Attunement, Fast Travel
+        public static List<int> SKILLEVENTS = new List<int> { 9, 10, 20, 194, 131 }; //Sprint, Leaf, Double Jump, Wall Jump, Lunar Attunement, Fast Travel
         public static List<int> BOSSEVENTS = new List<int>() { 15, 17, 16, 278, 150, 171, 114, 105, 188, 255, 213, 259, 260, 261, 262 };
-        public static List<int> DEFAULT_EVENTS_TO_1 = new List<int>() { 59, 60, 62 };
+        public static List<int> DEFAULT_EVENTS_TO_1 = new List<int>() { 59, 60, 62, 205 };
 
         public static List<int> OPTIONALEVENTS = new List<int>();
         public static List<int> LILYEVENTS = new List<int>();
