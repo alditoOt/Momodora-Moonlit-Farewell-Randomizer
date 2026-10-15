@@ -9,9 +9,10 @@ When playing in a randomizer, it's recommended to start from a new save file. Ha
 
 # Mod Install Notes
 This randomizer uses a custom made mod to go along with the AP session. 
-1. Download [MelonLoader](https://melonwiki.xyz/#/?id=requirements), execute the file, and when installing for Momodora: Moonlit Farewell, **ensure you're installing version 0.5.7**. 
-2. Download the **APMomodoraMoonlitFarewell.zip** file and put it into the **Mods** folder in the game's folder. If you're updating, replace all files since this uses a new version of the NuGet package for Archipelago connection handling.
-4. Before opening the game, open config.json file and edit all fields as necessary. 
+1. Download [MelonLoader](https://melonwiki.xyz/#/?id=requirements), execute the file, and when installing for Momodora: Moonlit Farewell, **ENSURE YOU'RE INSTALLING VERSION 0.5.7**. 
+2. Download the **APMomodoraMoonlitFarewell.dll** file from the [Latest Release](https://github.com/alditoOt/Momodora-Moonlit-Farewell-Randomizer/releases) and put it into the **Mods** folder in the game's folder.
+3. If it's your first time installing this mod, also download **extra-files.zip** and unzip the file in the **Mods** folder in the game's folder.
+4. Before opening the game, open **config.json** and edit all fields as necessary. 
 # Creating the Session
 1. Download **momodoramoonlitfarewell.apworld** and add it into the custom_worlds folder on your Archipelago folder. 
 2. Download **Momodora-Moonlit-Farewell.yaml** and edit it as necessary (mainly your player slot). 
