@@ -129,6 +129,19 @@ The game is considered finished when you defeat the chosen final boss and see th
 If any issues are found during playing or playtesting, please do let me know in the [Archipelago Discord](https://discord.com/invite/8Z65BR2) so I can look into them. Ultimately, this is still a work in progress so it's not free of bugs, but I'd argue it's very much completable most of the time.
 **I promise I'll try to not disappear again for a year and a half.**
 
+# Community
+# Discord Links 
+If you want to know more about Archipelago, this game's randomizer or even the game's speedrunning community as a whole, feel free to join!
+## [Archipelago](https://discord.com/invite/8Z65BR2)
+Your go-to for Archipelago stuff. You can find the [Momodora Moonlit Farewell Channel](https://discord.com/channels/731205301247803413/1351406749315240007) inside the Archipelago Discord. Feel free to discuss the randomizer here, give feedback, ask questions, anything!
+## [Momodora Speedrunning Community](https://discord.gg/f6QGXmXfPU) 
+Because I like speedrunning and want this game's community to grow!
+# My Own Socials
+Shamelessly plugging this in here just because I can.
+## [My Twitch Channel](https://www.twitch.tv/alditto) 
+I don't stream as often as I'd like or could, I also speak spanish mostly, but I tend do programming sometimes, speedrunning, gaming, sometimes even drawing whaaaat and other stuff! Feel free to show up if interested!
+## [My YouTube Channel](https://www.youtube.com/@aldittoYT)
+Again, spanish, some videos have english subtitles though, these are edited stream highlights and sometimes off-stream videos so check them out if interested!
 # Final Notes 
 Feel free to ask for advice or share what you find! There might be some places that, even with their respective YAML setting, might need some creativity or use of some strats to reach, since considering every possibility of entrance is quite a task, so having information on how to reach certain places can be very useful!
 
