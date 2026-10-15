@@ -253,14 +253,23 @@ namespace APMomodoraMoonlitFarewell.Archipelago
                 }
                 APItemGranter.GiveItem((int)itemId);
             }
-            APPlayerStatUpdater.UpdatePlayerDamage(lilyCount);
-            APPlayerStatUpdater.UpdatePlayerHealth(healthCount);
-            APPlayerStatUpdater.UpdatePlayerStamina(staminaCount);
-            APPlayerStatUpdater.UpdatePlayerMagic(magicCount);
-            APPlayerStatUpdater.UpdateFairies(fairyCount);
-            APPlayerStatUpdater.UpdatePlayerLuck(blackBerryCount);
+            if (SlotDataUtils.DAMAGE_UPGRADE)
+            {
+                APPlayerStatUpdater.UpdatePlayerDamage(lilyCount);
+            }
+            if (SlotDataUtils.BERRYSANITY)
+            {
+                APPlayerStatUpdater.UpdatePlayerHealth(healthCount);
+                APPlayerStatUpdater.UpdatePlayerStamina(staminaCount);
+                APPlayerStatUpdater.UpdatePlayerMagic(magicCount);
+                APPlayerStatUpdater.UpdatePlayerLuck(blackBerryCount);
+            }
+            if (SlotDataUtils.LUMEN_FAIRIES)
+            {
+                APPlayerStatUpdater.UpdateFairies(fairyCount);
+            }
 
-            if (finalBossDoorCount > 0)
+            if (SlotDataUtils.FINAL_BOSS_DOOR && finalBossDoorCount > 0)
             {
                 GameData.current.MomoEvent[MomoEventUtils.FINAL_DOOR_EVENT] = finalBossDoorCount;
             }
